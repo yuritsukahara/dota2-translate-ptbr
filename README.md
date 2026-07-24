@@ -12,7 +12,42 @@ O repositório começa com um laboratório completo do **Axe**: ele detecta no D
 - geração local de 285 WAVs-guia com uma voz pt-BR do Windows;
 - compilação comprovada em 285 recursos `.vsnd_c` pelos Dota 2 Workshop Tools;
 - addon de laboratório instalável sem copiar ou redistribuir áudio da Valve;
-- validação automática do CSV e regras para tradução, elenco, gravação e crédito.
+- validação automática do CSV e regras para tradução, elenco, gravação e crédito;
+- portal público responsivo com catálogo, progresso triplo, propostas, votos e moderação;
+- autenticação Discord com conta mínima de 30 dias, papéis, auditoria e limites de uso;
+- armazenamento D1 para dados e R2 separado para gravações pendentes/aprovadas;
+- instalador Windows .NET 8 com descoberta da Steam, backup, reparo e restauração.
+
+## Portal comunitário
+
+O portal está em [`web/`](web/README.md) e usa Vinext no Cloudflare Workers. A leitura do catálogo é pública; Discord é exigido apenas para enviar, votar, denunciar ou moderar.
+
+```powershell
+npm run web:seed
+npm --prefix web install
+npm run web:dev
+```
+
+O progresso é deliberadamente separado:
+
+- **traduzido:** texto aprovado;
+- **gravado:** interpretação recebida e tecnicamente válida;
+- **revisado:** áudio aprovado e incluído em uma release.
+
+Um herói só chega a 100% quando todas as falas do inventário fixado ao build estão revisadas. Personas, narradores, cosméticos e eventos ficam fora desse denominador e terão campanhas próprias.
+
+Para desenvolvimento local e configuração de Discord/D1/R2, consulte [`web/.env.example`](web/.env.example) e a documentação do portal. O site nunca armazena o áudio original da Valve.
+
+## Instalador Windows
+
+O projeto WPF self-contained está em [`installer/`](installer/README.md). Ele oferece instalação do addon, reparo por hash, backup automático e restauração. A instalação é bloqueada enquanto o Dota está aberto.
+
+O modo de cliente normal é um laboratório desativado por padrão. Ele não edita executáveis, não injeta DLL, não altera VAC/CRC e nunca sobrescreve `pak01_dir.vpk`. Builds desconhecidos ou arquivos-base divergentes são recusados automaticamente.
+
+```powershell
+dotnet test .\installer\Dota2Translate.Tests\Dota2Translate.Tests.csproj -c Release
+dotnet publish .\installer\Dota2Translate.Installer\Dota2Translate.Installer.csproj -c Release -r win-x64 --self-contained true
+```
 
 ## Limite importante
 
@@ -115,6 +150,8 @@ Leia o fluxo completo em [CONTRIBUTING.md](CONTRIBUTING.md). Em resumo:
 addon/game/                 arquivos mínimos do Custom Game
 audio/recordings/<heroi>/   gravações finais (Git LFS)
 data/heroes/<heroi>/        manifesto de tradução
+web/                        portal público, migrações D1 e APIs
+installer/                  aplicativo Windows e testes de segurança
 scripts/                    sync, validação, TTS-guia e instalação
 build/                      artefatos locais ignorados pelo Git
 ```
@@ -130,8 +167,8 @@ O [Steam Subscriber Agreement](https://store.steampowered.com/subscriber_agreeme
 ## Roadmap
 
 - validar o Axe em uma sessão do addon e substituir as falas-guia por gravações humanas;
+- configurar as credenciais Discord e abrir a primeira rodada de votação;
 - criar glossário PT-BR e guia de direção vocal por herói;
 - automatizar relatório de cobertura por patch;
 - adicionar um herói por vez, com responsável de tradução e de revisão;
 - preparar proposta técnica e amostras para a Valve.
-

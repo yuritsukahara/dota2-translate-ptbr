@@ -1,0 +1,2567 @@
+[
+  {
+    "id": "axe_ability_battlehunger_01",
+    "assetPath": "sounds/vo/axe/axe_ability_battlehunger_01.vsnd_c",
+    "category": "ability_battlehunger",
+    "placeholderText": "Axe: fome de batalha, fala 1.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_ability_battlehunger_02",
+    "assetPath": "sounds/vo/axe/axe_ability_battlehunger_02.vsnd_c",
+    "category": "ability_battlehunger",
+    "placeholderText": "Axe: fome de batalha, fala 2.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_ability_battlehunger_03",
+    "assetPath": "sounds/vo/axe/axe_ability_battlehunger_03.vsnd_c",
+    "category": "ability_battlehunger",
+    "placeholderText": "Axe: fome de batalha, fala 3.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_ability_berserk_01",
+    "assetPath": "sounds/vo/axe/axe_ability_berserk_01.vsnd_c",
+    "category": "ability_berserk",
+    "placeholderText": "Axe: chamado do berserker, fala 1.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_ability_berserk_02",
+    "assetPath": "sounds/vo/axe/axe_ability_berserk_02.vsnd_c",
+    "category": "ability_berserk",
+    "placeholderText": "Axe: chamado do berserker, fala 2.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_ability_berserk_03",
+    "assetPath": "sounds/vo/axe/axe_ability_berserk_03.vsnd_c",
+    "category": "ability_berserk",
+    "placeholderText": "Axe: chamado do berserker, fala 3.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_ability_berserk_04",
+    "assetPath": "sounds/vo/axe/axe_ability_berserk_04.vsnd_c",
+    "category": "ability_berserk",
+    "placeholderText": "Axe: chamado do berserker, fala 4.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_ability_berserk_05",
+    "assetPath": "sounds/vo/axe/axe_ability_berserk_05.vsnd_c",
+    "category": "ability_berserk",
+    "placeholderText": "Axe: chamado do berserker, fala 5.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_ability_berserk_06",
+    "assetPath": "sounds/vo/axe/axe_ability_berserk_06.vsnd_c",
+    "category": "ability_berserk",
+    "placeholderText": "Axe: chamado do berserker, fala 6.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_ability_berserk_07",
+    "assetPath": "sounds/vo/axe/axe_ability_berserk_07.vsnd_c",
+    "category": "ability_berserk",
+    "placeholderText": "Axe: chamado do berserker, fala 7.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_ability_berserk_08",
+    "assetPath": "sounds/vo/axe/axe_ability_berserk_08.vsnd_c",
+    "category": "ability_berserk",
+    "placeholderText": "Axe: chamado do berserker, fala 8.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_ability_berserk_09",
+    "assetPath": "sounds/vo/axe/axe_ability_berserk_09.vsnd_c",
+    "category": "ability_berserk",
+    "placeholderText": "Axe: chamado do berserker, fala 9.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_ability_cullingblade_01",
+    "assetPath": "sounds/vo/axe/axe_ability_cullingblade_01.vsnd_c",
+    "category": "ability_cullingblade",
+    "placeholderText": "Axe: lâmina de abate, fala 1.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_ability_cullingblade_02",
+    "assetPath": "sounds/vo/axe/axe_ability_cullingblade_02.vsnd_c",
+    "category": "ability_cullingblade",
+    "placeholderText": "Axe: lâmina de abate, fala 2.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_ability_failure_01",
+    "assetPath": "sounds/vo/axe/axe_ability_failure_01.vsnd_c",
+    "category": "ability_failure",
+    "placeholderText": "Axe: habilidade falhou, fala 1.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_ability_failure_02",
+    "assetPath": "sounds/vo/axe/axe_ability_failure_02.vsnd_c",
+    "category": "ability_failure",
+    "placeholderText": "Axe: habilidade falhou, fala 2.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_ability_failure_03",
+    "assetPath": "sounds/vo/axe/axe_ability_failure_03.vsnd_c",
+    "category": "ability_failure",
+    "placeholderText": "Axe: habilidade falhou, fala 3.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_ally_01",
+    "assetPath": "sounds/vo/axe/axe_ally_01.vsnd_c",
+    "category": "ally",
+    "placeholderText": "Axe: interação com aliado, fala 1.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_ally_02",
+    "assetPath": "sounds/vo/axe/axe_ally_02.vsnd_c",
+    "category": "ally",
+    "placeholderText": "Axe: interação com aliado, fala 2.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_ally_03",
+    "assetPath": "sounds/vo/axe/axe_ally_03.vsnd_c",
+    "category": "ally",
+    "placeholderText": "Axe: interação com aliado, fala 3.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_ally_04",
+    "assetPath": "sounds/vo/axe/axe_ally_04.vsnd_c",
+    "category": "ally",
+    "placeholderText": "Axe: interação com aliado, fala 4.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_ally_05",
+    "assetPath": "sounds/vo/axe/axe_ally_05.vsnd_c",
+    "category": "ally",
+    "placeholderText": "Axe: interação com aliado, fala 5.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_ally_06",
+    "assetPath": "sounds/vo/axe/axe_ally_06.vsnd_c",
+    "category": "ally",
+    "placeholderText": "Axe: interação com aliado, fala 6.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_ally_07",
+    "assetPath": "sounds/vo/axe/axe_ally_07.vsnd_c",
+    "category": "ally",
+    "placeholderText": "Axe: interação com aliado, fala 7.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_ally_08",
+    "assetPath": "sounds/vo/axe/axe_ally_08.vsnd_c",
+    "category": "ally",
+    "placeholderText": "Axe: interação com aliado, fala 8.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_ally_09",
+    "assetPath": "sounds/vo/axe/axe_ally_09.vsnd_c",
+    "category": "ally",
+    "placeholderText": "Axe: interação com aliado, fala 9.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_ally_10",
+    "assetPath": "sounds/vo/axe/axe_ally_10.vsnd_c",
+    "category": "ally",
+    "placeholderText": "Axe: interação com aliado, fala 10.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_ally_11",
+    "assetPath": "sounds/vo/axe/axe_ally_11.vsnd_c",
+    "category": "ally",
+    "placeholderText": "Axe: interação com aliado, fala 11.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_ally_12",
+    "assetPath": "sounds/vo/axe/axe_ally_12.vsnd_c",
+    "category": "ally",
+    "placeholderText": "Axe: interação com aliado, fala 12.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_ally_13",
+    "assetPath": "sounds/vo/axe/axe_ally_13.vsnd_c",
+    "category": "ally",
+    "placeholderText": "Axe: interação com aliado, fala 13.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_anger_01",
+    "assetPath": "sounds/vo/axe/axe_anger_01.vsnd_c",
+    "category": "anger",
+    "placeholderText": "Axe: raiva, fala 1.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_anger_02",
+    "assetPath": "sounds/vo/axe/axe_anger_02.vsnd_c",
+    "category": "anger",
+    "placeholderText": "Axe: raiva, fala 2.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_anger_03",
+    "assetPath": "sounds/vo/axe/axe_anger_03.vsnd_c",
+    "category": "anger",
+    "placeholderText": "Axe: raiva, fala 3.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_attack_01",
+    "assetPath": "sounds/vo/axe/axe_attack_01.vsnd_c",
+    "category": "attack",
+    "placeholderText": "Axe: ataque, fala 1.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_attack_02",
+    "assetPath": "sounds/vo/axe/axe_attack_02.vsnd_c",
+    "category": "attack",
+    "placeholderText": "Axe: ataque, fala 2.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_attack_03",
+    "assetPath": "sounds/vo/axe/axe_attack_03.vsnd_c",
+    "category": "attack",
+    "placeholderText": "Axe: ataque, fala 3.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_attack_04",
+    "assetPath": "sounds/vo/axe/axe_attack_04.vsnd_c",
+    "category": "attack",
+    "placeholderText": "Axe: ataque, fala 4.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_attack_05",
+    "assetPath": "sounds/vo/axe/axe_attack_05.vsnd_c",
+    "category": "attack",
+    "placeholderText": "Axe: ataque, fala 5.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_attack_06",
+    "assetPath": "sounds/vo/axe/axe_attack_06.vsnd_c",
+    "category": "attack",
+    "placeholderText": "Axe: ataque, fala 6.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_attack_07",
+    "assetPath": "sounds/vo/axe/axe_attack_07.vsnd_c",
+    "category": "attack",
+    "placeholderText": "Axe: ataque, fala 7.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_attack_08",
+    "assetPath": "sounds/vo/axe/axe_attack_08.vsnd_c",
+    "category": "attack",
+    "placeholderText": "Axe: ataque, fala 8.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_attack_09",
+    "assetPath": "sounds/vo/axe/axe_attack_09.vsnd_c",
+    "category": "attack",
+    "placeholderText": "Axe: ataque, fala 9.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_attack_10",
+    "assetPath": "sounds/vo/axe/axe_attack_10.vsnd_c",
+    "category": "attack",
+    "placeholderText": "Axe: ataque, fala 10.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_battlebegins_01",
+    "assetPath": "sounds/vo/axe/axe_battlebegins_01.vsnd_c",
+    "category": "battlebegins",
+    "placeholderText": "Axe: início da batalha, fala 1.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_blink_01",
+    "assetPath": "sounds/vo/axe/axe_blink_01.vsnd_c",
+    "category": "blink",
+    "placeholderText": "Axe: adaga de translocação, fala 1.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_blink_02",
+    "assetPath": "sounds/vo/axe/axe_blink_02.vsnd_c",
+    "category": "blink",
+    "placeholderText": "Axe: adaga de translocação, fala 2.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_blinkcull_01",
+    "assetPath": "sounds/vo/axe/axe_blinkcull_01.vsnd_c",
+    "category": "blinkcull",
+    "placeholderText": "Axe: translocação e abate, fala 1.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_blinkcull_02",
+    "assetPath": "sounds/vo/axe/axe_blinkcull_02.vsnd_c",
+    "category": "blinkcull",
+    "placeholderText": "Axe: translocação e abate, fala 2.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_blinkcull_03",
+    "assetPath": "sounds/vo/axe/axe_blinkcull_03.vsnd_c",
+    "category": "blinkcull",
+    "placeholderText": "Axe: translocação e abate, fala 3.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_bottle_01",
+    "assetPath": "sounds/vo/axe/axe_bottle_01.vsnd_c",
+    "category": "bottle",
+    "placeholderText": "Axe: garrafa, fala 1.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_bottle_02",
+    "assetPath": "sounds/vo/axe/axe_bottle_02.vsnd_c",
+    "category": "bottle",
+    "placeholderText": "Axe: garrafa, fala 2.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_bottle_03",
+    "assetPath": "sounds/vo/axe/axe_bottle_03.vsnd_c",
+    "category": "bottle",
+    "placeholderText": "Axe: garrafa, fala 3.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_bottle_04",
+    "assetPath": "sounds/vo/axe/axe_bottle_04.vsnd_c",
+    "category": "bottle",
+    "placeholderText": "Axe: garrafa, fala 4.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_cast_01",
+    "assetPath": "sounds/vo/axe/axe_cast_01.vsnd_c",
+    "category": "cast",
+    "placeholderText": "Axe: conjuração, fala 1.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_cast_02",
+    "assetPath": "sounds/vo/axe/axe_cast_02.vsnd_c",
+    "category": "cast",
+    "placeholderText": "Axe: conjuração, fala 2.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_crumwiz_01",
+    "assetPath": "sounds/vo/axe/axe_crumwiz_01.vsnd_c",
+    "category": "crumwiz",
+    "placeholderText": "Axe: crumwiz, fala 1.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_death_01",
+    "assetPath": "sounds/vo/axe/axe_death_01.vsnd_c",
+    "category": "death",
+    "placeholderText": "Axe: morte, fala 1.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_death_02",
+    "assetPath": "sounds/vo/axe/axe_death_02.vsnd_c",
+    "category": "death",
+    "placeholderText": "Axe: morte, fala 2.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_death_03",
+    "assetPath": "sounds/vo/axe/axe_death_03.vsnd_c",
+    "category": "death",
+    "placeholderText": "Axe: morte, fala 3.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_death_04",
+    "assetPath": "sounds/vo/axe/axe_death_04.vsnd_c",
+    "category": "death",
+    "placeholderText": "Axe: morte, fala 4.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_death_05",
+    "assetPath": "sounds/vo/axe/axe_death_05.vsnd_c",
+    "category": "death",
+    "placeholderText": "Axe: morte, fala 5.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_death_06",
+    "assetPath": "sounds/vo/axe/axe_death_06.vsnd_c",
+    "category": "death",
+    "placeholderText": "Axe: morte, fala 6.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_death_07",
+    "assetPath": "sounds/vo/axe/axe_death_07.vsnd_c",
+    "category": "death",
+    "placeholderText": "Axe: morte, fala 7.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_death_08",
+    "assetPath": "sounds/vo/axe/axe_death_08.vsnd_c",
+    "category": "death",
+    "placeholderText": "Axe: morte, fala 8.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_death_09",
+    "assetPath": "sounds/vo/axe/axe_death_09.vsnd_c",
+    "category": "death",
+    "placeholderText": "Axe: morte, fala 9.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_death_10",
+    "assetPath": "sounds/vo/axe/axe_death_10.vsnd_c",
+    "category": "death",
+    "placeholderText": "Axe: morte, fala 10.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_deny_01",
+    "assetPath": "sounds/vo/axe/axe_deny_01.vsnd_c",
+    "category": "deny",
+    "placeholderText": "Axe: negação, fala 1.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_deny_02",
+    "assetPath": "sounds/vo/axe/axe_deny_02.vsnd_c",
+    "category": "deny",
+    "placeholderText": "Axe: negação, fala 2.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_deny_03",
+    "assetPath": "sounds/vo/axe/axe_deny_03.vsnd_c",
+    "category": "deny",
+    "placeholderText": "Axe: negação, fala 3.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_deny_04",
+    "assetPath": "sounds/vo/axe/axe_deny_04.vsnd_c",
+    "category": "deny",
+    "placeholderText": "Axe: negação, fala 4.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_deny_05",
+    "assetPath": "sounds/vo/axe/axe_deny_05.vsnd_c",
+    "category": "deny",
+    "placeholderText": "Axe: negação, fala 5.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_deny_06",
+    "assetPath": "sounds/vo/axe/axe_deny_06.vsnd_c",
+    "category": "deny",
+    "placeholderText": "Axe: negação, fala 6.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_deny_07",
+    "assetPath": "sounds/vo/axe/axe_deny_07.vsnd_c",
+    "category": "deny",
+    "placeholderText": "Axe: negação, fala 7.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_deny_08",
+    "assetPath": "sounds/vo/axe/axe_deny_08.vsnd_c",
+    "category": "deny",
+    "placeholderText": "Axe: negação, fala 8.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_deny_09",
+    "assetPath": "sounds/vo/axe/axe_deny_09.vsnd_c",
+    "category": "deny",
+    "placeholderText": "Axe: negação, fala 9.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_deny_10",
+    "assetPath": "sounds/vo/axe/axe_deny_10.vsnd_c",
+    "category": "deny",
+    "placeholderText": "Axe: negação, fala 10.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_deny_11",
+    "assetPath": "sounds/vo/axe/axe_deny_11.vsnd_c",
+    "category": "deny",
+    "placeholderText": "Axe: negação, fala 11.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_deny_12",
+    "assetPath": "sounds/vo/axe/axe_deny_12.vsnd_c",
+    "category": "deny",
+    "placeholderText": "Axe: negação, fala 12.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_deny_13",
+    "assetPath": "sounds/vo/axe/axe_deny_13.vsnd_c",
+    "category": "deny",
+    "placeholderText": "Axe: negação, fala 13.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_deny_14",
+    "assetPath": "sounds/vo/axe/axe_deny_14.vsnd_c",
+    "category": "deny",
+    "placeholderText": "Axe: negação, fala 14.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_deny_15",
+    "assetPath": "sounds/vo/axe/axe_deny_15.vsnd_c",
+    "category": "deny",
+    "placeholderText": "Axe: negação, fala 15.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_deny_16",
+    "assetPath": "sounds/vo/axe/axe_deny_16.vsnd_c",
+    "category": "deny",
+    "placeholderText": "Axe: negação, fala 16.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_doubdam_01",
+    "assetPath": "sounds/vo/axe/axe_doubdam_01.vsnd_c",
+    "category": "doubdam",
+    "placeholderText": "Axe: dano dobrado, fala 1.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_doubdam_02",
+    "assetPath": "sounds/vo/axe/axe_doubdam_02.vsnd_c",
+    "category": "doubdam",
+    "placeholderText": "Axe: dano dobrado, fala 2.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_drop_common_01",
+    "assetPath": "sounds/vo/axe/axe_drop_common_01.vsnd_c",
+    "category": "drop_common",
+    "placeholderText": "Axe: drop common, fala 1.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_drop_medium_01",
+    "assetPath": "sounds/vo/axe/axe_drop_medium_01.vsnd_c",
+    "category": "drop_medium",
+    "placeholderText": "Axe: drop medium, fala 1.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_drop_rare_01",
+    "assetPath": "sounds/vo/axe/axe_drop_rare_01.vsnd_c",
+    "category": "drop_rare",
+    "placeholderText": "Axe: drop rare, fala 1.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_fastres_01",
+    "assetPath": "sounds/vo/axe/axe_fastres_01.vsnd_c",
+    "category": "fastres",
+    "placeholderText": "Axe: fastres, fala 1.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_fastres_02",
+    "assetPath": "sounds/vo/axe/axe_fastres_02.vsnd_c",
+    "category": "fastres",
+    "placeholderText": "Axe: fastres, fala 2.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_firstblood_01",
+    "assetPath": "sounds/vo/axe/axe_firstblood_01.vsnd_c",
+    "category": "firstblood",
+    "placeholderText": "Axe: primeiro sangue, fala 1.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_firstblood_02",
+    "assetPath": "sounds/vo/axe/axe_firstblood_02.vsnd_c",
+    "category": "firstblood",
+    "placeholderText": "Axe: primeiro sangue, fala 2.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_happy_01",
+    "assetPath": "sounds/vo/axe/axe_happy_01.vsnd_c",
+    "category": "happy",
+    "placeholderText": "Axe: felicidade, fala 1.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_happy_02",
+    "assetPath": "sounds/vo/axe/axe_happy_02.vsnd_c",
+    "category": "happy",
+    "placeholderText": "Axe: felicidade, fala 2.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_happy_03",
+    "assetPath": "sounds/vo/axe/axe_happy_03.vsnd_c",
+    "category": "happy",
+    "placeholderText": "Axe: felicidade, fala 3.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_happy_04",
+    "assetPath": "sounds/vo/axe/axe_happy_04.vsnd_c",
+    "category": "happy",
+    "placeholderText": "Axe: felicidade, fala 4.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_happy_05",
+    "assetPath": "sounds/vo/axe/axe_happy_05.vsnd_c",
+    "category": "happy",
+    "placeholderText": "Axe: felicidade, fala 5.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_happy_06",
+    "assetPath": "sounds/vo/axe/axe_happy_06.vsnd_c",
+    "category": "happy",
+    "placeholderText": "Axe: felicidade, fala 6.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_happy_07",
+    "assetPath": "sounds/vo/axe/axe_happy_07.vsnd_c",
+    "category": "happy",
+    "placeholderText": "Axe: felicidade, fala 7.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_haste_01",
+    "assetPath": "sounds/vo/axe/axe_haste_01.vsnd_c",
+    "category": "haste",
+    "placeholderText": "Axe: velocidade, fala 1.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_haste_02",
+    "assetPath": "sounds/vo/axe/axe_haste_02.vsnd_c",
+    "category": "haste",
+    "placeholderText": "Axe: velocidade, fala 2.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_illus_01",
+    "assetPath": "sounds/vo/axe/axe_illus_01.vsnd_c",
+    "category": "illus",
+    "placeholderText": "Axe: ilusão, fala 1.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_illus_02",
+    "assetPath": "sounds/vo/axe/axe_illus_02.vsnd_c",
+    "category": "illus",
+    "placeholderText": "Axe: ilusão, fala 2.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_illus_03",
+    "assetPath": "sounds/vo/axe/axe_illus_03.vsnd_c",
+    "category": "illus",
+    "placeholderText": "Axe: ilusão, fala 3.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_immort_01",
+    "assetPath": "sounds/vo/axe/axe_immort_01.vsnd_c",
+    "category": "immort",
+    "placeholderText": "Axe: égide, fala 1.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_immort_02",
+    "assetPath": "sounds/vo/axe/axe_immort_02.vsnd_c",
+    "category": "immort",
+    "placeholderText": "Axe: égide, fala 2.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_inthebag_01",
+    "assetPath": "sounds/vo/axe/axe_inthebag_01.vsnd_c",
+    "category": "inthebag",
+    "placeholderText": "Axe: inthebag, fala 1.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_inthebag_02",
+    "assetPath": "sounds/vo/axe/axe_inthebag_02.vsnd_c",
+    "category": "inthebag",
+    "placeholderText": "Axe: inthebag, fala 2.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_invis_01",
+    "assetPath": "sounds/vo/axe/axe_invis_01.vsnd_c",
+    "category": "invis",
+    "placeholderText": "Axe: invisibilidade, fala 1.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_invis_02",
+    "assetPath": "sounds/vo/axe/axe_invis_02.vsnd_c",
+    "category": "invis",
+    "placeholderText": "Axe: invisibilidade, fala 2.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_item_01",
+    "assetPath": "sounds/vo/axe/axe_item_01.vsnd_c",
+    "category": "item",
+    "placeholderText": "Axe: item, fala 1.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_item_02",
+    "assetPath": "sounds/vo/axe/axe_item_02.vsnd_c",
+    "category": "item",
+    "placeholderText": "Axe: item, fala 2.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_item_03",
+    "assetPath": "sounds/vo/axe/axe_item_03.vsnd_c",
+    "category": "item",
+    "placeholderText": "Axe: item, fala 3.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_item_04",
+    "assetPath": "sounds/vo/axe/axe_item_04.vsnd_c",
+    "category": "item",
+    "placeholderText": "Axe: item, fala 4.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_item_05",
+    "assetPath": "sounds/vo/axe/axe_item_05.vsnd_c",
+    "category": "item",
+    "placeholderText": "Axe: item, fala 5.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_item_06",
+    "assetPath": "sounds/vo/axe/axe_item_06.vsnd_c",
+    "category": "item",
+    "placeholderText": "Axe: item, fala 6.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_item_07",
+    "assetPath": "sounds/vo/axe/axe_item_07.vsnd_c",
+    "category": "item",
+    "placeholderText": "Axe: item, fala 7.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_item_08",
+    "assetPath": "sounds/vo/axe/axe_item_08.vsnd_c",
+    "category": "item",
+    "placeholderText": "Axe: item, fala 8.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_item_09",
+    "assetPath": "sounds/vo/axe/axe_item_09.vsnd_c",
+    "category": "item",
+    "placeholderText": "Axe: item, fala 9.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_kill_01",
+    "assetPath": "sounds/vo/axe/axe_kill_01.vsnd_c",
+    "category": "kill",
+    "placeholderText": "Axe: abate, fala 1.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_kill_02",
+    "assetPath": "sounds/vo/axe/axe_kill_02.vsnd_c",
+    "category": "kill",
+    "placeholderText": "Axe: abate, fala 2.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_kill_03",
+    "assetPath": "sounds/vo/axe/axe_kill_03.vsnd_c",
+    "category": "kill",
+    "placeholderText": "Axe: abate, fala 3.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_kill_04",
+    "assetPath": "sounds/vo/axe/axe_kill_04.vsnd_c",
+    "category": "kill",
+    "placeholderText": "Axe: abate, fala 4.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_kill_05",
+    "assetPath": "sounds/vo/axe/axe_kill_05.vsnd_c",
+    "category": "kill",
+    "placeholderText": "Axe: abate, fala 5.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_kill_06",
+    "assetPath": "sounds/vo/axe/axe_kill_06.vsnd_c",
+    "category": "kill",
+    "placeholderText": "Axe: abate, fala 6.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_kill_07",
+    "assetPath": "sounds/vo/axe/axe_kill_07.vsnd_c",
+    "category": "kill",
+    "placeholderText": "Axe: abate, fala 7.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_kill_08",
+    "assetPath": "sounds/vo/axe/axe_kill_08.vsnd_c",
+    "category": "kill",
+    "placeholderText": "Axe: abate, fala 8.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_kill_09",
+    "assetPath": "sounds/vo/axe/axe_kill_09.vsnd_c",
+    "category": "kill",
+    "placeholderText": "Axe: abate, fala 9.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_kill_10",
+    "assetPath": "sounds/vo/axe/axe_kill_10.vsnd_c",
+    "category": "kill",
+    "placeholderText": "Axe: abate, fala 10.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_kill_11",
+    "assetPath": "sounds/vo/axe/axe_kill_11.vsnd_c",
+    "category": "kill",
+    "placeholderText": "Axe: abate, fala 11.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_kill_12",
+    "assetPath": "sounds/vo/axe/axe_kill_12.vsnd_c",
+    "category": "kill",
+    "placeholderText": "Axe: abate, fala 12.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_kill_13",
+    "assetPath": "sounds/vo/axe/axe_kill_13.vsnd_c",
+    "category": "kill",
+    "placeholderText": "Axe: abate, fala 13.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_kill_14",
+    "assetPath": "sounds/vo/axe/axe_kill_14.vsnd_c",
+    "category": "kill",
+    "placeholderText": "Axe: abate, fala 14.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_kill_15",
+    "assetPath": "sounds/vo/axe/axe_kill_15.vsnd_c",
+    "category": "kill",
+    "placeholderText": "Axe: abate, fala 15.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_kill_16",
+    "assetPath": "sounds/vo/axe/axe_kill_16.vsnd_c",
+    "category": "kill",
+    "placeholderText": "Axe: abate, fala 16.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_kill_17",
+    "assetPath": "sounds/vo/axe/axe_kill_17.vsnd_c",
+    "category": "kill",
+    "placeholderText": "Axe: abate, fala 17.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_kill_18",
+    "assetPath": "sounds/vo/axe/axe_kill_18.vsnd_c",
+    "category": "kill",
+    "placeholderText": "Axe: abate, fala 18.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_kill_19",
+    "assetPath": "sounds/vo/axe/axe_kill_19.vsnd_c",
+    "category": "kill",
+    "placeholderText": "Axe: abate, fala 19.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_kill_20",
+    "assetPath": "sounds/vo/axe/axe_kill_20.vsnd_c",
+    "category": "kill",
+    "placeholderText": "Axe: abate, fala 20.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_killspecial_01",
+    "assetPath": "sounds/vo/axe/axe_killspecial_01.vsnd_c",
+    "category": "killspecial",
+    "placeholderText": "Axe: abate especial, fala 1.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_killspecial_02",
+    "assetPath": "sounds/vo/axe/axe_killspecial_02.vsnd_c",
+    "category": "killspecial",
+    "placeholderText": "Axe: abate especial, fala 2.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_killspecial_03",
+    "assetPath": "sounds/vo/axe/axe_killspecial_03.vsnd_c",
+    "category": "killspecial",
+    "placeholderText": "Axe: abate especial, fala 3.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_killspecial_04",
+    "assetPath": "sounds/vo/axe/axe_killspecial_04.vsnd_c",
+    "category": "killspecial",
+    "placeholderText": "Axe: abate especial, fala 4.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_lasthit_01",
+    "assetPath": "sounds/vo/axe/axe_lasthit_01.vsnd_c",
+    "category": "lasthit",
+    "placeholderText": "Axe: último golpe, fala 1.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_lasthit_02",
+    "assetPath": "sounds/vo/axe/axe_lasthit_02.vsnd_c",
+    "category": "lasthit",
+    "placeholderText": "Axe: último golpe, fala 2.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_lasthit_03",
+    "assetPath": "sounds/vo/axe/axe_lasthit_03.vsnd_c",
+    "category": "lasthit",
+    "placeholderText": "Axe: último golpe, fala 3.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_lasthit_04",
+    "assetPath": "sounds/vo/axe/axe_lasthit_04.vsnd_c",
+    "category": "lasthit",
+    "placeholderText": "Axe: último golpe, fala 4.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_lasthit_05",
+    "assetPath": "sounds/vo/axe/axe_lasthit_05.vsnd_c",
+    "category": "lasthit",
+    "placeholderText": "Axe: último golpe, fala 5.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_lasthit_06",
+    "assetPath": "sounds/vo/axe/axe_lasthit_06.vsnd_c",
+    "category": "lasthit",
+    "placeholderText": "Axe: último golpe, fala 6.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_lasthit_07",
+    "assetPath": "sounds/vo/axe/axe_lasthit_07.vsnd_c",
+    "category": "lasthit",
+    "placeholderText": "Axe: último golpe, fala 7.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_laugh_01",
+    "assetPath": "sounds/vo/axe/axe_laugh_01.vsnd_c",
+    "category": "laugh",
+    "placeholderText": "Axe: risada, fala 1.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_laugh_02",
+    "assetPath": "sounds/vo/axe/axe_laugh_02.vsnd_c",
+    "category": "laugh",
+    "placeholderText": "Axe: risada, fala 2.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_laugh_03",
+    "assetPath": "sounds/vo/axe/axe_laugh_03.vsnd_c",
+    "category": "laugh",
+    "placeholderText": "Axe: risada, fala 3.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_laugh_04",
+    "assetPath": "sounds/vo/axe/axe_laugh_04.vsnd_c",
+    "category": "laugh",
+    "placeholderText": "Axe: risada, fala 4.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_laugh_05",
+    "assetPath": "sounds/vo/axe/axe_laugh_05.vsnd_c",
+    "category": "laugh",
+    "placeholderText": "Axe: risada, fala 5.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_level_01",
+    "assetPath": "sounds/vo/axe/axe_level_01.vsnd_c",
+    "category": "level",
+    "placeholderText": "Axe: novo nível, fala 1.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_level_02",
+    "assetPath": "sounds/vo/axe/axe_level_02.vsnd_c",
+    "category": "level",
+    "placeholderText": "Axe: novo nível, fala 2.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_level_03",
+    "assetPath": "sounds/vo/axe/axe_level_03.vsnd_c",
+    "category": "level",
+    "placeholderText": "Axe: novo nível, fala 3.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_level_04",
+    "assetPath": "sounds/vo/axe/axe_level_04.vsnd_c",
+    "category": "level",
+    "placeholderText": "Axe: novo nível, fala 4.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_level_05",
+    "assetPath": "sounds/vo/axe/axe_level_05.vsnd_c",
+    "category": "level",
+    "placeholderText": "Axe: novo nível, fala 5.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_level_06",
+    "assetPath": "sounds/vo/axe/axe_level_06.vsnd_c",
+    "category": "level",
+    "placeholderText": "Axe: novo nível, fala 6.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_level_07",
+    "assetPath": "sounds/vo/axe/axe_level_07.vsnd_c",
+    "category": "level",
+    "placeholderText": "Axe: novo nível, fala 7.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_level_08",
+    "assetPath": "sounds/vo/axe/axe_level_08.vsnd_c",
+    "category": "level",
+    "placeholderText": "Axe: novo nível, fala 8.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_level_09",
+    "assetPath": "sounds/vo/axe/axe_level_09.vsnd_c",
+    "category": "level",
+    "placeholderText": "Axe: novo nível, fala 9.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_level_10",
+    "assetPath": "sounds/vo/axe/axe_level_10.vsnd_c",
+    "category": "level",
+    "placeholderText": "Axe: novo nível, fala 10.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_level_11",
+    "assetPath": "sounds/vo/axe/axe_level_11.vsnd_c",
+    "category": "level",
+    "placeholderText": "Axe: novo nível, fala 11.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_lose_01",
+    "assetPath": "sounds/vo/axe/axe_lose_01.vsnd_c",
+    "category": "lose",
+    "placeholderText": "Axe: derrota, fala 1.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_lose_02",
+    "assetPath": "sounds/vo/axe/axe_lose_02.vsnd_c",
+    "category": "lose",
+    "placeholderText": "Axe: derrota, fala 2.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_lose_03",
+    "assetPath": "sounds/vo/axe/axe_lose_03.vsnd_c",
+    "category": "lose",
+    "placeholderText": "Axe: derrota, fala 3.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_lose_04",
+    "assetPath": "sounds/vo/axe/axe_lose_04.vsnd_c",
+    "category": "lose",
+    "placeholderText": "Axe: derrota, fala 4.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_lose_05",
+    "assetPath": "sounds/vo/axe/axe_lose_05.vsnd_c",
+    "category": "lose",
+    "placeholderText": "Axe: derrota, fala 5.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_missing_lane_01",
+    "assetPath": "sounds/vo/axe/axe_missing_lane_01.vsnd_c",
+    "category": "missing_lane",
+    "placeholderText": "Axe: inimigo desaparecido, fala 1.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_missing_lane_02",
+    "assetPath": "sounds/vo/axe/axe_missing_lane_02.vsnd_c",
+    "category": "missing_lane",
+    "placeholderText": "Axe: inimigo desaparecido, fala 2.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_missing_lane_03",
+    "assetPath": "sounds/vo/axe/axe_missing_lane_03.vsnd_c",
+    "category": "missing_lane",
+    "placeholderText": "Axe: inimigo desaparecido, fala 3.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_move_01",
+    "assetPath": "sounds/vo/axe/axe_move_01.vsnd_c",
+    "category": "move",
+    "placeholderText": "Axe: movimento, fala 1.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_move_02",
+    "assetPath": "sounds/vo/axe/axe_move_02.vsnd_c",
+    "category": "move",
+    "placeholderText": "Axe: movimento, fala 2.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_move_03",
+    "assetPath": "sounds/vo/axe/axe_move_03.vsnd_c",
+    "category": "move",
+    "placeholderText": "Axe: movimento, fala 3.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_move_04",
+    "assetPath": "sounds/vo/axe/axe_move_04.vsnd_c",
+    "category": "move",
+    "placeholderText": "Axe: movimento, fala 4.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_move_05",
+    "assetPath": "sounds/vo/axe/axe_move_05.vsnd_c",
+    "category": "move",
+    "placeholderText": "Axe: movimento, fala 5.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_move_06",
+    "assetPath": "sounds/vo/axe/axe_move_06.vsnd_c",
+    "category": "move",
+    "placeholderText": "Axe: movimento, fala 6.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_move_07",
+    "assetPath": "sounds/vo/axe/axe_move_07.vsnd_c",
+    "category": "move",
+    "placeholderText": "Axe: movimento, fala 7.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_move_08",
+    "assetPath": "sounds/vo/axe/axe_move_08.vsnd_c",
+    "category": "move",
+    "placeholderText": "Axe: movimento, fala 8.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_move_09",
+    "assetPath": "sounds/vo/axe/axe_move_09.vsnd_c",
+    "category": "move",
+    "placeholderText": "Axe: movimento, fala 9.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_move_10",
+    "assetPath": "sounds/vo/axe/axe_move_10.vsnd_c",
+    "category": "move",
+    "placeholderText": "Axe: movimento, fala 10.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_move_11",
+    "assetPath": "sounds/vo/axe/axe_move_11.vsnd_c",
+    "category": "move",
+    "placeholderText": "Axe: movimento, fala 11.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_nomana_01",
+    "assetPath": "sounds/vo/axe/axe_nomana_01.vsnd_c",
+    "category": "nomana",
+    "placeholderText": "Axe: sem mana, fala 1.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_nomana_02",
+    "assetPath": "sounds/vo/axe/axe_nomana_02.vsnd_c",
+    "category": "nomana",
+    "placeholderText": "Axe: sem mana, fala 2.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_nomana_03",
+    "assetPath": "sounds/vo/axe/axe_nomana_03.vsnd_c",
+    "category": "nomana",
+    "placeholderText": "Axe: sem mana, fala 3.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_nomana_04",
+    "assetPath": "sounds/vo/axe/axe_nomana_04.vsnd_c",
+    "category": "nomana",
+    "placeholderText": "Axe: sem mana, fala 4.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_nomana_05",
+    "assetPath": "sounds/vo/axe/axe_nomana_05.vsnd_c",
+    "category": "nomana",
+    "placeholderText": "Axe: sem mana, fala 5.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_nomana_06",
+    "assetPath": "sounds/vo/axe/axe_nomana_06.vsnd_c",
+    "category": "nomana",
+    "placeholderText": "Axe: sem mana, fala 6.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_nomana_07",
+    "assetPath": "sounds/vo/axe/axe_nomana_07.vsnd_c",
+    "category": "nomana",
+    "placeholderText": "Axe: sem mana, fala 7.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_nomana_08",
+    "assetPath": "sounds/vo/axe/axe_nomana_08.vsnd_c",
+    "category": "nomana",
+    "placeholderText": "Axe: sem mana, fala 8.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_nomana_09",
+    "assetPath": "sounds/vo/axe/axe_nomana_09.vsnd_c",
+    "category": "nomana",
+    "placeholderText": "Axe: sem mana, fala 9.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_notyet_01",
+    "assetPath": "sounds/vo/axe/axe_notyet_01.vsnd_c",
+    "category": "notyet",
+    "placeholderText": "Axe: ainda não, fala 1.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_notyet_02",
+    "assetPath": "sounds/vo/axe/axe_notyet_02.vsnd_c",
+    "category": "notyet",
+    "placeholderText": "Axe: ainda não, fala 2.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_notyet_03",
+    "assetPath": "sounds/vo/axe/axe_notyet_03.vsnd_c",
+    "category": "notyet",
+    "placeholderText": "Axe: ainda não, fala 3.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_notyet_04",
+    "assetPath": "sounds/vo/axe/axe_notyet_04.vsnd_c",
+    "category": "notyet",
+    "placeholderText": "Axe: ainda não, fala 4.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_notyet_05",
+    "assetPath": "sounds/vo/axe/axe_notyet_05.vsnd_c",
+    "category": "notyet",
+    "placeholderText": "Axe: ainda não, fala 5.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_notyet_06",
+    "assetPath": "sounds/vo/axe/axe_notyet_06.vsnd_c",
+    "category": "notyet",
+    "placeholderText": "Axe: ainda não, fala 6.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_notyet_07",
+    "assetPath": "sounds/vo/axe/axe_notyet_07.vsnd_c",
+    "category": "notyet",
+    "placeholderText": "Axe: ainda não, fala 7.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_notyet_08",
+    "assetPath": "sounds/vo/axe/axe_notyet_08.vsnd_c",
+    "category": "notyet",
+    "placeholderText": "Axe: ainda não, fala 8.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_notyet_09",
+    "assetPath": "sounds/vo/axe/axe_notyet_09.vsnd_c",
+    "category": "notyet",
+    "placeholderText": "Axe: ainda não, fala 9.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_pain_01",
+    "assetPath": "sounds/vo/axe/axe_pain_01.vsnd_c",
+    "category": "pain",
+    "placeholderText": "Axe: dor, fala 1.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_pain_02",
+    "assetPath": "sounds/vo/axe/axe_pain_02.vsnd_c",
+    "category": "pain",
+    "placeholderText": "Axe: dor, fala 2.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_pain_03",
+    "assetPath": "sounds/vo/axe/axe_pain_03.vsnd_c",
+    "category": "pain",
+    "placeholderText": "Axe: dor, fala 3.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_pain_04",
+    "assetPath": "sounds/vo/axe/axe_pain_04.vsnd_c",
+    "category": "pain",
+    "placeholderText": "Axe: dor, fala 4.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_pain_05",
+    "assetPath": "sounds/vo/axe/axe_pain_05.vsnd_c",
+    "category": "pain",
+    "placeholderText": "Axe: dor, fala 5.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_pain_06",
+    "assetPath": "sounds/vo/axe/axe_pain_06.vsnd_c",
+    "category": "pain",
+    "placeholderText": "Axe: dor, fala 6.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_pain_07",
+    "assetPath": "sounds/vo/axe/axe_pain_07.vsnd_c",
+    "category": "pain",
+    "placeholderText": "Axe: dor, fala 7.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_purch_01",
+    "assetPath": "sounds/vo/axe/axe_purch_01.vsnd_c",
+    "category": "purch",
+    "placeholderText": "Axe: compra, fala 1.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_purch_02",
+    "assetPath": "sounds/vo/axe/axe_purch_02.vsnd_c",
+    "category": "purch",
+    "placeholderText": "Axe: compra, fala 2.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_purch_03",
+    "assetPath": "sounds/vo/axe/axe_purch_03.vsnd_c",
+    "category": "purch",
+    "placeholderText": "Axe: compra, fala 3.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_purch_04",
+    "assetPath": "sounds/vo/axe/axe_purch_04.vsnd_c",
+    "category": "purch",
+    "placeholderText": "Axe: compra, fala 4.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_rare_01",
+    "assetPath": "sounds/vo/axe/axe_rare_01.vsnd_c",
+    "category": "rare",
+    "placeholderText": "Axe: item raro, fala 1.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_rare_02",
+    "assetPath": "sounds/vo/axe/axe_rare_02.vsnd_c",
+    "category": "rare",
+    "placeholderText": "Axe: item raro, fala 2.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_rare_03",
+    "assetPath": "sounds/vo/axe/axe_rare_03.vsnd_c",
+    "category": "rare",
+    "placeholderText": "Axe: item raro, fala 3.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_regen_01",
+    "assetPath": "sounds/vo/axe/axe_regen_01.vsnd_c",
+    "category": "regen",
+    "placeholderText": "Axe: regeneração, fala 1.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_regen_02",
+    "assetPath": "sounds/vo/axe/axe_regen_02.vsnd_c",
+    "category": "regen",
+    "placeholderText": "Axe: regeneração, fala 2.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_respawn_01",
+    "assetPath": "sounds/vo/axe/axe_respawn_01.vsnd_c",
+    "category": "respawn",
+    "placeholderText": "Axe: renascimento, fala 1.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_respawn_02",
+    "assetPath": "sounds/vo/axe/axe_respawn_02.vsnd_c",
+    "category": "respawn",
+    "placeholderText": "Axe: renascimento, fala 2.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_respawn_03",
+    "assetPath": "sounds/vo/axe/axe_respawn_03.vsnd_c",
+    "category": "respawn",
+    "placeholderText": "Axe: renascimento, fala 3.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_respawn_04",
+    "assetPath": "sounds/vo/axe/axe_respawn_04.vsnd_c",
+    "category": "respawn",
+    "placeholderText": "Axe: renascimento, fala 4.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_respawn_05",
+    "assetPath": "sounds/vo/axe/axe_respawn_05.vsnd_c",
+    "category": "respawn",
+    "placeholderText": "Axe: renascimento, fala 5.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_respawn_06",
+    "assetPath": "sounds/vo/axe/axe_respawn_06.vsnd_c",
+    "category": "respawn",
+    "placeholderText": "Axe: renascimento, fala 6.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_respawn_07",
+    "assetPath": "sounds/vo/axe/axe_respawn_07.vsnd_c",
+    "category": "respawn",
+    "placeholderText": "Axe: renascimento, fala 7.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_respawn_08",
+    "assetPath": "sounds/vo/axe/axe_respawn_08.vsnd_c",
+    "category": "respawn",
+    "placeholderText": "Axe: renascimento, fala 8.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_respawn_09",
+    "assetPath": "sounds/vo/axe/axe_respawn_09.vsnd_c",
+    "category": "respawn",
+    "placeholderText": "Axe: renascimento, fala 9.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_respawn_10",
+    "assetPath": "sounds/vo/axe/axe_respawn_10.vsnd_c",
+    "category": "respawn",
+    "placeholderText": "Axe: renascimento, fala 10.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_rival_01",
+    "assetPath": "sounds/vo/axe/axe_rival_01.vsnd_c",
+    "category": "rival",
+    "placeholderText": "Axe: interação com rival, fala 1.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_rival_02",
+    "assetPath": "sounds/vo/axe/axe_rival_02.vsnd_c",
+    "category": "rival",
+    "placeholderText": "Axe: interação com rival, fala 2.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_rival_03",
+    "assetPath": "sounds/vo/axe/axe_rival_03.vsnd_c",
+    "category": "rival",
+    "placeholderText": "Axe: interação com rival, fala 3.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_rival_04",
+    "assetPath": "sounds/vo/axe/axe_rival_04.vsnd_c",
+    "category": "rival",
+    "placeholderText": "Axe: interação com rival, fala 4.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_rival_05",
+    "assetPath": "sounds/vo/axe/axe_rival_05.vsnd_c",
+    "category": "rival",
+    "placeholderText": "Axe: interação com rival, fala 5.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_rival_06",
+    "assetPath": "sounds/vo/axe/axe_rival_06.vsnd_c",
+    "category": "rival",
+    "placeholderText": "Axe: interação com rival, fala 6.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_rival_07",
+    "assetPath": "sounds/vo/axe/axe_rival_07.vsnd_c",
+    "category": "rival",
+    "placeholderText": "Axe: interação com rival, fala 7.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_rival_08",
+    "assetPath": "sounds/vo/axe/axe_rival_08.vsnd_c",
+    "category": "rival",
+    "placeholderText": "Axe: interação com rival, fala 8.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_rival_09",
+    "assetPath": "sounds/vo/axe/axe_rival_09.vsnd_c",
+    "category": "rival",
+    "placeholderText": "Axe: interação com rival, fala 9.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_rival_10",
+    "assetPath": "sounds/vo/axe/axe_rival_10.vsnd_c",
+    "category": "rival",
+    "placeholderText": "Axe: interação com rival, fala 10.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_rival_11",
+    "assetPath": "sounds/vo/axe/axe_rival_11.vsnd_c",
+    "category": "rival",
+    "placeholderText": "Axe: interação com rival, fala 11.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_rival_12",
+    "assetPath": "sounds/vo/axe/axe_rival_12.vsnd_c",
+    "category": "rival",
+    "placeholderText": "Axe: interação com rival, fala 12.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_rival_13",
+    "assetPath": "sounds/vo/axe/axe_rival_13.vsnd_c",
+    "category": "rival",
+    "placeholderText": "Axe: interação com rival, fala 13.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_rival_14",
+    "assetPath": "sounds/vo/axe/axe_rival_14.vsnd_c",
+    "category": "rival",
+    "placeholderText": "Axe: interação com rival, fala 14.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_rival_15",
+    "assetPath": "sounds/vo/axe/axe_rival_15.vsnd_c",
+    "category": "rival",
+    "placeholderText": "Axe: interação com rival, fala 15.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_rival_16",
+    "assetPath": "sounds/vo/axe/axe_rival_16.vsnd_c",
+    "category": "rival",
+    "placeholderText": "Axe: interação com rival, fala 16.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_rival_17",
+    "assetPath": "sounds/vo/axe/axe_rival_17.vsnd_c",
+    "category": "rival",
+    "placeholderText": "Axe: interação com rival, fala 17.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_rival_18",
+    "assetPath": "sounds/vo/axe/axe_rival_18.vsnd_c",
+    "category": "rival",
+    "placeholderText": "Axe: interação com rival, fala 18.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_rival_19",
+    "assetPath": "sounds/vo/axe/axe_rival_19.vsnd_c",
+    "category": "rival",
+    "placeholderText": "Axe: interação com rival, fala 19.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_rival_20",
+    "assetPath": "sounds/vo/axe/axe_rival_20.vsnd_c",
+    "category": "rival",
+    "placeholderText": "Axe: interação com rival, fala 20.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_rival_21",
+    "assetPath": "sounds/vo/axe/axe_rival_21.vsnd_c",
+    "category": "rival",
+    "placeholderText": "Axe: interação com rival, fala 21.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_rival_22",
+    "assetPath": "sounds/vo/axe/axe_rival_22.vsnd_c",
+    "category": "rival",
+    "placeholderText": "Axe: interação com rival, fala 22.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_rival_23",
+    "assetPath": "sounds/vo/axe/axe_rival_23.vsnd_c",
+    "category": "rival",
+    "placeholderText": "Axe: interação com rival, fala 23.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_rival_24",
+    "assetPath": "sounds/vo/axe/axe_rival_24.vsnd_c",
+    "category": "rival",
+    "placeholderText": "Axe: interação com rival, fala 24.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_rival_25",
+    "assetPath": "sounds/vo/axe/axe_rival_25.vsnd_c",
+    "category": "rival",
+    "placeholderText": "Axe: interação com rival, fala 25.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_rival_26",
+    "assetPath": "sounds/vo/axe/axe_rival_26.vsnd_c",
+    "category": "rival",
+    "placeholderText": "Axe: interação com rival, fala 26.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_rival_27",
+    "assetPath": "sounds/vo/axe/axe_rival_27.vsnd_c",
+    "category": "rival",
+    "placeholderText": "Axe: interação com rival, fala 27.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_rival_28",
+    "assetPath": "sounds/vo/axe/axe_rival_28.vsnd_c",
+    "category": "rival",
+    "placeholderText": "Axe: interação com rival, fala 28.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_rival_29",
+    "assetPath": "sounds/vo/axe/axe_rival_29.vsnd_c",
+    "category": "rival",
+    "placeholderText": "Axe: interação com rival, fala 29.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_rival_30",
+    "assetPath": "sounds/vo/axe/axe_rival_30.vsnd_c",
+    "category": "rival",
+    "placeholderText": "Axe: interação com rival, fala 30.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_rival_31",
+    "assetPath": "sounds/vo/axe/axe_rival_31.vsnd_c",
+    "category": "rival",
+    "placeholderText": "Axe: interação com rival, fala 31.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_rival_32",
+    "assetPath": "sounds/vo/axe/axe_rival_32.vsnd_c",
+    "category": "rival",
+    "placeholderText": "Axe: interação com rival, fala 32.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_rival_33",
+    "assetPath": "sounds/vo/axe/axe_rival_33.vsnd_c",
+    "category": "rival",
+    "placeholderText": "Axe: interação com rival, fala 33.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_rival_34",
+    "assetPath": "sounds/vo/axe/axe_rival_34.vsnd_c",
+    "category": "rival",
+    "placeholderText": "Axe: interação com rival, fala 34.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_rival_35",
+    "assetPath": "sounds/vo/axe/axe_rival_35.vsnd_c",
+    "category": "rival",
+    "placeholderText": "Axe: interação com rival, fala 35.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_sheepstick_01",
+    "assetPath": "sounds/vo/axe/axe_sheepstick_01.vsnd_c",
+    "category": "sheepstick",
+    "placeholderText": "Axe: transformação, fala 1.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_sheepstick_02",
+    "assetPath": "sounds/vo/axe/axe_sheepstick_02.vsnd_c",
+    "category": "sheepstick",
+    "placeholderText": "Axe: transformação, fala 2.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_sheepstick_03",
+    "assetPath": "sounds/vo/axe/axe_sheepstick_03.vsnd_c",
+    "category": "sheepstick",
+    "placeholderText": "Axe: transformação, fala 3.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_sheepstick_04",
+    "assetPath": "sounds/vo/axe/axe_sheepstick_04.vsnd_c",
+    "category": "sheepstick",
+    "placeholderText": "Axe: transformação, fala 4.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_sheepstick_05",
+    "assetPath": "sounds/vo/axe/axe_sheepstick_05.vsnd_c",
+    "category": "sheepstick",
+    "placeholderText": "Axe: transformação, fala 5.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_shitwiz_01",
+    "assetPath": "sounds/vo/axe/axe_shitwiz_01.vsnd_c",
+    "category": "shitwiz",
+    "placeholderText": "Axe: shitwiz, fala 1.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_spawn_01",
+    "assetPath": "sounds/vo/axe/axe_spawn_01.vsnd_c",
+    "category": "spawn",
+    "placeholderText": "Axe: entrada, fala 1.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_spawn_02",
+    "assetPath": "sounds/vo/axe/axe_spawn_02.vsnd_c",
+    "category": "spawn",
+    "placeholderText": "Axe: entrada, fala 2.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_spawn_03",
+    "assetPath": "sounds/vo/axe/axe_spawn_03.vsnd_c",
+    "category": "spawn",
+    "placeholderText": "Axe: entrada, fala 3.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_spawn_04",
+    "assetPath": "sounds/vo/axe/axe_spawn_04.vsnd_c",
+    "category": "spawn",
+    "placeholderText": "Axe: entrada, fala 4.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_spawn_05",
+    "assetPath": "sounds/vo/axe/axe_spawn_05.vsnd_c",
+    "category": "spawn",
+    "placeholderText": "Axe: entrada, fala 5.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_spawn_06",
+    "assetPath": "sounds/vo/axe/axe_spawn_06.vsnd_c",
+    "category": "spawn",
+    "placeholderText": "Axe: entrada, fala 6.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_spawn_07",
+    "assetPath": "sounds/vo/axe/axe_spawn_07.vsnd_c",
+    "category": "spawn",
+    "placeholderText": "Axe: entrada, fala 7.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_spawn_08",
+    "assetPath": "sounds/vo/axe/axe_spawn_08.vsnd_c",
+    "category": "spawn",
+    "placeholderText": "Axe: entrada, fala 8.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_spawn_09",
+    "assetPath": "sounds/vo/axe/axe_spawn_09.vsnd_c",
+    "category": "spawn",
+    "placeholderText": "Axe: entrada, fala 9.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_spawn_10",
+    "assetPath": "sounds/vo/axe/axe_spawn_10.vsnd_c",
+    "category": "spawn",
+    "placeholderText": "Axe: entrada, fala 10.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_thanks_01",
+    "assetPath": "sounds/vo/axe/axe_thanks_01.vsnd_c",
+    "category": "thanks",
+    "placeholderText": "Axe: agradecimento, fala 1.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_thanks_02",
+    "assetPath": "sounds/vo/axe/axe_thanks_02.vsnd_c",
+    "category": "thanks",
+    "placeholderText": "Axe: agradecimento, fala 2.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_underattack_01",
+    "assetPath": "sounds/vo/axe/axe_underattack_01.vsnd_c",
+    "category": "underattack",
+    "placeholderText": "Axe: sob ataque, fala 1.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_win_01",
+    "assetPath": "sounds/vo/axe/axe_win_01.vsnd_c",
+    "category": "win",
+    "placeholderText": "Axe: vitória, fala 1.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_win_02",
+    "assetPath": "sounds/vo/axe/axe_win_02.vsnd_c",
+    "category": "win",
+    "placeholderText": "Axe: vitória, fala 2.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  },
+  {
+    "id": "axe_win_03",
+    "assetPath": "sounds/vo/axe/axe_win_03.vsnd_c",
+    "category": "win",
+    "placeholderText": "Axe: vitória, fala 3.",
+    "translationStatus": "placeholder",
+    "audioStatus": "missing",
+    "releaseStatus": "missing"
+  }
+]
