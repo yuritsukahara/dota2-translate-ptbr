@@ -1,0 +1,39 @@
+name: Adotar um herói
+description: Propor ou assumir tradução, revisão ou gravação de um herói
+title: "[HERÓI] "
+labels: ["herói"]
+body:
+  - type: input
+    id: hero
+    attributes:
+      label: Herói
+    validations:
+      required: true
+  - type: dropdown
+    id: role
+    attributes:
+      label: Área
+      options:
+        - Tradução
+        - Revisão
+        - Interpretação
+        - Direção
+        - Edição de áudio
+        - Teste técnico
+    validations:
+      required: true
+  - type: textarea
+    id: scope
+    attributes:
+      label: Escopo
+      description: Categorias ou IDs que você pretende trabalhar.
+    validations:
+      required: true
+  - type: checkboxes
+    id: rights
+    attributes:
+      label: Direitos
+      options:
+        - label: Li as regras de contribuição e não enviarei áudio extraído do jogo ou voz sem consentimento.
+          required: true
+

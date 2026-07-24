@@ -1,0 +1,7 @@
+*.csv text eol=lf
+*.md text eol=lf
+*.mjs text eol=lf
+*.ps1 text eol=crlf
+*.lua text eol=lf
+audio/recordings/**/*.wav filter=lfs diff=lfs merge=lfs -text
+

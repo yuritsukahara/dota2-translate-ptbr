@@ -1,0 +1,27 @@
+name: Problema técnico
+description: Relatar erro no manifesto, geração, compilação ou addon
+title: "[BUG] "
+labels: ["bug"]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: O que aconteceu?
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Como reproduzir
+    validations:
+      required: true
+  - type: input
+    id: dota
+    attributes:
+      label: Versão/data do Dota 2
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs relevantes
+      render: shell
+

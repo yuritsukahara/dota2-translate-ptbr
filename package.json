@@ -1,0 +1,13 @@
+{
+  "name": "dota2-translate-ptbr",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "sync:axe": "node scripts/sync-manifest.mjs --hero axe",
+    "validate": "node scripts/validate.mjs"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

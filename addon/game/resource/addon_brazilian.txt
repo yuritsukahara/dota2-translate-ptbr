@@ -1,0 +1,9 @@
+"lang"
+{
+    "Language" "brazilian"
+    "Tokens"
+    {
+        "AddonName"        "Dota 2 Translate PT-BR — Laboratório de Voz"
+        "AddonDescription" "Addon comunitário para testar dublagens brasileiras."
+    }
+}
