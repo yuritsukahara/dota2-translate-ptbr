@@ -146,7 +146,7 @@ test("petição possui assinatura única por usuário", async () => {
   assert.match(page, /projeto independente/);
   assert.match(home, /Dota inteiro/);
   assert.match(home, /Em português/);
-  assert.doesNotMatch(home, /Captions do Axe/);
+  assert.doesNotMatch(home, /\baxe\b/i);
   assert.ok(header.indexOf("Heróis") < header.indexOf("Traduções"));
   assert.ok(header.indexOf("Traduções") < header.indexOf("Petição"));
   assert.match(schema, /petition_signatures/);
