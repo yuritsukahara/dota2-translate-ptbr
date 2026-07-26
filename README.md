@@ -37,9 +37,16 @@ Os envios devem ser WAV PCM mono, 16-bit, 24/48 kHz, até 20 segundos e 10 MB, c
 
 O portal usa somente Steam OpenID. Cada Steam ID pode assinar uma vez a carta pública que pede à Valve uma dublagem oficial em PT-BR. A petição destaca a história, o humor, os campeonatos e a paixão da comunidade brasileira sem afirmar apoio ou promessa da Valve.
 
-## Áudio original
+## Áudio original e captions
 
-O catálogo guarda o caminho técnico do som dentro da instalação local do Dota. O portal público não funciona como espelho dos arquivos de voz da Valve. A categoria [Responses da Dota 2 Wiki](https://dota2.fandom.com/wiki/Category:Responses) e páginas equivalentes servem para conferência editorial secundária; a fonte canônica do snapshot é o cliente instalado.
+O catálogo guarda o caminho técnico do som dentro da instalação local do Dota.
+Quando existe um arquivo individual no Fandom, o player do portal abre essa
+origem externa diretamente e mostra o crédito e a página Responses; o arquivo
+não é copiado para o servidor do projeto. A fonte canônica do inventário continua
+sendo o cliente instalado.
+
+A rota `/captions` é dedicada somente às captions oficiais, com seleção de
+herói, busca e filtros separados do fluxo de audições.
 
 ## Executar
 

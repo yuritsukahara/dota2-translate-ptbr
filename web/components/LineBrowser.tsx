@@ -3,8 +3,15 @@
 import { useMemo, useState } from "react";
 import type { OfficialVoiceLine } from "@/lib/catalog";
 import { categoryLabel } from "@/lib/catalog";
+import { OriginalAudio } from "@/components/OriginalAudio";
 
-export function LineBrowser({ lines }: { lines: OfficialVoiceLine[] }) {
+export function LineBrowser({
+  lines,
+  responsePage,
+}: {
+  lines: OfficialVoiceLine[];
+  responsePage: string;
+}) {
   const [query, setQuery] = useState("");
   const [category, setCategory] = useState("all");
   const categories = useMemo(() => [...new Set(lines.map((line) => line.category))].sort(), [lines]);
@@ -33,10 +40,7 @@ export function LineBrowser({ lines }: { lines: OfficialVoiceLine[] }) {
         {filtered.map((line) => (
           <article className="line-row official-line-row" key={line.id}>
             <span className="line-id">{line.id}</span>
-            <span className="original-audio-source">
-              <strong>Som original</strong>
-              <small>Disponível no Dota instalado</small>
-            </span>
+            <OriginalAudio lineId={line.id} responsePage={responsePage} />
             <span className="line-copy">
               <small>EN · caption oficial</small>
               <strong>{line.captionEn}</strong>

@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 import { Header } from "@/components/Header";
+import { OriginalAudio } from "@/components/OriginalAudio";
 import { categoryLabel, getLine } from "@/lib/catalog";
 
 export default async function LinePage({ params }: { params: Promise<{ id: string }> }) {
@@ -15,6 +16,11 @@ export default async function LinePage({ params }: { params: Promise<{ id: strin
         </div>
         <div className="detail-grid">
           <section className="detail-panel">
+            <p className="eyebrow">SOM ORIGINAL</p>
+            <OriginalAudio
+              lineId={line.id}
+              responsePage="https://dota2.fandom.com/wiki/Axe/Responses"
+            />
             <p className="eyebrow">LEGENDA OFICIAL EM INGLÊS</p>
             <blockquote className="source-caption">
               {line.captionEn}

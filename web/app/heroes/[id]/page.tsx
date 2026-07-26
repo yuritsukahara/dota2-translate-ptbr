@@ -24,6 +24,7 @@ export default async function HeroPage({
   const hero = getHero(id);
   if (!hero) notFound();
   const lines = getHeroLines(id);
+  const fandomResponsePage = `https://dota2.fandom.com/wiki/${encodeURIComponent(hero.name.replaceAll(" ", "_"))}/Responses`;
 
   return (
     <>
@@ -42,7 +43,8 @@ export default async function HeroPage({
             </p>
             <div className="hero-actions">
               <Link className="button button-primary" href={`/audicoes/${hero.id}`}>Enviar audição de 5 linhas</Link>
-              <a className="button button-ghost" href={`https://liquipedia.net/dota2/${encodeURIComponent(hero.name.replaceAll(" ", "_"))}/Responses`}>Referência da wiki</a>
+              <Link className="button button-ghost" href={`/captions?heroi=${hero.id}`}>Ver somente captions</Link>
+              <a className="button button-ghost" href={fandomResponsePage}>Responses no Fandom</a>
             </div>
           </div>
         </div>
@@ -59,10 +61,10 @@ export default async function HeroPage({
           </section>
           <aside className="side-panel">
             <p className="eyebrow">SOM ORIGINAL</p>
-            <p className="form-note">O catálogo registra o caminho do asset original no VPK local. O portal não redistribui as gravações da Valve.</p>
+            <p className="form-note">O player tenta abrir o arquivo individual hospedado pelo Fandom. Quando ele não existe, permanece o caminho do asset no VPK local e o link para a página Responses.</p>
           </aside>
         </div>
-        <LineBrowser lines={lines} />
+        <LineBrowser lines={lines} responsePage={fandomResponsePage} />
       </main>
     </>
   );

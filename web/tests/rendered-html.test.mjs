@@ -18,15 +18,28 @@ test("portal público está em português e usa identidade Steam", async () => {
 });
 
 test("catálogo lista som local e captions oficiais EN e PT-BR", async () => {
-  const [page, browser] = await Promise.all([
+  const [page, browser, audio] = await Promise.all([
     readFile(new URL("../app/heroes/[id]/page.tsx", import.meta.url), "utf8"),
     readFile(new URL("../components/LineBrowser.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../components/OriginalAudio.tsx", import.meta.url), "utf8"),
   ]);
   assert.match(page, /getHeroLines/);
-  assert.match(browser, /Som original/);
   assert.match(browser, /caption oficial/);
   assert.match(browser, /Não publicada neste build/);
   assert.match(browser, /lines\.filter/);
+  assert.match(audio, /Special:Redirect\/file/);
+  assert.match(audio, /Fonte: Dota 2 Wiki\/Fandom/);
+});
+
+test("página exclusiva de captions separa EN e PT-BR oficiais", async () => {
+  const [page, browser] = await Promise.all([
+    readFile(new URL("../app/captions/page.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../components/CaptionBrowser.tsx", import.meta.url), "utf8"),
+  ]);
+  assert.match(page, /Nenhuma tradução comunitária/);
+  assert.match(page, /Escolha o herói/);
+  assert.match(browser, /Inglês oficial/);
+  assert.match(browser, /Português brasileiro oficial/);
 });
 
 test("inventário oficial cobre 127 heróis em ordem alfabética", async () => {

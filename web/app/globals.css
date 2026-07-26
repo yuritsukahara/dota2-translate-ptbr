@@ -129,6 +129,8 @@ textarea.field { min-height: 130px; padding: 14px; resize: vertical; }
 .original-audio-source { display: grid; gap: 5px; }
 .original-audio-source strong { color: var(--paper-2); font-size: 12px; }
 .original-audio-source small { color: var(--muted); font-size: 10px; }
+.original-audio-source audio { width: 100%; min-width: 150px; height: 32px; filter: sepia(.18) saturate(.75); }
+.original-audio-source a { color: var(--gold); font: 700 9px var(--font-mono); text-transform: uppercase; }
 .detail-grid { display: grid; grid-template-columns: 1fr 340px; gap: 36px; }
 .detail-panel, .side-panel, .form-card, .empty-card { background: var(--panel); border: 1px solid var(--line); padding: 30px; }
 .detail-panel h2, .form-card h2 { font: 400 31px var(--font-display); text-transform: uppercase; margin: 0 0 24px; }
@@ -254,6 +256,28 @@ textarea.field { min-height: 130px; padding: 14px; resize: vertical; }
 .signature-grid img, .signature-grid article > span { width: 52px; height: 52px; border-radius: 50%; }
 .signature-grid article > span { display: grid; place-items: center; background: var(--rust); font: 700 12px var(--font-mono); }
 
+.caption-control-panel { display: grid; grid-template-columns: 1.35fr .65fr; gap: 24px; border: 1px solid var(--line); background: linear-gradient(135deg,rgba(215,168,79,.08),var(--panel)); padding: 26px; margin-bottom: 22px; }
+.caption-control-panel form { display: grid; grid-template-columns: 1fr auto; gap: 10px; }
+.caption-control-panel label { grid-column: 1 / -1; color: var(--muted); font: 700 10px var(--font-mono); text-transform: uppercase; }
+.caption-control-panel select { width: 100%; }
+.caption-control-panel > div { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 16px; border-left: 1px solid var(--line); padding-left: 24px; }
+.caption-control-panel > div strong { grid-column: 1 / -1; font: 400 28px var(--font-display); text-transform: uppercase; }
+.caption-control-panel > div span, .caption-control-panel > div small { color: var(--muted); font-size: 12px; }
+.caption-control-panel > div small { grid-column: 1 / -1; }
+.caption-policy { margin-bottom: 34px; }
+.caption-policy a { color: var(--gold); font-weight: 700; }
+.caption-table { border: 1px solid var(--line); }
+.caption-table-head, .caption-row { display: grid; grid-template-columns: 1fr 1.45fr 1.45fr; gap: 22px; padding: 17px 20px; }
+.caption-table-head { background: var(--gold); color: var(--ink); font: 700 10px var(--font-mono); text-transform: uppercase; letter-spacing: .06em; }
+.caption-row { border-top: 1px solid var(--line); background: rgba(19,17,15,.55); align-items: start; }
+.caption-row:hover { background: var(--panel-2); }
+.caption-row > div { display: grid; gap: 7px; }
+.caption-row code { color: var(--paper-2); overflow-wrap: anywhere; font-size: 11px; }
+.caption-row small { color: var(--muted); }
+.caption-row p { margin: 0; font-size: 14px; line-height: 1.5; }
+.caption-available { color: var(--paper); }
+.caption-missing { color: var(--muted); font-style: italic; }
+
 @media (max-width: 900px) {
   .main-nav { display: none; }
   .mobile-menu { display: inline; font: 700 11px var(--font-mono); }
@@ -269,6 +293,11 @@ textarea.field { min-height: 130px; padding: 14px; resize: vertical; }
   .casting-sample { grid-template-columns: 1fr; }
   .petition-hero { grid-template-columns: 1fr; padding: 70px 0; }
   .signature-grid { grid-template-columns: repeat(2,1fr); }
+  .caption-control-panel { grid-template-columns: 1fr; }
+  .caption-control-panel > div { border-left: 0; border-top: 1px solid var(--line); padding: 20px 0 0; }
+  .caption-table-head { display: none; }
+  .caption-row { grid-template-columns: 1fr 1fr; }
+  .caption-row > div { grid-column: 1 / -1; }
   .explainer-steps { grid-template-columns: repeat(4, 1fr); }
   .explainer-steps > div:nth-child(4) { border-right: 0; }
   .explainer-steps > div:nth-child(-n+4) { border-bottom: 1px solid var(--line); }
@@ -304,4 +333,7 @@ textarea.field { min-height: 130px; padding: 14px; resize: vertical; }
   .casting-empty, .profile-head { flex-direction: column; align-items: start; }
   .petition-hero { width: min(100% - 32px,1200px); }
   .petition-hero h1 { font-size: 49px; }
+  .caption-control-panel form, .caption-row { grid-template-columns: 1fr; }
+  .caption-control-panel form button { width: 100%; }
+  .caption-row > div { grid-column: auto; }
 }

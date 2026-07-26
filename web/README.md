@@ -7,8 +7,14 @@ Portal Vinext/Cloudflare Workers para catalogar as voicelines oficiais, organiza
 - O inventário e as captions são extraídos do VPK instalado localmente.
 - A interface só identifica uma tradução como oficial quando ela existe no arquivo brasileiro do mesmo build.
 - No build catalogado atualmente, há 55.357 captions inglesas de 127 heróis e nenhuma caption brasileira base por herói.
-- O portal guarda apenas o caminho do som original no cliente; não copia o áudio da Valve para R2.
-- A categoria `Responses` da Dota 2 Wiki é uma referência editorial secundária, não a fonte canônica nem uma licença de redistribuição.
+- O portal guarda o caminho do som original no cliente e tenta reproduzir externamente o arquivo individual do Fandom quando ele existe; não copia esse áudio para R2.
+- A categoria `Responses` da Dota 2 Wiki é uma referência editorial e uma origem externa dos players, não a fonte canônica do inventário.
+
+## Captions
+
+`/captions` é uma área separada, sem votação ou envio, para consultar somente os
+textos oficiais em inglês e português brasileiro. O usuário escolhe o herói,
+pesquisa por texto ou ID e filtra por categoria.
 
 ## Audições e packs
 
