@@ -26,7 +26,7 @@ ADMIN_STEAM_IDS=
 PUBLIC_SITE_URL=http://localhost:3000
 ```
 
-A Web API é usada no servidor para obter nome/avatar públicos e verificar que a conta possui pelo menos 30 dias. Nunca versione a chave.
+O OpenID funciona sem segredo. A chave Web API é opcional e permite obter nome/avatar públicos e verificar que a conta possui pelo menos 30 dias. Nunca versione a chave.
 
 ## Petição
 

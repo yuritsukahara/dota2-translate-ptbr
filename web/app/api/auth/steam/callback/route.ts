@@ -40,17 +40,20 @@ export async function GET(request: Request) {
     return Response.json({ error: "A Steam não confirmou esta identidade." }, { status: 401 });
   }
 
-  if (!runtimeEnv.STEAM_WEB_API_KEY) {
-    return Response.json({ error: "A chave da Steam Web API ainda não foi configurada." }, { status: 503 });
-  }
   const steamId = match[1];
-  const profileUrl = new URL("https://api.steampowered.com/ISteamUser/GetPlayerSummaries/v2/");
-  profileUrl.searchParams.set("key", runtimeEnv.STEAM_WEB_API_KEY);
-  profileUrl.searchParams.set("steamids", steamId);
-  const profileResponse = await fetch(profileUrl);
-  const payload = await profileResponse.json() as { response?: { players?: SteamPlayer[] } };
-  const profile = payload.response?.players?.[0];
-  if (!profile?.timecreated || Date.now() - profile.timecreated * 1000 < 30 * 86_400_000) {
+  let profile: SteamPlayer = {
+    steamid: steamId,
+    personaname: `Jogador Steam ${steamId.slice(-6)}`,
+  };
+  if (runtimeEnv.STEAM_WEB_API_KEY) {
+    const profileUrl = new URL("https://api.steampowered.com/ISteamUser/GetPlayerSummaries/v2/");
+    profileUrl.searchParams.set("key", runtimeEnv.STEAM_WEB_API_KEY);
+    profileUrl.searchParams.set("steamids", steamId);
+    const profileResponse = await fetch(profileUrl);
+    const payload = await profileResponse.json() as { response?: { players?: SteamPlayer[] } };
+    profile = payload.response?.players?.[0] || profile;
+  }
+  if (profile.timecreated && Date.now() - profile.timecreated * 1000 < 30 * 86_400_000) {
     return Response.json({ error: "Use uma conta Steam com pelo menos 30 dias." }, { status: 403 });
   }
 
@@ -62,7 +65,9 @@ export async function GET(request: Request) {
     displayName: profile.personaname,
     avatarUrl: profile.avatarfull || null,
     verified: true,
-    steamCreatedAt: new Date(profile.timecreated * 1000).toISOString(),
+    steamCreatedAt: profile.timecreated
+      ? new Date(profile.timecreated * 1000).toISOString()
+      : new Date().toISOString(),
   }).onConflictDoUpdate({
     target: users.steamId,
     set: { displayName: profile.personaname, avatarUrl: profile.avatarfull || null, verified: true, updatedAt: sql`CURRENT_TIMESTAMP` },
