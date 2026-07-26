@@ -1,10 +1,10 @@
 {
-  "source": "OpenDota heroStats + VPK local",
+  "source": "OpenDota heroStats + captions oficiais e inventário do VPK local",
   "build": {
     "clientVersion": "6869",
     "date": "Jul 24 2026"
   },
-  "generatedAt": "2026-07-26T13:41:54.539Z",
+  "generatedAt": "2026-07-26T14:38:29.603Z",
   "heroes": [
     {
       "id": "abaddon",
@@ -19,14 +19,19 @@
         "Carry",
         "Durable"
       ],
-      "total": 0,
-      "assetTotal": 0,
+      "total": 295,
+      "assetTotal": 295,
       "drafted": 0,
       "translated": 0,
       "recorded": 0,
       "reviewed": 0,
       "hasOfficialEnglishCaptions": true,
-      "active": false
+      "active": false,
+      "officialEnglishCaptions": 295,
+      "officialBrazilianCaptions": 0,
+      "hasOfficialBrazilianCaptions": false,
+      "voiceDirectory": "abaddon",
+      "voicePrefix": "abad"
     },
     {
       "id": "alchemist",
@@ -44,14 +49,19 @@
         "Initiator",
         "Nuker"
       ],
-      "total": 0,
-      "assetTotal": 0,
+      "total": 359,
+      "assetTotal": 359,
       "drafted": 0,
       "translated": 0,
       "recorded": 0,
       "reviewed": 0,
       "hasOfficialEnglishCaptions": true,
-      "active": false
+      "active": false,
+      "officialEnglishCaptions": 359,
+      "officialBrazilianCaptions": 0,
+      "hasOfficialBrazilianCaptions": false,
+      "voiceDirectory": "alchemist",
+      "voicePrefix": "alch"
     },
     {
       "id": "ancient_apparition",
@@ -66,14 +76,19 @@
         "Disabler",
         "Nuker"
       ],
-      "total": 0,
-      "assetTotal": 0,
+      "total": 226,
+      "assetTotal": 226,
       "drafted": 0,
       "translated": 0,
       "recorded": 0,
       "reviewed": 0,
       "hasOfficialEnglishCaptions": true,
-      "active": false
+      "active": false,
+      "officialEnglishCaptions": 226,
+      "officialBrazilianCaptions": 0,
+      "hasOfficialBrazilianCaptions": false,
+      "voiceDirectory": "ancient_apparition",
+      "voicePrefix": "appa"
     },
     {
       "id": "antimage",
@@ -88,14 +103,19 @@
         "Escape",
         "Nuker"
       ],
-      "total": 0,
-      "assetTotal": 0,
+      "total": 210,
+      "assetTotal": 210,
       "drafted": 0,
       "translated": 0,
       "recorded": 0,
       "reviewed": 0,
       "hasOfficialEnglishCaptions": true,
-      "active": false
+      "active": false,
+      "officialEnglishCaptions": 210,
+      "officialBrazilianCaptions": 0,
+      "hasOfficialBrazilianCaptions": false,
+      "voiceDirectory": "antimage",
+      "voicePrefix": "anti"
     },
     {
       "id": "arc_warden",
@@ -110,14 +130,19 @@
         "Escape",
         "Nuker"
       ],
-      "total": 0,
-      "assetTotal": 0,
+      "total": 402,
+      "assetTotal": 402,
       "drafted": 0,
       "translated": 0,
       "recorded": 0,
       "reviewed": 0,
       "hasOfficialEnglishCaptions": true,
-      "active": false
+      "active": false,
+      "officialEnglishCaptions": 402,
+      "officialBrazilianCaptions": 0,
+      "hasOfficialBrazilianCaptions": false,
+      "voiceDirectory": "arc_warden",
+      "voicePrefix": "arcwar"
     },
     {
       "id": "axe",
@@ -133,14 +158,19 @@
         "Disabler",
         "Carry"
       ],
-      "total": 243,
-      "assetTotal": 285,
-      "drafted": 243,
+      "total": 284,
+      "assetTotal": 284,
+      "drafted": 0,
       "translated": 0,
       "recorded": 0,
       "reviewed": 0,
       "hasOfficialEnglishCaptions": true,
-      "active": true
+      "active": false,
+      "officialEnglishCaptions": 284,
+      "officialBrazilianCaptions": 0,
+      "hasOfficialBrazilianCaptions": false,
+      "voiceDirectory": "axe",
+      "voicePrefix": "axe"
     },
     {
       "id": "bane",
@@ -156,14 +186,19 @@
         "Nuker",
         "Durable"
       ],
-      "total": 0,
-      "assetTotal": 0,
+      "total": 284,
+      "assetTotal": 284,
       "drafted": 0,
       "translated": 0,
       "recorded": 0,
       "reviewed": 0,
       "hasOfficialEnglishCaptions": true,
-      "active": false
+      "active": false,
+      "officialEnglishCaptions": 284,
+      "officialBrazilianCaptions": 0,
+      "hasOfficialBrazilianCaptions": false,
+      "voiceDirectory": "bane",
+      "voicePrefix": "bane"
     },
     {
       "id": "batrider",
@@ -178,14 +213,19 @@
         "Disabler",
         "Escape"
       ],
-      "total": 0,
-      "assetTotal": 0,
+      "total": 297,
+      "assetTotal": 297,
       "drafted": 0,
       "translated": 0,
       "recorded": 0,
       "reviewed": 0,
       "hasOfficialEnglishCaptions": true,
-      "active": false
+      "active": false,
+      "officialEnglishCaptions": 297,
+      "officialBrazilianCaptions": 0,
+      "hasOfficialBrazilianCaptions": false,
+      "voiceDirectory": "batrider",
+      "voicePrefix": "bat"
     },
     {
       "id": "beastmaster",
@@ -201,14 +241,19 @@
         "Durable",
         "Nuker"
       ],
-      "total": 0,
-      "assetTotal": 0,
+      "total": 245,
+      "assetTotal": 245,
       "drafted": 0,
       "translated": 0,
       "recorded": 0,
       "reviewed": 0,
       "hasOfficialEnglishCaptions": true,
-      "active": false
+      "active": false,
+      "officialEnglishCaptions": 245,
+      "officialBrazilianCaptions": 0,
+      "hasOfficialBrazilianCaptions": false,
+      "voiceDirectory": "beastmaster",
+      "voicePrefix": "beas"
     },
     {
       "id": "bloodseeker",
@@ -224,14 +269,19 @@
         "Nuker",
         "Initiator"
       ],
-      "total": 0,
-      "assetTotal": 0,
+      "total": 254,
+      "assetTotal": 254,
       "drafted": 0,
       "translated": 0,
       "recorded": 0,
       "reviewed": 0,
       "hasOfficialEnglishCaptions": true,
-      "active": false
+      "active": false,
+      "officialEnglishCaptions": 254,
+      "officialBrazilianCaptions": 0,
+      "hasOfficialBrazilianCaptions": false,
+      "voiceDirectory": "bloodseeker",
+      "voicePrefix": "blod"
     },
     {
       "id": "bounty_hunter",
@@ -245,14 +295,19 @@
         "Escape",
         "Nuker"
       ],
-      "total": 0,
-      "assetTotal": 0,
+      "total": 284,
+      "assetTotal": 284,
       "drafted": 0,
       "translated": 0,
       "recorded": 0,
       "reviewed": 0,
       "hasOfficialEnglishCaptions": true,
-      "active": false
+      "active": false,
+      "officialEnglishCaptions": 284,
+      "officialBrazilianCaptions": 0,
+      "hasOfficialBrazilianCaptions": false,
+      "voiceDirectory": "bounty_hunter",
+      "voicePrefix": "bount"
     },
     {
       "id": "brewmaster",
@@ -269,14 +324,19 @@
         "Disabler",
         "Nuker"
       ],
-      "total": 0,
-      "assetTotal": 0,
+      "total": 296,
+      "assetTotal": 296,
       "drafted": 0,
       "translated": 0,
       "recorded": 0,
       "reviewed": 0,
       "hasOfficialEnglishCaptions": true,
-      "active": false
+      "active": false,
+      "officialEnglishCaptions": 296,
+      "officialBrazilianCaptions": 0,
+      "hasOfficialBrazilianCaptions": false,
+      "voiceDirectory": "brewmaster",
+      "voicePrefix": "brew"
     },
     {
       "id": "bristleback",
@@ -292,14 +352,19 @@
         "Initiator",
         "Nuker"
       ],
-      "total": 0,
-      "assetTotal": 0,
+      "total": 319,
+      "assetTotal": 319,
       "drafted": 0,
       "translated": 0,
       "recorded": 0,
       "reviewed": 0,
       "hasOfficialEnglishCaptions": true,
-      "active": false
+      "active": false,
+      "officialEnglishCaptions": 319,
+      "officialBrazilianCaptions": 0,
+      "hasOfficialBrazilianCaptions": false,
+      "voiceDirectory": "bristleback",
+      "voicePrefix": "bristle"
     },
     {
       "id": "broodmother",
@@ -315,14 +380,19 @@
         "Escape",
         "Nuker"
       ],
-      "total": 0,
-      "assetTotal": 0,
+      "total": 251,
+      "assetTotal": 251,
       "drafted": 0,
       "translated": 0,
       "recorded": 0,
       "reviewed": 0,
       "hasOfficialEnglishCaptions": true,
-      "active": false
+      "active": false,
+      "officialEnglishCaptions": 251,
+      "officialBrazilianCaptions": 0,
+      "hasOfficialBrazilianCaptions": false,
+      "voiceDirectory": "broodmother",
+      "voicePrefix": "broo"
     },
     {
       "id": "centaur",
@@ -339,14 +409,19 @@
         "Nuker",
         "Escape"
       ],
-      "total": 0,
-      "assetTotal": 0,
+      "total": 317,
+      "assetTotal": 317,
       "drafted": 0,
       "translated": 0,
       "recorded": 0,
       "reviewed": 0,
       "hasOfficialEnglishCaptions": true,
-      "active": false
+      "active": false,
+      "officialEnglishCaptions": 317,
+      "officialBrazilianCaptions": 0,
+      "hasOfficialBrazilianCaptions": false,
+      "voiceDirectory": "centaur",
+      "voicePrefix": "cent"
     },
     {
       "id": "chaos_knight",
@@ -363,14 +438,19 @@
         "Pusher",
         "Initiator"
       ],
-      "total": 0,
-      "assetTotal": 0,
+      "total": 267,
+      "assetTotal": 267,
       "drafted": 0,
       "translated": 0,
       "recorded": 0,
       "reviewed": 0,
       "hasOfficialEnglishCaptions": true,
-      "active": false
+      "active": false,
+      "officialEnglishCaptions": 267,
+      "officialBrazilianCaptions": 0,
+      "hasOfficialBrazilianCaptions": false,
+      "voiceDirectory": "chaos_knight",
+      "voicePrefix": "chaknight"
     },
     {
       "id": "chen",
@@ -384,14 +464,19 @@
         "Support",
         "Pusher"
       ],
-      "total": 0,
-      "assetTotal": 0,
+      "total": 212,
+      "assetTotal": 212,
       "drafted": 0,
       "translated": 0,
       "recorded": 0,
       "reviewed": 0,
       "hasOfficialEnglishCaptions": true,
-      "active": false
+      "active": false,
+      "officialEnglishCaptions": 212,
+      "officialBrazilianCaptions": 0,
+      "hasOfficialBrazilianCaptions": false,
+      "voiceDirectory": "chen",
+      "voicePrefix": "chen"
     },
     {
       "id": "clinkz",
@@ -406,14 +491,19 @@
         "Escape",
         "Pusher"
       ],
-      "total": 0,
-      "assetTotal": 0,
+      "total": 251,
+      "assetTotal": 251,
       "drafted": 0,
       "translated": 0,
       "recorded": 0,
       "reviewed": 0,
       "hasOfficialEnglishCaptions": true,
-      "active": false
+      "active": false,
+      "officialEnglishCaptions": 251,
+      "officialBrazilianCaptions": 0,
+      "hasOfficialBrazilianCaptions": false,
+      "voiceDirectory": "clinkz",
+      "voicePrefix": "clinkz"
     },
     {
       "id": "rattletrap",
@@ -429,14 +519,19 @@
         "Durable",
         "Nuker"
       ],
-      "total": 0,
-      "assetTotal": 0,
+      "total": 318,
+      "assetTotal": 318,
       "drafted": 0,
       "translated": 0,
       "recorded": 0,
       "reviewed": 0,
       "hasOfficialEnglishCaptions": true,
-      "active": false
+      "active": false,
+      "officialEnglishCaptions": 318,
+      "officialBrazilianCaptions": 0,
+      "hasOfficialBrazilianCaptions": false,
+      "voiceDirectory": "rattletrap",
+      "voicePrefix": "ratt"
     },
     {
       "id": "crystal_maiden",
@@ -451,14 +546,19 @@
         "Disabler",
         "Nuker"
       ],
-      "total": 0,
-      "assetTotal": 0,
+      "total": 924,
+      "assetTotal": 924,
       "drafted": 0,
       "translated": 0,
       "recorded": 0,
       "reviewed": 0,
-      "hasOfficialEnglishCaptions": false,
-      "active": false
+      "hasOfficialEnglishCaptions": true,
+      "active": false,
+      "officialEnglishCaptions": 924,
+      "officialBrazilianCaptions": 0,
+      "hasOfficialBrazilianCaptions": false,
+      "voiceDirectory": "crystalmaiden",
+      "voicePrefix": "cm"
     },
     {
       "id": "dark_seer",
@@ -473,14 +573,19 @@
         "Escape",
         "Disabler"
       ],
-      "total": 0,
-      "assetTotal": 0,
+      "total": 227,
+      "assetTotal": 227,
       "drafted": 0,
       "translated": 0,
       "recorded": 0,
       "reviewed": 0,
       "hasOfficialEnglishCaptions": true,
-      "active": false
+      "active": false,
+      "officialEnglishCaptions": 227,
+      "officialBrazilianCaptions": 0,
+      "hasOfficialBrazilianCaptions": false,
+      "voiceDirectory": "dark_seer",
+      "voicePrefix": "dkseer"
     },
     {
       "id": "dark_willow",
@@ -496,14 +601,19 @@
         "Disabler",
         "Escape"
       ],
-      "total": 0,
-      "assetTotal": 0,
+      "total": 985,
+      "assetTotal": 985,
       "drafted": 0,
       "translated": 0,
       "recorded": 0,
       "reviewed": 0,
       "hasOfficialEnglishCaptions": true,
-      "active": false
+      "active": false,
+      "officialEnglishCaptions": 985,
+      "officialBrazilianCaptions": 0,
+      "hasOfficialBrazilianCaptions": false,
+      "voiceDirectory": "dark_willow",
+      "voicePrefix": "sylph"
     },
     {
       "id": "dawnbreaker",
@@ -517,14 +627,19 @@
         "Carry",
         "Durable"
       ],
-      "total": 0,
-      "assetTotal": 0,
+      "total": 856,
+      "assetTotal": 856,
       "drafted": 0,
       "translated": 0,
       "recorded": 0,
       "reviewed": 0,
       "hasOfficialEnglishCaptions": true,
-      "active": false
+      "active": false,
+      "officialEnglishCaptions": 856,
+      "officialBrazilianCaptions": 0,
+      "hasOfficialBrazilianCaptions": false,
+      "voiceDirectory": "dawnbreaker",
+      "voicePrefix": "valora"
     },
     {
       "id": "dazzle",
@@ -539,14 +654,19 @@
         "Nuker",
         "Disabler"
       ],
-      "total": 0,
-      "assetTotal": 0,
+      "total": 236,
+      "assetTotal": 236,
       "drafted": 0,
       "translated": 0,
       "recorded": 0,
       "reviewed": 0,
       "hasOfficialEnglishCaptions": true,
-      "active": false
+      "active": false,
+      "officialEnglishCaptions": 236,
+      "officialBrazilianCaptions": 0,
+      "hasOfficialBrazilianCaptions": false,
+      "voiceDirectory": "dazzle",
+      "voicePrefix": "dazz"
     },
     {
       "id": "death_prophet",
@@ -562,14 +682,19 @@
         "Nuker",
         "Disabler"
       ],
-      "total": 0,
-      "assetTotal": 0,
+      "total": 335,
+      "assetTotal": 335,
       "drafted": 0,
       "translated": 0,
       "recorded": 0,
       "reviewed": 0,
       "hasOfficialEnglishCaptions": true,
-      "active": false
+      "active": false,
+      "officialEnglishCaptions": 335,
+      "officialBrazilianCaptions": 0,
+      "hasOfficialBrazilianCaptions": false,
+      "voiceDirectory": "death_prophet",
+      "voicePrefix": "dpro"
     },
     {
       "id": "disruptor",
@@ -585,14 +710,19 @@
         "Nuker",
         "Initiator"
       ],
-      "total": 0,
-      "assetTotal": 0,
+      "total": 294,
+      "assetTotal": 294,
       "drafted": 0,
       "translated": 0,
       "recorded": 0,
       "reviewed": 0,
       "hasOfficialEnglishCaptions": true,
-      "active": false
+      "active": false,
+      "officialEnglishCaptions": 294,
+      "officialBrazilianCaptions": 0,
+      "hasOfficialBrazilianCaptions": false,
+      "voiceDirectory": "disruptor",
+      "voicePrefix": "dis"
     },
     {
       "id": "doom_bringer",
@@ -609,14 +739,19 @@
         "Durable",
         "Nuker"
       ],
-      "total": 0,
-      "assetTotal": 0,
+      "total": 225,
+      "assetTotal": 225,
       "drafted": 0,
       "translated": 0,
       "recorded": 0,
       "reviewed": 0,
       "hasOfficialEnglishCaptions": true,
-      "active": false
+      "active": false,
+      "officialEnglishCaptions": 225,
+      "officialBrazilianCaptions": 0,
+      "hasOfficialBrazilianCaptions": false,
+      "voiceDirectory": "doom_bringer",
+      "voicePrefix": "doom"
     },
     {
       "id": "dragon_knight",
@@ -634,14 +769,19 @@
         "Initiator",
         "Nuker"
       ],
-      "total": 0,
-      "assetTotal": 0,
+      "total": 201,
+      "assetTotal": 201,
       "drafted": 0,
       "translated": 0,
       "recorded": 0,
       "reviewed": 0,
       "hasOfficialEnglishCaptions": true,
-      "active": false
+      "active": false,
+      "officialEnglishCaptions": 201,
+      "officialBrazilianCaptions": 0,
+      "hasOfficialBrazilianCaptions": false,
+      "voiceDirectory": "dragon_knight",
+      "voicePrefix": "dragon"
     },
     {
       "id": "drow_ranger",
@@ -656,14 +796,19 @@
         "Disabler",
         "Pusher"
       ],
-      "total": 0,
-      "assetTotal": 0,
+      "total": 1007,
+      "assetTotal": 1007,
       "drafted": 0,
       "translated": 0,
       "recorded": 0,
       "reviewed": 0,
-      "hasOfficialEnglishCaptions": false,
-      "active": false
+      "hasOfficialEnglishCaptions": true,
+      "active": false,
+      "officialEnglishCaptions": 1007,
+      "officialBrazilianCaptions": 0,
+      "hasOfficialBrazilianCaptions": false,
+      "voiceDirectory": "drowranger",
+      "voicePrefix": "drow"
     },
     {
       "id": "earth_spirit",
@@ -680,14 +825,19 @@
         "Initiator",
         "Durable"
       ],
-      "total": 0,
-      "assetTotal": 0,
+      "total": 402,
+      "assetTotal": 402,
       "drafted": 0,
       "translated": 0,
       "recorded": 0,
       "reviewed": 0,
       "hasOfficialEnglishCaptions": true,
-      "active": false
+      "active": false,
+      "officialEnglishCaptions": 402,
+      "officialBrazilianCaptions": 0,
+      "hasOfficialBrazilianCaptions": false,
+      "voiceDirectory": "earth_spirit",
+      "voicePrefix": "earthspi"
     },
     {
       "id": "earthshaker",
@@ -703,14 +853,19 @@
         "Disabler",
         "Nuker"
       ],
-      "total": 0,
-      "assetTotal": 0,
+      "total": 955,
+      "assetTotal": 955,
       "drafted": 0,
       "translated": 0,
       "recorded": 0,
       "reviewed": 0,
       "hasOfficialEnglishCaptions": true,
-      "active": false
+      "active": false,
+      "officialEnglishCaptions": 955,
+      "officialBrazilianCaptions": 0,
+      "hasOfficialBrazilianCaptions": false,
+      "voiceDirectory": "earthshaker",
+      "voicePrefix": "earth"
     },
     {
       "id": "elder_titan",
@@ -726,14 +881,19 @@
         "Nuker",
         "Durable"
       ],
-      "total": 0,
-      "assetTotal": 0,
+      "total": 312,
+      "assetTotal": 312,
       "drafted": 0,
       "translated": 0,
       "recorded": 0,
       "reviewed": 0,
       "hasOfficialEnglishCaptions": true,
-      "active": false
+      "active": false,
+      "officialEnglishCaptions": 312,
+      "officialBrazilianCaptions": 0,
+      "hasOfficialBrazilianCaptions": false,
+      "voiceDirectory": "elder_titan",
+      "voicePrefix": "elder"
     },
     {
       "id": "ember_spirit",
@@ -750,14 +910,19 @@
         "Disabler",
         "Initiator"
       ],
-      "total": 0,
-      "assetTotal": 0,
+      "total": 407,
+      "assetTotal": 407,
       "drafted": 0,
       "translated": 0,
       "recorded": 0,
       "reviewed": 0,
       "hasOfficialEnglishCaptions": true,
-      "active": false
+      "active": false,
+      "officialEnglishCaptions": 407,
+      "officialBrazilianCaptions": 0,
+      "hasOfficialBrazilianCaptions": false,
+      "voiceDirectory": "ember_spirit",
+      "voicePrefix": "embr"
     },
     {
       "id": "enchantress",
@@ -773,14 +938,19 @@
         "Durable",
         "Disabler"
       ],
-      "total": 0,
-      "assetTotal": 0,
+      "total": 225,
+      "assetTotal": 225,
       "drafted": 0,
       "translated": 0,
       "recorded": 0,
       "reviewed": 0,
       "hasOfficialEnglishCaptions": true,
-      "active": false
+      "active": false,
+      "officialEnglishCaptions": 225,
+      "officialBrazilianCaptions": 0,
+      "hasOfficialBrazilianCaptions": false,
+      "voiceDirectory": "enchantress",
+      "voicePrefix": "ench"
     },
     {
       "id": "enigma",
@@ -795,14 +965,19 @@
         "Initiator",
         "Pusher"
       ],
-      "total": 0,
-      "assetTotal": 0,
+      "total": 243,
+      "assetTotal": 243,
       "drafted": 0,
       "translated": 0,
       "recorded": 0,
       "reviewed": 0,
       "hasOfficialEnglishCaptions": true,
-      "active": false
+      "active": false,
+      "officialEnglishCaptions": 243,
+      "officialBrazilianCaptions": 0,
+      "hasOfficialBrazilianCaptions": false,
+      "voiceDirectory": "enigma",
+      "voicePrefix": "enig"
     },
     {
       "id": "faceless_void",
@@ -819,14 +994,19 @@
         "Escape",
         "Durable"
       ],
-      "total": 0,
-      "assetTotal": 0,
+      "total": 217,
+      "assetTotal": 217,
       "drafted": 0,
       "translated": 0,
       "recorded": 0,
       "reviewed": 0,
       "hasOfficialEnglishCaptions": true,
-      "active": false
+      "active": false,
+      "officialEnglishCaptions": 217,
+      "officialBrazilianCaptions": 0,
+      "hasOfficialBrazilianCaptions": false,
+      "voiceDirectory": "faceless_void",
+      "voicePrefix": "face"
     },
     {
       "id": "grimstroke",
@@ -842,14 +1022,19 @@
         "Disabler",
         "Escape"
       ],
-      "total": 0,
-      "assetTotal": 0,
+      "total": 876,
+      "assetTotal": 876,
       "drafted": 0,
       "translated": 0,
       "recorded": 0,
       "reviewed": 0,
       "hasOfficialEnglishCaptions": true,
-      "active": false
+      "active": false,
+      "officialEnglishCaptions": 876,
+      "officialBrazilianCaptions": 0,
+      "hasOfficialBrazilianCaptions": false,
+      "voiceDirectory": "grimstroke",
+      "voicePrefix": "grimstroke"
     },
     {
       "id": "gyrocopter",
@@ -864,14 +1049,19 @@
         "Nuker",
         "Disabler"
       ],
-      "total": 0,
-      "assetTotal": 0,
+      "total": 334,
+      "assetTotal": 334,
       "drafted": 0,
       "translated": 0,
       "recorded": 0,
       "reviewed": 0,
       "hasOfficialEnglishCaptions": true,
-      "active": false
+      "active": false,
+      "officialEnglishCaptions": 334,
+      "officialBrazilianCaptions": 0,
+      "hasOfficialBrazilianCaptions": false,
+      "voiceDirectory": "gyrocopter",
+      "voicePrefix": "gyro"
     },
     {
       "id": "hoodwink",
@@ -887,14 +1077,19 @@
         "Escape",
         "Disabler"
       ],
-      "total": 0,
-      "assetTotal": 0,
+      "total": 1258,
+      "assetTotal": 1258,
       "drafted": 0,
       "translated": 0,
       "recorded": 0,
       "reviewed": 0,
       "hasOfficialEnglishCaptions": true,
-      "active": false
+      "active": false,
+      "officialEnglishCaptions": 1258,
+      "officialBrazilianCaptions": 0,
+      "hasOfficialBrazilianCaptions": false,
+      "voiceDirectory": "hoodwink",
+      "voicePrefix": "hoodwink"
     },
     {
       "id": "huskar",
@@ -909,14 +1104,19 @@
         "Durable",
         "Initiator"
       ],
-      "total": 0,
-      "assetTotal": 0,
+      "total": 246,
+      "assetTotal": 246,
       "drafted": 0,
       "translated": 0,
       "recorded": 0,
       "reviewed": 0,
       "hasOfficialEnglishCaptions": true,
-      "active": false
+      "active": false,
+      "officialEnglishCaptions": 246,
+      "officialBrazilianCaptions": 0,
+      "hasOfficialBrazilianCaptions": false,
+      "voiceDirectory": "huskar",
+      "voicePrefix": "husk"
     },
     {
       "id": "invoker",
@@ -933,14 +1133,19 @@
         "Escape",
         "Pusher"
       ],
-      "total": 0,
-      "assetTotal": 0,
+      "total": 326,
+      "assetTotal": 326,
       "drafted": 0,
       "translated": 0,
       "recorded": 0,
       "reviewed": 0,
       "hasOfficialEnglishCaptions": true,
-      "active": false
+      "active": false,
+      "officialEnglishCaptions": 326,
+      "officialBrazilianCaptions": 0,
+      "hasOfficialBrazilianCaptions": false,
+      "voiceDirectory": "invoker",
+      "voicePrefix": "invo"
     },
     {
       "id": "wisp",
@@ -955,14 +1160,19 @@
         "Escape",
         "Nuker"
       ],
-      "total": 0,
-      "assetTotal": 0,
+      "total": 3,
+      "assetTotal": 3,
       "drafted": 0,
       "translated": 0,
       "recorded": 0,
       "reviewed": 0,
       "hasOfficialEnglishCaptions": true,
-      "active": false
+      "active": false,
+      "officialEnglishCaptions": 3,
+      "officialBrazilianCaptions": 0,
+      "hasOfficialBrazilianCaptions": false,
+      "voiceDirectory": "wisp",
+      "voicePrefix": "no"
     },
     {
       "id": "jakiro",
@@ -978,14 +1188,19 @@
         "Pusher",
         "Disabler"
       ],
-      "total": 0,
-      "assetTotal": 0,
+      "total": 268,
+      "assetTotal": 268,
       "drafted": 0,
       "translated": 0,
       "recorded": 0,
       "reviewed": 0,
       "hasOfficialEnglishCaptions": true,
-      "active": false
+      "active": false,
+      "officialEnglishCaptions": 268,
+      "officialBrazilianCaptions": 0,
+      "hasOfficialBrazilianCaptions": false,
+      "voiceDirectory": "jakiro",
+      "voicePrefix": "jak"
     },
     {
       "id": "juggernaut",
@@ -1000,14 +1215,19 @@
         "Pusher",
         "Escape"
       ],
-      "total": 0,
-      "assetTotal": 0,
+      "total": 70,
+      "assetTotal": 70,
       "drafted": 0,
       "translated": 0,
       "recorded": 0,
       "reviewed": 0,
       "hasOfficialEnglishCaptions": true,
-      "active": false
+      "active": false,
+      "officialEnglishCaptions": 70,
+      "officialBrazilianCaptions": 0,
+      "hasOfficialBrazilianCaptions": false,
+      "voiceDirectory": "juggernaut",
+      "voicePrefix": "jugg"
     },
     {
       "id": "keeper_of_the_light",
@@ -1022,14 +1242,19 @@
         "Nuker",
         "Disabler"
       ],
-      "total": 0,
-      "assetTotal": 0,
+      "total": 311,
+      "assetTotal": 311,
       "drafted": 0,
       "translated": 0,
       "recorded": 0,
       "reviewed": 0,
       "hasOfficialEnglishCaptions": true,
-      "active": false
+      "active": false,
+      "officialEnglishCaptions": 311,
+      "officialBrazilianCaptions": 0,
+      "hasOfficialBrazilianCaptions": false,
+      "voiceDirectory": "keeper_of_the_light",
+      "voicePrefix": "keep"
     },
     {
       "id": "kez",
@@ -1044,14 +1269,19 @@
         "Escape",
         "Disabler"
       ],
-      "total": 0,
-      "assetTotal": 0,
+      "total": 1439,
+      "assetTotal": 1439,
       "drafted": 0,
       "translated": 0,
       "recorded": 0,
       "reviewed": 0,
       "hasOfficialEnglishCaptions": true,
-      "active": false
+      "active": false,
+      "officialEnglishCaptions": 1439,
+      "officialBrazilianCaptions": 0,
+      "hasOfficialBrazilianCaptions": false,
+      "voiceDirectory": "kez",
+      "voicePrefix": "kez"
     },
     {
       "id": "kunkka",
@@ -1069,14 +1299,19 @@
         "Durable",
         "Nuker"
       ],
-      "total": 0,
-      "assetTotal": 0,
+      "total": 285,
+      "assetTotal": 285,
       "drafted": 0,
       "translated": 0,
       "recorded": 0,
       "reviewed": 0,
       "hasOfficialEnglishCaptions": true,
-      "active": false
+      "active": false,
+      "officialEnglishCaptions": 285,
+      "officialBrazilianCaptions": 0,
+      "hasOfficialBrazilianCaptions": false,
+      "voiceDirectory": "kunkka",
+      "voicePrefix": "kunk"
     },
     {
       "id": "largo",
@@ -1091,14 +1326,19 @@
         "Disabler",
         "Support"
       ],
-      "total": 0,
-      "assetTotal": 0,
+      "total": 1451,
+      "assetTotal": 1451,
       "drafted": 0,
       "translated": 0,
       "recorded": 0,
       "reviewed": 0,
       "hasOfficialEnglishCaptions": true,
-      "active": false
+      "active": false,
+      "officialEnglishCaptions": 1451,
+      "officialBrazilianCaptions": 0,
+      "hasOfficialBrazilianCaptions": false,
+      "voiceDirectory": "largo",
+      "voicePrefix": "largo"
     },
     {
       "id": "legion_commander",
@@ -1115,14 +1355,19 @@
         "Durable",
         "Nuker"
       ],
-      "total": 0,
-      "assetTotal": 0,
+      "total": 850,
+      "assetTotal": 850,
       "drafted": 0,
       "translated": 0,
       "recorded": 0,
       "reviewed": 0,
       "hasOfficialEnglishCaptions": true,
-      "active": false
+      "active": false,
+      "officialEnglishCaptions": 850,
+      "officialBrazilianCaptions": 0,
+      "hasOfficialBrazilianCaptions": false,
+      "voiceDirectory": "legion_commander",
+      "voicePrefix": "legcom"
     },
     {
       "id": "leshrac",
@@ -1139,14 +1384,19 @@
         "Pusher",
         "Disabler"
       ],
-      "total": 0,
-      "assetTotal": 0,
+      "total": 217,
+      "assetTotal": 217,
       "drafted": 0,
       "translated": 0,
       "recorded": 0,
       "reviewed": 0,
       "hasOfficialEnglishCaptions": true,
-      "active": false
+      "active": false,
+      "officialEnglishCaptions": 217,
+      "officialBrazilianCaptions": 0,
+      "hasOfficialBrazilianCaptions": false,
+      "voiceDirectory": "leshrac",
+      "voicePrefix": "lesh"
     },
     {
       "id": "lich",
@@ -1160,14 +1410,19 @@
         "Support",
         "Nuker"
       ],
-      "total": 0,
-      "assetTotal": 0,
+      "total": 258,
+      "assetTotal": 258,
       "drafted": 0,
       "translated": 0,
       "recorded": 0,
       "reviewed": 0,
       "hasOfficialEnglishCaptions": true,
-      "active": false
+      "active": false,
+      "officialEnglishCaptions": 258,
+      "officialBrazilianCaptions": 0,
+      "hasOfficialBrazilianCaptions": false,
+      "voiceDirectory": "lich",
+      "voicePrefix": "lich"
     },
     {
       "id": "life_stealer",
@@ -1183,14 +1438,19 @@
         "Escape",
         "Disabler"
       ],
-      "total": 0,
-      "assetTotal": 0,
+      "total": 281,
+      "assetTotal": 281,
       "drafted": 0,
       "translated": 0,
       "recorded": 0,
       "reviewed": 0,
       "hasOfficialEnglishCaptions": true,
-      "active": false
+      "active": false,
+      "officialEnglishCaptions": 281,
+      "officialBrazilianCaptions": 0,
+      "hasOfficialBrazilianCaptions": false,
+      "voiceDirectory": "life_stealer",
+      "voicePrefix": "lifest"
     },
     {
       "id": "lina",
@@ -1206,14 +1466,19 @@
         "Nuker",
         "Disabler"
       ],
-      "total": 0,
-      "assetTotal": 0,
+      "total": 258,
+      "assetTotal": 258,
       "drafted": 0,
       "translated": 0,
       "recorded": 0,
       "reviewed": 0,
       "hasOfficialEnglishCaptions": true,
-      "active": false
+      "active": false,
+      "officialEnglishCaptions": 258,
+      "officialBrazilianCaptions": 0,
+      "hasOfficialBrazilianCaptions": false,
+      "voiceDirectory": "lina",
+      "voicePrefix": "lina"
     },
     {
       "id": "lion",
@@ -1229,14 +1494,19 @@
         "Nuker",
         "Initiator"
       ],
-      "total": 0,
-      "assetTotal": 0,
+      "total": 189,
+      "assetTotal": 189,
       "drafted": 0,
       "translated": 0,
       "recorded": 0,
       "reviewed": 0,
       "hasOfficialEnglishCaptions": true,
-      "active": false
+      "active": false,
+      "officialEnglishCaptions": 189,
+      "officialBrazilianCaptions": 0,
+      "hasOfficialBrazilianCaptions": false,
+      "voiceDirectory": "lion",
+      "voicePrefix": "lion"
     },
     {
       "id": "lone_druid",
@@ -1251,14 +1521,19 @@
         "Pusher",
         "Durable"
       ],
-      "total": 0,
-      "assetTotal": 0,
+      "total": 619,
+      "assetTotal": 619,
       "drafted": 0,
       "translated": 0,
       "recorded": 0,
       "reviewed": 0,
       "hasOfficialEnglishCaptions": true,
-      "active": false
+      "active": false,
+      "officialEnglishCaptions": 619,
+      "officialBrazilianCaptions": 0,
+      "hasOfficialBrazilianCaptions": false,
+      "voiceDirectory": "lone_druid",
+      "voicePrefix": "lone"
     },
     {
       "id": "luna",
@@ -1273,14 +1548,19 @@
         "Nuker",
         "Pusher"
       ],
-      "total": 0,
-      "assetTotal": 0,
+      "total": 288,
+      "assetTotal": 288,
       "drafted": 0,
       "translated": 0,
       "recorded": 0,
       "reviewed": 0,
       "hasOfficialEnglishCaptions": true,
-      "active": false
+      "active": false,
+      "officialEnglishCaptions": 288,
+      "officialBrazilianCaptions": 0,
+      "hasOfficialBrazilianCaptions": false,
+      "voiceDirectory": "luna",
+      "voicePrefix": "luna"
     },
     {
       "id": "lycan",
@@ -1296,14 +1576,19 @@
         "Durable",
         "Escape"
       ],
-      "total": 0,
-      "assetTotal": 0,
+      "total": 295,
+      "assetTotal": 295,
       "drafted": 0,
       "translated": 0,
       "recorded": 0,
       "reviewed": 0,
       "hasOfficialEnglishCaptions": true,
-      "active": false
+      "active": false,
+      "officialEnglishCaptions": 295,
+      "officialBrazilianCaptions": 0,
+      "hasOfficialBrazilianCaptions": false,
+      "voiceDirectory": "lycan",
+      "voicePrefix": "lycan"
     },
     {
       "id": "magnataur",
@@ -1319,14 +1604,19 @@
         "Nuker",
         "Escape"
       ],
-      "total": 0,
-      "assetTotal": 0,
+      "total": 320,
+      "assetTotal": 320,
       "drafted": 0,
       "translated": 0,
       "recorded": 0,
       "reviewed": 0,
       "hasOfficialEnglishCaptions": true,
-      "active": false
+      "active": false,
+      "officialEnglishCaptions": 320,
+      "officialBrazilianCaptions": 0,
+      "hasOfficialBrazilianCaptions": false,
+      "voiceDirectory": "magnataur",
+      "voicePrefix": "magn"
     },
     {
       "id": "marci",
@@ -1343,14 +1633,19 @@
         "Disabler",
         "Escape"
       ],
-      "total": 0,
-      "assetTotal": 0,
+      "total": 10,
+      "assetTotal": 10,
       "drafted": 0,
       "translated": 0,
       "recorded": 0,
       "reviewed": 0,
       "hasOfficialEnglishCaptions": true,
-      "active": false
+      "active": false,
+      "officialEnglishCaptions": 10,
+      "officialBrazilianCaptions": 0,
+      "hasOfficialBrazilianCaptions": false,
+      "voiceDirectory": "marci",
+      "voicePrefix": "marci"
     },
     {
       "id": "mars",
@@ -1366,14 +1661,19 @@
         "Disabler",
         "Durable"
       ],
-      "total": 0,
-      "assetTotal": 0,
+      "total": 1138,
+      "assetTotal": 1138,
       "drafted": 0,
       "translated": 0,
       "recorded": 0,
       "reviewed": 0,
       "hasOfficialEnglishCaptions": true,
-      "active": false
+      "active": false,
+      "officialEnglishCaptions": 1138,
+      "officialBrazilianCaptions": 0,
+      "hasOfficialBrazilianCaptions": false,
+      "voiceDirectory": "mars",
+      "voicePrefix": "mars"
     },
     {
       "id": "medusa",
@@ -1388,14 +1688,19 @@
         "Disabler",
         "Durable"
       ],
-      "total": 0,
-      "assetTotal": 0,
+      "total": 367,
+      "assetTotal": 367,
       "drafted": 0,
       "translated": 0,
       "recorded": 0,
       "reviewed": 0,
       "hasOfficialEnglishCaptions": true,
-      "active": false
+      "active": false,
+      "officialEnglishCaptions": 367,
+      "officialBrazilianCaptions": 0,
+      "hasOfficialBrazilianCaptions": false,
+      "voiceDirectory": "medusa",
+      "voicePrefix": "medus"
     },
     {
       "id": "meepo",
@@ -1413,14 +1718,19 @@
         "Initiator",
         "Pusher"
       ],
-      "total": 0,
-      "assetTotal": 0,
+      "total": 385,
+      "assetTotal": 385,
       "drafted": 0,
       "translated": 0,
       "recorded": 0,
       "reviewed": 0,
       "hasOfficialEnglishCaptions": true,
-      "active": false
+      "active": false,
+      "officialEnglishCaptions": 385,
+      "officialBrazilianCaptions": 0,
+      "hasOfficialBrazilianCaptions": false,
+      "voiceDirectory": "meepo",
+      "voicePrefix": "meepo"
     },
     {
       "id": "mirana",
@@ -1437,14 +1747,19 @@
         "Nuker",
         "Disabler"
       ],
-      "total": 0,
-      "assetTotal": 0,
+      "total": 947,
+      "assetTotal": 947,
       "drafted": 0,
       "translated": 0,
       "recorded": 0,
       "reviewed": 0,
       "hasOfficialEnglishCaptions": true,
-      "active": false
+      "active": false,
+      "officialEnglishCaptions": 947,
+      "officialBrazilianCaptions": 0,
+      "hasOfficialBrazilianCaptions": false,
+      "voiceDirectory": "mirana",
+      "voicePrefix": "mira"
     },
     {
       "id": "monkey_king",
@@ -1460,14 +1775,19 @@
         "Disabler",
         "Initiator"
       ],
-      "total": 0,
-      "assetTotal": 0,
+      "total": 1850,
+      "assetTotal": 1850,
       "drafted": 0,
       "translated": 0,
       "recorded": 0,
       "reviewed": 0,
       "hasOfficialEnglishCaptions": true,
-      "active": false
+      "active": false,
+      "officialEnglishCaptions": 1850,
+      "officialBrazilianCaptions": 0,
+      "hasOfficialBrazilianCaptions": false,
+      "voiceDirectory": "monkey_king",
+      "voicePrefix": "monkey"
     },
     {
       "id": "morphling",
@@ -1484,14 +1804,19 @@
         "Nuker",
         "Disabler"
       ],
-      "total": 0,
-      "assetTotal": 0,
+      "total": 201,
+      "assetTotal": 201,
       "drafted": 0,
       "translated": 0,
       "recorded": 0,
       "reviewed": 0,
       "hasOfficialEnglishCaptions": true,
-      "active": false
+      "active": false,
+      "officialEnglishCaptions": 201,
+      "officialBrazilianCaptions": 0,
+      "hasOfficialBrazilianCaptions": false,
+      "voiceDirectory": "morphling",
+      "voicePrefix": "mrph"
     },
     {
       "id": "muerta",
@@ -1506,14 +1831,19 @@
         "Nuker",
         "Disabler"
       ],
-      "total": 0,
-      "assetTotal": 0,
+      "total": 885,
+      "assetTotal": 885,
       "drafted": 0,
       "translated": 0,
       "recorded": 0,
       "reviewed": 0,
       "hasOfficialEnglishCaptions": true,
-      "active": false
+      "active": false,
+      "officialEnglishCaptions": 885,
+      "officialBrazilianCaptions": 0,
+      "hasOfficialBrazilianCaptions": false,
+      "voiceDirectory": "muerta",
+      "voicePrefix": "muerta"
     },
     {
       "id": "naga_siren",
@@ -1531,14 +1861,19 @@
         "Initiator",
         "Escape"
       ],
-      "total": 0,
-      "assetTotal": 0,
+      "total": 293,
+      "assetTotal": 293,
       "drafted": 0,
       "translated": 0,
       "recorded": 0,
       "reviewed": 0,
       "hasOfficialEnglishCaptions": true,
-      "active": false
+      "active": false,
+      "officialEnglishCaptions": 293,
+      "officialBrazilianCaptions": 0,
+      "hasOfficialBrazilianCaptions": false,
+      "voiceDirectory": "naga_siren",
+      "voicePrefix": "naga"
     },
     {
       "id": "furion",
@@ -1554,14 +1889,19 @@
         "Escape",
         "Nuker"
       ],
-      "total": 0,
-      "assetTotal": 0,
+      "total": 253,
+      "assetTotal": 253,
       "drafted": 0,
       "translated": 0,
       "recorded": 0,
       "reviewed": 0,
       "hasOfficialEnglishCaptions": true,
-      "active": false
+      "active": false,
+      "officialEnglishCaptions": 253,
+      "officialBrazilianCaptions": 0,
+      "hasOfficialBrazilianCaptions": false,
+      "voiceDirectory": "furion",
+      "voicePrefix": "furi"
     },
     {
       "id": "necrolyte",
@@ -1577,14 +1917,19 @@
         "Durable",
         "Disabler"
       ],
-      "total": 0,
-      "assetTotal": 0,
+      "total": 221,
+      "assetTotal": 221,
       "drafted": 0,
       "translated": 0,
       "recorded": 0,
       "reviewed": 0,
       "hasOfficialEnglishCaptions": true,
-      "active": false
+      "active": false,
+      "officialEnglishCaptions": 221,
+      "officialBrazilianCaptions": 0,
+      "hasOfficialBrazilianCaptions": false,
+      "voiceDirectory": "necrolyte",
+      "voicePrefix": "necr"
     },
     {
       "id": "night_stalker",
@@ -1601,14 +1946,19 @@
         "Disabler",
         "Nuker"
       ],
-      "total": 0,
-      "assetTotal": 0,
+      "total": 225,
+      "assetTotal": 225,
       "drafted": 0,
       "translated": 0,
       "recorded": 0,
       "reviewed": 0,
       "hasOfficialEnglishCaptions": true,
-      "active": false
+      "active": false,
+      "officialEnglishCaptions": 225,
+      "officialBrazilianCaptions": 0,
+      "hasOfficialBrazilianCaptions": false,
+      "voiceDirectory": "night_stalker",
+      "voicePrefix": "nstalk"
     },
     {
       "id": "nyx_assassin",
@@ -1624,14 +1974,19 @@
         "Initiator",
         "Escape"
       ],
-      "total": 0,
-      "assetTotal": 0,
+      "total": 331,
+      "assetTotal": 331,
       "drafted": 0,
       "translated": 0,
       "recorded": 0,
       "reviewed": 0,
       "hasOfficialEnglishCaptions": true,
-      "active": false
+      "active": false,
+      "officialEnglishCaptions": 331,
+      "officialBrazilianCaptions": 0,
+      "hasOfficialBrazilianCaptions": false,
+      "voiceDirectory": "nyx_assassin",
+      "voicePrefix": "nyx"
     },
     {
       "id": "ogre_magi",
@@ -1648,14 +2003,19 @@
         "Durable",
         "Initiator"
       ],
-      "total": 0,
-      "assetTotal": 0,
+      "total": 39,
+      "assetTotal": 39,
       "drafted": 0,
       "translated": 0,
       "recorded": 0,
       "reviewed": 0,
       "hasOfficialEnglishCaptions": true,
-      "active": false
+      "active": false,
+      "officialEnglishCaptions": 39,
+      "officialBrazilianCaptions": 0,
+      "hasOfficialBrazilianCaptions": false,
+      "voiceDirectory": "ogre_magi",
+      "voicePrefix": "ogr"
     },
     {
       "id": "omniknight",
@@ -1670,14 +2030,19 @@
         "Durable",
         "Nuker"
       ],
-      "total": 0,
-      "assetTotal": 0,
+      "total": 280,
+      "assetTotal": 280,
       "drafted": 0,
       "translated": 0,
       "recorded": 0,
       "reviewed": 0,
       "hasOfficialEnglishCaptions": true,
-      "active": false
+      "active": false,
+      "officialEnglishCaptions": 280,
+      "officialBrazilianCaptions": 0,
+      "hasOfficialBrazilianCaptions": false,
+      "voiceDirectory": "omniknight",
+      "voicePrefix": "omni"
     },
     {
       "id": "oracle",
@@ -1693,14 +2058,19 @@
         "Disabler",
         "Escape"
       ],
-      "total": 0,
-      "assetTotal": 0,
+      "total": 469,
+      "assetTotal": 469,
       "drafted": 0,
       "translated": 0,
       "recorded": 0,
       "reviewed": 0,
       "hasOfficialEnglishCaptions": true,
-      "active": false
+      "active": false,
+      "officialEnglishCaptions": 469,
+      "officialBrazilianCaptions": 0,
+      "hasOfficialBrazilianCaptions": false,
+      "voiceDirectory": "oracle",
+      "voicePrefix": "orac"
     },
     {
       "id": "obsidian_destroyer",
@@ -1715,14 +2085,19 @@
         "Nuker",
         "Disabler"
       ],
-      "total": 0,
-      "assetTotal": 0,
+      "total": 271,
+      "assetTotal": 271,
       "drafted": 0,
       "translated": 0,
       "recorded": 0,
       "reviewed": 0,
-      "hasOfficialEnglishCaptions": false,
-      "active": false
+      "hasOfficialEnglishCaptions": true,
+      "active": false,
+      "officialEnglishCaptions": 271,
+      "officialBrazilianCaptions": 0,
+      "hasOfficialBrazilianCaptions": false,
+      "voiceDirectory": "outworld_destroyer",
+      "voicePrefix": "odest"
     },
     {
       "id": "pangolier",
@@ -1740,14 +2115,19 @@
         "Escape",
         "Initiator"
       ],
-      "total": 0,
-      "assetTotal": 0,
+      "total": 1001,
+      "assetTotal": 1001,
       "drafted": 0,
       "translated": 0,
       "recorded": 0,
       "reviewed": 0,
-      "hasOfficialEnglishCaptions": false,
-      "active": false
+      "hasOfficialEnglishCaptions": true,
+      "active": false,
+      "officialEnglishCaptions": 1001,
+      "officialBrazilianCaptions": 0,
+      "hasOfficialBrazilianCaptions": false,
+      "voiceDirectory": "pangolin",
+      "voicePrefix": "pangolin"
     },
     {
       "id": "phantom_assassin",
@@ -1761,14 +2141,19 @@
         "Carry",
         "Escape"
       ],
-      "total": 0,
-      "assetTotal": 0,
+      "total": 961,
+      "assetTotal": 961,
       "drafted": 0,
       "translated": 0,
       "recorded": 0,
       "reviewed": 0,
       "hasOfficialEnglishCaptions": true,
-      "active": false
+      "active": false,
+      "officialEnglishCaptions": 961,
+      "officialBrazilianCaptions": 0,
+      "hasOfficialBrazilianCaptions": false,
+      "voiceDirectory": "phantom_assassin",
+      "voicePrefix": "pa"
     },
     {
       "id": "phantom_lancer",
@@ -1784,14 +2169,19 @@
         "Pusher",
         "Nuker"
       ],
-      "total": 0,
-      "assetTotal": 0,
+      "total": 326,
+      "assetTotal": 326,
       "drafted": 0,
       "translated": 0,
       "recorded": 0,
       "reviewed": 0,
       "hasOfficialEnglishCaptions": true,
-      "active": false
+      "active": false,
+      "officialEnglishCaptions": 326,
+      "officialBrazilianCaptions": 0,
+      "hasOfficialBrazilianCaptions": false,
+      "voiceDirectory": "phantom_lancer",
+      "voicePrefix": "plance"
     },
     {
       "id": "phoenix",
@@ -1808,14 +2198,19 @@
         "Escape",
         "Disabler"
       ],
-      "total": 0,
-      "assetTotal": 0,
+      "total": 6,
+      "assetTotal": 6,
       "drafted": 0,
       "translated": 0,
       "recorded": 0,
       "reviewed": 0,
       "hasOfficialEnglishCaptions": true,
-      "active": false
+      "active": false,
+      "officialEnglishCaptions": 6,
+      "officialBrazilianCaptions": 0,
+      "hasOfficialBrazilianCaptions": false,
+      "voiceDirectory": "phoenix",
+      "voicePrefix": "phoenix"
     },
     {
       "id": "primal_beast",
@@ -1830,14 +2225,19 @@
         "Durable",
         "Disabler"
       ],
-      "total": 0,
-      "assetTotal": 0,
+      "total": 203,
+      "assetTotal": 203,
       "drafted": 0,
       "translated": 0,
       "recorded": 0,
       "reviewed": 0,
       "hasOfficialEnglishCaptions": true,
-      "active": false
+      "active": false,
+      "officialEnglishCaptions": 203,
+      "officialBrazilianCaptions": 0,
+      "hasOfficialBrazilianCaptions": false,
+      "voiceDirectory": "primal_beast",
+      "voicePrefix": "primal"
     },
     {
       "id": "puck",
@@ -1853,14 +2253,19 @@
         "Escape",
         "Nuker"
       ],
-      "total": 0,
-      "assetTotal": 0,
+      "total": 236,
+      "assetTotal": 236,
       "drafted": 0,
       "translated": 0,
       "recorded": 0,
       "reviewed": 0,
       "hasOfficialEnglishCaptions": true,
-      "active": false
+      "active": false,
+      "officialEnglishCaptions": 236,
+      "officialBrazilianCaptions": 0,
+      "hasOfficialBrazilianCaptions": false,
+      "voiceDirectory": "puck",
+      "voicePrefix": "puck"
     },
     {
       "id": "pudge",
@@ -1876,14 +2281,19 @@
         "Durable",
         "Nuker"
       ],
-      "total": 0,
-      "assetTotal": 0,
+      "total": 1179,
+      "assetTotal": 1179,
       "drafted": 0,
       "translated": 0,
       "recorded": 0,
       "reviewed": 0,
       "hasOfficialEnglishCaptions": true,
-      "active": false
+      "active": false,
+      "officialEnglishCaptions": 1179,
+      "officialBrazilianCaptions": 0,
+      "hasOfficialBrazilianCaptions": false,
+      "voiceDirectory": "pudge",
+      "voicePrefix": "pud"
     },
     {
       "id": "pugna",
@@ -1897,14 +2307,19 @@
         "Nuker",
         "Pusher"
       ],
-      "total": 0,
-      "assetTotal": 0,
+      "total": 261,
+      "assetTotal": 261,
       "drafted": 0,
       "translated": 0,
       "recorded": 0,
       "reviewed": 0,
       "hasOfficialEnglishCaptions": true,
-      "active": false
+      "active": false,
+      "officialEnglishCaptions": 261,
+      "officialBrazilianCaptions": 0,
+      "hasOfficialBrazilianCaptions": false,
+      "voiceDirectory": "pugna",
+      "voicePrefix": "pugna"
     },
     {
       "id": "queenofpain",
@@ -1919,14 +2334,19 @@
         "Nuker",
         "Escape"
       ],
-      "total": 0,
-      "assetTotal": 0,
+      "total": 821,
+      "assetTotal": 821,
       "drafted": 0,
       "translated": 0,
       "recorded": 0,
       "reviewed": 0,
       "hasOfficialEnglishCaptions": true,
-      "active": false
+      "active": false,
+      "officialEnglishCaptions": 821,
+      "officialBrazilianCaptions": 0,
+      "hasOfficialBrazilianCaptions": false,
+      "voiceDirectory": "queenofpain",
+      "voicePrefix": "qop"
     },
     {
       "id": "razor",
@@ -1942,14 +2362,19 @@
         "Nuker",
         "Pusher"
       ],
-      "total": 0,
-      "assetTotal": 0,
+      "total": 2,
+      "assetTotal": 2,
       "drafted": 0,
       "translated": 0,
       "recorded": 0,
       "reviewed": 0,
       "hasOfficialEnglishCaptions": true,
-      "active": false
+      "active": false,
+      "officialEnglishCaptions": 2,
+      "officialBrazilianCaptions": 0,
+      "hasOfficialBrazilianCaptions": false,
+      "voiceDirectory": "razor",
+      "voicePrefix": "razor"
     },
     {
       "id": "riki",
@@ -1964,14 +2389,19 @@
         "Escape",
         "Disabler"
       ],
-      "total": 0,
-      "assetTotal": 0,
+      "total": 212,
+      "assetTotal": 212,
       "drafted": 0,
       "translated": 0,
       "recorded": 0,
       "reviewed": 0,
       "hasOfficialEnglishCaptions": true,
-      "active": false
+      "active": false,
+      "officialEnglishCaptions": 212,
+      "officialBrazilianCaptions": 0,
+      "hasOfficialBrazilianCaptions": false,
+      "voiceDirectory": "riki",
+      "voicePrefix": "riki"
     },
     {
       "id": "ringmaster",
@@ -1987,14 +2417,19 @@
         "Escape",
         "Disabler"
       ],
-      "total": 0,
-      "assetTotal": 0,
+      "total": 979,
+      "assetTotal": 979,
       "drafted": 0,
       "translated": 0,
       "recorded": 0,
       "reviewed": 0,
       "hasOfficialEnglishCaptions": true,
-      "active": false
+      "active": false,
+      "officialEnglishCaptions": 979,
+      "officialBrazilianCaptions": 0,
+      "hasOfficialBrazilianCaptions": false,
+      "voiceDirectory": "ringmaster",
+      "voicePrefix": "ringmaster"
     },
     {
       "id": "rubick",
@@ -2009,14 +2444,19 @@
         "Disabler",
         "Nuker"
       ],
-      "total": 0,
-      "assetTotal": 0,
+      "total": 357,
+      "assetTotal": 357,
       "drafted": 0,
       "translated": 0,
       "recorded": 0,
       "reviewed": 0,
       "hasOfficialEnglishCaptions": true,
-      "active": false
+      "active": false,
+      "officialEnglishCaptions": 357,
+      "officialBrazilianCaptions": 0,
+      "hasOfficialBrazilianCaptions": false,
+      "voiceDirectory": "rubick",
+      "voicePrefix": "rubick"
     },
     {
       "id": "sand_king",
@@ -2033,14 +2473,19 @@
         "Nuker",
         "Escape"
       ],
-      "total": 0,
-      "assetTotal": 0,
+      "total": 36,
+      "assetTotal": 36,
       "drafted": 0,
       "translated": 0,
       "recorded": 0,
       "reviewed": 0,
-      "hasOfficialEnglishCaptions": false,
-      "active": false
+      "hasOfficialEnglishCaptions": true,
+      "active": false,
+      "officialEnglishCaptions": 36,
+      "officialBrazilianCaptions": 0,
+      "hasOfficialBrazilianCaptions": false,
+      "voiceDirectory": "sandking",
+      "voicePrefix": "sand"
     },
     {
       "id": "shadow_demon",
@@ -2056,14 +2501,19 @@
         "Initiator",
         "Nuker"
       ],
-      "total": 0,
-      "assetTotal": 0,
+      "total": 296,
+      "assetTotal": 296,
       "drafted": 0,
       "translated": 0,
       "recorded": 0,
       "reviewed": 0,
       "hasOfficialEnglishCaptions": true,
-      "active": false
+      "active": false,
+      "officialEnglishCaptions": 296,
+      "officialBrazilianCaptions": 0,
+      "hasOfficialBrazilianCaptions": false,
+      "voiceDirectory": "shadow_demon",
+      "voicePrefix": "shadow"
     },
     {
       "id": "nevermore",
@@ -2077,14 +2527,19 @@
         "Carry",
         "Nuker"
       ],
-      "total": 0,
-      "assetTotal": 0,
+      "total": 568,
+      "assetTotal": 568,
       "drafted": 0,
       "translated": 0,
       "recorded": 0,
       "reviewed": 0,
       "hasOfficialEnglishCaptions": true,
-      "active": false
+      "active": false,
+      "officialEnglishCaptions": 568,
+      "officialBrazilianCaptions": 0,
+      "hasOfficialBrazilianCaptions": false,
+      "voiceDirectory": "nevermore",
+      "voicePrefix": "nev"
     },
     {
       "id": "shadow_shaman",
@@ -2101,14 +2556,19 @@
         "Nuker",
         "Initiator"
       ],
-      "total": 0,
-      "assetTotal": 0,
+      "total": 222,
+      "assetTotal": 222,
       "drafted": 0,
       "translated": 0,
       "recorded": 0,
       "reviewed": 0,
-      "hasOfficialEnglishCaptions": false,
-      "active": false
+      "hasOfficialEnglishCaptions": true,
+      "active": false,
+      "officialEnglishCaptions": 222,
+      "officialBrazilianCaptions": 0,
+      "hasOfficialBrazilianCaptions": false,
+      "voiceDirectory": "shadowshaman",
+      "voicePrefix": "shad"
     },
     {
       "id": "silencer",
@@ -2125,14 +2585,19 @@
         "Initiator",
         "Nuker"
       ],
-      "total": 0,
-      "assetTotal": 0,
+      "total": 269,
+      "assetTotal": 269,
       "drafted": 0,
       "translated": 0,
       "recorded": 0,
       "reviewed": 0,
       "hasOfficialEnglishCaptions": true,
-      "active": false
+      "active": false,
+      "officialEnglishCaptions": 269,
+      "officialBrazilianCaptions": 0,
+      "hasOfficialBrazilianCaptions": false,
+      "voiceDirectory": "silencer",
+      "voicePrefix": "silen"
     },
     {
       "id": "skywrath_mage",
@@ -2147,14 +2612,19 @@
         "Nuker",
         "Disabler"
       ],
-      "total": 0,
-      "assetTotal": 0,
+      "total": 819,
+      "assetTotal": 819,
       "drafted": 0,
       "translated": 0,
       "recorded": 0,
       "reviewed": 0,
       "hasOfficialEnglishCaptions": true,
-      "active": false
+      "active": false,
+      "officialEnglishCaptions": 819,
+      "officialBrazilianCaptions": 0,
+      "hasOfficialBrazilianCaptions": false,
+      "voiceDirectory": "skywrath_mage",
+      "voicePrefix": "skywrath"
     },
     {
       "id": "slardar",
@@ -2171,14 +2641,19 @@
         "Disabler",
         "Escape"
       ],
-      "total": 0,
-      "assetTotal": 0,
+      "total": 216,
+      "assetTotal": 216,
       "drafted": 0,
       "translated": 0,
       "recorded": 0,
       "reviewed": 0,
       "hasOfficialEnglishCaptions": true,
-      "active": false
+      "active": false,
+      "officialEnglishCaptions": 216,
+      "officialBrazilianCaptions": 0,
+      "hasOfficialBrazilianCaptions": false,
+      "voiceDirectory": "slardar",
+      "voicePrefix": "slar"
     },
     {
       "id": "slark",
@@ -2194,14 +2669,19 @@
         "Disabler",
         "Nuker"
       ],
-      "total": 0,
-      "assetTotal": 0,
+      "total": 282,
+      "assetTotal": 282,
       "drafted": 0,
       "translated": 0,
       "recorded": 0,
       "reviewed": 0,
       "hasOfficialEnglishCaptions": true,
-      "active": false
+      "active": false,
+      "officialEnglishCaptions": 282,
+      "officialBrazilianCaptions": 0,
+      "hasOfficialBrazilianCaptions": false,
+      "voiceDirectory": "slark",
+      "voicePrefix": "slark"
     },
     {
       "id": "snapfire",
@@ -2217,14 +2697,19 @@
         "Disabler",
         "Escape"
       ],
-      "total": 0,
-      "assetTotal": 0,
+      "total": 1349,
+      "assetTotal": 1349,
       "drafted": 0,
       "translated": 0,
       "recorded": 0,
       "reviewed": 0,
       "hasOfficialEnglishCaptions": true,
-      "active": false
+      "active": false,
+      "officialEnglishCaptions": 1349,
+      "officialBrazilianCaptions": 0,
+      "hasOfficialBrazilianCaptions": false,
+      "voiceDirectory": "snapfire",
+      "voicePrefix": "snapfire"
     },
     {
       "id": "sniper",
@@ -2238,14 +2723,19 @@
         "Carry",
         "Nuker"
       ],
-      "total": 0,
-      "assetTotal": 0,
+      "total": 263,
+      "assetTotal": 263,
       "drafted": 0,
       "translated": 0,
       "recorded": 0,
       "reviewed": 0,
       "hasOfficialEnglishCaptions": true,
-      "active": false
+      "active": false,
+      "officialEnglishCaptions": 263,
+      "officialBrazilianCaptions": 0,
+      "hasOfficialBrazilianCaptions": false,
+      "voiceDirectory": "sniper",
+      "voicePrefix": "snip"
     },
     {
       "id": "spectre",
@@ -2260,14 +2750,19 @@
         "Durable",
         "Escape"
       ],
-      "total": 0,
-      "assetTotal": 0,
+      "total": 573,
+      "assetTotal": 573,
       "drafted": 0,
       "translated": 0,
       "recorded": 0,
       "reviewed": 0,
       "hasOfficialEnglishCaptions": true,
-      "active": false
+      "active": false,
+      "officialEnglishCaptions": 573,
+      "officialBrazilianCaptions": 0,
+      "hasOfficialBrazilianCaptions": false,
+      "voiceDirectory": "spectre",
+      "voicePrefix": "spectre"
     },
     {
       "id": "spirit_breaker",
@@ -2284,14 +2779,19 @@
         "Durable",
         "Escape"
       ],
-      "total": 0,
-      "assetTotal": 0,
+      "total": 261,
+      "assetTotal": 261,
       "drafted": 0,
       "translated": 0,
       "recorded": 0,
       "reviewed": 0,
       "hasOfficialEnglishCaptions": true,
-      "active": false
+      "active": false,
+      "officialEnglishCaptions": 261,
+      "officialBrazilianCaptions": 0,
+      "hasOfficialBrazilianCaptions": false,
+      "voiceDirectory": "spirit_breaker",
+      "voicePrefix": "spir"
     },
     {
       "id": "storm_spirit",
@@ -2308,14 +2808,19 @@
         "Initiator",
         "Disabler"
       ],
-      "total": 0,
-      "assetTotal": 0,
+      "total": 70,
+      "assetTotal": 70,
       "drafted": 0,
       "translated": 0,
       "recorded": 0,
       "reviewed": 0,
-      "hasOfficialEnglishCaptions": false,
-      "active": false
+      "hasOfficialEnglishCaptions": true,
+      "active": false,
+      "officialEnglishCaptions": 70,
+      "officialBrazilianCaptions": 0,
+      "hasOfficialBrazilianCaptions": false,
+      "voiceDirectory": "stormspirit",
+      "voicePrefix": "stormspirit"
     },
     {
       "id": "sven",
@@ -2332,14 +2837,19 @@
         "Durable",
         "Nuker"
       ],
-      "total": 0,
-      "assetTotal": 0,
+      "total": 310,
+      "assetTotal": 310,
       "drafted": 0,
       "translated": 0,
       "recorded": 0,
       "reviewed": 0,
       "hasOfficialEnglishCaptions": true,
-      "active": false
+      "active": false,
+      "officialEnglishCaptions": 310,
+      "officialBrazilianCaptions": 0,
+      "hasOfficialBrazilianCaptions": false,
+      "voiceDirectory": "sven",
+      "voicePrefix": "sven"
     },
     {
       "id": "techies",
@@ -2353,14 +2863,19 @@
         "Nuker",
         "Disabler"
       ],
-      "total": 0,
-      "assetTotal": 0,
+      "total": 582,
+      "assetTotal": 582,
       "drafted": 0,
       "translated": 0,
       "recorded": 0,
       "reviewed": 0,
       "hasOfficialEnglishCaptions": true,
-      "active": false
+      "active": false,
+      "officialEnglishCaptions": 582,
+      "officialBrazilianCaptions": 0,
+      "hasOfficialBrazilianCaptions": false,
+      "voiceDirectory": "techies",
+      "voicePrefix": "tech"
     },
     {
       "id": "templar_assassin",
@@ -2374,14 +2889,19 @@
         "Carry",
         "Escape"
       ],
-      "total": 0,
-      "assetTotal": 0,
+      "total": 285,
+      "assetTotal": 285,
       "drafted": 0,
       "translated": 0,
       "recorded": 0,
       "reviewed": 0,
       "hasOfficialEnglishCaptions": true,
-      "active": false
+      "active": false,
+      "officialEnglishCaptions": 285,
+      "officialBrazilianCaptions": 0,
+      "hasOfficialBrazilianCaptions": false,
+      "voiceDirectory": "templar_assassin",
+      "voicePrefix": "temp"
     },
     {
       "id": "terrorblade",
@@ -2396,14 +2916,19 @@
         "Pusher",
         "Nuker"
       ],
-      "total": 0,
-      "assetTotal": 0,
+      "total": 1221,
+      "assetTotal": 1221,
       "drafted": 0,
       "translated": 0,
       "recorded": 0,
       "reviewed": 0,
       "hasOfficialEnglishCaptions": true,
-      "active": false
+      "active": false,
+      "officialEnglishCaptions": 1221,
+      "officialBrazilianCaptions": 0,
+      "hasOfficialBrazilianCaptions": false,
+      "voiceDirectory": "terrorblade",
+      "voicePrefix": "terr"
     },
     {
       "id": "tidehunter",
@@ -2420,14 +2945,19 @@
         "Nuker",
         "Carry"
       ],
-      "total": 0,
-      "assetTotal": 0,
+      "total": 225,
+      "assetTotal": 225,
       "drafted": 0,
       "translated": 0,
       "recorded": 0,
       "reviewed": 0,
       "hasOfficialEnglishCaptions": true,
-      "active": false
+      "active": false,
+      "officialEnglishCaptions": 225,
+      "officialBrazilianCaptions": 0,
+      "hasOfficialBrazilianCaptions": false,
+      "voiceDirectory": "tidehunter",
+      "voicePrefix": "tide"
     },
     {
       "id": "shredder",
@@ -2442,14 +2972,19 @@
         "Durable",
         "Escape"
       ],
-      "total": 0,
-      "assetTotal": 0,
+      "total": 328,
+      "assetTotal": 328,
       "drafted": 0,
       "translated": 0,
       "recorded": 0,
       "reviewed": 0,
       "hasOfficialEnglishCaptions": true,
-      "active": false
+      "active": false,
+      "officialEnglishCaptions": 328,
+      "officialBrazilianCaptions": 0,
+      "hasOfficialBrazilianCaptions": false,
+      "voiceDirectory": "shredder",
+      "voicePrefix": "timb"
     },
     {
       "id": "tinker",
@@ -2464,14 +2999,19 @@
         "Nuker",
         "Pusher"
       ],
-      "total": 0,
-      "assetTotal": 0,
+      "total": 293,
+      "assetTotal": 293,
       "drafted": 0,
       "translated": 0,
       "recorded": 0,
       "reviewed": 0,
       "hasOfficialEnglishCaptions": true,
-      "active": false
+      "active": false,
+      "officialEnglishCaptions": 293,
+      "officialBrazilianCaptions": 0,
+      "hasOfficialBrazilianCaptions": false,
+      "voiceDirectory": "tinker",
+      "voicePrefix": "tink"
     },
     {
       "id": "tiny",
@@ -2489,14 +3029,19 @@
         "Durable",
         "Disabler"
       ],
-      "total": 0,
-      "assetTotal": 0,
+      "total": 904,
+      "assetTotal": 904,
       "drafted": 0,
       "translated": 0,
       "recorded": 0,
       "reviewed": 0,
       "hasOfficialEnglishCaptions": true,
-      "active": false
+      "active": false,
+      "officialEnglishCaptions": 904,
+      "officialBrazilianCaptions": 0,
+      "hasOfficialBrazilianCaptions": false,
+      "voiceDirectory": "tiny",
+      "voicePrefix": "tiny"
     },
     {
       "id": "treant",
@@ -2513,14 +3058,19 @@
         "Disabler",
         "Escape"
       ],
-      "total": 0,
-      "assetTotal": 0,
+      "total": 334,
+      "assetTotal": 334,
       "drafted": 0,
       "translated": 0,
       "recorded": 0,
       "reviewed": 0,
       "hasOfficialEnglishCaptions": true,
-      "active": false
+      "active": false,
+      "officialEnglishCaptions": 334,
+      "officialBrazilianCaptions": 0,
+      "hasOfficialBrazilianCaptions": false,
+      "voiceDirectory": "treant",
+      "voicePrefix": "treant"
     },
     {
       "id": "troll_warlord",
@@ -2536,14 +3086,19 @@
         "Disabler",
         "Durable"
       ],
-      "total": 0,
-      "assetTotal": 0,
+      "total": 321,
+      "assetTotal": 321,
       "drafted": 0,
       "translated": 0,
       "recorded": 0,
       "reviewed": 0,
       "hasOfficialEnglishCaptions": true,
-      "active": false
+      "active": false,
+      "officialEnglishCaptions": 321,
+      "officialBrazilianCaptions": 0,
+      "hasOfficialBrazilianCaptions": false,
+      "voiceDirectory": "troll_warlord",
+      "voicePrefix": "troll"
     },
     {
       "id": "tusk",
@@ -2558,14 +3113,19 @@
         "Disabler",
         "Nuker"
       ],
-      "total": 0,
-      "assetTotal": 0,
+      "total": 449,
+      "assetTotal": 449,
       "drafted": 0,
       "translated": 0,
       "recorded": 0,
       "reviewed": 0,
       "hasOfficialEnglishCaptions": true,
-      "active": false
+      "active": false,
+      "officialEnglishCaptions": 449,
+      "officialBrazilianCaptions": 0,
+      "hasOfficialBrazilianCaptions": false,
+      "voiceDirectory": "tusk",
+      "voicePrefix": "tusk"
     },
     {
       "id": "abyssal_underlord",
@@ -2582,14 +3142,19 @@
         "Durable",
         "Escape"
       ],
-      "total": 0,
-      "assetTotal": 0,
+      "total": 309,
+      "assetTotal": 309,
       "drafted": 0,
       "translated": 0,
       "recorded": 0,
       "reviewed": 0,
       "hasOfficialEnglishCaptions": true,
-      "active": false
+      "active": false,
+      "officialEnglishCaptions": 309,
+      "officialBrazilianCaptions": 0,
+      "hasOfficialBrazilianCaptions": false,
+      "voiceDirectory": "abyssal_underlord",
+      "voicePrefix": "abys"
     },
     {
       "id": "undying",
@@ -2605,14 +3170,19 @@
         "Disabler",
         "Nuker"
       ],
-      "total": 0,
-      "assetTotal": 0,
+      "total": 706,
+      "assetTotal": 706,
       "drafted": 0,
       "translated": 0,
       "recorded": 0,
       "reviewed": 0,
       "hasOfficialEnglishCaptions": true,
-      "active": false
+      "active": false,
+      "officialEnglishCaptions": 706,
+      "officialBrazilianCaptions": 0,
+      "hasOfficialBrazilianCaptions": false,
+      "voiceDirectory": "undying",
+      "voicePrefix": "undying"
     },
     {
       "id": "ursa",
@@ -2627,14 +3197,19 @@
         "Durable",
         "Disabler"
       ],
-      "total": 0,
-      "assetTotal": 0,
+      "total": 344,
+      "assetTotal": 344,
       "drafted": 0,
       "translated": 0,
       "recorded": 0,
       "reviewed": 0,
       "hasOfficialEnglishCaptions": true,
-      "active": false
+      "active": false,
+      "officialEnglishCaptions": 344,
+      "officialBrazilianCaptions": 0,
+      "hasOfficialBrazilianCaptions": false,
+      "voiceDirectory": "ursa",
+      "voicePrefix": "ursa"
     },
     {
       "id": "vengefulspirit",
@@ -2651,14 +3226,19 @@
         "Nuker",
         "Escape"
       ],
-      "total": 0,
-      "assetTotal": 0,
+      "total": 792,
+      "assetTotal": 792,
       "drafted": 0,
       "translated": 0,
       "recorded": 0,
       "reviewed": 0,
       "hasOfficialEnglishCaptions": true,
-      "active": false
+      "active": false,
+      "officialEnglishCaptions": 792,
+      "officialBrazilianCaptions": 0,
+      "hasOfficialBrazilianCaptions": false,
+      "voiceDirectory": "vengefulspirit",
+      "voicePrefix": "venge"
     },
     {
       "id": "venomancer",
@@ -2675,14 +3255,19 @@
         "Pusher",
         "Disabler"
       ],
-      "total": 0,
-      "assetTotal": 0,
+      "total": 240,
+      "assetTotal": 240,
       "drafted": 0,
       "translated": 0,
       "recorded": 0,
       "reviewed": 0,
       "hasOfficialEnglishCaptions": true,
-      "active": false
+      "active": false,
+      "officialEnglishCaptions": 240,
+      "officialBrazilianCaptions": 0,
+      "hasOfficialBrazilianCaptions": false,
+      "voiceDirectory": "venomancer",
+      "voicePrefix": "venm"
     },
     {
       "id": "viper",
@@ -2698,14 +3283,19 @@
         "Initiator",
         "Disabler"
       ],
-      "total": 0,
-      "assetTotal": 0,
+      "total": 204,
+      "assetTotal": 204,
       "drafted": 0,
       "translated": 0,
       "recorded": 0,
       "reviewed": 0,
       "hasOfficialEnglishCaptions": true,
-      "active": false
+      "active": false,
+      "officialEnglishCaptions": 204,
+      "officialBrazilianCaptions": 0,
+      "hasOfficialBrazilianCaptions": false,
+      "voiceDirectory": "viper",
+      "voicePrefix": "vipe"
     },
     {
       "id": "visage",
@@ -2722,14 +3312,19 @@
         "Disabler",
         "Pusher"
       ],
-      "total": 0,
-      "assetTotal": 0,
+      "total": 346,
+      "assetTotal": 346,
       "drafted": 0,
       "translated": 0,
       "recorded": 0,
       "reviewed": 0,
       "hasOfficialEnglishCaptions": true,
-      "active": false
+      "active": false,
+      "officialEnglishCaptions": 346,
+      "officialBrazilianCaptions": 0,
+      "hasOfficialBrazilianCaptions": false,
+      "voiceDirectory": "visage",
+      "voicePrefix": "visa"
     },
     {
       "id": "void_spirit",
@@ -2745,14 +3340,19 @@
         "Nuker",
         "Disabler"
       ],
-      "total": 0,
-      "assetTotal": 0,
+      "total": 878,
+      "assetTotal": 878,
       "drafted": 0,
       "translated": 0,
       "recorded": 0,
       "reviewed": 0,
       "hasOfficialEnglishCaptions": true,
-      "active": false
+      "active": false,
+      "officialEnglishCaptions": 878,
+      "officialBrazilianCaptions": 0,
+      "hasOfficialBrazilianCaptions": false,
+      "voiceDirectory": "void_spirit",
+      "voicePrefix": "voidspir"
     },
     {
       "id": "warlock",
@@ -2767,14 +3367,19 @@
         "Initiator",
         "Disabler"
       ],
-      "total": 0,
-      "assetTotal": 0,
+      "total": 228,
+      "assetTotal": 228,
       "drafted": 0,
       "translated": 0,
       "recorded": 0,
       "reviewed": 0,
       "hasOfficialEnglishCaptions": true,
-      "active": false
+      "active": false,
+      "officialEnglishCaptions": 228,
+      "officialBrazilianCaptions": 0,
+      "hasOfficialBrazilianCaptions": false,
+      "voiceDirectory": "warlock",
+      "voicePrefix": "warl"
     },
     {
       "id": "weaver",
@@ -2788,14 +3393,19 @@
         "Carry",
         "Escape"
       ],
-      "total": 0,
-      "assetTotal": 0,
+      "total": 224,
+      "assetTotal": 224,
       "drafted": 0,
       "translated": 0,
       "recorded": 0,
       "reviewed": 0,
       "hasOfficialEnglishCaptions": true,
-      "active": false
+      "active": false,
+      "officialEnglishCaptions": 224,
+      "officialBrazilianCaptions": 0,
+      "hasOfficialBrazilianCaptions": false,
+      "voiceDirectory": "weaver",
+      "voicePrefix": "weav"
     },
     {
       "id": "windrunner",
@@ -2812,14 +3422,19 @@
         "Escape",
         "Nuker"
       ],
-      "total": 0,
-      "assetTotal": 0,
+      "total": 260,
+      "assetTotal": 260,
       "drafted": 0,
       "translated": 0,
       "recorded": 0,
       "reviewed": 0,
       "hasOfficialEnglishCaptions": true,
-      "active": false
+      "active": false,
+      "officialEnglishCaptions": 260,
+      "officialBrazilianCaptions": 0,
+      "hasOfficialBrazilianCaptions": false,
+      "voiceDirectory": "windrunner",
+      "voicePrefix": "wind"
     },
     {
       "id": "winter_wyvern",
@@ -2834,14 +3449,19 @@
         "Disabler",
         "Nuker"
       ],
-      "total": 0,
-      "assetTotal": 0,
+      "total": 322,
+      "assetTotal": 322,
       "drafted": 0,
       "translated": 0,
       "recorded": 0,
       "reviewed": 0,
       "hasOfficialEnglishCaptions": true,
-      "active": false
+      "active": false,
+      "officialEnglishCaptions": 322,
+      "officialBrazilianCaptions": 0,
+      "hasOfficialBrazilianCaptions": false,
+      "voiceDirectory": "winter_wyvern",
+      "voicePrefix": "winwyv"
     },
     {
       "id": "witch_doctor",
@@ -2856,14 +3476,19 @@
         "Nuker",
         "Disabler"
       ],
-      "total": 0,
-      "assetTotal": 0,
+      "total": 203,
+      "assetTotal": 203,
       "drafted": 0,
       "translated": 0,
       "recorded": 0,
       "reviewed": 0,
-      "hasOfficialEnglishCaptions": false,
-      "active": false
+      "hasOfficialEnglishCaptions": true,
+      "active": false,
+      "officialEnglishCaptions": 203,
+      "officialBrazilianCaptions": 0,
+      "hasOfficialBrazilianCaptions": false,
+      "voiceDirectory": "witchdoctor",
+      "voicePrefix": "wdoc"
     },
     {
       "id": "skeleton_king",
@@ -2880,14 +3505,19 @@
         "Disabler",
         "Initiator"
       ],
-      "total": 0,
-      "assetTotal": 0,
+      "total": 840,
+      "assetTotal": 840,
       "drafted": 0,
       "translated": 0,
       "recorded": 0,
       "reviewed": 0,
       "hasOfficialEnglishCaptions": true,
-      "active": false
+      "active": false,
+      "officialEnglishCaptions": 840,
+      "officialBrazilianCaptions": 0,
+      "hasOfficialBrazilianCaptions": false,
+      "voiceDirectory": "skeleton_king",
+      "voicePrefix": "skel"
     },
     {
       "id": "zuus",
@@ -2901,14 +3531,19 @@
         "Nuker",
         "Carry"
       ],
-      "total": 0,
-      "assetTotal": 0,
+      "total": 412,
+      "assetTotal": 412,
       "drafted": 0,
       "translated": 0,
       "recorded": 0,
       "reviewed": 0,
       "hasOfficialEnglishCaptions": true,
-      "active": false
+      "active": false,
+      "officialEnglishCaptions": 412,
+      "officialBrazilianCaptions": 0,
+      "hasOfficialBrazilianCaptions": false,
+      "voiceDirectory": "zuus",
+      "voicePrefix": "zuus"
     }
   ]
 }

@@ -15,11 +15,12 @@ const timestamps = {
 
 export const users = sqliteTable("users", {
   id: text("id").primaryKey(),
-  discordId: text("discord_id").notNull().unique(),
+  // Physical names are retained for a non-destructive migration of the existing D1 database.
+  steamId: text("discord_id").notNull().unique(),
   displayName: text("display_name").notNull(),
   avatarUrl: text("avatar_url"),
   verified: integer("verified", { mode: "boolean" }).notNull().default(false),
-  discordCreatedAt: text("discord_created_at").notNull(),
+  steamCreatedAt: text("discord_created_at").notNull(),
   blockedAt: text("blocked_at"),
   ...timestamps,
 });
@@ -153,4 +154,119 @@ export const auditEvents = sqliteTable(
     createdAt: text("created_at").notNull().default(sql`CURRENT_TIMESTAMP`),
   },
   (table) => [index("audit_subject_idx").on(table.subjectType, table.subjectId)],
+);
+
+export const auditions = sqliteTable(
+  "auditions",
+  {
+    id: text("id").primaryKey(),
+    heroId: text("hero_id").notNull(),
+    authorId: text("author_id").notNull().references(() => users.id),
+    credit: text("credit").notNull(),
+    status: text("status", {
+      enum: ["pending", "open", "winner", "rejected", "withdrawn"],
+    }).notNull().default("pending"),
+    openedAt: text("opened_at"),
+    decidedAt: text("decided_at"),
+    ...timestamps,
+  },
+  (table) => [
+    index("auditions_hero_idx").on(table.heroId),
+    index("auditions_author_idx").on(table.authorId),
+    index("auditions_status_idx").on(table.status),
+  ],
+);
+
+export const auditionClips = sqliteTable(
+  "audition_clips",
+  {
+    auditionId: text("audition_id").notNull().references(() => auditions.id, { onDelete: "cascade" }),
+    lineId: text("line_id").notNull(),
+    position: integer("position").notNull(),
+    audioObjectKey: text("audio_object_key").notNull(),
+    durationMs: integer("duration_ms").notNull(),
+    sampleRate: integer("sample_rate").notNull(),
+  },
+  (table) => [
+    primaryKey({ columns: [table.auditionId, table.lineId] }),
+    uniqueIndex("audition_clip_position_unique").on(table.auditionId, table.position),
+  ],
+);
+
+export const auditionVotes = sqliteTable(
+  "audition_votes",
+  {
+    auditionId: text("audition_id").notNull().references(() => auditions.id, { onDelete: "cascade" }),
+    userId: text("user_id").notNull().references(() => users.id, { onDelete: "cascade" }),
+    createdAt: text("created_at").notNull().default(sql`CURRENT_TIMESTAMP`),
+  },
+  (table) => [primaryKey({ columns: [table.auditionId, table.userId] })],
+);
+
+export const auditionComments = sqliteTable(
+  "audition_comments",
+  {
+    id: text("id").primaryKey(),
+    auditionId: text("audition_id").notNull().references(() => auditions.id, { onDelete: "cascade" }),
+    authorId: text("author_id").notNull().references(() => users.id),
+    body: text("body").notNull(),
+    hiddenAt: text("hidden_at"),
+    ...timestamps,
+  },
+  (table) => [index("audition_comments_audition_idx").on(table.auditionId)],
+);
+
+export const auditionReactions = sqliteTable(
+  "audition_reactions",
+  {
+    auditionId: text("audition_id").notNull().references(() => auditions.id, { onDelete: "cascade" }),
+    userId: text("user_id").notNull().references(() => users.id, { onDelete: "cascade" }),
+    kind: text("kind", { enum: ["like", "dislike"] }).notNull(),
+    createdAt: text("created_at").notNull().default(sql`CURRENT_TIMESTAMP`),
+  },
+  (table) => [primaryKey({ columns: [table.auditionId, table.userId] })],
+);
+
+export const voicePacks = sqliteTable(
+  "voice_packs",
+  {
+    id: text("id").primaryKey(),
+    heroId: text("hero_id").notNull().unique(),
+    authorId: text("author_id").notNull().references(() => users.id),
+    auditionId: text("audition_id").notNull().unique().references(() => auditions.id),
+    status: text("status", {
+      enum: ["recording", "review", "approved", "released"],
+    }).notNull().default("recording"),
+    totalLines: integer("total_lines").notNull(),
+    submittedLines: integer("submitted_lines").notNull().default(5),
+    approvedLines: integer("approved_lines").notNull().default(0),
+    ...timestamps,
+  },
+  (table) => [index("voice_packs_author_idx").on(table.authorId)],
+);
+
+export const voicePackClips = sqliteTable(
+  "voice_pack_clips",
+  {
+    packId: text("pack_id").notNull().references(() => voicePacks.id, { onDelete: "cascade" }),
+    lineId: text("line_id").notNull(),
+    audioObjectKey: text("audio_object_key").notNull(),
+    status: text("status", {
+      enum: ["pending", "approved", "changes_requested", "rejected"],
+    }).notNull().default("pending"),
+    createdAt: text("created_at").notNull().default(sql`CURRENT_TIMESTAMP`),
+  },
+  (table) => [primaryKey({ columns: [table.packId, table.lineId] })],
+);
+
+export const petitionSignatures = sqliteTable(
+  "petition_signatures",
+  {
+    id: text("id").primaryKey(),
+    userId: text("user_id").notNull().unique().references(() => users.id, { onDelete: "cascade" }),
+    statementVersion: text("statement_version").notNull().default("2026-07-26"),
+    displayPublicly: integer("display_publicly", { mode: "boolean" }).notNull().default(true),
+    createdAt: text("created_at").notNull().default(sql`CURRENT_TIMESTAMP`),
+  },
+  (table) => [index("petition_signatures_created_idx").on(table.createdAt)],
 );

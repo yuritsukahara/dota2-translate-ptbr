@@ -29,25 +29,19 @@ export default function HowItWorksPage() {
 
         <section className="explainer-safety">
           <div>
-            <p className="eyebrow">DOIS MODOS, DOIS USOS</p>
-            <h2>O conteúdo é o mesmo. A montagem muda.</h2>
+            <p className="eyebrow">UM HERÓI, UMA VOZ</p>
+            <h2>O pack pertence ao intérprete escolhido.</h2>
           </div>
-          <div className="mode-grid">
-            <article className="mode-card">
-              <p className="eyebrow">MODO OFICIAL</p>
-              <h3>Custom Game</h3>
-              <p>
-                O addon fica em <code>dota_addons</code> e roda como jogo
-                personalizado usando o fluxo oficial dos Workshop Tools.
-              </p>
+          <div className="mode-grid casting-policy-grid">
+            <article className="mode-card lab">
+              <p className="eyebrow">AUDIÇÃO PADRONIZADA</p>
+              <h3>Cinco linhas</h3>
+              <p>Todos interpretam o mesmo roteiro para permitir uma votação comparável e transparente.</p>
             </article>
             <article className="mode-card lab">
-              <p className="eyebrow">LABORATÓRIO REVERSÍVEL</p>
-              <h3>Cliente normal</h3>
-              <p>
-                Uma camada <code>dota_brazilian</code> separada é montada pelo
-                sistema de idiomas. Não altera executáveis, DLLs nem o VPK base.
-              </p>
+              <p className="eyebrow">PACK INDIVISÍVEL</p>
+              <h3>Um intérprete</h3>
+              <p>O vencedor grava o herói inteiro. Linhas de diferentes autores nunca são misturadas no mesmo pack.</p>
             </article>
           </div>
         </section>

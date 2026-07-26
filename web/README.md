@@ -1,10 +1,38 @@
 # Portal Dota 2 Translate PT-BR
 
-Portal público em Vinext/Cloudflare Workers para organizar tradução, gravação, votação e publicação das voicelines comunitárias.
+Portal Vinext/Cloudflare Workers para catalogar as voicelines oficiais, organizar audições comunitárias e demonstrar apoio a uma dublagem oficial em português brasileiro.
 
-O front-end usa Vite por meio do Vinext. O snapshot atual traz 127 heróis do OpenDota, imagens servidas pelo CDN indicado no catálogo e páginas dinâmicas para cada herói.
+## O que é fonte oficial
 
-## Desenvolvimento
+- O inventário e as captions são extraídos do VPK instalado localmente.
+- A interface só identifica uma tradução como oficial quando ela existe no arquivo brasileiro do mesmo build.
+- No build catalogado atualmente, há 55.357 captions inglesas de 127 heróis e nenhuma caption brasileira base por herói.
+- O portal guarda apenas o caminho do som original no cliente; não copia o áudio da Valve para R2.
+- A categoria `Responses` da Dota 2 Wiki é uma referência editorial secundária, não a fonte canônica nem uma licença de redistribuição.
+
+## Audições e packs
+
+Cada candidato envia cinco WAVs para o mesmo roteiro. A comunidade pode votar, comentar, curtir ou desaprovar. Depois da triagem e revisão, um vencedor assume o herói inteiro. Um pack nunca mistura linhas de intérpretes diferentes.
+
+Formato: WAV PCM mono, 16-bit, 24/48 kHz, até 20 segundos e 10 MB por arquivo. O autor declara consentimento, crédito e licença CC BY 4.0.
+
+## Login Steam
+
+O login usa o provedor OpenID da Steam. Configure:
+
+```dotenv
+STEAM_WEB_API_KEY=
+ADMIN_STEAM_IDS=
+PUBLIC_SITE_URL=http://localhost:3000
+```
+
+A Web API é usada no servidor para obter nome/avatar públicos e verificar que a conta possui pelo menos 30 dias. Nunca versione a chave.
+
+## Petição
+
+`/peticao` apresenta uma carta pública à Valve e aceita uma assinatura por Steam ID. A ação exige sessão, validação de origem, limite de uso e registro de auditoria. A página não afirma apoio da Valve nem entrega automática da petição.
+
+## Desenvolvimento e Docker
 
 Requisitos: Node.js 22.13 ou superior.
 
@@ -14,55 +42,19 @@ npm run db:generate
 npm run dev
 ```
 
-## Docker
-
-Na raiz do repositório:
+Na raiz:
 
 ```powershell
 docker compose up --build
 ```
 
-O portal fica em `http://localhost:3000`. O container usa Wrangler para executar o bundle Cloudflare gerado pelo Vinext; isso mantém os módulos `cloudflare:*`, D1 e R2 compatíveis no Docker.
-
-O ambiente local simula os bindings declarados em `.openai/hosting.json`:
-
-- `DB`: Cloudflare D1 para catálogo, usuários, propostas, votos, revisões, releases e auditoria;
-- `AUDIO`: Cloudflare R2 para uploads privados e gravações aprovadas.
-
-Copie as chaves descritas em `.env.example` para o gerenciador de ambiente. Nunca versione o segredo Discord.
-
-## Discord
-
-Cadastre no Discord Developer Portal o callback:
-
-```text
-https://SEU-DOMINIO/api/auth/discord/callback
-```
-
-Defina `DISCORD_CLIENT_ID`, `DISCORD_CLIENT_SECRET`, `DISCORD_REDIRECT_URI` e, opcionalmente, `ADMIN_DISCORD_IDS`. O login usa state e PKCE, cookie HttpOnly/Secure/SameSite=Lax e recusa contas com menos de 30 dias.
-
-## Fluxo editorial
-
-Uma proposta fica elegível somente depois de sete dias, dez apoiadores únicos, liderança de três votos ou 20% e duas revisões independentes: linguística e técnica. Votos são consultivos; apenas moderadores ou administradores publicam o resultado.
-
-Uploads são aceitos apenas como WAV PCM mono, 16-bit, 24/48 kHz, até 20 segundos e 10 MB. Entram em `pending/` no R2 e só migram para `approved/` após moderação.
-
-## Inventário
-
-O snapshot em `data/axe-lines.json` é exportado do CSV revisável do repositório:
-
-```powershell
-npm run web:seed
-```
-
-Ele contém 285 slots base do Axe: 243 falas verbais com legenda oficial e rascunho PT-BR, 41 vocalizações não verbais excluídas e um slot sem legenda oficial. O portal não hospeda áudio original da Valve.
+O portal fica em `http://localhost:3000`. `DB` é o binding D1 e `AUDIO` é o R2 para gravações comunitárias pendentes e aprovadas.
 
 ## Verificação
 
 ```powershell
 npm test
-npx tsc --noEmit
 npm run lint
 ```
 
-As migrações D1 ficam em `drizzle/`. A publicação é feita pelo Sites a partir do commit Git exato.
+As migrações ficam em `drizzle/`. A publicação no Sites sempre parte do commit Git exato.

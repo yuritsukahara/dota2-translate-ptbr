@@ -1,11 +1,10 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import Link from "next/link";
-import type { CatalogLine } from "@/lib/catalog";
+import type { OfficialVoiceLine } from "@/lib/catalog";
 import { categoryLabel } from "@/lib/catalog";
 
-export function LineBrowser({ lines }: { lines: CatalogLine[] }) {
+export function LineBrowser({ lines }: { lines: OfficialVoiceLine[] }) {
   const [query, setQuery] = useState("");
   const [category, setCategory] = useState("all");
   const categories = useMemo(() => [...new Set(lines.map((line) => line.category))].sort(), [lines]);
@@ -15,8 +14,8 @@ export function LineBrowser({ lines }: { lines: CatalogLine[] }) {
       (category === "all" || line.category === category) &&
       (!normalized ||
         line.id.includes(normalized) ||
-        line.sourceText.toLowerCase().includes(normalized) ||
-        line.ptBrText.toLowerCase().includes(normalized)),
+        line.captionEn.toLowerCase().includes(normalized) ||
+        (line.captionPtBr || "").toLowerCase().includes(normalized)),
     );
   }, [category, lines, query]);
 
@@ -32,17 +31,24 @@ export function LineBrowser({ lines }: { lines: CatalogLine[] }) {
       <p className="form-note">{filtered.length} de {lines.length} falas visíveis</p>
       <div className="line-list">
         {filtered.map((line) => (
-          <Link className="line-row" href={`/linhas/${line.id}`} key={line.id}>
+          <article className="line-row official-line-row" key={line.id}>
             <span className="line-id">{line.id}</span>
-            <span className="line-category">{categoryLabel(line.category)}</span>
+            <span className="original-audio-source">
+              <strong>Som original</strong>
+              <small>Disponível no Dota instalado</small>
+            </span>
             <span className="line-copy">
-              <strong>{line.sourceText || "Sem legenda oficial"}</strong>
-              <small>{line.ptBrText}</small>
+              <small>EN · caption oficial</small>
+              <strong>{line.captionEn}</strong>
             </span>
-            <span className={`status-pill ${line.translationStatus === "approved" ? "open" : ""}`}>
-              {line.translationStatus === "approved" ? "aprovada" : line.ptBrText ? "rascunho PT-BR" : "aguardando"}
+            <span className="line-copy">
+              <small>PT-BR · caption oficial</small>
+              <strong>{line.captionPtBr || "Não publicada neste build"}</strong>
             </span>
-          </Link>
+            <span className={`status-pill ${line.captionPtBr ? "open" : ""}`}>
+              {line.captionPtBr ? "elegível" : "aguardando Valve"}
+            </span>
+          </article>
         ))}
       </div>
     </>

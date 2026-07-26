@@ -14,24 +14,15 @@ export default function ReleasesPage() {
         <div className="release-list">
           <article className="release-card">
             <div>
-              <p className="eyebrow">v0.1.0 · LABORATÓRIO DO AXE</p>
-              <h2>285 vozes-guia</h2>
-              <p>Protótipo técnico com WAVs gerados pelo projeto, addon mínimo e instalador compilável. Não contém áudio original da Valve.</p>
+              <p className="eyebrow">PRÓXIMA RELEASE · AXE</p>
+              <h2>Pack comunitário completo</h2>
+              <p>A release será aberta depois que um intérprete vencer a audição, gravar todo o herói e concluir as revisões linguística e técnica.</p>
             </div>
             <a className="button button-primary" href="https://github.com/yuritsukahara/dota2-translate-ptbr/releases/tag/v0.1.0">Ver no GitHub</a>
           </article>
         </div>
-        <div className="mode-grid">
-          <article className="mode-card">
-            <p className="eyebrow">MODO SUPORTADO</p>
-            <h3>Addon oficial</h3>
-            <p>Instala em <code>dota_addons</code>, compila com os Workshop Tools locais e roda em Custom Game.</p>
-          </article>
-          <article className="mode-card lab">
-            <p className="eyebrow">LABORATÓRIO · DESATIVADO</p>
-            <h3>Cliente normal</h3>
-            <p>Só será liberado para builds verificados quando a montagem reversível funcionar sem bypass, injeção ou alteração de executáveis.</p>
-          </article>
+        <div className="notice" style={{ marginTop: 34 }}>
+          O instalador do cliente normal permanece desativado até que a montagem seja comprovadamente reversível em um build conhecido, sem injeção, bypass ou alteração de executáveis.
         </div>
       </main>
     </>

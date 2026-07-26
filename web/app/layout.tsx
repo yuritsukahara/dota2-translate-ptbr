@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Archivo, Archivo_Black, JetBrains_Mono } from "next/font/google";
+import { Footer } from "@/components/Footer";
 import "./globals.css";
 
 const body = Archivo({ variable: "--font-body", subsets: ["latin"] });
@@ -24,7 +25,10 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="pt-BR">
-      <body className={`${body.variable} ${display.variable} ${mono.variable}`}>{children}</body>
+      <body className={`${body.variable} ${display.variable} ${mono.variable}`}>
+        {children}
+        <Footer />
+      </body>
     </html>
   );
 }

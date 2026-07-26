@@ -6,7 +6,7 @@ import { runtimeEnv } from "./runtime-env";
 
 export type CommunityUser = {
   id: string;
-  discordId: string;
+  steamId: string;
   displayName: string;
   avatarUrl: string | null;
   roles: string[];
@@ -29,27 +29,18 @@ export async function currentUser(request: Request): Promise<CommunityUser | nul
 
 export async function requireUser(request: Request) {
   const user = await currentUser(request);
-  if (!user) throw new Response(JSON.stringify({ error: "Entre com Discord para continuar." }), {
+  if (!user) throw new Response(JSON.stringify({ error: "Entre com Steam para continuar." }), {
     status: 401,
     headers: { "content-type": "application/json" },
   });
   return user;
 }
 
-export async function grantInitialRoles(userId: string, discordId: string) {
+export async function grantInitialRoles(userId: string, steamId: string) {
   const db = getDb();
   await db.insert(roles).values({ userId, role: "member" }).onConflictDoNothing();
-  const admins = String(runtimeEnv.ADMIN_DISCORD_IDS || "").split(",").map((value) => value.trim()).filter(Boolean);
-  if (admins.includes(discordId)) {
+  const admins = String(runtimeEnv.ADMIN_STEAM_IDS || "").split(",").map((value) => value.trim()).filter(Boolean);
+  if (admins.includes(steamId)) {
     await db.insert(roles).values({ userId, role: "admin" }).onConflictDoNothing();
   }
-}
-
-export function discordAccountCreatedAt(discordId: string) {
-  const epoch = 1420070400000n;
-  return new Date(Number((BigInt(discordId) >> 22n) + epoch));
-}
-
-export function isDiscordAccountOldEnough(discordId: string) {
-  return Date.now() - discordAccountCreatedAt(discordId).getTime() >= 30 * 86_400_000;
 }
