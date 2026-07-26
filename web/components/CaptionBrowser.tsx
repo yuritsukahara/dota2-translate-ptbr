@@ -29,7 +29,7 @@ export function CaptionBrowser({
 }) {
   const [query, setQuery] = useState("");
   const [category, setCategory] = useState("all");
-  const [selectedId, setSelectedId] = useState(lines[0]?.id || "");
+  const [selectedId, setSelectedId] = useState("");
   const [suggestions, setSuggestions] = useState<Suggestion[]>([]);
   const [suggestion, setSuggestion] = useState("");
   const [message, setMessage] = useState("");
@@ -38,24 +38,7 @@ export function CaptionBrowser({
     () => [...new Set(lines.map((line) => line.category))].sort(),
     [lines],
   );
-  const selected = lines.find((line) => line.id === selectedId) || lines[0];
-  const leadingSuggestion = [...suggestions].sort(
-    (left, right) => (right.support - right.oppose) - (left.support - left.oppose),
-  )[0];
-  const selectedTranslation = selected
-    ? selected.captionPtBr ||
-      previews[selected.id] ||
-      leadingSuggestion?.text ||
-      automaticTranslations[selected.id] ||
-      ""
-    : "";
-  const selectedSource = selected?.captionPtBr
-    ? "official"
-    : (selected && previews[selected.id]) || leadingSuggestion?.text
-      ? "community"
-      : selected && automaticTranslations[selected.id]
-        ? "automatic"
-        : "missing";
+  const selected = lines.find((line) => line.id === selectedId);
   const relevantTerms = selected ? findRelevantTerms(selected.captionEn) : [];
   const localWarnings = selected ? validateTerminology(selected.captionEn, suggestion) : [];
   const filtered = useMemo(() => {
@@ -125,125 +108,6 @@ export function CaptionBrowser({
 
   return (
     <>
-      {selected && (
-        <section className="translation-workspace" aria-labelledby="translation-title">
-          <div className="translation-workspace-head">
-            <div>
-              <p className="eyebrow">LINHA SELECIONADA · {categoryLabel(selected.category)}</p>
-              <h2 id="translation-title">{selected.id}</h2>
-            </div>
-              <span className={
-                selectedSource === "official"
-                  ? "official-badge"
-                  : selectedSource === "automatic"
-                    ? "automatic-badge"
-                    : "community-badge"
-              }>
-                {selectedSource === "official"
-                  ? "PT-BR oficial do jogo"
-                  : selectedSource === "automatic"
-                    ? "Tradução automática · não revisada"
-                    : "PT-BR comunitário · não oficial"}
-              </span>
-          </div>
-
-          <div className="translation-columns">
-            <article>
-              <small>CAPTION OFICIAL EM INGLÊS</small>
-              <p>{selected.captionEn}</p>
-            </article>
-            <article className={
-              selectedSource === "official"
-                ? "official-caption-card"
-                : selectedSource === "automatic"
-                  ? "automatic-caption-card"
-                  : "preview-card"
-            }>
-              <small>
-                {selectedSource === "official"
-                  ? "CAPTION OFICIAL PT-BR"
-                  : selectedSource === "automatic"
-                    ? "TRADUÇÃO AUTOMÁTICA · NÃO REVISADA"
-                    : "PRÉVIA COMUNITÁRIA PT-BR"}
-              </small>
-              <p>{selectedTranslation || "Ainda não há prévia para esta linha."}</p>
-            </article>
-          </div>
-
-          {relevantTerms.length > 0 && (
-            <div className="terminology-guard">
-              <strong>Nomes oficiais detectados</strong>
-              <div>
-                {relevantTerms.map((term) => (
-                  <span key={term.key}>
-                    {term.type}: {term.en} → <b>{term.ptBr}</b>
-                  </span>
-                ))}
-              </div>
-              <small>Esses nomes devem ser preservados exatamente nas sugestões.</small>
-            </div>
-          )}
-
-          <div className="suggestion-layout">
-            <form className="suggestion-form" onSubmit={submitSuggestion}>
-              <label htmlFor="caption-suggestion">Sua sugestão para esta caption</label>
-              <textarea
-                id="caption-suggestion"
-                className="field"
-                maxLength={500}
-                minLength={2}
-                required
-                value={suggestion}
-                onChange={(event) => setSuggestion(event.target.value)}
-                placeholder="Escreva uma versão natural em português brasileiro…"
-              />
-              <div className="suggestion-form-foot">
-                <small>{suggestion.length}/500</small>
-                <button className="button button-primary" type="submit">Enviar sugestão</button>
-              </div>
-              {localWarnings.map((warning) => (
-                <p className="terminology-warning" key={warning.key}>
-                  Use “{warning.expectedTerm}” para o {warning.type} “{warning.sourceTerm}”.
-                </p>
-              ))}
-              {message && (
-                <p className="form-message">
-                  {message}{" "}
-                  {message.includes("Steam") && <a href="/api/auth/steam/start">Entrar com Steam →</a>}
-                </p>
-              )}
-            </form>
-
-            <div className="community-suggestions">
-              <div className="suggestion-heading">
-                <strong>Sugestões da comunidade</strong>
-                <span>{suggestions.length}</span>
-              </div>
-              {loading && <p className="form-note">Carregando sugestões…</p>}
-              {!loading && suggestions.length === 0 && (
-                <p className="form-note">Seja a primeira pessoa a sugerir uma versão para esta linha.</p>
-              )}
-              {suggestions.map((item) => (
-                <article className="caption-suggestion" key={item.id}>
-                  <p>{item.text}</p>
-                  <div>
-                    <span>por {item.author}</span>
-                    <div>
-                      <button type="button" onClick={() => vote(item.id, "support")} aria-label="Apoiar sugestão">
-                        ▲ {item.support}
-                      </button>
-                      <button type="button" onClick={() => vote(item.id, "oppose")} aria-label="Desaprovar sugestão">
-                        ▼ {item.oppose}
-                      </button>
-                    </div>
-                  </div>
-                </article>
-              ))}
-            </div>
-          </div>
-        </section>
-      )}
-
       <div className="toolbar">
         <input
           className="field search-field"
@@ -272,30 +136,124 @@ export function CaptionBrowser({
           <strong>Português brasileiro</strong>
           <strong>Ação</strong>
         </div>
-        {filtered.map((line) => (
-          <article className={`caption-row ${selected.id === line.id ? "selected" : ""}`} role="row" key={line.id}>
-            <div>
-              <code>{line.id}</code>
-              <small>{categoryLabel(line.category)}</small>
-            </div>
-            <p>{line.captionEn}</p>
-            <p className={(line.captionPtBr || previews[line.id] || automaticTranslations[line.id]) ? "caption-available" : "caption-missing"}>
-              {line.captionPtBr || previews[line.id] || automaticTranslations[line.id] || "Prévia ainda não criada"}
-              {line.captionPtBr && <small className="inline-source-label">OFICIAL PT-BR</small>}
-              {!line.captionPtBr && !previews[line.id] && automaticTranslations[line.id] && (
-                <small className="inline-source-label automatic">AUTOMÁTICA · NÃO REVISADA</small>
+        {filtered.map((line) => {
+          const isOpen = selectedId === line.id;
+          const currentTranslation =
+            line.captionPtBr || previews[line.id] || automaticTranslations[line.id] || "";
+          return (
+            <article className={`caption-row-shell ${isOpen ? "selected" : ""}`} key={line.id}>
+              <div className="caption-row" role="row">
+                <div>
+                  <code>{line.id}</code>
+                  <small>{categoryLabel(line.category)}</small>
+                </div>
+                <p>{line.captionEn}</p>
+                <p className={currentTranslation ? "caption-available" : "caption-missing"}>
+                  {currentTranslation || "Prévia ainda não criada"}
+                  {line.captionPtBr && <small className="inline-source-label">OFICIAL PT-BR</small>}
+                  {!line.captionPtBr && previews[line.id] && (
+                    <small className="inline-source-label">COMUNITÁRIA</small>
+                  )}
+                  {!line.captionPtBr && !previews[line.id] && automaticTranslations[line.id] && (
+                    <small className="inline-source-label automatic">AUTOMÁTICA · NÃO REVISADA</small>
+                  )}
+                </p>
+                <button
+                  className="caption-select"
+                  type="button"
+                  aria-expanded={isOpen}
+                  aria-controls={`editor-${line.id}`}
+                  onClick={() => {
+                    setSelectedId(isOpen ? "" : line.id);
+                    setSuggestion(isOpen ? "" : currentTranslation);
+                    setSuggestions([]);
+                    setMessage("");
+                  }}
+                >
+                  {isOpen ? "Fechar" : "Sugerir"}
+                </button>
+              </div>
+
+              {isOpen && (
+                <section className="caption-inline-editor" id={`editor-${line.id}`} aria-label={`Editar ${line.id}`}>
+                  {relevantTerms.length > 0 && (
+                    <div className="terminology-guard">
+                      <strong>Nomes oficiais nesta fala</strong>
+                      <div>
+                        {relevantTerms.map((term) => (
+                          <span key={term.key}>
+                            {term.en} → <b>{term.ptBr}</b>
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  <div className="inline-editor-grid">
+                    <form className="suggestion-form" onSubmit={submitSuggestion}>
+                      <div className="inline-editor-heading">
+                        <label htmlFor={`caption-suggestion-${line.id}`}>Sugerir tradução PT-BR</label>
+                        <small>{suggestion.length}/500</small>
+                      </div>
+                      <textarea
+                        id={`caption-suggestion-${line.id}`}
+                        className="field"
+                        maxLength={500}
+                        minLength={2}
+                        required
+                        value={suggestion}
+                        onChange={(event) => setSuggestion(event.target.value)}
+                        placeholder={currentTranslation || "Escreva uma versão natural em português brasileiro…"}
+                      />
+                      {localWarnings.map((warning) => (
+                        <p className="terminology-warning" key={warning.key}>
+                          Use “{warning.expectedTerm}” para o {warning.type} “{warning.sourceTerm}”.
+                        </p>
+                      ))}
+                      <div className="inline-submit-row">
+                        <small>A sugestão ficará aberta para votos da comunidade.</small>
+                        <button className="button button-primary" type="submit">Publicar sugestão</button>
+                      </div>
+                      {message && (
+                        <p className="form-message" role="status">
+                          {message}{" "}
+                          {message.includes("Steam") && <a href="/api/auth/steam/start">Entrar com Steam →</a>}
+                        </p>
+                      )}
+                    </form>
+
+                    <div className="community-suggestions">
+                      <div className="suggestion-heading">
+                        <strong>Sugestões e votos</strong>
+                        <span>{suggestions.length}</span>
+                      </div>
+                      {loading && <p className="form-note">Carregando sugestões…</p>}
+                      {!loading && suggestions.length === 0 && (
+                        <p className="inline-empty">Nenhuma sugestão ainda. Você pode abrir a votação.</p>
+                      )}
+                      {suggestions.map((item) => (
+                        <article className="caption-suggestion" key={item.id}>
+                          <p>{item.text}</p>
+                          <div>
+                            <span>por {item.author}</span>
+                            <div>
+                              <button type="button" onClick={() => vote(item.id, "support")} aria-label="Apoiar sugestão">
+                                ▲ {item.support}
+                              </button>
+                              <button type="button" onClick={() => vote(item.id, "oppose")} aria-label="Desaprovar sugestão">
+                                ▼ {item.oppose}
+                              </button>
+                            </div>
+                          </div>
+                        </article>
+                      ))}
+                    </div>
+                  </div>
+                </section>
               )}
-            </p>
-            <button className="caption-select" type="button" onClick={() => {
-              setSelectedId(line.id);
-              setSuggestions([]);
-              setMessage("");
-              document.getElementById("translation-title")?.scrollIntoView({ behavior: "smooth", block: "center" });
-            }}>
-              {selected.id === line.id ? "Editando" : "Sugerir"}
-            </button>
-          </article>
-        ))}
+            </article>
+          );
+        })}
       </div>
     </>
   );

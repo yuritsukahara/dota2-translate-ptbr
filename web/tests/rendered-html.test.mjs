@@ -40,9 +40,10 @@ test("página de captions separa inglês oficial e tradução comunitária", asy
   ]);
   assert.match(page, /Tradução das captions/);
   assert.match(page, /Escolha o herói/);
-  assert.match(browser, /CAPTION OFICIAL EM INGLÊS/);
-  assert.match(browser, /PRÉVIA COMUNITÁRIA PT-BR/);
-  assert.match(browser, /Sugestões da comunidade/);
+  assert.match(browser, /Inglês oficial/);
+  assert.match(browser, /Português brasileiro/);
+  assert.match(browser, /caption-inline-editor/);
+  assert.match(browser, /Sugestões e votos/);
   assert.match(api, /validateTerminology/);
   assert.match(api, /assertSameOrigin/);
   const glossary = JSON.parse(terminology);
@@ -72,8 +73,8 @@ test("traduções automáticas são separadas de captions oficiais e sugestões"
     readFile(new URL("../lib/automatic-translations.ts", import.meta.url), "utf8"),
   ]);
   assert.match(page, /geradas pelo Codex/);
-  assert.match(browser, /TRADUÇÃO AUTOMÁTICA · NÃO REVISADA/);
-  assert.match(browser, /automatic-caption-card/);
+  assert.match(browser, /AUTOMÁTICA · NÃO REVISADA/);
+  assert.match(browser, /inline-source-label automatic/);
   assert.match(automatic, /automatic-translations\.json/);
 });
 
