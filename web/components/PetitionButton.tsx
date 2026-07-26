@@ -25,10 +25,10 @@ export function PetitionButton({ alreadySigned }: { alreadySigned: boolean }) {
   return (
     <div className="petition-action">
       <button className="button button-primary" type="button" onClick={sign} disabled={signed}>
-        {signed ? "Petição assinada" : "Assinar com Steam"}
+        {signed ? "Petição assinada" : "Assinar a carta com Steam"}
       </button>
       <p className="form-note" aria-live="polite">
-        {message || "Uma assinatura por Steam ID. Seu nome público da Steam poderá aparecer na lista."}
+        {message || "Uma assinatura por Steam ID. Você escolhe se seu nome público aparece na lista."}
       </p>
     </div>
   );

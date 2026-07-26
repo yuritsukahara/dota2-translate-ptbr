@@ -10,6 +10,7 @@ export function Footer() {
       <div>
         <Link href="/creditos">Créditos</Link>
         <Link href="/como-funciona">Diretrizes</Link>
+        <Link href="/moderacao">Moderação</Link>
         <a href="https://github.com/yuritsukahara/dota2-translate-ptbr">GitHub</a>
       </div>
     </footer>

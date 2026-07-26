@@ -1,14 +1,17 @@
 import Link from "next/link";
 import type { OfficialVoiceLine } from "@/lib/catalog";
+import type { CurrentTranslation } from "@/lib/current-translations";
 
 export function CastingPanel({
   heroId,
   heroName,
   sampleLines,
+  translations,
 }: {
   heroId: string;
   heroName: string;
   sampleLines: OfficialVoiceLine[];
+  translations: Record<string, CurrentTranslation>;
 }) {
   return (
     <section className="casting-panel">
@@ -44,7 +47,7 @@ export function CastingPanel({
             <div key={line.id}>
               <span>{String(index + 1).padStart(2, "0")}</span>
               <code>{line.id}</code>
-              <p>{line.captionPtBr || "Aguardando caption oficial PT-BR"}</p>
+              <p>{translations[line.id]?.text || "Tradução em geração"}</p>
             </div>
           ))}
         </div>

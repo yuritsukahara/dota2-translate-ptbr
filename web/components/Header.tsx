@@ -9,12 +9,12 @@ export function Header() {
       </Link>
       <nav className="main-nav" aria-label="Navegação principal">
         <Link href="/heroes">Heróis</Link>
-        <Link href="/captions">Captions</Link>
-        <Link href="/como-funciona">Como funciona</Link>
-        <Link href="/peticao">Petição</Link>
+        <Link href="/captions">Traduções</Link>
+        <Link href="/captions?heroi=announcer">Narrador</Link>
         <Link href="/enviar">Audições</Link>
+        <Link href="/peticao">Petição</Link>
+        <Link href="/como-funciona">Projeto</Link>
         <Link href="/releases">Instalar</Link>
-        <Link href="/moderacao">Moderação</Link>
         <a className="login-link" href="/api/auth/steam/start">Entrar com Steam</a>
       </nav>
       <span className="mobile-menu">MENU</span>

@@ -4,12 +4,21 @@ import { useMemo, useState } from "react";
 import type { OfficialVoiceLine } from "@/lib/catalog";
 import { categoryLabel } from "@/lib/catalog";
 import { OriginalAudio } from "@/components/OriginalAudio";
+import type { CurrentTranslation } from "@/lib/current-translations";
+
+function translationLabel(source: CurrentTranslation["source"]) {
+  if (source === "official") return "caption oficial";
+  if (source === "project") return "tradução do projeto";
+  return "tradução automática";
+}
 
 export function LineBrowser({
   lines,
+  translations,
   responsePage,
 }: {
   lines: OfficialVoiceLine[];
+  translations: Record<string, CurrentTranslation>;
   responsePage: string;
 }) {
   const [query, setQuery] = useState("");
@@ -22,9 +31,9 @@ export function LineBrowser({
       (!normalized ||
         line.id.includes(normalized) ||
         line.captionEn.toLowerCase().includes(normalized) ||
-        (line.captionPtBr || "").toLowerCase().includes(normalized)),
+        (translations[line.id]?.text || "").toLowerCase().includes(normalized)),
     );
-  }, [category, lines, query]);
+  }, [category, lines, query, translations]);
 
   return (
     <>
@@ -46,11 +55,15 @@ export function LineBrowser({
               <strong>{line.captionEn}</strong>
             </span>
             <span className="line-copy">
-              <small>PT-BR · caption oficial</small>
-              <strong>{line.captionPtBr || "Não publicada neste build"}</strong>
+              <small>
+                PT-BR · {translations[line.id]
+                  ? translationLabel(translations[line.id].source)
+                  : "em geração"}
+              </small>
+              <strong>{translations[line.id]?.text || "Tradução ainda em geração"}</strong>
             </span>
-            <span className={`status-pill ${line.captionPtBr ? "open" : ""}`}>
-              {line.captionPtBr ? "elegível" : "aguardando Valve"}
+            <span className={`status-pill ${translations[line.id] ? "open" : ""}`}>
+              {translations[line.id] ? "incluída" : "na fila"}
             </span>
           </article>
         ))}

@@ -3,6 +3,7 @@ import Image from "next/image";
 import { Header } from "@/components/Header";
 import { AuditionForm } from "@/components/AuditionForm";
 import { getHero, getHeroLines, heroes } from "@/lib/catalog";
+import { getCurrentTranslations } from "@/lib/current-translations";
 
 export function generateStaticParams() {
   return heroes.map((hero) => ({ hero: hero.id }));
@@ -16,9 +17,12 @@ export default async function AuditionPage({
   const { hero: heroId } = await params;
   const hero = getHero(heroId);
   if (!hero) notFound();
-  const lines = getHeroLines(heroId)
-    .filter((line) => line.captionPtBr)
-    .slice(0, 5);
+  const allLines = getHeroLines(heroId);
+  const translations = getCurrentTranslations(heroId, allLines);
+  const lines = allLines
+    .filter((line) => translations[line.id])
+    .slice(0, 5)
+    .map((line) => ({ ...line, captionPtBr: translations[line.id].text }));
 
   return (
     <>
@@ -30,7 +34,7 @@ export default async function AuditionPage({
             <p className="eyebrow">AUDIÇÃO · {hero.name.toUpperCase()}</p>
             <h1 className="page-title">Seja a voz do pack</h1>
             <p>
-              A prévia usa exatamente cinco captions oficiais PT-BR. O vencedor
+              A prévia usa exatamente cinco traduções PT-BR incluídas. O vencedor
               aprovado assume todas as voicelines deste herói; o pack nunca
               mistura intérpretes.
             </p>
@@ -43,12 +47,11 @@ export default async function AuditionPage({
           </section>
         ) : (
           <section className="empty-card casting-blocked">
-            <p className="eyebrow">AGUARDANDO FONTE OFICIAL</p>
+            <p className="eyebrow">TRADUÇÃO EM ANDAMENTO</p>
             <h2>A seleção ainda não pode receber áudio</h2>
             <p>
-              Este build possui {hero.officialBrazilianCaptions} captions
-              oficiais PT-BR para {hero.name}. A audição abre automaticamente
-              quando houver pelo menos cinco linhas oficiais elegíveis.
+              O catálogo ainda não possui cinco traduções PT-BR para {hero.name}.
+              A audição abre automaticamente assim que o Codex concluir cinco linhas.
             </p>
           </section>
         )}

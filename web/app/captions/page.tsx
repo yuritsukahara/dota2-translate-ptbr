@@ -13,6 +13,7 @@ import {
   automaticTranslationMetadata,
   getAutomaticTranslations,
 } from "@/lib/automatic-translations";
+import { getCurrentTranslations } from "@/lib/current-translations";
 
 export const metadata = { title: "Tradução comunitária das captions" };
 
@@ -25,6 +26,7 @@ export default async function CaptionsPage({
   const hero = getCaptionSource(requestedHero) || getCaptionSource("axe")!;
   const lines = getHeroLines(hero.id);
   const automaticTranslations = getAutomaticTranslations(hero.id);
+  const currentTranslations = getCurrentTranslations(hero.id, lines);
   const automaticPercent = Math.floor(
     (automaticTranslationMetadata.translatedOccurrences
       / automaticTranslationMetadata.totalMissingOccurrences) * 100,
@@ -61,7 +63,7 @@ export default async function CaptionsPage({
           <div>
             <strong>{hero.name}</strong>
             <span>{lines.length} captions inglesas</span>
-            <span>{hero.officialBrazilianCaptions} captions PT-BR</span>
+            <span>{Object.keys(currentTranslations).length} traduções PT-BR incluídas</span>
             <span>{Object.keys(automaticTranslations).length} traduções automáticas</span>
             <span>
               Codex: {automaticTranslationMetadata.translatedOccurrences.toLocaleString("pt-BR")}
@@ -74,8 +76,9 @@ export default async function CaptionsPage({
 
         <div className="notice caption-policy">
           O narrador padrão usa PT-BR oficial quando o arquivo brasileiro possui o token.
-          As demais prévias são um ponto de partida para revisão, não texto oficial da Valve.
-          Traduções geradas pelo Codex aparecem sempre como automáticas e não revisadas.
+          As traduções do projeto e do Codex são incluídas diretamente no catálogo,
+          sempre com a origem identificada. Não há votação para confirmar a inclusão.
+          A comunidade pode sugerir alternativas; os votos ajudam a ordenar essas propostas.
           Sugestões que mencionam heróis ou itens precisam manter o nome publicado
           nos arquivos oficiais PT-BR do Dota.
           {hero.kind === "hero" && <Link href={`/heroes/${hero.id}`}> Ver página completa de {hero.name} →</Link>}

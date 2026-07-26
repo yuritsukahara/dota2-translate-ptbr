@@ -1,21 +1,25 @@
 import Link from "next/link";
 import { Header } from "@/components/Header";
 import { HeroCard } from "@/components/HeroCard";
-import { CURRENT_BUILD, heroes } from "@/lib/catalog";
-import { getCommunityPreviews } from "@/lib/community-preview";
+import { CURRENT_BUILD, captionSources, getHeroLines, heroes } from "@/lib/catalog";
+import { getCurrentTranslations } from "@/lib/current-translations";
 
 export const metadata = {
-  title: "Dota 2 Translate PT-BR — Cada herói. Cada fala.",
+  title: "Dota 2 inteiro em português brasileiro",
   description: "Portal comunitário para traduzir, gravar, revisar e instalar todas as vozes base do Dota 2 em português brasileiro.",
 };
 
 export default function Home() {
-  const axe = heroes.find((hero) => hero.id === "axe")!;
-  const axePreviewCount = Object.keys(getCommunityPreviews("axe")).length;
-  const featuredHeroes = [
-    axe,
-    ...heroes.filter((hero) => hero.id !== "axe").slice(0, 3),
-  ];
+  const translatedTotal = captionSources.reduce(
+    (sum, source) => sum + Object.keys(getCurrentTranslations(source.id, getHeroLines(source.id))).length,
+    0,
+  );
+  const catalogTotal = captionSources.reduce((sum, source) => sum + source.total, 0);
+  const coverage = Math.floor((translatedTotal / catalogTotal) * 100);
+  const featuredIds = ["crystal_maiden", "invoker", "juggernaut", "pudge"];
+  const featuredHeroes = featuredIds
+    .map((id) => heroes.find((hero) => hero.id === id))
+    .filter((hero): hero is NonNullable<typeof hero> => Boolean(hero));
   return (
     <>
       <Header />
@@ -23,34 +27,38 @@ export default function Home() {
         <section className="hero-shell">
           <div className="hero-grid">
             <div className="hero-copy">
-              <p className="eyebrow">PROJETO COMUNITÁRIO · BUILD {CURRENT_BUILD}</p>
-              <h1>Cada herói.<br /><span>Cada fala.</span></h1>
+              <p className="eyebrow">DOTA 2 TRANSLATE PT-BR · BUILD {CURRENT_BUILD}</p>
+              <h1>Dota inteiro.<br /><span>Em português.</span></h1>
               <p className="hero-lead">
-                Traduza as captions oficiais em inglês, compare uma prévia PT-BR e
-                ajude a comunidade a escolher a versão que melhor preserva cada herói.
+                Um catálogo aberto para traduzir as vozes de todos os heróis e do
+                narrador padrão, formar elencos brasileiros e levar essa demanda à Valve.
               </p>
               <div className="hero-actions">
-                <Link className="button button-primary" href="/captions?heroi=axe">Traduzir captions do Axe</Link>
-                <Link className="button button-ghost" href="/captions?heroi=announcer">Narrador padrão</Link>
-                <Link className="button button-ghost" href="/heroes">Explorar todos os heróis</Link>
+                <Link className="button button-primary" href="/heroes">Explorar os 127 heróis</Link>
+                <Link className="button button-ghost" href="/captions">Ver traduções</Link>
+                <Link className="button button-ghost" href="/peticao">Assinar a petição</Link>
               </div>
               <dl className="hero-metrics">
-                <div><dt>{heroes.length}</dt><dd>heróis catalogados</dd></div>
-                <div><dt>{heroes.reduce((sum, hero) => sum + hero.total, 0).toLocaleString("pt-BR")}</dt><dd>captions oficiais EN</dd></div>
-                <div><dt>0</dt><dd>áudios da Valve hospedados</dd></div>
+                <div><dt>{heroes.length}</dt><dd>heróis</dd></div>
+                <div><dt>1</dt><dd>narrador padrão</dd></div>
+                <div><dt>{translatedTotal.toLocaleString("pt-BR")}</dt><dd>linhas PT-BR incluídas</dd></div>
               </dl>
             </div>
-            <div className="campaign-card" aria-label="Progresso da campanha do Axe">
-              <div className="campaign-mark" aria-hidden="true">AXE</div>
-              <p className="card-kicker">PRIMEIRA TRADUÇÃO</p>
-              <h2>Captions do Axe</h2>
-              <p>O catálogo encontrou {axe.total} voicelines com caption oficial EN. Já há {axePreviewCount} prévias comunitárias PT-BR para revisar.</p>
+            <div className="campaign-card" aria-label="Progresso geral das traduções">
+              <div className="campaign-mark" aria-hidden="true">PT-BR</div>
+              <p className="card-kicker">COBERTURA GERAL</p>
+              <h2>Todos entram no pack</h2>
+              <p>{translatedTotal.toLocaleString("pt-BR")} de {catalogTotal.toLocaleString("pt-BR")} captions já possuem uma versão brasileira incluída.</p>
+              <div className="progress-row">
+                <div className="progress-label"><span>Catálogo PT-BR</span><span>{coverage}%</span></div>
+                <div className="progress-track"><div className="progress-fill" style={{ width: `${coverage}%` }} /></div>
+              </div>
               <ol className="campaign-casting-list">
-                <li><span>01</span>Comparar inglês e prévia PT-BR</li>
-                <li><span>02</span>Sugerir uma versão mais natural</li>
-                <li><span>03</span>Apoiar ou desaprovar propostas</li>
+                <li><span>01</span>Inglês oficial preservado</li>
+                <li><span>02</span>PT-BR incluído conforme é gerado</li>
+                <li><span>03</span>Alternativas abertas à comunidade</li>
               </ol>
-              <Link className="text-link" href="/captions?heroi=axe">Abrir tradução <span>→</span></Link>
+              <Link className="text-link" href="/captions?heroi=announcer">Ver o narrador padrão <span>→</span></Link>
             </div>
           </div>
         </section>
@@ -58,22 +66,22 @@ export default function Home() {
         <section className="section section-dark">
           <div className="section-heading">
             <div>
-              <p className="eyebrow">COBERTURA HONESTA</p>
-              <h2>100% tem um significado.</h2>
+              <p className="eyebrow">UM PROJETO PARA O JOGO INTEIRO</p>
+              <h2>Texto, voz e comunidade.</h2>
             </div>
-            <p>O inglês oficial permanece imutável. A tradução comunitária é rastreável, votada e revisada antes de orientar qualquer gravação.</p>
+            <p>O inglês oficial permanece imutável. A tradução automática entra no catálogo imediatamente e propostas comunitárias podem aperfeiçoá-la.</p>
           </div>
           <div className="principle-grid">
-            <article><span>01</span><h3>Inventário</h3><p>Os nomes técnicos vêm do VPK instalado e ficam fixados a uma versão do jogo.</p></article>
-            <article><span>02</span><h3>Audição</h3><p>Cada candidato envia as mesmas cinco linhas para comparação justa.</p></article>
-            <article><span>03</span><h3>Elenco</h3><p>Votos, comentários e revisão escolhem um intérprete único por herói.</p></article>
-            <article><span>04</span><h3>Pack</h3><p>O vencedor grava todas as linhas elegíveis e recebe crédito no release.</p></article>
+            <article><span>01</span><h3>Catálogo</h3><p>{catalogTotal.toLocaleString("pt-BR")} captions do jogo organizadas por herói, narrador e build.</p></article>
+            <article><span>02</span><h3>Tradução</h3><p>O Codex gera a base PT-BR e cada origem permanece claramente identificada.</p></article>
+            <article><span>03</span><h3>Comunidade</h3><p>Qualquer pessoa pode sugerir uma alternativa mais natural e apoiar propostas.</p></article>
+            <article><span>04</span><h3>Vozes</h3><p>Cada pack mantém um único intérprete para preservar a identidade do personagem.</p></article>
           </div>
         </section>
 
         <section className="section">
           <div className="section-heading compact">
-            <div><p className="eyebrow">HERÓIS</p><h2>Elencos da comunidade</h2></div>
+            <div><p className="eyebrow">UM ELENCO PARA CADA HERÓI</p><h2>O projeto é de todos.</h2></div>
             <Link className="text-link" href="/heroes">Ver todos <span>→</span></Link>
           </div>
           <div className="hero-card-grid">
@@ -85,7 +93,7 @@ export default function Home() {
           <div>
             <p className="eyebrow">RELEASE v0.1.0</p>
             <h2>O laboratório já funciona.</h2>
-            <p>A camada brasileira já foi validada tecnicamente. Agora o portal aguarda captions oficiais PT-BR e o primeiro intérprete eleito.</p>
+            <p>A camada brasileira já foi validada tecnicamente. O mesmo processo agora percorre todos os heróis e o narrador padrão.</p>
           </div>
           <Link className="button button-primary" href="/releases">Baixar e instalar</Link>
         </section>

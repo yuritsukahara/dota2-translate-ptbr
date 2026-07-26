@@ -6,7 +6,10 @@ import { PetitionButton } from "@/components/PetitionButton";
 import { getDb } from "@/db";
 import { petitionSignatures, sessions, users } from "@/db/schema";
 
-export const metadata = { title: "Petição por vozes oficiais em PT-BR" };
+export const metadata = {
+  title: "Petição por áudio oficial em português brasileiro",
+  description: "Uma carta aberta da comunidade brasileira pedindo à Valve vozes oficiais de Dota 2 em PT-BR.",
+};
 
 export default async function PetitionPage() {
   const db = getDb();
@@ -36,18 +39,18 @@ export default async function PetitionPage() {
       <main>
         <section className="petition-hero">
           <div>
-            <p className="eyebrow">UMA VOZ PARA O BRASIL</p>
-            <h1>Valve, dê voz oficial em PT-BR aos heróis de Dota 2</h1>
+            <p className="eyebrow">CARTA ABERTA DA COMUNIDADE DOTA BRASIL</p>
+            <h1>Valve, o Brasil quer ouvir Dota 2 em português.</h1>
             <p className="petition-lead">
-              O Brasil joga, transmite, cria memes, organiza campeonatos e mantém Dota vivo há anos.
-              Queremos ouvir essa paixão dentro do jogo, com uma dublagem brasileira oficial, cuidada
-              por direção artística profissional e fiel à personalidade de cada herói.
+              Nós já vivemos Dota em português: nas partidas, transmissões, campeonatos,
+              piadas e amizades. Agora queremos ouvir os heróis que amamos com vozes
+              brasileiras oficiais, direção profissional e o mesmo cuidado dado a cada personalidade.
             </p>
             <PetitionButton alreadySigned={alreadySigned} />
           </div>
           <aside className="petition-counter">
             <strong>{total.toLocaleString("pt-BR")}</strong>
-            <span>assinaturas verificadas pela Steam</span>
+            <span>jogadores verificados pela Steam</span>
             <p>Meta inicial</p>
             <b>10.000</b>
             <div className="progress-track"><div className="progress-fill" style={{ width: `${Math.min(100, total / 100)}%` }} /></div>
@@ -56,13 +59,14 @@ export default async function PetitionPage() {
 
         <section className="section petition-letter">
           <p className="eyebrow">CARTA ABERTA</p>
-          <h2>Não pedimos apenas uma opção no menu. Pedimos reconhecimento.</h2>
+          <h2>O jogo já fala com o Brasil. Queremos ouvi-lo também.</h2>
           <div>
             <p>À equipe de Dota 2 na Valve,</p>
-            <p>A comunidade brasileira construiu uma relação profunda com Dota. Cada partida carrega nosso humor, nossa competitividade, nossas histórias e amizades. O texto em português aproxima o jogo, mas ouvir os heróis em nosso idioma faria essa relação ganhar outra dimensão.</p>
-            <p>Pedimos a avaliação de um pacote oficial de áudio em português brasileiro para as voicelines dos heróis, com elenco profissional, direção consistente e participação respeitosa da comunidade na celebração do lançamento.</p>
-            <p>Este projeto comunitário cataloga a demanda e demonstra organização. Ele não fala em nome da Valve e não presume uma promessa de implementação. As assinaturas serão entregues por canais públicos adequados, acompanhadas de números verificáveis e desta carta.</p>
-            <p>Com paixão e respeito,<br />Comunidade Dota 2 Brasil</p>
+            <p>Há anos a comunidade brasileira transforma Dota em cultura. Narramos campeonatos, ensinamos novos jogadores, criamos conteúdo, lotamos transmissões e continuamos voltando para mais uma partida. Nosso idioma já faz parte dessa história.</p>
+            <p>Uma opção oficial de áudio em português brasileiro tornaria o universo do jogo mais próximo, acessível e memorável. Não queremos apagar as vozes originais: queremos poder escolher uma interpretação brasileira feita com elenco profissional, direção consistente e respeito ao humor, à força e às particularidades de cada personagem.</p>
+            <p>Por isso pedimos que a Valve avalie produzir um pacote oficial com as voicelines dos heróis e do narrador padrão em PT-BR. Este portal organiza a demanda, mede a participação e mostra que existe uma comunidade pronta para celebrar e apoiar esse trabalho.</p>
+            <p>Este é um projeto independente. Não falamos em nome da Valve e não presumimos qualquer compromisso de implementação. Oferecemos esta carta e nossas assinaturas como um convite claro: escutem a comunidade que há tanto tempo mantém Dota vivo no Brasil.</p>
+            <p>Com paixão, respeito e uma vontade enorme de ouvir “Primeiro Sangue” do nosso jeito,<br /><strong>Comunidade Dota 2 Brasil</strong></p>
           </div>
         </section>
 

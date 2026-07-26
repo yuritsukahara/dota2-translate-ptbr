@@ -40,7 +40,7 @@ export function AuditionForm({
       {lines.map((line, index) => (
         <label key={line.id}>
           <span>
-            {index + 1}. {line.captionPtBr || "Caption oficial PT-BR indisponível"}{" "}
+            {index + 1}. {line.captionPtBr || "Tradução PT-BR indisponível"}{" "}
             <code>{line.id}</code>
           </span>
           <input className="field" type="file" name="clips" required accept=".wav,audio/wav" />

@@ -7,6 +7,7 @@ import { assertSameOrigin } from "@/lib/csrf";
 import { assertRateLimit } from "@/lib/rate-limit";
 import { runtimeEnv } from "@/lib/runtime-env";
 import { inspectWav } from "@/lib/wav";
+import { getCurrentTranslations } from "@/lib/current-translations";
 
 export async function GET(request: Request) {
   const heroId = new URL(request.url).searchParams.get("hero") || "";
@@ -45,9 +46,11 @@ export async function POST(request: Request) {
     const files = data.getAll("clips");
     const lineIds = JSON.parse(String(data.get("lineIds") || "[]")) as string[];
     const hero = getHero(heroId);
+    const heroLines = getHeroLines(heroId);
+    const translations = getCurrentTranslations(heroId, heroLines);
     const eligible = new Map(
-      getHeroLines(heroId)
-        .filter((line) => line.captionPtBr)
+      heroLines
+        .filter((line) => translations[line.id])
         .map((line) => [line.id, line])
     );
 
@@ -62,7 +65,7 @@ export async function POST(request: Request) {
       files.some((file) => !(file instanceof File))
     ) {
       return Response.json(
-        { error: "A audição exige cinco linhas oficiais distintas, crédito e consentimento." },
+        { error: "A audição exige cinco linhas traduzidas distintas, crédito e consentimento." },
         { status: 400 }
       );
     }

@@ -9,8 +9,8 @@ test("portal público está em português e usa identidade Steam", async () => {
     readFile(new URL("../components/Header.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/globals.css", import.meta.url), "utf8"),
   ]);
-  assert.match(page, /Dota 2 Translate PT-BR/);
-  assert.match(page, /Cada herói/);
+  assert.match(page, /DOTA 2 TRANSLATE PT-BR/);
+  assert.match(page, /Dota inteiro/);
   assert.match(layout, /<html lang="pt-BR">/);
   assert.match(header, /auth\/steam\/start/);
   assert.doesNotMatch(header, /Discord/);
@@ -25,7 +25,8 @@ test("catálogo lista som local e captions oficiais EN e PT-BR", async () => {
   ]);
   assert.match(page, /getHeroLines/);
   assert.match(browser, /caption oficial/);
-  assert.match(browser, /Não publicada neste build/);
+  assert.match(browser, /Tradução ainda em geração/);
+  assert.match(browser, /tradução automática/);
   assert.match(browser, /lines\.filter/);
   assert.match(audio, /Special:Redirect\/file/);
   assert.match(audio, /Fonte: Dota 2 Wiki\/Fandom/);
@@ -72,10 +73,26 @@ test("traduções automáticas são separadas de captions oficiais e sugestões"
     readFile(new URL("../components/CaptionBrowser.tsx", import.meta.url), "utf8"),
     readFile(new URL("../lib/automatic-translations.ts", import.meta.url), "utf8"),
   ]);
-  assert.match(page, /geradas pelo Codex/);
+  assert.match(page, /Codex são incluídas diretamente/);
+  assert.match(page, /Não há votação para confirmar a inclusão/);
   assert.match(browser, /AUTOMÁTICA · NÃO REVISADA/);
   assert.match(browser, /inline-source-label automatic/);
   assert.match(automatic, /automatic-translations\.json/);
+});
+
+test("tradução atual aparece nas páginas de herói e de fala", async () => {
+  const [heroPage, linePage, resolver, catalog] = await Promise.all([
+    readFile(new URL("../app/heroes/[id]/page.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../app/linhas/[id]/page.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../lib/current-translations.ts", import.meta.url), "utf8"),
+    readFile(new URL("../lib/catalog.ts", import.meta.url), "utf8"),
+  ]);
+  assert.match(heroPage, /getCurrentTranslations/);
+  assert.match(heroPage, /traduções PT-BR incluídas/);
+  assert.match(linePage, /LEGENDA PT-BR INCLUÍDA/);
+  assert.match(linePage, /getLineContext/);
+  assert.match(resolver, /source: "automatic"/);
+  assert.match(catalog, /linesByHero/);
 });
 
 test("inventário oficial cobre 127 heróis em ordem alfabética", async () => {
@@ -113,12 +130,21 @@ test("audição exige cinco linhas e pack indivisível", async () => {
 });
 
 test("petição possui assinatura única por usuário", async () => {
-  const [page, schema, api] = await Promise.all([
+  const [page, schema, api, home, header] = await Promise.all([
     readFile(new URL("../app/peticao/page.tsx", import.meta.url), "utf8"),
     readFile(new URL("../db/schema.ts", import.meta.url), "utf8"),
     readFile(new URL("../app/api/petition/sign/route.ts", import.meta.url), "utf8"),
+    readFile(new URL("../app/page.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../components/Header.tsx", import.meta.url), "utf8"),
   ]);
   assert.match(page, /Comunidade Dota 2 Brasil/);
+  assert.match(page, /Valve, o Brasil quer ouvir Dota 2 em português/);
+  assert.match(page, /projeto independente/);
+  assert.match(home, /Dota inteiro/);
+  assert.match(home, /Em português/);
+  assert.doesNotMatch(home, /Captions do Axe/);
+  assert.ok(header.indexOf("Heróis") < header.indexOf("Traduções"));
+  assert.ok(header.indexOf("Traduções") < header.indexOf("Petição"));
   assert.match(schema, /petition_signatures/);
   assert.match(schema, /userId: text\("user_id"\)\.notNull\(\)\.unique\(\)/);
   assert.match(api, /assertSameOrigin/);

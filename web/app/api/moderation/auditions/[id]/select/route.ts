@@ -2,7 +2,8 @@ import { and, eq, ne, sql } from "drizzle-orm";
 import { getDb } from "@/db";
 import { auditEvents, auditions, voicePacks } from "@/db/schema";
 import { requireUser } from "@/lib/auth";
-import { getHero } from "@/lib/catalog";
+import { getHero, getHeroLines } from "@/lib/catalog";
+import { getCurrentTranslations } from "@/lib/current-translations";
 import { assertSameOrigin } from "@/lib/csrf";
 import { hasRequiredRole } from "@/lib/database";
 
@@ -24,6 +25,9 @@ export async function POST(
     }
     const hero = getHero(audition.heroId);
     if (!hero) return Response.json({ error: "Herói não encontrado." }, { status: 404 });
+    const translatedLines = Object.keys(
+      getCurrentTranslations(audition.heroId, getHeroLines(audition.heroId)),
+    ).length;
     const packId = crypto.randomUUID();
     await db.batch([
       db.update(auditions).set({
@@ -42,7 +46,7 @@ export async function POST(
         authorId: audition.authorId,
         auditionId: id,
         status: "recording",
-        totalLines: hero.officialBrazilianCaptions,
+        totalLines: translatedLines,
         submittedLines: 5,
       }),
       db.insert(auditEvents).values({

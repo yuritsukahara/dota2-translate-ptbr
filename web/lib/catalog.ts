@@ -49,7 +49,15 @@ export const captionSources: CaptionSource[] = [
 ];
 
 export const getAxeLines = () => linesByHero.axe || [];
-export const getLine = (id: string) => getAxeLines().find((line) => line.id === id);
+export const getLineContext = (id: string) => {
+  for (const [sourceId, lines] of Object.entries(linesByHero)) {
+    const line = lines.find((item) => item.id === id);
+    if (line) return { sourceId, line };
+  }
+  const announcerLine = announcerLines.find((line) => line.id === id);
+  return announcerLine ? { sourceId: "announcer", line: announcerLine } : undefined;
+};
+export const getLine = (id: string) => getLineContext(id)?.line;
 export const getHero = (id: string) => heroes.find((hero) => hero.id === id);
 export const getCaptionSource = (id: string) => captionSources.find((source) => source.id === id);
 export const getHeroLines = (id: string) => id === "announcer" ? announcerLines : linesByHero[id] || [];

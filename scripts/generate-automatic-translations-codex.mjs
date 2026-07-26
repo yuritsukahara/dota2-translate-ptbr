@@ -93,7 +93,9 @@ for (const line of axeDrafts.filter((item) => item.voiceScope === "spoken" && it
 }
 for (const key of ambiguous) communityMemory.delete(key);
 
-const sources = { ...voiceCatalog.heroes, announcer };
+// O narrador já possui muitas captions oficiais PT-BR; as lacunas restantes
+// entram primeiro na fila para que essa fonte não espere todos os heróis.
+const sources = { announcer, ...voiceCatalog.heroes };
 const missingOccurrences = Object.entries(sources).flatMap(([sourceId, lines]) =>
   lines
     .filter((line) => !line.captionPtBr && !communityMemory.has(normalize(line.captionEn)))
