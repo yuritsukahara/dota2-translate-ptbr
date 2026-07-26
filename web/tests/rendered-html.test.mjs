@@ -50,6 +50,21 @@ test("página de captions separa inglês oficial e tradução comunitária", asy
   assert.ok(glossary.items.length > 500);
 });
 
+test("narrador padrão possui catálogo oficial brasileiro e todos os heróis aceitam prévias", async () => {
+  const [announcer, catalog, preview] = await Promise.all([
+    readFile(new URL("../data/announcer-lines.json", import.meta.url), "utf8"),
+    readFile(new URL("../lib/catalog.ts", import.meta.url), "utf8"),
+    readFile(new URL("../lib/community-preview.ts", import.meta.url), "utf8"),
+  ]);
+  const data = JSON.parse(announcer);
+  assert.ok(data.lines.length > 2_000);
+  assert.ok(data.lines.filter((line) => line.captionPtBr).length > 1_300);
+  assert.match(catalog, /Narrador padrão/);
+  assert.match(catalog, /captionSources/);
+  assert.match(preview, /translationMemory/);
+  assert.match(preview, /getHeroLines\(heroId\)/);
+});
+
 test("inventário oficial cobre 127 heróis em ordem alfabética", async () => {
   const catalog = JSON.parse(await readFile(new URL("../data/heroes.json", import.meta.url), "utf8"));
   assert.equal(catalog.heroes.length, 127);

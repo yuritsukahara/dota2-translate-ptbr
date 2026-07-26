@@ -7,7 +7,7 @@ import {
   users,
 } from "@/db/schema";
 import { requireUser } from "@/lib/auth";
-import { getHero, getHeroLine } from "@/lib/catalog";
+import { getCaptionSource, getHeroLine } from "@/lib/catalog";
 import { assertSameOrigin } from "@/lib/csrf";
 import { assertRateLimit } from "@/lib/rate-limit";
 import { validateTerminology } from "@/lib/terminology";
@@ -61,7 +61,7 @@ export async function POST(request: Request) {
     const heroId = payload.heroId?.trim() || "";
     const lineId = payload.lineId?.trim() || "";
     const text = payload.text?.trim() || "";
-    const hero = getHero(heroId);
+    const hero = getCaptionSource(heroId);
     const line = getHeroLine(heroId, lineId);
     if (!hero || !line) {
       return Response.json({ error: "Herói ou caption não encontrada." }, { status: 404 });

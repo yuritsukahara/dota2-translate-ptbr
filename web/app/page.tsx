@@ -31,6 +31,7 @@ export default function Home() {
               </p>
               <div className="hero-actions">
                 <Link className="button button-primary" href="/captions?heroi=axe">Traduzir captions do Axe</Link>
+                <Link className="button button-ghost" href="/captions?heroi=announcer">Narrador padrão</Link>
                 <Link className="button button-ghost" href="/heroes">Explorar todos os heróis</Link>
               </div>
               <dl className="hero-metrics">

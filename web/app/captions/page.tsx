@@ -4,9 +4,9 @@ import { CaptionBrowser } from "@/components/CaptionBrowser";
 import {
   CURRENT_BUILD,
   CURRENT_BUILD_DATE,
-  getHero,
+  captionSources,
+  getCaptionSource,
   getHeroLines,
-  heroes,
 } from "@/lib/catalog";
 import { getCommunityPreviews } from "@/lib/community-preview";
 
@@ -18,7 +18,7 @@ export default async function CaptionsPage({
   searchParams: Promise<{ heroi?: string }>;
 }) {
   const requestedHero = (await searchParams).heroi || "axe";
-  const hero = getHero(requestedHero) || getHero("axe")!;
+  const hero = getCaptionSource(requestedHero) || getCaptionSource("axe")!;
   const lines = getHeroLines(hero.id);
 
   return (
@@ -41,9 +41,9 @@ export default async function CaptionsPage({
           <form method="get" action="/captions">
             <label htmlFor="caption-hero">Escolha o herói</label>
             <select className="field" id="caption-hero" name="heroi" defaultValue={hero.id}>
-              {heroes.map((item) => (
+              {captionSources.map((item) => (
                 <option key={item.id} value={item.id}>
-                  {item.name} · {item.officialEnglishCaptions} EN · {item.officialBrazilianCaptions} PT-BR
+                  {item.kind === "announcer" ? "★ " : ""}{item.name} · {item.officialEnglishCaptions} EN · {item.officialBrazilianCaptions} PT-BR oficial
                 </option>
               ))}
             </select>
@@ -58,10 +58,11 @@ export default async function CaptionsPage({
         </section>
 
         <div className="notice caption-policy">
-          As prévias são um ponto de partida para revisão, não texto oficial da Valve.
+          O narrador padrão usa PT-BR oficial quando o arquivo brasileiro possui o token.
+          As demais prévias são um ponto de partida para revisão, não texto oficial da Valve.
           Sugestões que mencionam heróis ou itens precisam manter o nome publicado
           nos arquivos oficiais PT-BR do Dota.
-          <Link href={`/heroes/${hero.id}`}> Ver página completa de {hero.name} →</Link>
+          {hero.kind === "hero" && <Link href={`/heroes/${hero.id}`}> Ver página completa de {hero.name} →</Link>}
         </div>
 
         <CaptionBrowser heroId={hero.id} lines={lines} previews={getCommunityPreviews(hero.id)} />
