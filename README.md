@@ -19,7 +19,7 @@ O repositório começa com um laboratório completo do **Axe**: ele detecta no D
 - autenticação Discord com conta mínima de 30 dias, papéis, auditoria e limites de uso;
 - armazenamento D1 para dados e R2 separado para gravações pendentes/aprovadas;
 - instalador Windows .NET 8 com descoberta da Steam, backup, reparo e restauração.
-- idioma **Português-Brasil** visível no menu nativo de áudio por uma camada `dota_brazilian`, sem editar VPK, executável ou DLL;
+- idioma **Português-Brasil** visível no menu nativo de áudio por uma camada `dota_brazilian`, sem alterar o VPK base, executável ou DLL;
 - Dockerfile e Docker Compose para executar o portal localmente.
 
 ## Portal comunitário
@@ -84,13 +84,13 @@ npm run sync:catalog
 
 Os [Dota 2 Workshop Tools](https://developer.valvesoftware.com/wiki/Dota_2_Workshop_Tools) dão uma rota oficial para **Custom Games/addons**. A Valve documenta que áudio fonte fica em `sounds` no conteúdo do addon e é compilado para `.vsnd`; o jogo não lê o WAV cru como recurso final ([documentação de áudio do Source 2](https://developer.valvesoftware.com/wiki/Soundscape_%28Source_2%29#Storing_Audio_Files)).
 
-O cliente reconhece camadas oficiais como `dota_russian`. O laboratório comprovou que uma camada paralela `game/dota_brazilian/gameinfo.gi`:
+O cliente reconhece camadas oficiais como `dota_russian`. O laboratório comprovou que `AudioLanguage "brazilian"` ativa a busca automática por `game/dota_brazilian`. A camada:
 
 1. adiciona **Português-Brasil** ao menu nativo de áudio;
-2. monta `.vsnd_c` comunitários antes de `dota`;
+2. monta seu próprio `pak01_dir.vpk` antes do `dota/pak01_dir.vpk`;
 3. mantém o áudio original como fallback para todo slot ausente.
 
-O teste não sobrescreve `pak01_dir.vpk`, não edita o `gameinfo.gi` principal, não toca em executáveis, não injeta DLL e não manipula VAC/CRC. A restauração remove somente a camada criada e devolve `boot.vcfg` byte a byte a partir do backup.
+Arquivos `.vsnd_c` soltos na pasta de idioma são encontrados depois do VPK base e, portanto, não substituem as vozes. O instalador empacota somente os 243 recursos comunitários em `dota_brazilian/pak01_*.vpk`. Ele nunca sobrescreve `dota/pak01_dir.vpk`, não edita o `gameinfo.gi` principal, não toca em executáveis, não injeta DLL e não manipula VAC/CRC. A restauração remove somente a camada criada e devolve `boot.vcfg` byte a byte a partir do backup.
 
 ## Teste rápido no Windows
 

@@ -81,6 +81,16 @@ try {
         $copied += 1
     }
 
+    $vpkSource = Join-Path $target "_vpk_source"
+    $vpkAudioTarget = Join-Path $vpkSource "sounds\vo\axe"
+    New-Item -ItemType Directory -Force -Path $vpkAudioTarget | Out-Null
+    Copy-Item -Path (Join-Path $audioTarget "*.vsnd_c") -Destination $vpkAudioTarget -Force
+    & node (Join-Path $repoRoot "scripts\pack-language-vpk.mjs") $vpkSource (Join-Path $target "pak01")
+    if ($LASTEXITCODE -ne 0) {
+        throw "Falha ao criar o VPK da camada brasileira."
+    }
+    Remove-Item -LiteralPath $vpkSource -Recurse -Force
+
     if (-not $KeepCurrentAudioLanguage) {
         $boot = Get-Content -LiteralPath $bootPath -Raw
         $updated = [regex]::Replace(
