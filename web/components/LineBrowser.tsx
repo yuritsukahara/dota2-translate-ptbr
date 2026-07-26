@@ -13,7 +13,10 @@ export function LineBrowser({ lines }: { lines: CatalogLine[] }) {
     const normalized = query.trim().toLowerCase();
     return lines.filter((line) =>
       (category === "all" || line.category === category) &&
-      (!normalized || line.id.includes(normalized) || line.placeholderText.toLowerCase().includes(normalized)),
+      (!normalized ||
+        line.id.includes(normalized) ||
+        line.sourceText.toLowerCase().includes(normalized) ||
+        line.ptBrText.toLowerCase().includes(normalized)),
     );
   }, [category, lines, query]);
 
@@ -32,7 +35,10 @@ export function LineBrowser({ lines }: { lines: CatalogLine[] }) {
           <Link className="line-row" href={`/linhas/${line.id}`} key={line.id}>
             <span className="line-id">{line.id}</span>
             <span className="line-category">{categoryLabel(line.category)}</span>
-            <span className="line-copy">{line.placeholderText}</span>
+            <span className="line-copy">
+              <strong>{line.sourceText || "Sem legenda oficial"}</strong>
+              <small>{line.ptBrText}</small>
+            </span>
             <span className={`status-pill ${line.translationStatus === "approved" ? "open" : ""}`}>
               {line.translationStatus === "approved" ? "traduzida" : "aguardando"}
             </span>

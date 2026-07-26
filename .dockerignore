@@ -1,0 +1,12 @@
+.git
+.vscode
+build
+dist
+node_modules
+web/node_modules
+web/dist
+web/.vinext
+web/.wrangler
+web/.env
+*.log
+*.tsbuildinfo

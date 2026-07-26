@@ -4,12 +4,14 @@ Projeto comunitário, não oficial e sem fins lucrativos para localizar as vozes
 
 O repositório começa com um laboratório completo do **Axe**: ele detecta no Dota instalado os 285 slots de voz base atuais, mantém um manifesto revisável e gera vozes-guia em PT-BR para testar a integração ponta a ponta.
 
-> **Estado:** protótipo técnico. As falas-guia dizem o contexto e o número do asset; elas não são a tradução final nem imitam o ator original.
+> **Estado:** protótipo técnico. As 79 falas-guia atuais são rascunhos PT-BR baseados nas legendas oficiais em inglês; não são traduções aprovadas nem imitam o ator original.
 
 ## O que já funciona
 
 - manifesto reproduzível dos 285 assets base do Axe;
-- geração local de 285 WAVs-guia com uma voz pt-BR do Windows;
+- extração de 284 legendas oficiais EN do Axe (um slot não possui legenda associada);
+- catálogo de 127 heróis e imagens sincronizado pelo OpenDota;
+- geração local de 79 WAVs-guia com uma voz pt-BR do Windows;
 - compilação comprovada em 285 recursos `.vsnd_c` pelos Dota 2 Workshop Tools;
 - addon de laboratório instalável sem copiar ou redistribuir áudio da Valve;
 - validação automática do CSV e regras para tradução, elenco, gravação e crédito;
@@ -17,6 +19,8 @@ O repositório começa com um laboratório completo do **Axe**: ele detecta no D
 - autenticação Discord com conta mínima de 30 dias, papéis, auditoria e limites de uso;
 - armazenamento D1 para dados e R2 separado para gravações pendentes/aprovadas;
 - instalador Windows .NET 8 com descoberta da Steam, backup, reparo e restauração.
+- idioma **Português-Brasil** visível no menu nativo de áudio por uma camada `dota_brazilian`, sem editar VPK, executável ou DLL;
+- Dockerfile e Docker Compose para executar o portal localmente.
 
 ## Portal comunitário
 
@@ -27,6 +31,14 @@ npm run web:seed
 npm --prefix web install
 npm run web:dev
 ```
+
+Ou com Docker:
+
+```powershell
+docker compose up --build
+```
+
+Abra `http://localhost:3000`. O container executa o build Vinext/Vite no runtime local do Cloudflare e persiste D1/R2 de desenvolvimento no volume `portal-data`.
 
 O progresso é deliberadamente separado:
 
@@ -42,22 +54,41 @@ Para desenvolvimento local e configuração de Discord/D1/R2, consulte [`web/.en
 
 O projeto WPF self-contained está em [`installer/`](installer/README.md). Ele oferece instalação do addon, reparo por hash, backup automático e restauração. A instalação é bloqueada enquanto o Dota está aberto.
 
-O modo de cliente normal é um laboratório desativado por padrão. Ele não edita executáveis, não injeta DLL, não altera VAC/CRC e nunca sobrescreve `pak01_dir.vpk`. Builds desconhecidos ou arquivos-base divergentes são recusados automaticamente.
+O aplicativo .NET ainda mantém seu modo normal desativado; o teste comprovado está isolado nos scripts `install-axe-client-test.ps1` e `restore-axe-client-test.ps1`. Eles bloqueiam a operação com o Dota aberto, mantêm backup e nunca sobrescrevem `pak01_dir.vpk`.
 
 ```powershell
 dotnet test .\installer\Dota2Translate.Tests\Dota2Translate.Tests.csproj -c Release
 dotnet publish .\installer\Dota2Translate.Installer\Dota2Translate.Installer.csproj -c Release -r win-x64 --self-contained true
 ```
 
-## Limite importante
+## Fontes de legenda
+
+O sincronizador lê os arquivos `resource/subtitles/subtitles_*_english.txt` do VPK local e cruza os tokens com os assets de voz. Para o Axe atual, há 284 correspondências em 285 assets; `axe_rival_13` não tem legenda oficial associada.
+
+O cliente **não inclui** `subtitles_axe_brazilian.txt`. Portanto:
+
+- `source_en` é a legenda oficial em inglês;
+- `source_status` registra se a correspondência foi encontrada;
+- `pt_br` é texto comunitário, nunca apresentado como tradução oficial da Valve;
+- o áudio original da Valve não é extraído nem hospedado.
+
+Atualize o snapshot com:
+
+```powershell
+npm run sync:catalog
+```
+
+## Integração no cliente normal
 
 Os [Dota 2 Workshop Tools](https://developer.valvesoftware.com/wiki/Dota_2_Workshop_Tools) dão uma rota oficial para **Custom Games/addons**. A Valve documenta que áudio fonte fica em `sounds` no conteúdo do addon e é compilado para `.vsnd`; o jogo não lê o WAV cru como recurso final ([documentação de áudio do Source 2](https://developer.valvesoftware.com/wiki/Soundscape_%28Source_2%29#Storing_Audio_Files)).
 
-Isso não equivale a instalar uma nova dublagem nas partidas normais. O projeto não altera `pak01_dir.vpk`, `gameinfo.gi`, executáveis, memória do processo nem parâmetros de VAC. Não recomendamos “loaders”, DLL injection ou edição do cliente. A meta pública é:
+O cliente reconhece camadas oficiais como `dota_russian`. O laboratório comprovou que uma camada paralela `game/dota_brazilian/gameinfo.gi`:
 
-1. produzir e revisar um pacote comunitário completo;
-2. testá-lo de forma segura em um addon;
-3. buscar uma integração oficial com a Valve/Steam Workshop.
+1. adiciona **Português-Brasil** ao menu nativo de áudio;
+2. monta `.vsnd_c` comunitários antes de `dota`;
+3. mantém o áudio original como fallback para todo slot ausente.
+
+O teste não sobrescreve `pak01_dir.vpk`, não edita o `gameinfo.gi` principal, não toca em executáveis, não injeta DLL e não manipula VAC/CRC. A restauração remove somente a camada criada e devolve `boot.vcfg` byte a byte a partir do backup.
 
 ## Teste rápido no Windows
 
@@ -73,7 +104,7 @@ No PowerShell:
 
 ```powershell
 npm run validate
-.\scripts\generate-test-voices.ps1
+.\scripts\generate-test-voices.ps1 -Sample -Voice "Microsoft Daniel"
 .\scripts\install-test-addon.ps1
 ```
 
@@ -88,6 +119,22 @@ Abra os Workshop Tools, entre no console e execute:
 
 ```text
 dota_launch_custom_game dota2_translate_ptbr template_map
+```
+
+Para testar as 79 falas-guia no cliente normal, feche o Dota e execute:
+
+```powershell
+.\scripts\generate-test-voices.ps1 -Sample -Voice "Microsoft Daniel"
+.\scripts\install-test-addon.ps1
+.\scripts\install-axe-client-test.ps1
+```
+
+Abra o Dota normalmente. Em **Configurações → Áudio**, confirme **Português-Brasil**. O instalador já seleciona esse idioma no `boot.vcfg`; linhas do Axe fora da amostra continuam usando o áudio original.
+
+Para restaurar:
+
+```powershell
+.\scripts\restore-axe-client-test.ps1
 ```
 
 O instalador copia o mapa de exemplo da instalação local da Valve, compila o mapa e os WAVs, e grava o addon em:
@@ -123,7 +170,9 @@ O arquivo central é [`data/heroes/axe/lines.csv`](data/heroes/axe/lines.csv):
 | `id` | nome estável da fala no jogo |
 | `asset_path` | caminho de destino do recurso |
 | `category` | contexto técnico |
-| `pt_br` | texto em português aprovado pela comunidade |
+| `source_en` | legenda oficial inglesa extraída do VPK |
+| `source_status` | `official_caption` ou `missing_official_caption` |
+| `pt_br` | tradução ou rascunho em português da comunidade |
 | `status` | `placeholder`, `translated`, `recorded` ou `reviewed` |
 | `actor` | nome/crédito escolhido pelo intérprete |
 | `license` | licença da gravação, normalmente `CC-BY-4.0` |

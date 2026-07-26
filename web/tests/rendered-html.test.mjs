@@ -19,10 +19,10 @@ test("define o portal público em português", async () => {
 
 test("catálogo do Axe expõe busca, filtros e links de detalhe", async () => {
   const [page, browser] = await Promise.all([
-    readFile(new URL("../app/heroes/axe/page.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../app/heroes/[id]/page.tsx", import.meta.url), "utf8"),
     readFile(new URL("../components/LineBrowser.tsx", import.meta.url), "utf8"),
   ]);
-  assert.match(page, /285 slots/);
+  assert.match(page, /getHeroLines/);
   assert.match(browser, /Buscar por ID ou contexto/);
   assert.match(browser, /\/linhas\/\$\{line\.id\}/);
   assert.match(browser, /lines\.filter/);
@@ -35,8 +35,22 @@ test("seed possui 285 ids únicos e caminhos seguros", async () => {
   for (const line of lines) {
     assert.match(line.id, /^axe_[a-z0-9_]+$/);
     assert.match(line.assetPath, /^sounds\/vo\/axe\/axe_[a-z0-9_]+\.vsnd_c$/);
+    if (line.id !== "axe_rival_13") {
+      assert.ok(line.sourceText, `legenda oficial ausente em ${line.id}`);
+    }
     assert.equal(line.releaseStatus, "missing");
   }
+});
+
+test("grid usa os 127 heróis e imagens sincronizadas via OpenDota", async () => {
+  const catalog = JSON.parse(
+    await readFile(new URL("../data/heroes.json", import.meta.url), "utf8")
+  );
+  assert.equal(catalog.heroes.length, 127);
+  assert.equal(new Set(catalog.heroes.map((hero) => hero.id)).size, 127);
+  const axe = catalog.heroes.find((hero) => hero.id === "axe");
+  assert.equal(axe.total, 285);
+  assert.match(axe.imageUrl, /^https:\/\/cdn\.cloudflare\.steamstatic\.com\//);
 });
 
 test("não contém assets de áudio da Valve", async () => {

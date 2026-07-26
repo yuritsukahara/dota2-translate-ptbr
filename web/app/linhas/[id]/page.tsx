@@ -17,6 +17,12 @@ export default async function LinePage({ params }: { params: Promise<{ id: strin
         </div>
         <div className="detail-grid">
           <section className="detail-panel">
+            <p className="eyebrow">LEGENDA OFICIAL EM INGLÊS</p>
+            <blockquote className="source-caption">
+              {line.sourceText || "Este slot não possui legenda oficial associada no arquivo do Axe."}
+            </blockquote>
+            <p className="eyebrow">RASCUNHO PT-BR</p>
+            <blockquote className="source-caption ptbr">{line.ptBrText}</blockquote>
             <h2>Propostas da comunidade</h2>
             <div className="empty-card">
               <p className="eyebrow">ABERTA PARA CONTRIBUIÇÃO</p>
@@ -30,7 +36,8 @@ export default async function LinePage({ params }: { params: Promise<{ id: strin
               <dt>Herói</dt><dd>Axe</dd>
               <dt>Categoria</dt><dd>{categoryLabel(line.category)}</dd>
               <dt>Asset</dt><dd>{line.assetPath}</dd>
-              <dt>Tradução</dt><dd>Aguardando</dd>
+              <dt>Fonte</dt><dd>{line.sourceStatus === "official_caption" ? "Legenda oficial EN" : "Ausente"}</dd>
+              <dt>Tradução</dt><dd>{line.translationStatus === "approved" ? "Aprovada" : "Rascunho"}</dd>
               <dt>Áudio</dt><dd>Não gravado</dd>
               <dt>Release</dt><dd>Não incluído</dd>
             </dl>

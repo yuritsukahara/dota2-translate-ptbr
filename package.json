@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "sync:axe": "node scripts/sync-manifest.mjs --hero axe",
+    "sync:catalog": "node scripts/sync-game-catalog.mjs && node scripts/export-web-seed.mjs",
     "validate": "node scripts/validate.mjs",
     "web:seed": "node scripts/export-web-seed.mjs",
     "web:dev": "npm --prefix web run dev",

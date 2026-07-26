@@ -6,7 +6,8 @@ param(
     [int]$Rate = -2,
     [ValidateRange(0, 100)]
     [int]$Volume = 100,
-    [string]$Only = ""
+    [string]$Only = "",
+    [switch]$Sample
 )
 
 $ErrorActionPreference = "Stop"
@@ -42,6 +43,14 @@ $format = [System.Speech.AudioFormat.SpeechAudioFormatInfo]::new(
 )
 
 $lines = Import-Csv -LiteralPath $manifestPath
+if ($Sample) {
+    $samplePath = Join-Path $repoRoot "data\heroes\$Hero\sample-ptbr.json"
+    if (-not (Test-Path -LiteralPath $samplePath)) {
+        throw "Lista de amostras não encontrada: $samplePath"
+    }
+    $sampleIds = @((Get-Content -LiteralPath $samplePath -Raw | ConvertFrom-Json).PSObject.Properties.Name)
+    $lines = @($lines | Where-Object { $_.id -in $sampleIds })
+}
 if ($Only) {
     $lines = @($lines | Where-Object { $_.id -like $Only })
 }

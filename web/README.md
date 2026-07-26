@@ -2,6 +2,8 @@
 
 Portal público em Vinext/Cloudflare Workers para organizar tradução, gravação, votação e publicação das voicelines comunitárias.
 
+O front-end usa Vite por meio do Vinext. O snapshot atual traz 127 heróis do OpenDota, imagens servidas pelo CDN indicado no catálogo e páginas dinâmicas para cada herói.
+
 ## Desenvolvimento
 
 Requisitos: Node.js 22.13 ou superior.
@@ -11,6 +13,16 @@ npm install
 npm run db:generate
 npm run dev
 ```
+
+## Docker
+
+Na raiz do repositório:
+
+```powershell
+docker compose up --build
+```
+
+O portal fica em `http://localhost:3000`. O container usa Wrangler para executar o bundle Cloudflare gerado pelo Vinext; isso mantém os módulos `cloudflare:*`, D1 e R2 compatíveis no Docker.
 
 O ambiente local simula os bindings declarados em `.openai/hosting.json`:
 
@@ -43,7 +55,7 @@ O snapshot em `data/axe-lines.json` é exportado do CSV revisável do repositór
 npm run web:seed
 ```
 
-Ele contém 285 slots base do Axe. O portal não hospeda áudio original da Valve.
+Ele contém 285 slots base do Axe, 284 legendas oficiais em inglês reconciliadas e um slot marcado como sem legenda oficial. O portal não hospeda áudio original da Valve.
 
 ## Verificação
 

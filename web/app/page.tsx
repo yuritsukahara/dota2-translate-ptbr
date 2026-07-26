@@ -2,7 +2,7 @@ import Link from "next/link";
 import { Header } from "@/components/Header";
 import { ProgressRail } from "@/components/ProgressRail";
 import { HeroCard } from "@/components/HeroCard";
-import { heroes, percent } from "@/lib/catalog";
+import { CURRENT_BUILD, heroes, percent } from "@/lib/catalog";
 
 export const metadata = {
   title: "Dota 2 Translate PT-BR — Cada herói. Cada fala.",
@@ -10,7 +10,11 @@ export const metadata = {
 };
 
 export default function Home() {
-  const axe = heroes[0];
+  const axe = heroes.find((hero) => hero.id === "axe")!;
+  const featuredHeroes = [
+    axe,
+    ...heroes.filter((hero) => hero.id !== "axe").slice(0, 3),
+  ];
   return (
     <>
       <Header />
@@ -18,7 +22,7 @@ export default function Home() {
         <section className="hero-shell">
           <div className="hero-grid">
             <div className="hero-copy">
-              <p className="eyebrow">PROJETO COMUNITÁRIO · BUILD 2026-07-23</p>
+              <p className="eyebrow">PROJETO COMUNITÁRIO · BUILD {CURRENT_BUILD}</p>
               <h1>Cada herói.<br /><span>Cada fala.</span></h1>
               <p className="hero-lead">
                 Uma dublagem brasileira construída em público — com inventário verificável,
@@ -69,7 +73,7 @@ export default function Home() {
             <Link className="text-link" href="/heroes">Ver todos <span>→</span></Link>
           </div>
           <div className="hero-card-grid">
-            {heroes.map((hero) => <HeroCard key={hero.id} hero={hero} />)}
+            {featuredHeroes.map((hero) => <HeroCard key={hero.id} hero={hero} />)}
           </div>
         </section>
 

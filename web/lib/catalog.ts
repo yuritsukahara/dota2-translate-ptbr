@@ -1,27 +1,19 @@
 import axeLines from "@/data/axe-lines.json";
+import heroCatalog from "@/data/heroes.json";
 
 export type CatalogLine = (typeof axeLines)[number];
+export type Hero = (typeof heroCatalog.heroes)[number];
 
-export const CURRENT_BUILD = "2026-07-23";
+export const CURRENT_BUILD = heroCatalog.build.clientVersion;
+export const CURRENT_BUILD_DATE = heroCatalog.build.date;
 
-export const heroes = [
-  {
-    id: "axe",
-    name: "Axe",
-    subtitle: "Exército de um homem só",
-    total: axeLines.length,
-    translated: axeLines.filter((line) => line.translationStatus === "approved").length,
-    recorded: axeLines.filter((line) => line.audioStatus === "recorded").length,
-    reviewed: axeLines.filter((line) => line.releaseStatus === "included").length,
-    active: true,
-  },
-  { id: "crystal_maiden", name: "Crystal Maiden", subtitle: "Próxima campanha", total: 0, translated: 0, recorded: 0, reviewed: 0, active: false },
-  { id: "pudge", name: "Pudge", subtitle: "Inventário em preparação", total: 0, translated: 0, recorded: 0, reviewed: 0, active: false },
-  { id: "juggernaut", name: "Juggernaut", subtitle: "Inventário em preparação", total: 0, translated: 0, recorded: 0, reviewed: 0, active: false },
-] as const;
+export const heroes = heroCatalog.heroes;
 
 export const getAxeLines = () => axeLines as CatalogLine[];
 export const getLine = (id: string) => axeLines.find((line) => line.id === id);
+export const getHero = (id: string) => heroes.find((hero) => hero.id === id);
+export const getHeroLines = (id: string) =>
+  id === "axe" ? (axeLines as CatalogLine[]) : [];
 
 export function categoryLabel(category: string) {
   const labels: Record<string, string> = {

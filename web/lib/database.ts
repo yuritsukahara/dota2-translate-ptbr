@@ -29,7 +29,7 @@ export async function ensureCatalogSeeded() {
       line.id,
       line.assetPath,
       line.category,
-      line.placeholderText,
+      line.ptBrText,
       line.translationStatus,
       line.audioStatus,
       line.releaseStatus,
