@@ -8,7 +8,7 @@ import type { CurrentTranslation } from "@/lib/current-translations";
 
 function translationLabel(source: CurrentTranslation["source"]) {
   if (source === "official") return "caption oficial";
-  if (source === "project") return "tradução do projeto";
+  if (source === "community") return "tradução da comunidade";
   return "tradução automática";
 }
 
@@ -58,12 +58,12 @@ export function LineBrowser({
               <small>
                 PT-BR · {translations[line.id]
                   ? translationLabel(translations[line.id].source)
-                  : "em geração"}
+                  : "sem tradução"}
               </small>
-              <strong>{translations[line.id]?.text || "Tradução ainda em geração"}</strong>
+              <strong>{translations[line.id]?.text || "Sem versão PT-BR no catálogo"}</strong>
             </span>
             <span className={`status-pill ${translations[line.id] ? "open" : ""}`}>
-              {translations[line.id] ? "incluída" : "na fila"}
+              {translations[line.id] ? "incluída" : "pendente"}
             </span>
           </article>
         ))}

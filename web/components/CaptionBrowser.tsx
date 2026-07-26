@@ -152,7 +152,7 @@ export function CaptionBrowser({
                   {currentTranslation || "Prévia ainda não criada"}
                   {line.captionPtBr && <small className="inline-source-label">OFICIAL PT-BR</small>}
                   {!line.captionPtBr && previews[line.id] && (
-                    <small className="inline-source-label">COMUNITÁRIA</small>
+                    <small className="inline-source-label">COMUNIDADE</small>
                   )}
                   {!line.captionPtBr && !previews[line.id] && automaticTranslations[line.id] && (
                     <small className="inline-source-label automatic">AUTOMÁTICA · NÃO REVISADA</small>

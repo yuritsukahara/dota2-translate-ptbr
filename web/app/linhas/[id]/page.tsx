@@ -33,7 +33,7 @@ export default async function LinePage({ params }: { params: Promise<{ id: strin
               {line.captionEn}
             </blockquote>
             <p className="eyebrow">LEGENDA PT-BR INCLUÍDA</p>
-            <blockquote className="source-caption ptbr">{translation?.text || "Tradução ainda em geração."}</blockquote>
+            <blockquote className="source-caption ptbr">{translation?.text || "Sem versão PT-BR no catálogo."}</blockquote>
           </section>
           <aside className="side-panel">
             <p className="eyebrow">METADADOS</p>
@@ -45,7 +45,7 @@ export default async function LinePage({ params }: { params: Promise<{ id: strin
               <dt>Fonte EN</dt><dd>Caption oficial do VPK</dd>
               <dt>Fonte PT-BR</dt><dd>{translation ? currentTranslationLabel(translation.source) : "Em geração"}</dd>
               <dt>Som original</dt><dd>Disponível na instalação local do Dota</dd>
-              <dt>Inclusão</dt><dd>{translation ? "Incluída no catálogo" : "Na fila do Codex"}</dd>
+              <dt>Inclusão</dt><dd>{translation ? "Incluída no catálogo" : "Sem versão PT-BR"}</dd>
             </dl>
           </aside>
         </div>

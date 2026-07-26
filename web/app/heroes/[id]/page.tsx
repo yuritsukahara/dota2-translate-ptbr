@@ -10,7 +10,7 @@ import {
   getHeroLines,
   heroes,
 } from "@/lib/catalog";
-import { getCurrentTranslations } from "@/lib/current-translations";
+import { countTranslationSources, getCurrentTranslations } from "@/lib/current-translations";
 
 export function generateStaticParams() {
   return heroes.map((hero) => ({ id: hero.id }));
@@ -27,7 +27,7 @@ export default async function HeroPage({
   const lines = getHeroLines(id);
   const translations = getCurrentTranslations(id, lines);
   const includedCount = Object.keys(translations).length;
-  const automaticCount = Object.values(translations).filter((item) => item.source === "automatic").length;
+  const sources = countTranslationSources(translations);
   const fandomResponsePage = `https://dota2.fandom.com/wiki/${encodeURIComponent(hero.name.replaceAll(" ", "_"))}/Responses`;
 
   return (
@@ -54,15 +54,16 @@ export default async function HeroPage({
           </div>
         </div>
         <div className="stats-grid hero-caption-stats">
-          <div className="stat-card"><strong>{hero.total}</strong><span>captions oficiais EN</span></div>
-          <div className="stat-card"><strong>{includedCount}</strong><span>traduções PT-BR incluídas</span></div>
-          <div className="stat-card"><strong>{automaticCount}</strong><span>traduções automáticas</span></div>
+          <div className="stat-card"><strong>{includedCount}</strong><span>captions PT-BR incluídas</span></div>
+          <div className="stat-card"><strong>{sources.official}</strong><span>oficiais do jogo</span></div>
+          <div className="stat-card"><strong>{sources.community}</strong><span>traduzidas pela comunidade</span></div>
+          <div className="stat-card"><strong>{sources.automatic}</strong><span>traduções automáticas</span></div>
         </div>
         <CastingPanel heroId={hero.id} heroName={hero.name} sampleLines={lines.slice(0, 5)} translations={translations} />
         <div className="detail-grid official-caption-note" style={{ marginBottom: 50 }}>
           <section className="detail-panel">
             <h2>Fonte das captions</h2>
-            <p className="form-note">Inglês vem de <code>subtitles_{hero.voiceDirectory}_english.txt</code>. Quando não há texto brasileiro no jogo, o catálogo inclui a tradução do projeto ou a versão automática do Codex, sempre com a origem identificada.</p>
+            <p className="form-note">Inglês vem de <code>subtitles_{hero.voiceDirectory}_english.txt</code>. Para PT-BR, usamos primeiro a caption oficial; na ausência dela, a tradução da comunidade; e, por último, a tradução automática. Tudo o que o projeto já traduziu permanece incluído com a origem identificada.</p>
           </section>
           <aside className="side-panel">
             <p className="eyebrow">SOM ORIGINAL</p>

@@ -25,7 +25,7 @@ test("catálogo lista som local e captions oficiais EN e PT-BR", async () => {
   ]);
   assert.match(page, /getHeroLines/);
   assert.match(browser, /caption oficial/);
-  assert.match(browser, /Tradução ainda em geração/);
+  assert.match(browser, /Sem versão PT-BR no catálogo/);
   assert.match(browser, /tradução automática/);
   assert.match(browser, /lines\.filter/);
   assert.match(audio, /Special:Redirect\/file/);
@@ -88,10 +88,14 @@ test("tradução atual aparece nas páginas de herói e de fala", async () => {
     readFile(new URL("../lib/catalog.ts", import.meta.url), "utf8"),
   ]);
   assert.match(heroPage, /getCurrentTranslations/);
-  assert.match(heroPage, /traduções PT-BR incluídas/);
+  assert.match(heroPage, /captions PT-BR incluídas/);
   assert.match(linePage, /LEGENDA PT-BR INCLUÍDA/);
   assert.match(linePage, /getLineContext/);
+  assert.match(resolver, /source: "official"/);
+  assert.match(resolver, /source: "community"/);
   assert.match(resolver, /source: "automatic"/);
+  assert.ok(resolver.indexOf('source: "official"') < resolver.indexOf('source: "community"'));
+  assert.ok(resolver.indexOf('source: "community"') < resolver.indexOf('source: "automatic"'));
   assert.match(catalog, /linesByHero/);
 });
 

@@ -97,6 +97,9 @@ button { color: inherit; }
 .hero-card-status { color: var(--green); font: 700 10px var(--font-mono); letter-spacing: .1em; }
 .hero-card h3 { font: 400 31px var(--font-display); text-transform: uppercase; margin: auto 0 8px; }
 .hero-card p { color: var(--muted); margin: 0 0 24px; font-size: 13px; }
+.hero-card-sources { display: grid; grid-template-columns: repeat(3,1fr); gap: 6px; margin: 0 0 18px; }
+.hero-card-sources span { padding: 7px 5px; border: 1px solid var(--line); color: var(--muted); font: 700 8px/1.25 var(--font-mono); text-align: center; text-transform: uppercase; }
+.hero-card-sources b { display: block; margin-bottom: 3px; color: var(--paper); font-size: 12px; }
 .hero-card-footer { border-top: 1px solid var(--line); padding-top: 14px; display: flex; justify-content: space-between; font: 600 11px var(--font-mono); }
 .line-copy { display: grid; gap: 5px; }
 .line-copy strong { font-size: 13px; font-weight: 600; }
@@ -145,7 +148,7 @@ textarea.field { min-height: 130px; padding: 14px; resize: vertical; }
 .form-stack label { display: grid; gap: 8px; color: var(--paper-2); font-size: 13px; }
 .form-note { color: var(--muted); font-size: 12px; line-height: 1.55; }
 .notice { border-left: 3px solid var(--gold); background: rgba(215,168,79,.07); padding: 16px; color: var(--paper-2); font-size: 13px; }
-.stats-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; margin: 34px 0; }
+.stats-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(190px,1fr)); gap: 16px; margin: 34px 0; }
 .stat-card { border: 1px solid var(--line); background: var(--panel); padding: 24px; }
 .stat-card strong { display: block; font: 400 40px var(--font-display); }
 .stat-card span { color: var(--muted); font-size: 12px; }
