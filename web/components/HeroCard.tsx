@@ -12,7 +12,7 @@ export function HeroCard({ hero }: { hero: Hero }) {
       <Image className="hero-card-image" src={hero.imageUrl} alt="" width={256} height={144} />
       <span className="hero-card-status">INVENTÁRIO OFICIAL</span>
       <h3>{hero.name}</h3>
-      <p>{translated} de {hero.officialEnglishCaptions} captions com PT-BR</p>
+      <p><strong>{translated}</strong> de {hero.officialEnglishCaptions} captions PT-BR incluídas</p>
       <div className="hero-card-sources" aria-label="Origem das traduções">
         <span><b>{sources.official}</b> oficial</span>
         <span><b>{sources.community}</b> comunidade</span>

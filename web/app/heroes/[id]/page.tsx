@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Header } from "@/components/Header";
 import { LineBrowser } from "@/components/LineBrowser";
-import { CastingPanel } from "@/components/CastingPanel";
+import { VoicePackPanel } from "@/components/VoicePackPanel";
 import {
   CURRENT_BUILD,
   getHero,
@@ -47,8 +47,7 @@ export default async function HeroPage({
               comunidade pode sugerir alternativas sem bloquear a inclusão.
             </p>
             <div className="hero-actions">
-              <Link className="button button-primary" href={`/audicoes/${hero.id}`}>Enviar audição de 5 linhas</Link>
-              <Link className="button button-ghost" href={`/captions?heroi=${hero.id}`}>Ver somente captions</Link>
+              <Link className="button button-primary" href={`/packs/${hero.id}`}>Enviar pack de voz</Link>
               <a className="button button-ghost" href={fandomResponsePage}>Responses no Fandom</a>
             </div>
           </div>
@@ -59,7 +58,7 @@ export default async function HeroPage({
           <div className="stat-card"><strong>{sources.community}</strong><span>traduzidas pela comunidade</span></div>
           <div className="stat-card"><strong>{sources.automatic}</strong><span>traduções automáticas</span></div>
         </div>
-        <CastingPanel heroId={hero.id} heroName={hero.name} sampleLines={lines.slice(0, 5)} translations={translations} />
+        <VoicePackPanel heroId={hero.id} heroName={hero.name} />
         <div className="detail-grid official-caption-note" style={{ marginBottom: 50 }}>
           <section className="detail-panel">
             <h2>Fonte das captions</h2>
@@ -70,7 +69,7 @@ export default async function HeroPage({
             <p className="form-note">O player tenta abrir o arquivo individual hospedado pelo Fandom. Quando ele não existe, permanece o caminho do asset no VPK local e o link para a página Responses.</p>
           </aside>
         </div>
-        <LineBrowser lines={lines} translations={translations} responsePage={fandomResponsePage} />
+        <LineBrowser heroId={hero.id} lines={lines} translations={translations} responsePage={fandomResponsePage} />
       </main>
     </>
   );

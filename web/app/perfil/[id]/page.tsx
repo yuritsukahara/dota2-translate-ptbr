@@ -4,7 +4,7 @@ import Link from "next/link";
 import { desc, eq } from "drizzle-orm";
 import { Header } from "@/components/Header";
 import { getDb } from "@/db";
-import { auditions, users, voicePacks } from "@/db/schema";
+import { users, voicePacks, voicePackSubmissions } from "@/db/schema";
 import { getHero } from "@/lib/catalog";
 
 export default async function ProfilePage({
@@ -16,11 +16,11 @@ export default async function ProfilePage({
   const db = getDb();
   const [user] = await db.select().from(users).where(eq(users.id, id)).limit(1);
   if (!user || user.blockedAt) notFound();
-  const userAuditions = await db
+  const submissions = await db
     .select()
-    .from(auditions)
-    .where(eq(auditions.authorId, id))
-    .orderBy(desc(auditions.createdAt));
+    .from(voicePackSubmissions)
+    .where(eq(voicePackSubmissions.authorId, id))
+    .orderBy(desc(voicePackSubmissions.createdAt));
   const packs = await db
     .select()
     .from(voicePacks)
@@ -42,7 +42,7 @@ export default async function ProfilePage({
           <div>
             <p className="eyebrow">PERFIL DA COMUNIDADE</p>
             <h1 className="page-title">{user.displayName}</h1>
-            <p>{packs.length} packs atribuídos · {userAuditions.length} audições enviadas</p>
+            <p>{packs.length} packs aprovados · {submissions.length} packs enviados</p>
           </div>
         </section>
 
@@ -69,22 +69,22 @@ export default async function ProfilePage({
 
         <section className="profile-section">
           <div className="section-heading compact">
-            <div><p className="eyebrow">AUDIÇÕES</p><h2>Prévias enviadas</h2></div>
+            <div><p className="eyebrow">ENVIOS</p><h2>Packs enviados</h2></div>
           </div>
           <div className="release-list">
-            {userAuditions.length ? userAuditions.map((audition) => {
-              const hero = getHero(audition.heroId);
+            {submissions.length ? submissions.map((submission) => {
+              const hero = getHero(submission.heroId);
               return (
-                <article className="release-card" key={audition.id}>
+                <article className="release-card" key={submission.id}>
                   <div>
-                    <p className="eyebrow">{audition.status}</p>
-                    <h2>{hero?.name || audition.heroId}</h2>
-                    <p>Audição com cinco linhas · crédito: {audition.credit}</p>
+                    <p className="eyebrow">{submission.status}</p>
+                    <h2>{hero?.name || submission.heroId}</h2>
+                    <p>Pack completo via Google Drive · crédito: {submission.credit}</p>
                   </div>
-                  <Link className="button button-ghost" href={`/heroes/${audition.heroId}`}>Ver seleção</Link>
+                  <Link className="button button-ghost" href={`/heroes/${submission.heroId}`}>Ver herói</Link>
                 </article>
               );
-            }) : <div className="empty-card"><p>Nenhuma audição enviada.</p></div>}
+            }) : <div className="empty-card"><p>Nenhum pack enviado.</p></div>}
           </div>
         </section>
       </main>

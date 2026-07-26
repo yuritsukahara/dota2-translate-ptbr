@@ -291,6 +291,28 @@ export const voicePackClips = sqliteTable(
   (table) => [primaryKey({ columns: [table.packId, table.lineId] })],
 );
 
+export const voicePackSubmissions = sqliteTable(
+  "voice_pack_submissions",
+  {
+    id: text("id").primaryKey(),
+    heroId: text("hero_id").notNull(),
+    authorId: text("author_id").notNull().references(() => users.id),
+    credit: text("credit").notNull(),
+    driveFolderUrl: text("drive_folder_url").notNull(),
+    notes: text("notes").notNull().default(""),
+    status: text("status", {
+      enum: ["pending", "review", "approved", "changes_requested", "rejected", "withdrawn"],
+    }).notNull().default("pending"),
+    decidedAt: text("decided_at"),
+    ...timestamps,
+  },
+  (table) => [
+    index("voice_pack_submissions_hero_idx").on(table.heroId),
+    index("voice_pack_submissions_author_idx").on(table.authorId),
+    index("voice_pack_submissions_status_idx").on(table.status),
+  ],
+);
+
 export const petitionSignatures = sqliteTable(
   "petition_signatures",
   {

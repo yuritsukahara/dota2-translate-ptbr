@@ -1,6 +1,6 @@
 import { desc, eq } from "drizzle-orm";
 import { getDb } from "@/db";
-import { proposals, users } from "@/db/schema";
+import { proposals, users, voicePackSubmissions } from "@/db/schema";
 import { requireUser } from "@/lib/auth";
 import { hasRequiredRole } from "@/lib/database";
 
@@ -19,7 +19,22 @@ export async function GET(request: Request) {
       .innerJoin(users, eq(proposals.authorId, users.id))
       .orderBy(desc(proposals.createdAt))
       .limit(100);
-    return Response.json({ proposals: rows });
+    const packRows = await getDb()
+      .select({
+        id: voicePackSubmissions.id,
+        heroId: voicePackSubmissions.heroId,
+        status: voicePackSubmissions.status,
+        credit: voicePackSubmissions.credit,
+        driveFolderUrl: voicePackSubmissions.driveFolderUrl,
+        notes: voicePackSubmissions.notes,
+        author: users.displayName,
+        createdAt: voicePackSubmissions.createdAt,
+      })
+      .from(voicePackSubmissions)
+      .innerJoin(users, eq(voicePackSubmissions.authorId, users.id))
+      .orderBy(desc(voicePackSubmissions.createdAt))
+      .limit(100);
+    return Response.json({ proposals: rows, voicePacks: packRows });
   } catch (error) {
     if (error instanceof Response) return error;
     return Response.json({ error: "Não foi possível carregar a fila." }, { status: 500 });

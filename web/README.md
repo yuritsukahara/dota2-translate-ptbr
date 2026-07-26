@@ -1,6 +1,6 @@
-# Portal Dota 2 Translate PT-BR
+# Dublagem Brasileira Dota 2
 
-Portal Vinext/Cloudflare Workers para catalogar as voicelines oficiais, organizar audições comunitárias e demonstrar apoio a uma dublagem oficial em português brasileiro.
+Portal Vinext/Cloudflare Workers para catalogar captions, receber packs comunitários e demonstrar apoio a uma dublagem oficial em português brasileiro.
 
 ## O que é fonte oficial
 
@@ -12,18 +12,20 @@ Portal Vinext/Cloudflare Workers para catalogar as voicelines oficiais, organiza
 
 ## Captions
 
-`/captions` é a área de consulta e tradução. O usuário escolhe o herói,
-pesquisa por texto ou ID e filtra por categoria. A prioridade visual é:
+Cada página em `/heroes` concentra consulta e tradução. O usuário pesquisa por
+texto ou ID e filtra por categoria. A prioridade visual é:
 caption oficial PT-BR, sugestão comunitária, prévia automática do Codex e,
 por fim, texto ainda sem tradução. A origem nunca é ocultada.
 
-As prévias do Codex são auxiliares e permanecem marcadas como “automática · não
-revisada” até que uma pessoa envie ou aprove uma versão comunitária. O gerador
-usa o glossário oficial de heróis e itens e mantém checkpoint local em `build/`.
+Usuários autenticados pela Steam podem abrir o modal de cada linha e sugerir
+uma alternativa. O gerador usa o glossário oficial de heróis e itens e mantém
+checkpoint local em `build/`.
 
-## Audições e packs
+## Packs de Voz
 
-Cada candidato envia cinco WAVs para o mesmo roteiro. A comunidade pode votar, comentar, curtir ou desaprovar. Depois da triagem e revisão, um vencedor assume o herói inteiro. Um pack nunca mistura linhas de intérpretes diferentes.
+Cada intérprete envia um pack completo por meio de uma pasta própria do Google
+Drive compartilhada como leitora. O portal guarda somente o link, crédito,
+autoria e estado da revisão. Um pack nunca mistura linhas de intérpretes diferentes.
 
 Formato: WAV PCM mono, 16-bit, 24/48 kHz, até 20 segundos e 10 MB por arquivo. O autor declara consentimento, crédito e licença CC BY 4.0.
 

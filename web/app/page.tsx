@@ -6,7 +6,7 @@ import { getCurrentTranslations } from "@/lib/current-translations";
 
 export const metadata = {
   title: "Dota 2 inteiro em português brasileiro",
-  description: "Portal comunitário para traduzir, gravar, revisar e instalar todas as vozes base do Dota 2 em português brasileiro.",
+  description: "Portal comunitário para traduzir captions e reunir packs de voz de Dota 2 em português brasileiro.",
 };
 
 export default function Home() {
@@ -27,7 +27,7 @@ export default function Home() {
         <section className="hero-shell">
           <div className="hero-grid">
             <div className="hero-copy">
-              <p className="eyebrow">DOTA 2 TRANSLATE PT-BR · BUILD {CURRENT_BUILD}</p>
+              <p className="eyebrow">DUBLAGEM BRASILEIRA DOTA 2 · BUILD {CURRENT_BUILD}</p>
               <h1>Dota inteiro.<br /><span>Em português.</span></h1>
               <p className="hero-lead">
                 Um catálogo aberto para traduzir as vozes de todos os heróis e do
@@ -35,7 +35,7 @@ export default function Home() {
               </p>
               <div className="hero-actions">
                 <Link className="button button-primary" href="/heroes">Explorar os 127 heróis</Link>
-                <Link className="button button-ghost" href="/captions">Ver traduções</Link>
+                <Link className="button button-ghost" href="/heroes">Ver traduções</Link>
                 <Link className="button button-ghost" href="/peticao">Assinar a petição</Link>
               </div>
               <dl className="hero-metrics">
@@ -58,7 +58,7 @@ export default function Home() {
                 <li><span>02</span>PT-BR incluído conforme é gerado</li>
                 <li><span>03</span>Alternativas abertas à comunidade</li>
               </ol>
-              <Link className="text-link" href="/captions?heroi=announcer">Ver o narrador padrão <span>→</span></Link>
+              <Link className="text-link" href="/heroes/announcer">Ver o narrador padrão <span>→</span></Link>
             </div>
           </div>
         </section>
@@ -89,14 +89,6 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="section release-banner">
-          <div>
-            <p className="eyebrow">RELEASE v0.1.0</p>
-            <h2>O laboratório já funciona.</h2>
-            <p>A camada brasileira já foi validada tecnicamente. O mesmo processo agora percorre todos os heróis e o narrador padrão.</p>
-          </div>
-          <Link className="button button-primary" href="/releases">Baixar e instalar</Link>
-        </section>
       </main>
     </>
   );

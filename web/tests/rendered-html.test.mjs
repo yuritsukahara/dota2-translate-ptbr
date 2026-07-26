@@ -9,12 +9,16 @@ test("portal público está em português e usa identidade Steam", async () => {
     readFile(new URL("../components/Header.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/globals.css", import.meta.url), "utf8"),
   ]);
-  assert.match(page, /DOTA 2 TRANSLATE PT-BR/);
+  assert.match(page, /DUBLAGEM BRASILEIRA DOTA 2/);
   assert.match(page, /Dota inteiro/);
   assert.match(layout, /<html lang="pt-BR">/);
   assert.match(header, /auth\/steam\/start/);
   assert.doesNotMatch(header, /Discord/);
-  assert.match(css, /--gold:\s*#d7a84f/i);
+  assert.match(header, /dota2_logo_symbol\.png/);
+  assert.match(layout, /Dublagem Brasileira Dota 2/);
+  assert.match(css, /--green:\s*#167447/i);
+  assert.match(css, /--blue:\s*#1769aa/i);
+  assert.match(css, /linear-gradient\(180deg,#ffffff,#f7faf8\)/i);
 });
 
 test("catálogo lista som local e captions oficiais EN e PT-BR", async () => {
@@ -32,31 +36,34 @@ test("catálogo lista som local e captions oficiais EN e PT-BR", async () => {
   assert.match(audio, /Fonte: Dota 2 Wiki\/Fandom/);
 });
 
-test("página de captions separa inglês oficial e tradução comunitária", async () => {
-  const [page, browser, api, terminology] = await Promise.all([
-    readFile(new URL("../app/captions/page.tsx", import.meta.url), "utf8"),
-    readFile(new URL("../components/CaptionBrowser.tsx", import.meta.url), "utf8"),
+test("sugestões de captions ficam nas páginas de herói e exigem Steam", async () => {
+  const [page, browser, api, terminology, legacy] = await Promise.all([
+    readFile(new URL("../app/heroes/[id]/page.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../components/LineBrowser.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/api/caption-suggestions/route.ts", import.meta.url), "utf8"),
     readFile(new URL("../data/terminology.json", import.meta.url), "utf8"),
+    readFile(new URL("../app/captions/page.tsx", import.meta.url), "utf8"),
   ]);
-  assert.match(page, /Tradução das captions/);
-  assert.match(page, /Escolha o herói/);
-  assert.match(browser, /Inglês oficial/);
-  assert.match(browser, /Português brasileiro/);
-  assert.match(browser, /caption-inline-editor/);
-  assert.match(browser, /Sugestões e votos/);
+  assert.match(page, /LineBrowser/);
+  assert.match(browser, /Sugerir alteração/);
+  assert.match(browser, /suggestion-modal/);
+  assert.match(browser, /api\/auth\/me/);
+  assert.match(browser, /Entrar para sugerir/);
   assert.match(api, /validateTerminology/);
   assert.match(api, /assertSameOrigin/);
+  assert.match(legacy, /redirect/);
+  assert.doesNotMatch(legacy, /CaptionBrowser/);
   const glossary = JSON.parse(terminology);
   assert.equal(glossary.heroes.length, 127);
   assert.ok(glossary.items.length > 500);
 });
 
-test("narrador padrão possui catálogo oficial brasileiro e todos os heróis aceitam prévias", async () => {
-  const [announcer, catalog, preview] = await Promise.all([
+test("narrador padrão possui página própria e catálogo oficial brasileiro", async () => {
+  const [announcer, catalog, preview, page] = await Promise.all([
     readFile(new URL("../data/announcer-lines.json", import.meta.url), "utf8"),
     readFile(new URL("../lib/catalog.ts", import.meta.url), "utf8"),
     readFile(new URL("../lib/community-preview.ts", import.meta.url), "utf8"),
+    readFile(new URL("../app/heroes/announcer/page.tsx", import.meta.url), "utf8"),
   ]);
   const data = JSON.parse(announcer);
   assert.ok(data.lines.length > 2_000);
@@ -65,18 +72,20 @@ test("narrador padrão possui catálogo oficial brasileiro e todos os heróis ac
   assert.match(catalog, /captionSources/);
   assert.match(preview, /translationMemory/);
   assert.match(preview, /getHeroLines\(heroId\)/);
+  assert.match(page, /LineBrowser/);
+  assert.match(page, /geradas automaticamente/);
 });
 
 test("traduções automáticas são separadas de captions oficiais e sugestões", async () => {
-  const [page, browser, automatic] = await Promise.all([
-    readFile(new URL("../app/captions/page.tsx", import.meta.url), "utf8"),
-    readFile(new URL("../components/CaptionBrowser.tsx", import.meta.url), "utf8"),
+  const [resolver, browser, automatic] = await Promise.all([
+    readFile(new URL("../lib/current-translations.ts", import.meta.url), "utf8"),
+    readFile(new URL("../components/LineBrowser.tsx", import.meta.url), "utf8"),
     readFile(new URL("../lib/automatic-translations.ts", import.meta.url), "utf8"),
   ]);
-  assert.match(page, /Codex são incluídas diretamente/);
-  assert.match(page, /Não há votação para confirmar a inclusão/);
-  assert.match(browser, /AUTOMÁTICA · NÃO REVISADA/);
-  assert.match(browser, /inline-source-label automatic/);
+  assert.match(resolver, /source: "official"/);
+  assert.match(resolver, /source: "community"/);
+  assert.match(resolver, /source: "automatic"/);
+  assert.match(browser, /tradução automática/);
   assert.match(automatic, /automatic-translations\.json/);
 });
 
@@ -100,7 +109,13 @@ test("tradução atual aparece nas páginas de herói e de fala", async () => {
 });
 
 test("inventário oficial cobre 127 heróis em ordem alfabética", async () => {
-  const catalog = JSON.parse(await readFile(new URL("../data/heroes.json", import.meta.url), "utf8"));
+  const [catalogText, page, search, card] = await Promise.all([
+    readFile(new URL("../data/heroes.json", import.meta.url), "utf8"),
+    readFile(new URL("../app/heroes/page.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../components/HeroCatalog.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../components/HeroCard.tsx", import.meta.url), "utf8"),
+  ]);
+  const catalog = JSON.parse(catalogText);
   assert.equal(catalog.heroes.length, 127);
   assert.equal(new Set(catalog.heroes.map((hero) => hero.id)).size, 127);
   const names = catalog.heroes.map((hero) => hero.name);
@@ -109,6 +124,10 @@ test("inventário oficial cobre 127 heróis em ordem alfabética", async () => {
   assert.equal(axe.total, 284);
   assert.equal(axe.officialEnglishCaptions, 284);
   assert.equal(axe.officialBrazilianCaptions, 0);
+  assert.match(page, /captions geradas automaticamente/);
+  assert.match(search, /Buscar herói pelo nome/);
+  assert.match(card, /captions PT-BR incluídas/);
+  assert.match(card, /sources\.automatic/);
 });
 
 test("inventário de voicelines mantém apenas referências locais ao áudio", async () => {
@@ -123,14 +142,25 @@ test("inventário de voicelines mantém apenas referências locais ao áudio", a
   }
 });
 
-test("audição exige cinco linhas e pack indivisível", async () => {
-  const [form, schema] = await Promise.all([
-    readFile(new URL("../components/AuditionForm.tsx", import.meta.url), "utf8"),
+test("packs de voz usam pasta do Google Drive e diretrizes obrigatórias", async () => {
+  const [form, schema, api, drive, page, header] = await Promise.all([
+    readFile(new URL("../components/VoicePackForm.tsx", import.meta.url), "utf8"),
     readFile(new URL("../db/schema.ts", import.meta.url), "utf8"),
+    readFile(new URL("../app/api/voice-packs/route.ts", import.meta.url), "utf8"),
+    readFile(new URL("../lib/google-drive.ts", import.meta.url), "utf8"),
+    readFile(new URL("../app/enviar/page.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../components/Header.tsx", import.meta.url), "utf8"),
   ]);
-  assert.match(form, /lines\.length !== 5/);
-  assert.match(schema, /voice_packs/);
-  assert.match(schema, /heroId: text\("hero_id"\)\.notNull\(\)\.unique\(\)/);
+  assert.match(form, /driveFolderUrl/);
+  assert.match(form, /followedGuidelines/);
+  assert.match(schema, /voice_pack_submissions/);
+  assert.match(api, /normalizeGoogleDriveFolderUrl/);
+  assert.match(api, /assertSameOrigin/);
+  assert.match(drive, /drive\.google\.com/);
+  assert.match(page, /Uma pasta\. Um herói\. Uma identidade\./);
+  assert.match(header, /Packs de Voz/);
+  assert.doesNotMatch(header, /Audições/);
+  assert.doesNotMatch(header, /Instalar/);
 });
 
 test("petição possui assinatura única por usuário", async () => {
@@ -147,8 +177,11 @@ test("petição possui assinatura única por usuário", async () => {
   assert.match(home, /Dota inteiro/);
   assert.match(home, /Em português/);
   assert.doesNotMatch(home, /\baxe\b/i);
-  assert.ok(header.indexOf("Heróis") < header.indexOf("Traduções"));
-  assert.ok(header.indexOf("Traduções") < header.indexOf("Petição"));
+  assert.ok(header.indexOf("Heróis") < header.indexOf("Narrador"));
+  assert.ok(header.indexOf("Narrador") < header.indexOf("Packs de Voz"));
+  assert.ok(header.indexOf("Packs de Voz") < header.indexOf("Petição"));
+  assert.doesNotMatch(header, />Traduções</);
+  assert.doesNotMatch(header, /Moderação/);
   assert.match(schema, /petition_signatures/);
   assert.match(schema, /userId: text\("user_id"\)\.notNull\(\)\.unique\(\)/);
   assert.match(api, /assertSameOrigin/);

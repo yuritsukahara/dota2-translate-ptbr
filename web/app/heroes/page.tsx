@@ -1,13 +1,18 @@
 import { Header } from "@/components/Header";
 import { HeroCard } from "@/components/HeroCard";
+import { HeroCatalog } from "@/components/HeroCatalog";
 import { CURRENT_BUILD, getHeroLines, heroes } from "@/lib/catalog";
-import { getCurrentTranslations } from "@/lib/current-translations";
+import { countTranslationSources, getCurrentTranslations } from "@/lib/current-translations";
 
 export const metadata = { title: "Heróis" };
 
 export default function HeroesPage() {
   const translatedTotal = heroes.reduce(
     (sum, hero) => sum + Object.keys(getCurrentTranslations(hero.id, getHeroLines(hero.id))).length,
+    0,
+  );
+  const automaticTotal = heroes.reduce(
+    (sum, hero) => sum + countTranslationSources(getCurrentTranslations(hero.id, getHeroLines(hero.id))).automatic,
     0,
   );
   return (
@@ -22,8 +27,11 @@ export default function HeroesPage() {
           <div className="stat-card"><strong>{heroes.length}</strong><span>heróis no grid</span></div>
           <div className="stat-card"><strong>{heroes.reduce((sum, hero) => sum + hero.total, 0).toLocaleString("pt-BR")}</strong><span>voicelines com caption EN</span></div>
           <div className="stat-card"><strong>{translatedTotal.toLocaleString("pt-BR")}</strong><span>traduções PT-BR incluídas</span></div>
+          <div className="stat-card"><strong>{automaticTotal.toLocaleString("pt-BR")}</strong><span>captions geradas automaticamente</span></div>
         </div>
-        <div className="hero-card-grid">{heroes.map((hero) => <HeroCard key={hero.id} hero={hero} />)}</div>
+        <HeroCatalog entries={heroes.map(({ id, name }) => ({ id, name }))}>
+          {heroes.map((hero) => <HeroCard key={hero.id} hero={hero} />)}
+        </HeroCatalog>
       </main>
     </>
   );
