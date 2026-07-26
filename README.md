@@ -58,6 +58,38 @@ docker compose up --build
 
 Portal: `http://localhost:3000`
 
+## Catálogo MP3 local
+
+As voicelines `.vsnd_c` do Dota contêm um fluxo MP3 original. O gerador remove
+somente o invólucro Source 2, sem recomprimir, e cria um HTML local com busca,
+filtro por herói, players e captions lado a lado:
+
+```powershell
+# Apenas Axe
+npm run audio:catalog -- --hero axe
+
+# Todos os heróis catalogados
+npm run audio:catalog -- --all
+
+# Apenas estimar quantidade e espaço
+npm run audio:catalog -- --all --dry-run
+
+# Recriar somente o HTML, sem extrair novamente
+npm run audio:catalog -- --index-only
+```
+
+Abra `build/local-audio/index.html`. A pasta `build/` é ignorada pelo Git e não
+entra no site público.
+
+Para usar players com carregamento e navegação mais rápidos:
+
+```powershell
+npm run audio:serve
+```
+
+Depois abra `http://127.0.0.1:4173`. O servidor aceita conexões somente desta
+máquina.
+
 ## Estrutura
 
 ```text

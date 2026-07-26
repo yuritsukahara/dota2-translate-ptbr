@@ -79,9 +79,13 @@ export function readVpkEntry(vpkPath, entryPath) {
   if (!entry) {
     throw new Error(`Entrada não encontrada no VPK: ${entryPath}`);
   }
+  return readVpkEntryRecord(vpkPath, entry);
+}
+
+export function readVpkEntryRecord(vpkPath, entry) {
   if (entry.preloadBytes) {
     throw new Error(
-      `Entrada com preload ainda não suportada pelo extrator: ${entryPath}`
+      `Entrada com preload ainda não suportada pelo extrator: ${entry.path}`
     );
   }
 
@@ -103,7 +107,7 @@ export function readVpkEntry(vpkPath, entryPath) {
       entry.entryOffset
     );
     if (bytesRead !== entry.entryLength) {
-      throw new Error(`Entrada truncada ao ler ${entryPath}.`);
+      throw new Error(`Entrada truncada ao ler ${entry.path}.`);
     }
     return buffer;
   } finally {
