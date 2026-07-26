@@ -20,10 +20,12 @@ export function CaptionBrowser({
   heroId,
   lines,
   previews,
+  automaticTranslations,
 }: {
   heroId: string;
   lines: OfficialVoiceLine[];
   previews: Record<string, string>;
+  automaticTranslations: Record<string, string>;
 }) {
   const [query, setQuery] = useState("");
   const [category, setCategory] = useState("all");
@@ -41,8 +43,19 @@ export function CaptionBrowser({
     (left, right) => (right.support - right.oppose) - (left.support - left.oppose),
   )[0];
   const selectedTranslation = selected
-    ? selected.captionPtBr || previews[selected.id] || leadingSuggestion?.text || ""
+    ? selected.captionPtBr ||
+      previews[selected.id] ||
+      leadingSuggestion?.text ||
+      automaticTranslations[selected.id] ||
+      ""
     : "";
+  const selectedSource = selected?.captionPtBr
+    ? "official"
+    : (selected && previews[selected.id]) || leadingSuggestion?.text
+      ? "community"
+      : selected && automaticTranslations[selected.id]
+        ? "automatic"
+        : "missing";
   const relevantTerms = selected ? findRelevantTerms(selected.captionEn) : [];
   const localWarnings = selected ? validateTerminology(selected.captionEn, suggestion) : [];
   const filtered = useMemo(() => {
@@ -53,9 +66,10 @@ export function CaptionBrowser({
         line.id.includes(normalized) ||
         line.captionEn.toLowerCase().includes(normalized) ||
         (line.captionPtBr || "").toLowerCase().includes(normalized) ||
-        (previews[line.id] || "").toLowerCase().includes(normalized)),
+        (previews[line.id] || "").toLowerCase().includes(normalized) ||
+        (automaticTranslations[line.id] || "").toLowerCase().includes(normalized)),
     );
-  }, [category, lines, previews, query]);
+  }, [automaticTranslations, category, lines, previews, query]);
 
   async function loadSuggestions(lineId: string) {
     setLoading(true);
@@ -118,8 +132,18 @@ export function CaptionBrowser({
               <p className="eyebrow">LINHA SELECIONADA · {categoryLabel(selected.category)}</p>
               <h2 id="translation-title">{selected.id}</h2>
             </div>
-              <span className={selected.captionPtBr ? "official-badge" : "community-badge"}>
-                {selected.captionPtBr ? "PT-BR oficial do jogo" : "PT-BR comunitário · não oficial"}
+              <span className={
+                selectedSource === "official"
+                  ? "official-badge"
+                  : selectedSource === "automatic"
+                    ? "automatic-badge"
+                    : "community-badge"
+              }>
+                {selectedSource === "official"
+                  ? "PT-BR oficial do jogo"
+                  : selectedSource === "automatic"
+                    ? "Tradução automática · não revisada"
+                    : "PT-BR comunitário · não oficial"}
               </span>
           </div>
 
@@ -128,8 +152,20 @@ export function CaptionBrowser({
               <small>CAPTION OFICIAL EM INGLÊS</small>
               <p>{selected.captionEn}</p>
             </article>
-            <article className={selected.captionPtBr ? "official-caption-card" : "preview-card"}>
-              <small>{selected.captionPtBr ? "CAPTION OFICIAL PT-BR" : "PRÉVIA COMUNITÁRIA PT-BR"}</small>
+            <article className={
+              selectedSource === "official"
+                ? "official-caption-card"
+                : selectedSource === "automatic"
+                  ? "automatic-caption-card"
+                  : "preview-card"
+            }>
+              <small>
+                {selectedSource === "official"
+                  ? "CAPTION OFICIAL PT-BR"
+                  : selectedSource === "automatic"
+                    ? "TRADUÇÃO AUTOMÁTICA · NÃO REVISADA"
+                    : "PRÉVIA COMUNITÁRIA PT-BR"}
+              </small>
               <p>{selectedTranslation || "Ainda não há prévia para esta linha."}</p>
             </article>
           </div>
@@ -243,9 +279,12 @@ export function CaptionBrowser({
               <small>{categoryLabel(line.category)}</small>
             </div>
             <p>{line.captionEn}</p>
-            <p className={(line.captionPtBr || previews[line.id]) ? "caption-available" : "caption-missing"}>
-              {line.captionPtBr || previews[line.id] || "Prévia ainda não criada"}
+            <p className={(line.captionPtBr || previews[line.id] || automaticTranslations[line.id]) ? "caption-available" : "caption-missing"}>
+              {line.captionPtBr || previews[line.id] || automaticTranslations[line.id] || "Prévia ainda não criada"}
               {line.captionPtBr && <small className="inline-source-label">OFICIAL PT-BR</small>}
+              {!line.captionPtBr && !previews[line.id] && automaticTranslations[line.id] && (
+                <small className="inline-source-label automatic">AUTOMÁTICA · NÃO REVISADA</small>
+              )}
             </p>
             <button className="caption-select" type="button" onClick={() => {
               setSelectedId(line.id);

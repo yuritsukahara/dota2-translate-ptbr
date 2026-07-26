@@ -9,6 +9,10 @@ import {
   getHeroLines,
 } from "@/lib/catalog";
 import { getCommunityPreviews } from "@/lib/community-preview";
+import {
+  automaticTranslationMetadata,
+  getAutomaticTranslations,
+} from "@/lib/automatic-translations";
 
 export const metadata = { title: "Tradução comunitária das captions" };
 
@@ -20,6 +24,11 @@ export default async function CaptionsPage({
   const requestedHero = (await searchParams).heroi || "axe";
   const hero = getCaptionSource(requestedHero) || getCaptionSource("axe")!;
   const lines = getHeroLines(hero.id);
+  const automaticTranslations = getAutomaticTranslations(hero.id);
+  const automaticPercent = Math.floor(
+    (automaticTranslationMetadata.translatedOccurrences
+      / automaticTranslationMetadata.totalMissingOccurrences) * 100,
+  );
 
   return (
     <>
@@ -32,8 +41,8 @@ export default async function CaptionsPage({
           </div>
           <p>
             Compare a caption oficial em inglês, veja uma prévia PT-BR e proponha
-            versões melhores. Toda tradução brasileira desta área é identificada
-            como comunitária e não oficial.
+            versões melhores. A interface identifica separadamente o texto oficial,
+            comunitário e automático.
           </p>
         </div>
 
@@ -53,6 +62,12 @@ export default async function CaptionsPage({
             <strong>{hero.name}</strong>
             <span>{lines.length} captions inglesas</span>
             <span>{hero.officialBrazilianCaptions} captions PT-BR</span>
+            <span>{Object.keys(automaticTranslations).length} traduções automáticas</span>
+            <span>
+              Codex: {automaticTranslationMetadata.translatedOccurrences.toLocaleString("pt-BR")}
+              /{automaticTranslationMetadata.totalMissingOccurrences.toLocaleString("pt-BR")}
+              {" "}linhas ({automaticPercent}%)
+            </span>
             <small>Snapshot de {CURRENT_BUILD_DATE}</small>
           </div>
         </section>
@@ -60,12 +75,18 @@ export default async function CaptionsPage({
         <div className="notice caption-policy">
           O narrador padrão usa PT-BR oficial quando o arquivo brasileiro possui o token.
           As demais prévias são um ponto de partida para revisão, não texto oficial da Valve.
+          Traduções geradas pelo Codex aparecem sempre como automáticas e não revisadas.
           Sugestões que mencionam heróis ou itens precisam manter o nome publicado
           nos arquivos oficiais PT-BR do Dota.
           {hero.kind === "hero" && <Link href={`/heroes/${hero.id}`}> Ver página completa de {hero.name} →</Link>}
         </div>
 
-        <CaptionBrowser heroId={hero.id} lines={lines} previews={getCommunityPreviews(hero.id)} />
+        <CaptionBrowser
+          heroId={hero.id}
+          lines={lines}
+          previews={getCommunityPreviews(hero.id)}
+          automaticTranslations={automaticTranslations}
+        />
       </main>
     </>
   );

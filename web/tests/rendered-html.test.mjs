@@ -65,6 +65,18 @@ test("narrador padrão possui catálogo oficial brasileiro e todos os heróis ac
   assert.match(preview, /getHeroLines\(heroId\)/);
 });
 
+test("traduções automáticas são separadas de captions oficiais e sugestões", async () => {
+  const [page, browser, automatic] = await Promise.all([
+    readFile(new URL("../app/captions/page.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../components/CaptionBrowser.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../lib/automatic-translations.ts", import.meta.url), "utf8"),
+  ]);
+  assert.match(page, /geradas pelo Codex/);
+  assert.match(browser, /TRADUÇÃO AUTOMÁTICA · NÃO REVISADA/);
+  assert.match(browser, /automatic-caption-card/);
+  assert.match(automatic, /automatic-translations\.json/);
+});
+
 test("inventário oficial cobre 127 heróis em ordem alfabética", async () => {
   const catalog = JSON.parse(await readFile(new URL("../data/heroes.json", import.meta.url), "utf8"));
   assert.equal(catalog.heroes.length, 127);

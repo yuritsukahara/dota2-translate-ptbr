@@ -285,10 +285,12 @@ textarea.field { min-height: 130px; padding: 14px; resize: vertical; }
 .translation-workspace-head h2 { margin: 0; font: 400 clamp(27px,4vw,42px) var(--font-display); overflow-wrap: anywhere; }
 .community-badge { border: 1px solid var(--gold); color: var(--gold); padding: 8px 10px; font: 700 9px var(--font-mono); text-transform: uppercase; }
 .official-badge { border: 1px solid var(--green); color: #a9c68f; padding: 8px 10px; font: 700 9px var(--font-mono); text-transform: uppercase; }
+.automatic-badge { border: 1px solid var(--rust); color: #f0a68f; padding: 8px 10px; font: 700 9px var(--font-mono); text-transform: uppercase; }
 .translation-columns { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 28px 0 18px; }
 .translation-columns article { padding: 22px; border: 1px solid var(--line); background: rgba(11,10,9,.45); }
 .translation-columns .preview-card { border-color: rgba(215,168,79,.38); }
 .translation-columns .official-caption-card { border-color: rgba(118,148,91,.65); background: rgba(118,148,91,.08); }
+.translation-columns .automatic-caption-card { border-color: rgba(166,74,47,.7); background: rgba(166,74,47,.1); }
 .translation-columns small, .terminology-guard > strong, .suggestion-form > label { color: var(--muted); font: 700 9px var(--font-mono); letter-spacing: .1em; }
 .translation-columns p { margin: 14px 0 0; font-size: 20px; line-height: 1.45; }
 .terminology-guard { padding: 16px 18px; border-left: 3px solid var(--gold); background: rgba(215,168,79,.07); }
@@ -311,6 +313,7 @@ textarea.field { min-height: 130px; padding: 14px; resize: vertical; }
 .caption-suggestion button { background: transparent; border: 1px solid var(--line); color: var(--paper-2); padding: 6px 9px; cursor: pointer; margin-left: 6px; }
 .caption-suggestion button:hover { border-color: var(--gold); color: var(--gold); }
 .inline-source-label { display: block; width: fit-content; margin-top: 8px; color: #a9c68f !important; font: 700 8px var(--font-mono); letter-spacing: .08em; }
+.inline-source-label.automatic { color: #f0a68f !important; }
 
 @media (max-width: 900px) {
   .main-nav { display: none; }

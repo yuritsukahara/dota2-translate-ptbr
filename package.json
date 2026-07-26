@@ -9,6 +9,7 @@
     "sync:official-voices": "node scripts/sync-official-voice-catalog.mjs",
     "audio:catalog": "node scripts/build-local-mp3-catalog.mjs",
     "audio:serve": "node scripts/serve-local-audio-catalog.mjs",
+    "translations:codex": "node scripts/generate-automatic-translations-codex.mjs",
     "validate": "node scripts/validate.mjs",
     "web:seed": "node scripts/export-web-seed.mjs",
     "web:dev": "npm --prefix web run dev",

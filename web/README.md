@@ -12,9 +12,14 @@ Portal Vinext/Cloudflare Workers para catalogar as voicelines oficiais, organiza
 
 ## Captions
 
-`/captions` é uma área separada, sem votação ou envio, para consultar somente os
-textos oficiais em inglês e português brasileiro. O usuário escolhe o herói,
-pesquisa por texto ou ID e filtra por categoria.
+`/captions` é a área de consulta e tradução. O usuário escolhe o herói,
+pesquisa por texto ou ID e filtra por categoria. A prioridade visual é:
+caption oficial PT-BR, sugestão comunitária, prévia automática do Codex e,
+por fim, texto ainda sem tradução. A origem nunca é ocultada.
+
+As prévias do Codex são auxiliares e permanecem marcadas como “automática · não
+revisada” até que uma pessoa envie ou aprove uma versão comunitária. O gerador
+usa o glossário oficial de heróis e itens e mantém checkpoint local em `build/`.
 
 ## Audições e packs
 

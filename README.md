@@ -48,6 +48,21 @@ sendo o cliente instalado.
 A rota `/captions` é dedicada somente às captions oficiais, com seleção de
 herói, busca e filtros separados do fluxo de audições.
 
+## Prévia automática pelo Codex
+
+As captions inglesas sem equivalente oficial PT-BR podem receber uma prévia
+gerada pelo Codex autenticado com a assinatura do ChatGPT:
+
+```powershell
+npm run translations:codex
+```
+
+O processo usa checkpoint em `build/`, pode ser retomado sem refazer os lotes
+concluídos e consulta o glossário extraído dos arquivos oficiais para preservar
+nomes de heróis e itens. Na interface, esse conteúdo aparece sempre como
+**tradução automática · não revisada**. Ele não é apresentado como texto da
+Valve nem substitui sugestões, votos ou revisão humana da comunidade.
+
 ## Executar
 
 ```powershell
