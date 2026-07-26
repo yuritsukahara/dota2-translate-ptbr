@@ -27,7 +27,8 @@ for (const manifest of manifests) {
   const objects = rows.filter((row) => row.some(Boolean)).map((row) => Object.fromEntries(headers.map((key, i) => [key, row[i] || ""])));
   const ids = new Set();
   for (const line of objects) {
-    if (!line.id || !line.asset_path || !line.pt_br || !line.status) {
+    const needsTranslation = !["excluded_nonverbal", "excluded_no_official_caption"].includes(line.voice_scope);
+    if (!line.id || !line.asset_path || (needsTranslation && !line.pt_br) || !line.status) {
       console.error(`${manifest}: linha incompleta: ${line.id || "(sem id)"}`);
       failures += 1;
     }

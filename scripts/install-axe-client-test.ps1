@@ -14,7 +14,7 @@ $DotaRoot = [System.IO.Path]::GetFullPath($DotaRoot)
 $gameRoot = [System.IO.Path]::GetFullPath((Join-Path $DotaRoot "game"))
 $target = [System.IO.Path]::GetFullPath((Join-Path $gameRoot "dota_brazilian"))
 $compiledRoot = Join-Path $gameRoot "dota_addons\$AddonName\sounds\vo\axe"
-$samplePath = Join-Path $repoRoot "data\heroes\axe\sample-ptbr.json"
+$spokenPath = Join-Path $repoRoot "data\heroes\axe\spoken-ptbr.json"
 $stateRoot = Join-Path $repoRoot "build\client-test"
 $backupTarget = Join-Path $stateRoot "previous-dota_brazilian"
 $bootPath = Join-Path $gameRoot "dota\cfg\boot.vcfg"
@@ -26,7 +26,7 @@ if ($target -ne (Join-Path $gameRoot "dota_brazilian")) {
 if (Get-Process -Name dota2 -ErrorAction SilentlyContinue) {
     throw "Feche o Dota 2 antes de instalar o teste."
 }
-foreach ($required in @($compiledRoot, $samplePath, $bootPath)) {
+foreach ($required in @($compiledRoot, $spokenPath, $bootPath)) {
     if (-not (Test-Path -LiteralPath $required)) {
         throw "Caminho necessário não encontrado: $required"
     }
@@ -70,9 +70,9 @@ try {
         [System.Text.UTF8Encoding]::new($false)
     )
 
-    $sampleIds = @((Get-Content -LiteralPath $samplePath -Raw | ConvertFrom-Json).PSObject.Properties.Name)
+    $spokenIds = @((Get-Content -LiteralPath $spokenPath -Raw | ConvertFrom-Json).PSObject.Properties.Name)
     $copied = 0
-    foreach ($id in $sampleIds) {
+    foreach ($id in $spokenIds) {
         $source = Join-Path $compiledRoot "$id.vsnd_c"
         if (-not (Test-Path -LiteralPath $source)) {
             throw "Áudio compilado ausente: $source"

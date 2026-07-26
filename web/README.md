@@ -55,7 +55,7 @@ O snapshot em `data/axe-lines.json` é exportado do CSV revisável do repositór
 npm run web:seed
 ```
 
-Ele contém 285 slots base do Axe, 284 legendas oficiais em inglês reconciliadas e um slot marcado como sem legenda oficial. O portal não hospeda áudio original da Valve.
+Ele contém 285 slots base do Axe: 243 falas verbais com legenda oficial e rascunho PT-BR, 41 vocalizações não verbais excluídas e um slot sem legenda oficial. O portal não hospeda áudio original da Valve.
 
 ## Verificação
 

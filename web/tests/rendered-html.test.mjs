@@ -40,6 +40,10 @@ test("seed possui 285 ids únicos e caminhos seguros", async () => {
     }
     assert.equal(line.releaseStatus, "missing");
   }
+  assert.equal(lines.filter((line) => line.voiceScope === "spoken").length, 243);
+  assert.equal(lines.filter((line) => line.voiceScope === "excluded_nonverbal").length, 41);
+  assert.equal(lines.filter((line) => line.voiceScope === "excluded_no_official_caption").length, 1);
+  assert.equal(lines.filter((line) => line.voiceScope === "spoken" && !line.ptBrText).length, 0);
 });
 
 test("grid usa os 127 heróis e imagens sincronizadas via OpenDota", async () => {
@@ -49,7 +53,9 @@ test("grid usa os 127 heróis e imagens sincronizadas via OpenDota", async () =>
   assert.equal(catalog.heroes.length, 127);
   assert.equal(new Set(catalog.heroes.map((hero) => hero.id)).size, 127);
   const axe = catalog.heroes.find((hero) => hero.id === "axe");
-  assert.equal(axe.total, 285);
+  assert.equal(axe.total, 243);
+  assert.equal(axe.assetTotal, 285);
+  assert.equal(axe.drafted, 243);
   assert.match(axe.imageUrl, /^https:\/\/cdn\.cloudflare\.steamstatic\.com\//);
 });
 

@@ -2,7 +2,8 @@
 param(
     [string]$DotaRoot = $env:DOTA2_ROOT,
     [string]$AddonName = "dota2_translate_ptbr",
-    [switch]$SkipCompile
+    [switch]$SkipCompile,
+    [switch]$CleanAudio
 )
 
 $ErrorActionPreference = "Stop"
@@ -31,6 +32,23 @@ if (-not $SkipCompile -and -not (Test-Path -LiteralPath $compiler)) {
 }
 
 New-Item -ItemType Directory -Force -Path $contentTarget, $gameTarget | Out-Null
+if ($CleanAudio) {
+    foreach ($audioTarget in @(
+        (Join-Path $contentTarget "sounds\vo\axe"),
+        (Join-Path $gameTarget "sounds\vo\axe")
+    )) {
+        $resolvedAudioTarget = [System.IO.Path]::GetFullPath($audioTarget)
+        $resolvedAddonRoot = [System.IO.Path]::GetFullPath(
+            $(if ($resolvedAudioTarget.StartsWith($contentTarget)) { $contentTarget } else { $gameTarget })
+        )
+        if (-not $resolvedAudioTarget.StartsWith($resolvedAddonRoot + [System.IO.Path]::DirectorySeparatorChar)) {
+            throw "Recusa ao limpar caminho fora do addon: $resolvedAudioTarget"
+        }
+        if (Test-Path -LiteralPath $resolvedAudioTarget) {
+            Remove-Item -LiteralPath $resolvedAudioTarget -Recurse -Force
+        }
+    }
+}
 Copy-Item -Path (Join-Path $sourceAudio "*") -Destination $contentTarget -Recurse -Force
 Copy-Item -Path (Join-Path $sourceGame "*") -Destination $gameTarget -Recurse -Force
 New-Item -ItemType Directory -Force -Path (Join-Path $contentTarget "maps") | Out-Null

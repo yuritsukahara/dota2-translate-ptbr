@@ -37,6 +37,8 @@ export default async function LinePage({ params }: { params: Promise<{ id: strin
               <dt>Categoria</dt><dd>{categoryLabel(line.category)}</dd>
               <dt>Asset</dt><dd>{line.assetPath}</dd>
               <dt>Fonte</dt><dd>{line.sourceStatus === "official_caption" ? "Legenda oficial EN" : "Ausente"}</dd>
+              <dt>Escopo</dt><dd>{line.voiceScope === "spoken" ? "Fala verbal" : "Excluída"}</dd>
+              <dt>Direção</dt><dd>{line.voiceDirection || "Não aplicável"}</dd>
               <dt>Tradução</dt><dd>{line.translationStatus === "approved" ? "Aprovada" : "Rascunho"}</dd>
               <dt>Áudio</dt><dd>Não gravado</dd>
               <dt>Release</dt><dd>Não incluído</dd>

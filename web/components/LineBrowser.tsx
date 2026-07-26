@@ -40,7 +40,7 @@ export function LineBrowser({ lines }: { lines: CatalogLine[] }) {
               <small>{line.ptBrText}</small>
             </span>
             <span className={`status-pill ${line.translationStatus === "approved" ? "open" : ""}`}>
-              {line.translationStatus === "approved" ? "traduzida" : "aguardando"}
+              {line.translationStatus === "approved" ? "aprovada" : line.ptBrText ? "rascunho PT-BR" : "aguardando"}
             </span>
           </Link>
         ))}

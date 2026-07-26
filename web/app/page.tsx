@@ -42,7 +42,8 @@ export default function Home() {
               <div className="campaign-mark" aria-hidden="true">AXE</div>
               <p className="card-kicker">CAMPANHA ATIVA</p>
               <h2>Axe abre o caminho</h2>
-              <p>O inventário está completo. Agora a comunidade decide como ele vai soar em português.</p>
+              <p>As {axe.drafted} falas verbais com legenda oficial já têm rascunho PT-BR. Agora a comunidade revisa como elas devem soar.</p>
+              <ProgressRail label="Rascunhos PT-BR" value={percent(axe.drafted, axe.total)} tone="gold" />
               <ProgressRail label="Tradução aprovada" value={percent(axe.translated, axe.total)} tone="gold" />
               <ProgressRail label="Áudio gravado" value={percent(axe.recorded, axe.total)} tone="rust" />
               <ProgressRail label="Revisado e lançado" value={percent(axe.reviewed, axe.total)} tone="red" />

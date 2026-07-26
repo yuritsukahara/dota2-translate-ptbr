@@ -16,6 +16,8 @@ const records = rows
     category: line.category,
     sourceText: line.source_en,
     sourceStatus: line.source_status,
+    voiceScope: line.voice_scope,
+    voiceDirection: line.voice_direction,
     ptBrText: line.pt_br,
     translationStatus: line.status === "placeholder" ? "placeholder" : "approved",
     audioStatus: ["recorded", "reviewed"].includes(line.status) ? "recorded" : "missing",

@@ -78,6 +78,8 @@ const heroes = openDotaHeroes
       attackType: hero.attack_type,
       roles: hero.roles,
       total,
+      assetTotal: total,
+      drafted: 0,
       translated: 0,
       recorded: 0,
       reviewed: 0,
@@ -96,7 +98,13 @@ const oldLines = oldRows
   );
 const axeDrafts = JSON.parse(
   fs.readFileSync(
-    path.join(root, "data", "heroes", "axe", "sample-ptbr.json"),
+    path.join(root, "data", "heroes", "axe", "spoken-ptbr.json"),
+    "utf8"
+  )
+);
+const axeNonverbal = JSON.parse(
+  fs.readFileSync(
+    path.join(root, "data", "heroes", "axe", "nonverbal.json"),
     "utf8"
   )
 );
@@ -114,12 +122,34 @@ const headers = [
   "category",
   "source_en",
   "source_status",
+  "voice_scope",
+  "voice_direction",
   "pt_br",
   "status",
   "actor",
   "license",
   "notes",
 ];
+
+function voiceDirection(category) {
+  if (/^(ability|attack|battlebegins|blinkcull|cast|firstblood|kill)/.test(category)) {
+    return "guerreiro brutal; agressivo; projeção forte; ritmo rápido";
+  }
+  if (/^(ally|deny|rival|thanks)/.test(category)) {
+    return "provocador; arrogante; humor seco; ritmo conversado";
+  }
+  if (/^(death|lose)/.test(category)) {
+    return "derrotado; pesado; intensidade decrescente";
+  }
+  if (/^(respawn|spawn|win|level)/.test(category)) {
+    return "triunfante; confiante; voz aberta e energética";
+  }
+  if (/^(move|missing_lane|nomana|notyet|underattack)/.test(category)) {
+    return "comando curto; direto; leitura clara";
+  }
+  return "voz grave; confiante; personagem guerreiro; dicção clara";
+}
+
 const axeRows = oldLines.map((line) =>
   headers.map((header) => {
     if (header === "source_en") return directAxeCaptions.get(line.id) || "";
@@ -128,7 +158,18 @@ const axeRows = oldLines.map((line) =>
         ? "official_caption"
         : "missing_official_caption";
     }
+    if (header === "voice_scope") {
+      if (!directAxeCaptions.has(line.id)) return "excluded_no_official_caption";
+      if (axeNonverbal[line.id]) return "excluded_nonverbal";
+      if (axeDrafts[line.id]) return "spoken";
+      return "unclassified";
+    }
+    if (header === "voice_direction") {
+      return axeDrafts[line.id] ? voiceDirection(line.category) : "";
+    }
     if (header === "pt_br" && axeDrafts[line.id]) return axeDrafts[line.id];
+    if (header === "pt_br" && axeNonverbal[line.id]) return "";
+    if (header === "pt_br" && !directAxeCaptions.has(line.id)) return "";
     if (header === "notes" && axeDrafts[line.id] && !line.notes) {
       return "Rascunho-guia baseado na legenda oficial EN; requer revisão comunitária.";
     }
@@ -143,13 +184,17 @@ fs.writeFileSync(
 
 const axe = heroes.find((hero) => hero.id === "axe");
 if (axe) {
+  const statusIndex = headers.indexOf("status");
+  axe.assetTotal = axeRows.length;
+  axe.total = Object.keys(axeDrafts).length;
+  axe.drafted = Object.keys(axeDrafts).length;
   axe.translated = axeRows.filter(
-    (row) => ["translated", "recorded", "reviewed"].includes(row[6])
+    (row) => ["translated", "recorded", "reviewed"].includes(row[statusIndex])
   ).length;
   axe.recorded = axeRows.filter((row) =>
-    ["recorded", "reviewed"].includes(row[6])
+    ["recorded", "reviewed"].includes(row[statusIndex])
   ).length;
-  axe.reviewed = axeRows.filter((row) => row[6] === "reviewed").length;
+  axe.reviewed = axeRows.filter((row) => row[statusIndex] === "reviewed").length;
 }
 
 const output = path.join(root, "web", "data", "heroes.json");
@@ -173,5 +218,5 @@ console.log(
   `Catálogo: ${heroes.length} heróis; Axe é o inventário base reconciliado desta etapa.`
 );
 console.log(
-  `Axe: ${axeRows.length} assets, ${directAxeCaptions.size} legendas oficiais EN, build ${build.clientVersion}.`
+  `Axe: ${axeRows.length} assets, ${Object.keys(axeDrafts).length} falas verbais traduzidas, ${Object.keys(axeNonverbal).length} não verbais excluídas, build ${build.clientVersion}.`
 );

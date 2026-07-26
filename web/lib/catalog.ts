@@ -9,11 +9,12 @@ export const CURRENT_BUILD_DATE = heroCatalog.build.date;
 
 export const heroes = heroCatalog.heroes;
 
-export const getAxeLines = () => axeLines as CatalogLine[];
+export const getAxeLines = () =>
+  axeLines.filter((line) => line.voiceScope === "spoken") as CatalogLine[];
 export const getLine = (id: string) => axeLines.find((line) => line.id === id);
 export const getHero = (id: string) => heroes.find((hero) => hero.id === id);
 export const getHeroLines = (id: string) =>
-  id === "axe" ? (axeLines as CatalogLine[]) : [];
+  id === "axe" ? getAxeLines() : [];
 
 export function categoryLabel(category: string) {
   const labels: Record<string, string> = {

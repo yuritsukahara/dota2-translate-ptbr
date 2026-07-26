@@ -46,15 +46,16 @@ export default async function HeroPage({
         <div className="detail-grid" style={{ marginBottom: 50 }}>
           <section className="detail-panel">
             <h2>Progresso verificável</h2>
+            <ProgressRail label="Rascunhos PT-BR disponíveis" value={percent(hero.drafted, hero.total)} />
             <ProgressRail label="Tradução aprovada" value={percent(hero.translated, hero.total)} />
             <ProgressRail label="Áudio gravado" value={percent(hero.recorded, hero.total)} tone="rust" />
             <ProgressRail label="Revisado e lançado" value={percent(hero.reviewed, hero.total)} tone="red" />
           </section>
           <aside className="side-panel">
-            <p className="eyebrow">DENOMINADOR LOCAL</p>
+            <p className="eyebrow">FALAS VERBAIS COM LEGENDA OFICIAL</p>
             <h2 style={{ fontSize: 54, margin: 0 }}>{hero.total || "—"}</h2>
             <p className="form-note">
-              Assets encontrados no diretório base do herói. Personas e eventos serão campanhas separadas.
+              {hero.assetTotal || "Nenhum"} assets no inventário; vocalizações não verbais e slots sem legenda oficial ficam fora desta campanha.
             </p>
           </aside>
         </div>

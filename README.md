@@ -4,15 +4,15 @@ Projeto comunitário, não oficial e sem fins lucrativos para localizar as vozes
 
 O repositório começa com um laboratório completo do **Axe**: ele detecta no Dota instalado os 285 slots de voz base atuais, mantém um manifesto revisável e gera vozes-guia em PT-BR para testar a integração ponta a ponta.
 
-> **Estado:** protótipo técnico. As 79 falas-guia atuais são rascunhos PT-BR baseados nas legendas oficiais em inglês; não são traduções aprovadas nem imitam o ator original.
+> **Estado:** protótipo técnico. As 243 falas verbais com legenda oficial possuem rascunho e voz-guia PT-BR. As 41 vocalizações não verbais e o único asset sem legenda oficial ficam fora do lote.
 
 ## O que já funciona
 
 - manifesto reproduzível dos 285 assets base do Axe;
 - extração de 284 legendas oficiais EN do Axe (um slot não possui legenda associada);
 - catálogo de 127 heróis e imagens sincronizado pelo OpenDota;
-- geração local de 79 WAVs-guia com uma voz pt-BR do Windows;
-- compilação comprovada em 285 recursos `.vsnd_c` pelos Dota 2 Workshop Tools;
+- geração local de 243 WAVs-guia com uma voz pt-BR licenciada pelo Windows;
+- compilação comprovada em 243 recursos `.vsnd_c` pelos Dota 2 Workshop Tools;
 - addon de laboratório instalável sem copiar ou redistribuir áudio da Valve;
 - validação automática do CSV e regras para tradução, elenco, gravação e crédito;
 - portal público responsivo com catálogo, progresso triplo, propostas, votos e moderação;
@@ -65,6 +65,8 @@ dotnet publish .\installer\Dota2Translate.Installer\Dota2Translate.Installer.csp
 
 O sincronizador lê os arquivos `resource/subtitles/subtitles_*_english.txt` do VPK local e cruza os tokens com os assets de voz. Para o Axe atual, há 284 correspondências em 285 assets; `axe_rival_13` não tem legenda oficial associada.
 
+O primeiro lote é estrito: contém 243 falas verbais com legenda oficial, exclui 41 risadas, grunhidos, gemidos e outras vocalizações sem texto, e exclui o asset sem legenda. Os rascunhos ficam em `data/heroes/axe/spoken-ptbr.json`; as exclusões auditáveis ficam em `data/heroes/axe/nonverbal.json`.
+
 O cliente **não inclui** `subtitles_axe_brazilian.txt`. Portanto:
 
 - `source_en` é a legenda oficial em inglês;
@@ -104,8 +106,8 @@ No PowerShell:
 
 ```powershell
 npm run validate
-.\scripts\generate-test-voices.ps1 -Sample -Voice "Microsoft Daniel"
-.\scripts\install-test-addon.ps1
+.\scripts\generate-test-voices.ps1 -SpokenOnly -Clean -Voice "Microsoft Daniel"
+.\scripts\install-test-addon.ps1 -CleanAudio
 ```
 
 Se o Dota estiver em outra biblioteca:
@@ -121,15 +123,15 @@ Abra os Workshop Tools, entre no console e execute:
 dota_launch_custom_game dota2_translate_ptbr template_map
 ```
 
-Para testar as 79 falas-guia no cliente normal, feche o Dota e execute:
+Para testar as 243 falas-guia no cliente normal, feche o Dota e execute:
 
 ```powershell
-.\scripts\generate-test-voices.ps1 -Sample -Voice "Microsoft Daniel"
-.\scripts\install-test-addon.ps1
+.\scripts\generate-test-voices.ps1 -SpokenOnly -Clean -Voice "Microsoft Daniel"
+.\scripts\install-test-addon.ps1 -CleanAudio
 .\scripts\install-axe-client-test.ps1
 ```
 
-Abra o Dota normalmente. Em **Configurações → Áudio**, confirme **Português-Brasil**. O instalador já seleciona esse idioma no `boot.vcfg`; linhas do Axe fora da amostra continuam usando o áudio original.
+Abra o Dota normalmente. Em **Configurações → Áudio**, confirme **Português-Brasil**. O instalador já seleciona esse idioma no `boot.vcfg`; vocalizações excluídas e o slot sem legenda continuam usando o áudio original.
 
 Para restaurar:
 
