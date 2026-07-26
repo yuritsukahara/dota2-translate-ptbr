@@ -106,6 +106,38 @@ export const votes = sqliteTable(
   (table) => [primaryKey({ columns: [table.proposalId, table.userId] })],
 );
 
+export const captionSuggestions = sqliteTable(
+  "caption_suggestions",
+  {
+    id: text("id").primaryKey(),
+    lineId: text("line_id").notNull(),
+    heroId: text("hero_id").notNull(),
+    authorId: text("author_id").notNull().references(() => users.id),
+    text: text("text").notNull(),
+    status: text("status", {
+      enum: ["open", "accepted", "rejected", "withdrawn"],
+    }).notNull().default("open"),
+    terminologyWarnings: text("terminology_warnings").notNull().default("[]"),
+    ...timestamps,
+  },
+  (table) => [
+    index("caption_suggestions_line_idx").on(table.lineId),
+    index("caption_suggestions_hero_idx").on(table.heroId),
+    index("caption_suggestions_status_idx").on(table.status),
+  ],
+);
+
+export const captionSuggestionVotes = sqliteTable(
+  "caption_suggestion_votes",
+  {
+    suggestionId: text("suggestion_id").notNull().references(() => captionSuggestions.id, { onDelete: "cascade" }),
+    userId: text("user_id").notNull().references(() => users.id, { onDelete: "cascade" }),
+    kind: text("kind", { enum: ["support", "oppose"] }).notNull(),
+    createdAt: text("created_at").notNull().default(sql`CURRENT_TIMESTAMP`),
+  },
+  (table) => [primaryKey({ columns: [table.suggestionId, table.userId] })],
+);
+
 export const reviews = sqliteTable(
   "reviews",
   {

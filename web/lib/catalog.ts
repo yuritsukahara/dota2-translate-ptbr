@@ -27,6 +27,8 @@ export const getAxeLines = () => linesByHero.axe || [];
 export const getLine = (id: string) => getAxeLines().find((line) => line.id === id);
 export const getHero = (id: string) => heroes.find((hero) => hero.id === id);
 export const getHeroLines = (id: string) => linesByHero[id] || [];
+export const getHeroLine = (heroId: string, lineId: string) =>
+  getHeroLines(heroId).find((line) => line.id === lineId);
 
 export function categoryLabel(category: string) {
   const labels: Record<string, string> = {

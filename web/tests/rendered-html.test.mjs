@@ -31,15 +31,23 @@ test("catálogo lista som local e captions oficiais EN e PT-BR", async () => {
   assert.match(audio, /Fonte: Dota 2 Wiki\/Fandom/);
 });
 
-test("página exclusiva de captions separa EN e PT-BR oficiais", async () => {
-  const [page, browser] = await Promise.all([
+test("página de captions separa inglês oficial e tradução comunitária", async () => {
+  const [page, browser, api, terminology] = await Promise.all([
     readFile(new URL("../app/captions/page.tsx", import.meta.url), "utf8"),
     readFile(new URL("../components/CaptionBrowser.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../app/api/caption-suggestions/route.ts", import.meta.url), "utf8"),
+    readFile(new URL("../data/terminology.json", import.meta.url), "utf8"),
   ]);
-  assert.match(page, /Nenhuma tradução comunitária/);
+  assert.match(page, /Tradução das captions/);
   assert.match(page, /Escolha o herói/);
-  assert.match(browser, /Inglês oficial/);
-  assert.match(browser, /Português brasileiro oficial/);
+  assert.match(browser, /CAPTION OFICIAL EM INGLÊS/);
+  assert.match(browser, /PRÉVIA COMUNITÁRIA PT-BR/);
+  assert.match(browser, /Sugestões da comunidade/);
+  assert.match(api, /validateTerminology/);
+  assert.match(api, /assertSameOrigin/);
+  const glossary = JSON.parse(terminology);
+  assert.equal(glossary.heroes.length, 127);
+  assert.ok(glossary.items.length > 500);
 });
 
 test("inventário oficial cobre 127 heróis em ordem alfabética", async () => {

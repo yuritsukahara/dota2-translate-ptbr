@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Header } from "@/components/Header";
 import { HeroCard } from "@/components/HeroCard";
 import { CURRENT_BUILD, heroes } from "@/lib/catalog";
+import { getCommunityPreviews } from "@/lib/community-preview";
 
 export const metadata = {
   title: "Dota 2 Translate PT-BR — Cada herói. Cada fala.",
@@ -10,6 +11,7 @@ export const metadata = {
 
 export default function Home() {
   const axe = heroes.find((hero) => hero.id === "axe")!;
+  const axePreviewCount = Object.keys(getCommunityPreviews("axe")).length;
   const featuredHeroes = [
     axe,
     ...heroes.filter((hero) => hero.id !== "axe").slice(0, 3),
@@ -24,12 +26,12 @@ export default function Home() {
               <p className="eyebrow">PROJETO COMUNITÁRIO · BUILD {CURRENT_BUILD}</p>
               <h1>Cada herói.<br /><span>Cada fala.</span></h1>
               <p className="hero-lead">
-                Um catálogo verificável de captions oficiais e uma seleção pública para
-                escolher um único intérprete comunitário para cada herói.
+                Traduza as captions oficiais em inglês, compare uma prévia PT-BR e
+                ajude a comunidade a escolher a versão que melhor preserva cada herói.
               </p>
               <div className="hero-actions">
-                <Link className="button button-primary" href="/heroes">Explorar todos os heróis</Link>
-                <Link className="button button-ghost" href="/audicoes/axe">Participar de uma audição</Link>
+                <Link className="button button-primary" href="/captions?heroi=axe">Traduzir captions do Axe</Link>
+                <Link className="button button-ghost" href="/heroes">Explorar todos os heróis</Link>
               </div>
               <dl className="hero-metrics">
                 <div><dt>{heroes.length}</dt><dd>heróis catalogados</dd></div>
@@ -39,15 +41,15 @@ export default function Home() {
             </div>
             <div className="campaign-card" aria-label="Progresso da campanha do Axe">
               <div className="campaign-mark" aria-hidden="true">AXE</div>
-              <p className="card-kicker">PRIMEIRO ELENCO</p>
-              <h2>Uma voz para Axe</h2>
-              <p>O catálogo encontrou {axe.total} voicelines com caption oficial EN e {axe.officialBrazilianCaptions} com caption oficial PT-BR neste build.</p>
+              <p className="card-kicker">PRIMEIRA TRADUÇÃO</p>
+              <h2>Captions do Axe</h2>
+              <p>O catálogo encontrou {axe.total} voicelines com caption oficial EN. Já há {axePreviewCount} prévias comunitárias PT-BR para revisar.</p>
               <ol className="campaign-casting-list">
-                <li><span>01</span>Enviar uma prévia de cinco linhas</li>
-                <li><span>02</span>Receber votos e comentários</li>
-                <li><span>03</span>Vencedor grava o pack completo</li>
+                <li><span>01</span>Comparar inglês e prévia PT-BR</li>
+                <li><span>02</span>Sugerir uma versão mais natural</li>
+                <li><span>03</span>Apoiar ou desaprovar propostas</li>
               </ol>
-              <Link className="text-link" href="/heroes/axe">Ver seleção <span>→</span></Link>
+              <Link className="text-link" href="/captions?heroi=axe">Abrir tradução <span>→</span></Link>
             </div>
           </div>
         </section>
@@ -58,7 +60,7 @@ export default function Home() {
               <p className="eyebrow">COBERTURA HONESTA</p>
               <h2>100% tem um significado.</h2>
             </div>
-            <p>Uma linha só entra no projeto quando possui caption oficial PT-BR, gravação do intérprete selecionado e revisão técnica.</p>
+            <p>O inglês oficial permanece imutável. A tradução comunitária é rastreável, votada e revisada antes de orientar qualquer gravação.</p>
           </div>
           <div className="principle-grid">
             <article><span>01</span><h3>Inventário</h3><p>Os nomes técnicos vêm do VPK instalado e ficam fixados a uma versão do jogo.</p></article>

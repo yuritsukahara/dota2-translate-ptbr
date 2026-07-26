@@ -8,8 +8,9 @@ import {
   getHeroLines,
   heroes,
 } from "@/lib/catalog";
+import { getCommunityPreviews } from "@/lib/community-preview";
 
-export const metadata = { title: "Captions oficiais" };
+export const metadata = { title: "Tradução comunitária das captions" };
 
 export default async function CaptionsPage({
   searchParams,
@@ -26,12 +27,13 @@ export default async function CaptionsPage({
       <main className="page-shell captions-page">
         <div className="page-intro">
           <div>
-            <p className="eyebrow">TEXTO OFICIAL · BUILD {CURRENT_BUILD}</p>
-            <h1 className="page-title">Captions</h1>
+            <p className="eyebrow">INGLÊS OFICIAL + TRADUÇÃO COMUNITÁRIA · BUILD {CURRENT_BUILD}</p>
+            <h1 className="page-title">Tradução das captions</h1>
           </div>
           <p>
-            Uma área dedicada somente aos textos encontrados nos arquivos oficiais
-            do jogo. Nenhuma tradução comunitária é apresentada como caption da Valve.
+            Compare a caption oficial em inglês, veja uma prévia PT-BR e proponha
+            versões melhores. Toda tradução brasileira desta área é identificada
+            como comunitária e não oficial.
           </p>
         </div>
 
@@ -56,12 +58,13 @@ export default async function CaptionsPage({
         </section>
 
         <div className="notice caption-policy">
-          PT-BR ausente significa que este build não publicou uma caption brasileira
-          para a linha. Isso não é uma solicitação de tradução nem um campo editável.
+          As prévias são um ponto de partida para revisão, não texto oficial da Valve.
+          Sugestões que mencionam heróis ou itens precisam manter o nome publicado
+          nos arquivos oficiais PT-BR do Dota.
           <Link href={`/heroes/${hero.id}`}> Ver página completa de {hero.name} →</Link>
         </div>
 
-        <CaptionBrowser lines={lines} />
+        <CaptionBrowser heroId={hero.id} lines={lines} previews={getCommunityPreviews(hero.id)} />
       </main>
     </>
   );
