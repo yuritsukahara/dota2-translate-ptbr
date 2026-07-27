@@ -18,8 +18,9 @@ ROOT = Path(__file__).resolve().parents[1]
 COMFY_ROOT = Path.home() / "AppData/Roaming/StabilityMatrix/Packages/ComfyUI"
 SUITE_ROOT = COMFY_ROOT / "custom_nodes/TTS-Audio-Suite"
 MODEL_ROOT = COMFY_ROOT / "models/TTS/chatterbox_official_23lang/PT-BR V3"
-REFERENCE_ROOT = ROOT / "build/voice-lab/references"
 OUTPUT_ROOT = ROOT / "build/voice-lab/generated"
+LOCAL_AUDIO_ROOT = ROOT / "build/local-audio"
+LOCAL_AUDIO_CATALOG = LOCAL_AUDIO_ROOT / "catalog.json"
 
 sys.path.insert(0, str(COMFY_ROOT))
 sys.path.insert(0, str(SUITE_ROOT))
@@ -53,6 +54,18 @@ def translations_for(hero_id: str) -> dict[str, tuple[str, str]]:
     return resolved
 
 
+def matching_originals() -> tuple[dict[tuple[str, str], dict], list[str]]:
+    """Indexa cada fala pelo herói e ID para impedir referência genérica."""
+    catalog = json.loads(LOCAL_AUDIO_CATALOG.read_text(encoding="utf-8"))
+    by_line = {
+        (line["heroId"], line["id"]): line
+        for line in catalog["lines"]
+        if line.get("mp3")
+    }
+    hero_ids = sorted({hero_id for hero_id, _ in by_line})
+    return by_line, hero_ids
+
+
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--hero", default="axe")
@@ -80,13 +93,8 @@ def main() -> None:
     if args.limit < 0:
         raise ValueError("--limit deve ser zero (todas) ou um número positivo.")
 
-    if args.all:
-        reference_manifest = json.loads(
-            (REFERENCE_ROOT / "manifest.json").read_text(encoding="utf-8")
-        )
-        hero_ids = [item["heroId"] for item in reference_manifest]
-    else:
-        hero_ids = [args.hero]
+    originals, catalog_hero_ids = matching_originals()
+    hero_ids = catalog_hero_ids if args.all else [args.hero]
 
     torch.manual_seed(args.seed)
     model = ChatterboxOfficial23LangTTS.from_local(
@@ -102,10 +110,9 @@ def main() -> None:
     error_log_path = OUTPUT_ROOT / "generation-errors.jsonl"
     OUTPUT_ROOT.mkdir(parents=True, exist_ok=True)
     for hero_id in hero_ids:
-        reference = REFERENCE_ROOT / f"{hero_id}.wav"
         translations = translations_for(hero_id)
-        if not reference.exists() or not translations:
-            print(f"IGNORADO {hero_id}: sem referência ou caption PT-BR.")
+        if not translations:
+            print(f"IGNORADO {hero_id}: sem caption PT-BR verbal.")
             continue
 
         hero_output = OUTPUT_ROOT / hero_id
@@ -122,6 +129,28 @@ def main() -> None:
         if args.limit:
             selected = selected[: args.limit]
         for index, (line_id, (text, source)) in enumerate(selected):
+            original = originals.get((hero_id, line_id))
+            original_path = (
+                LOCAL_AUDIO_ROOT / original["mp3"] if original else None
+            )
+            if not original_path or not original_path.exists():
+                failed_total += 1
+                error_record = {
+                    "timestamp": dt.datetime.now(dt.timezone.utc).isoformat(),
+                    "heroId": hero_id,
+                    "lineId": line_id,
+                    "textPtBr": text,
+                    "error": "Áudio original correspondente não encontrado.",
+                }
+                with error_log_path.open("a", encoding="utf-8") as error_log:
+                    error_log.write(
+                        json.dumps(error_record, ensure_ascii=False) + "\n"
+                    )
+                print(
+                    f"SEM REFERÊNCIA CORRESPONDENTE {hero_id}/{line_id}",
+                    file=sys.stderr,
+                )
+                continue
             destination = hero_output / f"{line_id}.wav"
             if destination.exists() and not args.force:
                 print(f"JÁ EXISTE {hero_id}/{line_id}")
@@ -131,7 +160,7 @@ def main() -> None:
                 waveform = model.generate(
                     text,
                     language_id="pt",
-                    audio_prompt_path=str(reference),
+                    audio_prompt_path=str(original_path),
                     exaggeration=args.exaggeration,
                     cfg_weight=args.cfg_weight,
                     temperature=args.temperature,
@@ -168,7 +197,10 @@ def main() -> None:
                 "file": str(destination.relative_to(ROOT)).replace("\\", "/"),
                 "model": "ResembleAI/Chatterbox-Multilingual-pt-br",
                 "modelVersion": "V3",
-                "voiceReference": str(reference.relative_to(ROOT)).replace("\\", "/"),
+                "voiceReference": str(original_path.relative_to(ROOT)).replace("\\", "/"),
+                "voiceReferenceMode": "matching-original-line",
+                "voiceReferenceSha256": original.get("sha256"),
+                "originalCaptionEn": original.get("captionEn"),
                 "synthetic": True,
                 "watermarked": True,
                 "seed": args.seed,

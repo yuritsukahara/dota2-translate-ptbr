@@ -55,7 +55,7 @@
         "Node name for S&R": "LoadAudio"
       },
       "widgets_values": [
-        "dota-voice-references/axe.wav",
+        "dota-original-lines/axe/axe_ability_battlehunger_01.mp3",
         null,
         null
       ]

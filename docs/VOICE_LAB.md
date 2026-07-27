@@ -1,10 +1,11 @@
 # Laboratório local de vozes PT-BR
 
-Este laboratório gera **pré-visualizações sintéticas para estudo**, usando uma
-referência curta de cada personagem e captions PT-BR já catalogadas. Não existe
-um arquivo de “DNA da voz”: o modelo faz condicionamento zero-shot a partir de
-um WAV de referência. Os resultados ficam em `build/`, são marcados como
-sintéticos no manifesto e recebem a marca-d'água PerTh do Chatterbox.
+Este laboratório gera **pré-visualizações sintéticas para estudo**, usando o
+áudio original correspondente a cada linha e captions PT-BR já catalogadas.
+Não existe um arquivo de “DNA da voz”: o modelo faz condicionamento zero-shot
+a partir da fala original daquela mesma caption. Os resultados ficam em
+`build/`, são marcados como sintéticos no manifesto e recebem a marca-d'água
+PerTh do Chatterbox.
 
 Não use estas prévias para se passar por pessoas, atribuir falas reais a
 intérpretes ou publicar assets da Valve. Elas também não são aceitas como packs
@@ -43,8 +44,8 @@ dependências instaladas no ambiente Python do próprio ComfyUI.
 
 1. Abra o ComfyUI pelo Stability Matrix.
 2. Em **Workflows**, carregue `Dota PT-BR - Chatterbox`.
-3. No nó **Load Audio**, escolha
-   `dota-voice-references/axe.wav` ou outro herói.
+3. No nó **Load Audio**, escolha a linha original correspondente em
+   `dota-original-lines/{herói}/{id-da-linha}.mp3`.
 4. No nó **TTS Text**, cole exatamente uma caption PT-BR.
 5. Execute e ouça o resultado em **Preview Audio**.
 6. Para comparar interpretações, altere primeiro apenas a seed. Depois teste
@@ -84,9 +85,11 @@ interrompida pode ser retomada sem refazer WAVs existentes. A prioridade do
 texto é: caption oficial PT-BR, prévia comunitária já existente e, por último,
 tradução automática não revisada.
 
-Foram montadas referências para 125 heróis falantes e o narrador padrão.
-Marci e Wisp não recebem perfil porque o catálogo atual não contém fala verbal
-útil para condicionamento.
+O gerador exige uma correspondência exata entre `heroId + lineId` e o MP3
+extraído localmente. Se o original estiver ausente, a linha é registrada como
+erro e não é gerada com a voz genérica de outra fala. As antigas referências
+compostas por herói permanecem apenas como material histórico e não são mais
+usadas nos lotes.
 
 ## Comparação dos modelos
 
