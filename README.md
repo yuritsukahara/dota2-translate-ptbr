@@ -32,6 +32,15 @@ Uma linha só aparece como “oficial PT-BR” quando o texto existe no arquivo 
 
 Os envios devem ser WAV PCM mono, 16-bit, 24/48 kHz, até 20 segundos e 10 MB, com consentimento, crédito e licença CC BY 4.0. Áudio extraído do jogo e clonagem ou imitação sem autorização são rejeitados.
 
+## Laboratório sintético local
+
+Há também um ambiente privado de estudo com Stability Matrix, ComfyUI e
+Chatterbox PT-BR V3. Ele monta referências dos personagens a partir do catálogo
+local, gera prévias com marca-d'água e mantém tudo fora do Git em `build/`.
+Esse material não faz parte dos envios públicos de intérpretes.
+
+Veja [configuração, workflow e comandos do laboratório](docs/VOICE_LAB.md).
+
 ## Login e petição
 
 O portal usa somente Steam OpenID. Cada Steam ID pode assinar uma vez a carta pública que pede à Valve uma dublagem oficial em PT-BR. A petição destaca a história, o humor, os campeonatos e a paixão da comunidade brasileira sem afirmar apoio ou promessa da Valve.

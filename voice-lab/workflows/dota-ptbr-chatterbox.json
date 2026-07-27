@@ -1,0 +1,150 @@
+{
+  "last_node_id": 4,
+  "last_link_id": 3,
+  "nodes": [
+    {
+      "id": 1,
+      "type": "ChatterBoxOfficial23LangEngineNode",
+      "pos": [40, 80],
+      "size": [360, 270],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "TTS_engine",
+          "type": "TTS_ENGINE",
+          "links": [1]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ChatterBoxOfficial23LangEngineNode"
+      },
+      "widgets_values": [
+        "v3",
+        "Portuguese",
+        "cuda",
+        0.7,
+        0.75,
+        0.3,
+        1.2,
+        0.05,
+        1.0
+      ],
+      "color": "#173a36",
+      "bgcolor": "#24564f"
+    },
+    {
+      "id": 2,
+      "type": "LoadAudio",
+      "pos": [40, 400],
+      "size": [360, 150],
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "AUDIO",
+          "type": "AUDIO",
+          "links": [2]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoadAudio"
+      },
+      "widgets_values": [
+        "dota-voice-references/axe.wav",
+        null,
+        null
+      ]
+    },
+    {
+      "id": 3,
+      "type": "UnifiedTTSTextNode",
+      "pos": [500, 80],
+      "size": [470, 360],
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "TTS_engine",
+          "type": "TTS_ENGINE",
+          "link": 1
+        },
+        {
+          "name": "opt_narrator",
+          "shape": 7,
+          "type": "*",
+          "link": 2
+        }
+      ],
+      "outputs": [
+        {
+          "name": "audio",
+          "type": "AUDIO",
+          "links": [3]
+        },
+        {
+          "name": "generation_info",
+          "type": "STRING",
+          "links": []
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "UnifiedTTSTextNode"
+      },
+      "widgets_values": [
+        "Axe não tem tempo para isso!",
+        "none",
+        42,
+        "fixed",
+        false,
+        400,
+        "auto",
+        100,
+        true,
+        0
+      ],
+      "color": "#193755",
+      "bgcolor": "#28547e"
+    },
+    {
+      "id": 4,
+      "type": "PreviewAudio",
+      "pos": [1040, 80],
+      "size": [480, 110],
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "audio",
+          "type": "AUDIO",
+          "link": 3
+        }
+      ],
+      "outputs": [],
+      "properties": {
+        "Node name for S&R": "PreviewAudio"
+      },
+      "widgets_values": []
+    }
+  ],
+  "links": [
+    [1, 1, 0, 3, 0, "TTS_ENGINE"],
+    [2, 2, 0, 3, 1, "*"],
+    [3, 3, 0, 4, 0, "AUDIO"]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 0.82,
+      "offset": [80, 110]
+    }
+  },
+  "version": 0.4
+}

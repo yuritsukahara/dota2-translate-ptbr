@@ -1,0 +1,59 @@
+diff --git a/engines/chatterbox_official_23lang/language_models.py b/engines/chatterbox_official_23lang/language_models.py
+--- a/engines/chatterbox_official_23lang/language_models.py
++++ b/engines/chatterbox_official_23lang/language_models.py
+@@ -172,2 +172,2 @@
+-                    has_s3gen = "s3gen.pt" in item_files
+-                    has_ve = "ve.pt" in item_files
++                    has_s3gen = "s3gen.pt" in item_files or "s3gen.safetensors" in item_files
++                    has_ve = "ve.pt" in item_files or "ve.safetensors" in item_files
+diff --git a/engines/chatterbox_official_23lang/tts.py b/engines/chatterbox_official_23lang/tts.py
+--- a/engines/chatterbox_official_23lang/tts.py
++++ b/engines/chatterbox_official_23lang/tts.py
+@@ -649,3 +649,4 @@
+         repetition_penalty=2.0,
+         min_p=0.05,
+         top_p=1.0,
++        max_new_tokens=1000,
+@@ -693,1 +694,1 @@
+-                max_new_tokens=1000,  # TODO: use the value in config
++                max_new_tokens=max_new_tokens,
+diff --git a/nodes/chatterbox_official_23lang/chatterbox_official_23lang_processor.py b/nodes/chatterbox_official_23lang/chatterbox_official_23lang_processor.py
+--- a/nodes/chatterbox_official_23lang/chatterbox_official_23lang_processor.py
++++ b/nodes/chatterbox_official_23lang/chatterbox_official_23lang_processor.py
+@@ -203,0 +204,4 @@
++            elif model_version == "v3" and str(language).lower() in {"pt", "portuguese", "português"}:
++                # Local Dota voice lab: use ResembleAI's dedicated Brazilian
++                # Portuguese checkpoint instead of generic multilingual PT.
++                model_name = "PT-BR V3"
+@@ -214,0 +219,2 @@
++            # Local study outputs must remain machine-detectably synthetic.
++            engine.enable_watermarking = True
+@@ -231,2 +237,3 @@
+-        # Use the unified model directory for ChatterBox Official 23-Lang
+-        ckpt_dir = os.path.join(models_dir, "TTS", "chatterbox_official_23lang", "Official 23-Lang")
++        # Use the same selected directory when falling back to direct loading.
++        dir_name = model_name.replace("ChatterBox ", "") if model_name.startswith("ChatterBox ") else model_name
++        ckpt_dir = os.path.join(models_dir, "TTS", "chatterbox_official_23lang", dir_name)
+@@ -308,1 +315,1 @@
+-            model_name="Official 23-Lang",
++            model_name=model_name,
+@@ -311,0 +319,1 @@
++        self.tts_model.enable_watermarking = True
+@@ -406,2 +415,16 @@
+-                top_p=top_p
++                top_p=top_p,
++                # Voice lines are short. Capping generation prevents a failed
++                # end token from producing tens of seconds of runaway speech.
++                max_new_tokens=240
+             )
++            # The unified ComfyUI wrapper may not forward the engine's
++            # watermark flag, so apply PerTh explicitly at the processor
++            # boundary. This keeps every GUI-generated study clip detectable.
++            if not hasattr(self, "_dota_study_watermarker"):
++                import perth
++                self._dota_study_watermarker = perth.PerthImplicitWatermarker()
++            watermarked = self._dota_study_watermarker.apply_watermark(
++                audio.squeeze().detach().cpu().numpy(),
++                sample_rate=24000,
++            )
++            audio = torch.from_numpy(watermarked).unsqueeze(0)
