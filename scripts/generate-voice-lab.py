@@ -4,8 +4,10 @@
 from __future__ import annotations
 
 import argparse
+import datetime as dt
 import json
 import sys
+import traceback
 from pathlib import Path
 
 import soundfile as sf
@@ -96,6 +98,9 @@ def main() -> None:
     model.enable_watermarking = True
 
     generated_total = 0
+    failed_total = 0
+    error_log_path = OUTPUT_ROOT / "generation-errors.jsonl"
+    OUTPUT_ROOT.mkdir(parents=True, exist_ok=True)
     for hero_id in hero_ids:
         reference = REFERENCE_ROOT / f"{hero_id}.wav"
         translations = translations_for(hero_id)
@@ -122,21 +127,40 @@ def main() -> None:
                 print(f"JÁ EXISTE {hero_id}/{line_id}")
                 continue
             print(f"[{index + 1}/{len(selected)}] {hero_id}/{line_id}: {text}")
-            waveform = model.generate(
-                text,
-                language_id="pt",
-                audio_prompt_path=str(reference),
-                exaggeration=args.exaggeration,
-                cfg_weight=args.cfg_weight,
-                temperature=args.temperature,
-                max_new_tokens=args.max_new_tokens,
-            )
-            sf.write(
-                destination,
-                waveform.squeeze(0).cpu().numpy(),
-                model.sr,
-                subtype="PCM_16",
-            )
+            try:
+                waveform = model.generate(
+                    text,
+                    language_id="pt",
+                    audio_prompt_path=str(reference),
+                    exaggeration=args.exaggeration,
+                    cfg_weight=args.cfg_weight,
+                    temperature=args.temperature,
+                    max_new_tokens=args.max_new_tokens,
+                )
+                sf.write(
+                    destination,
+                    waveform.squeeze(0).cpu().numpy(),
+                    model.sr,
+                    subtype="PCM_16",
+                )
+            except Exception as error:
+                failed_total += 1
+                error_record = {
+                    "timestamp": dt.datetime.now(dt.timezone.utc).isoformat(),
+                    "heroId": hero_id,
+                    "lineId": line_id,
+                    "textPtBr": text,
+                    "error": str(error),
+                    "traceback": traceback.format_exc(),
+                }
+                with error_log_path.open("a", encoding="utf-8") as error_log:
+                    error_log.write(
+                        json.dumps(error_record, ensure_ascii=False) + "\n"
+                    )
+                print(f"ERRO {hero_id}/{line_id}: {error}", file=sys.stderr)
+                if torch.cuda.is_available():
+                    torch.cuda.empty_cache()
+                continue
             manifest_by_id[line_id] = {
                 "id": line_id,
                 "textPtBr": text,
@@ -160,7 +184,10 @@ def main() -> None:
             )
             generated_total += 1
 
-    print(f"Gerados nesta execução: {generated_total} · {OUTPUT_ROOT}")
+    print(
+        f"Gerados nesta execução: {generated_total} · "
+        f"falhas: {failed_total} · {OUTPUT_ROOT}"
+    )
 
 
 if __name__ == "__main__":
