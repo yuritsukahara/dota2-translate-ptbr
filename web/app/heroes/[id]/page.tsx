@@ -28,7 +28,6 @@ export default async function HeroPage({
   const translations = getCurrentTranslations(id, lines);
   const includedCount = Object.keys(translations).length;
   const sources = countTranslationSources(translations);
-  const fandomResponsePage = `https://dota2.fandom.com/wiki/${encodeURIComponent(hero.name.replaceAll(" ", "_"))}/Responses`;
 
   return (
     <>
@@ -48,7 +47,6 @@ export default async function HeroPage({
             </p>
             <div className="hero-actions">
               <Link className="button button-primary" href={`/packs/${hero.id}`}>Enviar pack de voz</Link>
-              <a className="button button-ghost" href={fandomResponsePage}>Responses no Fandom</a>
             </div>
           </div>
         </div>
@@ -66,10 +64,10 @@ export default async function HeroPage({
           </section>
           <aside className="side-panel">
             <p className="eyebrow">SOM ORIGINAL</p>
-            <p className="form-note">O player tenta abrir o arquivo individual hospedado pelo Fandom. Quando ele não existe, permanece o caminho do asset no VPK local e o link para a página Responses.</p>
+            <p className="form-note">O player usa somente o MP3 extraído do VPK instalado nesta máquina. Nenhuma fonte externa é necessária.</p>
           </aside>
         </div>
-        <LineBrowser heroId={hero.id} lines={lines} translations={translations} responsePage={fandomResponsePage} />
+        <LineBrowser heroId={hero.id} lines={lines} translations={translations} />
       </main>
     </>
   );

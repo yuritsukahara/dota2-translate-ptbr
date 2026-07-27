@@ -8,7 +8,7 @@ const display = Archivo_Black({ variable: "--font-display", subsets: ["latin"], 
 const mono = JetBrains_Mono({ variable: "--font-mono", subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.PUBLIC_SITE_URL || "https://dota2-translate-ptbr.sites.openai.com"),
+  metadataBase: new URL(process.env.PUBLIC_SITE_URL || "http://localhost:3000"),
   title: { default: "Dublagem Brasileira Dota 2", template: "%s · Dublagem Brasileira Dota 2" },
   description: "Todos os heróis e o narrador padrão de Dota 2 em português brasileiro.",
   icons: { icon: "/og.png", shortcut: "/og.png" },

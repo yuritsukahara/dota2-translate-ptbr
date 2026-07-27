@@ -2,7 +2,8 @@
 
 Projeto comunitário para catalogar as voicelines de Dota 2, organizar um elenco brasileiro por herói e reunir apoio público para uma dublagem oficial em português brasileiro.
 
-O portal está em [`web/`](web/README.md), usa Vite por meio do Vinext, Cloudflare D1 para dados e R2 apenas para gravações enviadas pela comunidade. Todo o ambiente local também roda em Docker.
+O portal pessoal está em [`web/`](web/README.md), usa Vite por meio do Vinext e
+mantém os dados e os áudios apenas no ambiente local.
 
 ## Estado do catálogo
 
@@ -24,12 +25,10 @@ Uma linha só aparece como “oficial PT-BR” quando o texto existe no arquivo 
 
 ## Regra do elenco
 
-1. A audição abre somente quando o herói possui ao menos cinco captions oficiais PT-BR.
-2. Cada candidato grava exatamente as mesmas cinco linhas.
-3. A comunidade comenta, curte, desaprova e vota.
-4. Revisores verificam direitos, interpretação, formato e qualidade técnica.
-5. O vencedor recebe um pack exclusivo e envia todas as falas restantes.
-6. Um herói nunca mistura gravações de autores diferentes.
+1. Cada intérprete escolhe um herói e envia o link de uma pasta própria no Google Drive.
+2. A pasta começa com cinco linhas de demonstração e pode crescer até o pack completo.
+3. A comunidade pode sugerir ajustes e apoiar o trabalho.
+4. Um pack mantém uma única identidade de voz do início ao fim.
 
 Os envios devem ser WAV PCM mono, 16-bit, 24/48 kHz, até 20 segundos e 10 MB, com consentimento, crédito e licença CC BY 4.0. Áudio extraído do jogo e clonagem ou imitação sem autorização são rejeitados.
 
@@ -40,13 +39,8 @@ O portal usa somente Steam OpenID. Cada Steam ID pode assinar uma vez a carta p�
 ## Áudio original e captions
 
 O catálogo guarda o caminho técnico do som dentro da instalação local do Dota.
-Quando existe um arquivo individual no Fandom, o player do portal abre essa
-origem externa diretamente e mostra o crédito e a página Responses; o arquivo
-não é copiado para o servidor do projeto. A fonte canônica do inventário continua
-sendo o cliente instalado.
-
-A rota `/captions` é dedicada somente às captions oficiais, com seleção de
-herói, busca e filtros separados do fluxo de audições.
+O player reproduz somente os MP3 extraídos do VPK desta máquina; não depende de
+fontes externas. Captions e sugestões ficam diretamente nas páginas dos heróis.
 
 ## Prévia automática pelo Codex
 
@@ -67,8 +61,8 @@ Valve nem substitui sugestões, votos ou revisão humana da comunidade.
 
 ```powershell
 npm install
-npm run validate
-docker compose up --build
+Set-Location web
+npm run dev
 ```
 
 Portal: `http://localhost:3000`
@@ -83,6 +77,9 @@ filtro por herói, players e captions lado a lado:
 # Apenas Axe
 npm run audio:catalog -- --hero axe
 
+# Acrescentar o narrador padrão ao catálogo existente
+npm run audio:catalog -- --hero announcer --merge
+
 # Todos os heróis catalogados
 npm run audio:catalog -- --all
 
@@ -93,8 +90,8 @@ npm run audio:catalog -- --all --dry-run
 npm run audio:catalog -- --index-only
 ```
 
-Abra `build/local-audio/index.html`. A pasta `build/` é ignorada pelo Git e não
-entra no site público.
+Abra `build/local-audio/index.html`. A pasta `build/` é ignorada pelo Git. O
+portal local também lê esses MP3s em `/audio/{origem}/{linha}.mp3`.
 
 Para usar players com carregamento e navegação mais rápidos:
 
@@ -109,7 +106,7 @@ máquina.
 
 ```text
 scripts/                     sincronização e validação do VPK
-web/                         portal Vinext, APIs, D1 e R2
+web/                         portal Vinext e APIs locais
 web/data/heroes.json         catálogo de heróis
 web/data/voice-lines.json    captions e caminhos oficiais por build
 installer/                   laboratório reversível do instalador Windows

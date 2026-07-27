@@ -11,9 +11,6 @@ export default async function LinePage({ params }: { params: Promise<{ id: strin
   const { line, sourceId } = context;
   const source = getCaptionSource(sourceId);
   const translation = getCurrentTranslations(sourceId, [line])[line.id];
-  const responsePage = sourceId === "announcer"
-    ? "https://dota2.fandom.com/wiki/Announcer_responses"
-    : `https://dota2.fandom.com/wiki/${encodeURIComponent((source?.name || sourceId).replaceAll(" ", "_"))}/Responses`;
   return (
     <>
       <Header />
@@ -25,8 +22,8 @@ export default async function LinePage({ params }: { params: Promise<{ id: strin
           <section className="detail-panel">
             <p className="eyebrow">SOM ORIGINAL</p>
             <OriginalAudio
+              sourceId={sourceId}
               lineId={line.id}
-              responsePage={responsePage}
             />
             <p className="eyebrow">LEGENDA OFICIAL EM INGLÊS</p>
             <blockquote className="source-caption">

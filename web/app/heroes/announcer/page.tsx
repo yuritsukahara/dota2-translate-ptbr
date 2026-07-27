@@ -12,7 +12,6 @@ export default function AnnouncerPage() {
   const lines = getHeroLines("announcer");
   const translations = getCurrentTranslations("announcer", lines);
   const sources = countTranslationSources(translations);
-  const responsePage = "https://dota2.fandom.com/wiki/Announcer/Responses";
 
   return (
     <>
@@ -31,7 +30,7 @@ export default function AnnouncerPage() {
           <div className="stat-card"><strong>{sources.official.toLocaleString("pt-BR")}</strong><span>oficiais PT-BR</span></div>
           <div className="stat-card"><strong>{sources.automatic.toLocaleString("pt-BR")}</strong><span>geradas automaticamente</span></div>
         </div>
-        <LineBrowser heroId="announcer" lines={lines} translations={translations} responsePage={responsePage} />
+        <LineBrowser heroId="announcer" lines={lines} translations={translations} />
       </main>
     </>
   );

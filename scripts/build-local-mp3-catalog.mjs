@@ -9,6 +9,7 @@ const defaultVpk =
   "C:\\Program Files (x86)\\Steam\\steamapps\\common\\dota 2 beta\\game\\dota\\pak01_dir.vpk";
 const voiceCatalogPath = path.join(root, "web", "data", "voice-lines.json");
 const heroCatalogPath = path.join(root, "web", "data", "heroes.json");
+const announcerCatalogPath = path.join(root, "web", "data", "announcer-lines.json");
 const knownNonVerbalIds = new Set([
   "no_mana_not_yet01",
   "no_mana_not_yet02",
@@ -36,6 +37,16 @@ function has(name) {
 
 function safeJson(value) {
   return JSON.stringify(value).replaceAll("<", "\\u003c");
+}
+
+function normalizeAnnouncerAssetPath(assetPath) {
+  const directory = path.posix.dirname(assetPath);
+  const filename = path.posix.basename(assetPath);
+  const folder = path.posix.basename(directory);
+  const redundantPrefix = `${folder}_`;
+  return filename.startsWith(redundantPrefix)
+    ? `${directory}/${filename.slice(redundantPrefix.length)}`
+    : assetPath;
 }
 
 function extractEmbeddedMp3(resource, id) {
@@ -108,6 +119,7 @@ const requestedHero = argument("--hero", "axe");
 const extractAll = has("--all");
 const dryRun = has("--dry-run");
 const indexOnly = has("--index-only");
+const mergeExisting = has("--merge");
 
 if (indexOnly) {
   const existingCatalogPath = path.join(outputRoot, "catalog.json");
@@ -124,20 +136,31 @@ if (!fs.existsSync(vpkPath)) throw new Error(`VPK não encontrado: ${vpkPath}`);
 
 const voiceCatalog = JSON.parse(fs.readFileSync(voiceCatalogPath, "utf8"));
 const heroCatalog = JSON.parse(fs.readFileSync(heroCatalogPath, "utf8"));
-const heroNames = new Map(heroCatalog.heroes.map((hero) => [hero.id, hero.name]));
+const announcerCatalog = JSON.parse(fs.readFileSync(announcerCatalogPath, "utf8"));
+const voiceSources = {
+  ...voiceCatalog.heroes,
+  announcer: announcerCatalog.lines.map((line) => ({
+    ...line,
+    assetPath: normalizeAnnouncerAssetPath(line.assetPath),
+  })),
+};
+const heroNames = new Map([
+  ...heroCatalog.heroes.map((hero) => [hero.id, hero.name]),
+  ["announcer", "Narrador padrão"],
+]);
 const selectedHeroIds = extractAll
-  ? Object.keys(voiceCatalog.heroes)
+  ? Object.keys(voiceSources)
   : requestedHero.split(",").map((value) => value.trim()).filter(Boolean);
 
 for (const heroId of selectedHeroIds) {
-  if (!voiceCatalog.heroes[heroId]) throw new Error(`Herói desconhecido: ${heroId}`);
+  if (!voiceSources[heroId]) throw new Error(`Fonte de voz desconhecida: ${heroId}`);
 }
 
 console.log("Lendo índice do VPK...");
 const entries = listVpkEntries(vpkPath);
 const entryIndex = new Map(entries.map((entry) => [entry.path.toLowerCase(), entry]));
 const candidateLines = selectedHeroIds.flatMap((heroId) =>
-  voiceCatalog.heroes[heroId].map((line) => ({ ...line, heroId })),
+  voiceSources[heroId].map((line) => ({ ...line, heroId })),
 );
 const excluded = candidateLines
   .filter((line) => knownNonVerbalIds.has(line.id))
@@ -167,7 +190,7 @@ for (let index = 0; index < selectedLines.length; index += 1) {
   const line = selectedLines[index];
   const entry = entryIndex.get(line.assetPath.toLowerCase());
   if (!entry) {
-    failures.push({ id: line.id, error: "asset ausente no VPK" });
+    failures.push({ heroId: line.heroId, id: line.id, error: "asset ausente no VPK" });
     continue;
   }
   try {
@@ -190,7 +213,7 @@ for (let index = 0; index < selectedLines.length; index += 1) {
       sha256: crypto.createHash("sha256").update(mp3).digest("hex"),
     });
   } catch (error) {
-    failures.push({ id: line.id, error: error.message });
+    failures.push({ heroId: line.heroId, id: line.id, error: error.message });
   }
   if ((index + 1) % 250 === 0 || index + 1 === selectedLines.length) {
     process.stdout.write(`\r${index + 1}/${selectedLines.length}`);
@@ -198,19 +221,29 @@ for (let index = 0; index < selectedLines.length; index += 1) {
 }
 process.stdout.write("\n");
 
+const existingCatalogPath = path.join(outputRoot, "catalog.json");
+const existingCatalog = mergeExisting && fs.existsSync(existingCatalogPath)
+  ? JSON.parse(fs.readFileSync(existingCatalogPath, "utf8"))
+  : null;
+const retainedLines = existingCatalog?.lines?.filter((line) => !selectedHeroIds.includes(line.heroId)) || [];
+const retainedExclusions = existingCatalog?.exclusions?.filter((line) => !selectedHeroIds.includes(line.heroId)) || [];
+const retainedFailures = existingCatalog?.failures?.filter((line) => !line.heroId || !selectedHeroIds.includes(line.heroId)) || [];
+const catalogLines = [...retainedLines, ...result].sort((left, right) =>
+  left.heroName.localeCompare(right.heroName, "pt-BR") || left.id.localeCompare(right.id, "en")
+);
 const catalog = {
   generatedAt: new Date().toISOString(),
   source: "Dota 2 instalado localmente; uso privado",
   vpkPath,
   build: voiceCatalog.build,
-  heroes: selectedHeroIds,
-  extracted: result.length,
-  excluded: excluded.length,
-  failed: failures.length,
-  totalMp3Bytes: result.reduce((sum, line) => sum + line.bytes, 0),
-  lines: result,
-  exclusions: excluded,
-  failures,
+  heroes: [...new Set(catalogLines.map((line) => line.heroId))],
+  extracted: catalogLines.length,
+  excluded: retainedExclusions.length + excluded.length,
+  failed: retainedFailures.length + failures.length,
+  totalMp3Bytes: catalogLines.reduce((sum, line) => sum + line.bytes, 0),
+  lines: catalogLines,
+  exclusions: [...retainedExclusions, ...excluded],
+  failures: [...retainedFailures, ...failures],
 };
 fs.writeFileSync(path.join(outputRoot, "catalog.json"), JSON.stringify(catalog, null, 2));
 fs.writeFileSync(path.join(outputRoot, "index.html"), renderHtml(catalog));
@@ -223,12 +256,16 @@ fs.writeFileSync(
     "Os MP3s foram retirados do fluxo embutido nos .vsnd_c, sem recompressão.",
     "Esta pasta é para uso local. Não envie build/local-audio ao Git ou ao portal público.",
     "",
-    `Extraídos: ${result.length}`,
-    `Excluídos por serem vocalizações não verbais: ${excluded.length}`,
-    `Falhas técnicas: ${failures.length}`,
+    `MP3s no catálogo: ${catalog.extracted}`,
+    `Extraídos nesta execução: ${result.length}`,
+    `Excluídos por serem vocalizações não verbais: ${catalog.excluded}`,
+    `Falhas técnicas: ${catalog.failed}`,
     `Tamanho dos MP3s: ${formatBytes(catalog.totalMp3Bytes)}`,
   ].join("\r\n"),
 );
 
 console.log(`Catálogo: ${path.join(outputRoot, "index.html")}`);
-console.log(`MP3s: ${result.length}; falhas: ${failures.length}; ${formatBytes(catalog.totalMp3Bytes)}`);
+console.log(
+  `MP3s no catálogo: ${catalog.extracted}; novos nesta execução: ${result.length}; ` +
+  `falhas: ${catalog.failed}; ${formatBytes(catalog.totalMp3Bytes)}`,
+);

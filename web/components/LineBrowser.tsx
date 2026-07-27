@@ -17,12 +17,10 @@ export function LineBrowser({
   heroId,
   lines,
   translations,
-  responsePage,
 }: {
   heroId: string;
   lines: OfficialVoiceLine[];
   translations: Record<string, CurrentTranslation>;
-  responsePage: string;
 }) {
   const [query, setQuery] = useState("");
   const [category, setCategory] = useState("all");
@@ -93,7 +91,7 @@ export function LineBrowser({
         {filtered.map((line) => (
           <article className="line-row official-line-row" key={line.id}>
             <span className="line-id">{line.id}</span>
-            <OriginalAudio lineId={line.id} responsePage={responsePage} />
+            <OriginalAudio sourceId={heroId} lineId={line.id} />
             <span className="line-copy">
               <small>EN · caption oficial</small>
               <strong>{line.captionEn}</strong>

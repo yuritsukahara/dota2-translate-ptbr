@@ -1,14 +1,14 @@
 # Dublagem Brasileira Dota 2
 
-Portal Vinext/Cloudflare Workers para catalogar captions, receber packs comunitários e demonstrar apoio a uma dublagem oficial em português brasileiro.
+Portal pessoal em Vinext/Vite para catalogar captions, ouvir os arquivos do
+Dota instalado e organizar packs comunitários em português brasileiro.
 
 ## O que é fonte oficial
 
 - O inventário e as captions são extraídos do VPK instalado localmente.
 - A interface só identifica uma tradução como oficial quando ela existe no arquivo brasileiro do mesmo build.
 - No build catalogado atualmente, há 55.357 captions inglesas de 127 heróis e nenhuma caption brasileira base por herói.
-- O portal guarda o caminho do som original no cliente e tenta reproduzir externamente o arquivo individual do Fandom quando ele existe; não copia esse áudio para R2.
-- A categoria `Responses` da Dota 2 Wiki é uma referência editorial e uma origem externa dos players, não a fonte canônica do inventário.
+- O portal guarda o caminho do som original e reproduz somente os MP3 extraídos do Dota instalado localmente.
 
 ## Captions
 
@@ -45,7 +45,7 @@ O OpenID funciona sem segredo. A chave Web API é opcional e permite obter nome/
 
 `/peticao` apresenta uma carta pública à Valve e aceita uma assinatura por Steam ID. A ação exige sessão, validação de origem, limite de uso e registro de auditoria. A página não afirma apoio da Valve nem entrega automática da petição.
 
-## Desenvolvimento e Docker
+## Desenvolvimento local
 
 Requisitos: Node.js 22.13 ou superior.
 
@@ -55,13 +55,17 @@ npm run db:generate
 npm run dev
 ```
 
-Na raiz:
+O portal fica em `http://localhost:3000`. O ambiente de desenvolvimento cria
+as dependências de dados localmente; não é necessário Docker.
+
+Os players procuram os arquivos em `../build/local-audio/mp3`. Para extrair ou
+atualizar o narrador padrão, execute na raiz:
 
 ```powershell
-docker compose up --build
+npm run audio:catalog -- --hero announcer --merge
 ```
 
-O portal fica em `http://localhost:3000`. `DB` é o binding D1 e `AUDIO` é o R2 para gravações comunitárias pendentes e aprovadas.
+`build/local-audio` fica fora do Git e deve permanecer para uso pessoal.
 
 ## Verificação
 
@@ -70,4 +74,4 @@ npm test
 npm run lint
 ```
 
-As migrações ficam em `drizzle/`. A publicação no Sites sempre parte do commit Git exato.
+As migrações ficam em `drizzle/`.

@@ -16,9 +16,10 @@ test("portal público está em português e usa identidade Steam", async () => {
   assert.doesNotMatch(header, /Discord/);
   assert.match(header, /dota2_logo_symbol\.png/);
   assert.match(layout, /Dublagem Brasileira Dota 2/);
-  assert.match(css, /--green:\s*#167447/i);
-  assert.match(css, /--blue:\s*#1769aa/i);
-  assert.match(css, /linear-gradient\(180deg,#ffffff,#f7faf8\)/i);
+  assert.match(css, /--green:\s*#145c43/i);
+  assert.match(css, /--blue:\s*#285c66/i);
+  assert.match(css, /linear-gradient\(180deg,#fffefa,#f8f7f2\)/i);
+  assert.match(css, /--shadow:/i);
 });
 
 test("catálogo lista som local e captions oficiais EN e PT-BR", async () => {
@@ -32,8 +33,9 @@ test("catálogo lista som local e captions oficiais EN e PT-BR", async () => {
   assert.match(browser, /Sem versão PT-BR no catálogo/);
   assert.match(browser, /tradução automática/);
   assert.match(browser, /lines\.filter/);
-  assert.match(audio, /Special:Redirect\/file/);
-  assert.match(audio, /Fonte: Dota 2 Wiki\/Fandom/);
+  assert.match(audio, /\/audio\//);
+  assert.match(audio, /extraído do Dota instalado/);
+  assert.doesNotMatch(audio, /Fandom/i);
 });
 
 test("sugestões de captions ficam nas páginas de herói e exigem Steam", async () => {
@@ -185,4 +187,12 @@ test("petição possui assinatura única por usuário", async () => {
   assert.match(schema, /petition_signatures/);
   assert.match(schema, /userId: text\("user_id"\)\.notNull\(\)\.unique\(\)/);
   assert.match(api, /assertSameOrigin/);
+});
+
+test("servidor local entrega MP3 com suporte a seek sem expor outros arquivos", async () => {
+  const plugin = await readFile(new URL("../lib/local-audio-vite-plugin.ts", import.meta.url), "utf8");
+  assert.match(plugin, /accept-ranges/);
+  assert.match(plugin, /response\.statusCode = range \? 206 : 200/);
+  assert.match(plugin, /target\.startsWith/);
+  assert.match(plugin, /\.endsWith\("\.mp3"\)/);
 });

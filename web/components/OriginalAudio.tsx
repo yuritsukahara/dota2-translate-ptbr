@@ -3,15 +3,15 @@
 import { useState } from "react";
 
 export function OriginalAudio({
+  sourceId,
   lineId,
-  responsePage,
 }: {
+  sourceId: string;
   lineId: string;
-  responsePage: string;
 }) {
   const [unavailable, setUnavailable] = useState(false);
   const fileName = `${lineId}.mp3`;
-  const audioUrl = `https://dota2.fandom.com/wiki/Special:Redirect/file/${encodeURIComponent(fileName)}`;
+  const localUrl = `/audio/${encodeURIComponent(sourceId)}/${encodeURIComponent(fileName)}`;
 
   return (
     <span className="original-audio-source">
@@ -20,16 +20,14 @@ export function OriginalAudio({
         <audio
           controls
           preload="none"
-          src={audioUrl}
-          aria-label={`Ouvir áudio original de ${lineId} no Fandom`}
+          src={localUrl}
+          aria-label={`Ouvir áudio original local de ${lineId}`}
           onError={() => setUnavailable(true)}
         />
       ) : (
-        <small>Arquivo individual não encontrado no Fandom.</small>
+        <small>Arquivo não encontrado no catálogo local.</small>
       )}
-      <a href={responsePage} target="_blank" rel="noreferrer">
-        Fonte: Dota 2 Wiki/Fandom ↗
-      </a>
+      <small>Arquivo extraído do Dota instalado nesta máquina.</small>
     </span>
   );
 }
