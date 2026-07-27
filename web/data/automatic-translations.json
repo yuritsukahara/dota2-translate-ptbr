@@ -4,8 +4,8 @@
     "label": "Tradução automática pelo Codex · não revisada",
     "model": "gpt-5.6-luna",
     "generatedAt": "2026-07-26T23:50:32.188Z",
-    "uniqueTranslated": 23120,
-    "translatedOccurrences": 35056,
+    "uniqueTranslated": 23122,
+    "translatedOccurrences": 35058,
     "totalMissingOccurrences": 52602,
     "complete": false,
     "protectedGlossary": {
@@ -31545,7 +31545,10 @@
       "qop_arc_wheel_laugh_01_03": "Ah ha ha ha ha ha ha ha!",
       "qop_arc_win_02": "Vitória!"
     },
-    "razor": {},
+    "razor": {
+      "razor_arc_debut_06_a_narrow_maze": "Os mestres do Labirinto Estreito sofrerão...",
+      "razor_arc_debut_06_b_recollections": "As lembranças do vazio."
+    },
     "riki": {
       "riki_ability_invis_01": "Não veja o mal.",
       "riki_ability_smokescreen_02": "Puf!",
