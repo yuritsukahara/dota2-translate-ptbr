@@ -30,6 +30,7 @@ export function Footer() {
         <nav className="footer-links" aria-label="Links do rodapé">
           <Link href="/creditos">Créditos</Link>
           <Link href="/como-funciona">Diretrizes</Link>
+          <Link href="/releases">Baixar</Link>
           <a href="https://github.com/yuritsukahara/dota2-translate-ptbr">GitHub</a>
         </nav>
       </div>

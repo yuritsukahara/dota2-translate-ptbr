@@ -3,6 +3,8 @@ dist/
 node_modules/
 bin/
 obj/
+installer/**/bin/
+installer/**/obj/
 *.log
 *.tsbuildinfo
 .DS_Store

@@ -42,8 +42,8 @@ export default function Home() {
                 <Link className="button button-ghost" href="/heroes">
                   Explorar os 127 heróis
                 </Link>
-                <Link className="button button-ghost" href="/heroes">
-                  Ver traduções
+                <Link className="button button-ghost" href="/releases">
+                  Baixar instalador
                 </Link>
                 <Link className="button button-primary" href="/peticao">
                   Assinar a petição

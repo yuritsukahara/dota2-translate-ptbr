@@ -95,6 +95,7 @@ export function Header() {
         <Link href="/announcer" {...navProps("/announcer")}>Narrador</Link>
         <Link href="/enviar" {...navProps("/enviar")}>Packs de Voz</Link>
         <Link href="/peticao" {...navProps("/peticao")}>Petição</Link>
+        <Link href="/releases" {...navProps("/releases")}>Baixar</Link>
         <Link href="/como-funciona" {...navProps("/como-funciona")}>Projeto</Link>
         {authControl()}
       </nav>
@@ -106,6 +107,7 @@ export function Header() {
           <Link href="/announcer" {...navProps("/announcer")}>Narrador</Link>
           <Link href="/enviar" {...navProps("/enviar")}>Packs de Voz</Link>
           <Link href="/peticao" {...navProps("/peticao")}>Petição</Link>
+          <Link href="/releases" {...navProps("/releases")}>Baixar</Link>
           <Link href="/como-funciona" {...navProps("/como-funciona")}>Projeto</Link>
           {authControl()}
         </nav>

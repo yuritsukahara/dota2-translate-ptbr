@@ -61,6 +61,17 @@ npm run check
 
 O guia técnico do portal está em [`web/README.md`](web/README.md).
 
+## Instalador Windows
+
+O aplicativo gráfico em .NET 8 está em [`installer/`](installer/README.md). Ele
+segue a linguagem visual do portal, procura o Dota em todas as bibliotecas
+Steam, baixa do GitHub um pacote versionado e verificado e oferece dois modos:
+somente captions ou captions com o pack-exemplo do Axe.
+
+A descoberta de pastas é somente leitura. O executável publicado é
+self-contained, cria backup antes de instalar e não exige Node.js, .NET ou uma
+cópia deste repositório no computador do usuário.
+
 ## Catálogos e ferramentas locais
 
 ```powershell

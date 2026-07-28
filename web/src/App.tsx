@@ -17,6 +17,7 @@ const PetitionPage = lazy(() => import("@/app/peticao/page"));
 const ProfilePage = lazy(() => import("@/app/perfil/[id]/page"));
 const ProjectPage = lazy(() => import("@/app/como-funciona/page"));
 const CreditsPage = lazy(() => import("@/app/creditos/page"));
+const ReleasesPage = lazy(() => import("@/app/releases/page"));
 
 function NotFoundPage() {
   return (
@@ -46,6 +47,7 @@ export function App() {
   else if (pathname.startsWith("/perfil/")) page = <ProfilePage />;
   else if (pathname === "/como-funciona") page = <ProjectPage />;
   else if (pathname === "/creditos") page = <CreditsPage />;
+  else if (pathname === "/releases") page = <ReleasesPage />;
   else page = <NotFoundPage />;
 
   return (

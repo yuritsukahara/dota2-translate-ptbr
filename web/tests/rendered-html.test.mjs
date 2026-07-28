@@ -25,6 +25,7 @@ test("portal Vite usa identidade Steam e mantém somente a navegação atual", a
   assert.match(header, /href="\/announcer"/);
   assert.match(header, /href="\/enviar"/);
   assert.match(header, /href="\/peticao"/);
+  assert.match(header, /href="\/releases"/);
   assert.match(footer, /tangoleague-logo-text-black\.png/);
   assert.match(footer, /unoptimized/);
   assert.doesNotMatch(home, /\baxe\b/i);
@@ -40,6 +41,26 @@ test("portal Vite usa identidade Steam e mantém somente a navegação atual", a
   assert.match(app, /G-XJESRK7NV7/);
   assert.match(packageText, /"build": "vite build"/);
   assert.doesNotMatch(packageText, /vinext|next/);
+});
+
+test("página de release explica opções, camada de idioma e download", async () => {
+  const [app, page, release, css] = await Promise.all([
+    file("src/App.tsx"),
+    file("app/releases/page.tsx"),
+    file("data/installer-release.json"),
+    file("app/globals.css"),
+  ]);
+  const manifest = JSON.parse(release);
+  assert.match(app, /pathname === "\/releases"/);
+  assert.match(page, /Somente legendas/);
+  assert.match(page, /Legendas \+ Axe/);
+  assert.match(page, /camada de idioma/);
+  assert.match(page, /não altera mecânicas/i);
+  assert.match(page, /backup automaticamente/i);
+  assert.match(page, /DublagemBrasileiraDota2\.exe/);
+  assert.equal(manifest.captions.tokens, 76_901);
+  assert.equal(manifest.voicePacks[0].lines, 243);
+  assert.match(css, /\.release-mode-grid/);
 });
 
 test("catálogo fixado ao build 6869 possui os totais esperados", async () => {
@@ -243,7 +264,6 @@ test("rotas e componentes removidos não voltaram", async () => {
     "app/captions/page.tsx",
     "app/linhas/[id]/page.tsx",
     "app/moderacao/page.tsx",
-    "app/releases/page.tsx",
     "app/heroes/announcer/page.tsx",
     "app/api/proposals/route.ts",
     "app/api/releases/route.ts",

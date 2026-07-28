@@ -24,6 +24,10 @@
     "validate": "node scripts/validate.mjs",
     "web:seed": "node scripts/export-web-seed.mjs",
     "web:summary": "node scripts/sync-home-summary.mjs",
+    "installer:icon": "node scripts/build-windows-installer-icon.mjs",
+    "installer:payload": "node scripts/build-windows-installer-payload.mjs",
+    "installer:test": "dotnet run --project installer/DublagemBrasileira.Installer.Tests/DublagemBrasileira.Installer.Tests.csproj -c Release",
+    "installer:publish": "dotnet publish installer/DublagemBrasileira.Installer/DublagemBrasileira.Installer.csproj -c Release -r win-x64 --self-contained true -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true -p:EnableCompressionInSingleFile=true -p:DebugType=None -o build/windows-installer",
     "web:dev": "npm --prefix web run dev",
     "web:test": "npm --prefix web test",
     "check": "npm run validate && npm run voices:audit && npm --prefix web run lint && npm --prefix web test"
