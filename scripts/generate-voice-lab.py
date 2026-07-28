@@ -37,13 +37,12 @@ def translations_for(hero_id: str) -> dict[str, tuple[str, str]]:
     )
     for line in voice_catalog["heroes"].get(hero_id, []):
         if line.get("captionPtBr"):
-            resolved[line["id"]] = (line["captionPtBr"], "oficial")
-
-    if hero_id == "axe":
-        axe_lines = json.loads((ROOT / "web/data/axe-lines.json").read_text(encoding="utf-8"))
-        for line in axe_lines:
-            if line.get("ptBrText"):
-                resolved.setdefault(line["id"], (line["ptBrText"], "prévia comunitária"))
+            source = (
+                "prévia comunitária"
+                if line.get("captionPtBrSource") == "community"
+                else "oficial"
+            )
+            resolved[line["id"]] = (line["captionPtBr"], source)
 
     automatic = json.loads(
         (ROOT / "web/data/automatic-translations.json").read_text(encoding="utf-8")

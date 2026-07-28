@@ -10,6 +10,7 @@ const defaultVpk =
 const voiceCatalogPath = path.join(root, "web", "data", "voice-lines.json");
 const heroCatalogPath = path.join(root, "web", "data", "heroes.json");
 const announcerCatalogPath = path.join(root, "web", "data", "announcer-lines.json");
+const personaCatalogPath = path.join(root, "web", "data", "personas.json");
 const knownNonVerbalIds = new Set([
   "no_mana_not_yet01",
   "no_mana_not_yet02",
@@ -117,6 +118,7 @@ const vpkPath = path.resolve(argument("--vpk", defaultVpk));
 const outputRoot = path.resolve(argument("--output", path.join(root, "build", "local-audio")));
 const requestedHero = argument("--hero", "axe");
 const extractAll = has("--all");
+const extractPersonas = has("--personas");
 const dryRun = has("--dry-run");
 const indexOnly = has("--index-only");
 const mergeExisting = has("--merge");
@@ -137,19 +139,28 @@ if (!fs.existsSync(vpkPath)) throw new Error(`VPK não encontrado: ${vpkPath}`);
 const voiceCatalog = JSON.parse(fs.readFileSync(voiceCatalogPath, "utf8"));
 const heroCatalog = JSON.parse(fs.readFileSync(heroCatalogPath, "utf8"));
 const announcerCatalog = JSON.parse(fs.readFileSync(announcerCatalogPath, "utf8"));
+const personaCatalog = fs.existsSync(personaCatalogPath)
+  ? JSON.parse(fs.readFileSync(personaCatalogPath, "utf8"))
+  : { variants: [] };
 const voiceSources = {
   ...voiceCatalog.heroes,
   announcer: announcerCatalog.lines.map((line) => ({
     ...line,
     assetPath: normalizeAnnouncerAssetPath(line.assetPath),
   })),
+  ...Object.fromEntries(
+    personaCatalog.variants.map((variant) => [variant.id, variant.lines]),
+  ),
 };
 const heroNames = new Map([
   ...heroCatalog.heroes.map((hero) => [hero.id, hero.name]),
   ["announcer", "Narrador padrão"],
+  ...personaCatalog.variants.map((variant) => [variant.id, variant.name]),
 ]);
 const selectedHeroIds = extractAll
   ? Object.keys(voiceSources)
+  : extractPersonas
+    ? personaCatalog.variants.map((variant) => variant.id)
   : requestedHero.split(",").map((value) => value.trim()).filter(Boolean);
 
 for (const heroId of selectedHeroIds) {

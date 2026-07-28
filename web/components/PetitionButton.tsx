@@ -1,34 +1,62 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
-export function PetitionButton({ alreadySigned }: { alreadySigned: boolean }) {
+export function PetitionButton({
+  alreadySigned,
+  language,
+}: {
+  alreadySigned: boolean;
+  language: "pt-BR" | "en";
+}) {
+  const router = useRouter();
   const [signed, setSigned] = useState(alreadySigned);
-  const [message, setMessage] = useState("");
+  const [status, setStatus] = useState<"" | "error">("");
+  const english = language === "en";
 
   async function sign() {
-    setMessage("");
+    setStatus("");
     const response = await fetch("/api/petition/sign", { method: "POST" });
     if (response.status === 401) {
-      window.location.href = "/api/auth/steam/start";
+      window.location.href = "/api/auth/steam/start?returnTo=%2Fpeticao";
       return;
     }
-    const body = await response.json() as { error?: string };
     if (!response.ok) {
-      setMessage(body.error || "Não foi possível registrar a assinatura.");
+      setStatus("error");
       return;
     }
     setSigned(true);
-    setMessage("Sua assinatura foi registrada. Obrigado por fortalecer esta voz.");
+    router.refresh();
+  }
+
+  if (signed) {
+    return (
+      <div className="petition-action petition-thanks" role="status">
+        <span aria-hidden="true">✓</span>
+        <div>
+          <strong>
+            {english ? "Thank you for signing!" : "Obrigado por assinar!"}
+          </strong>
+          <p>
+            {english
+              ? "Your support helps Brazilian voices reach Dota 2."
+              : "Seu apoio ajuda as vozes brasileiras a chegarem ao Dota 2."}
+          </p>
+        </div>
+      </div>
+    );
   }
 
   return (
     <div className="petition-action">
-      <button className="button button-primary" type="button" onClick={sign} disabled={signed}>
-        {signed ? "Petição assinada" : "Assinar a carta com Steam"}
+      <button className="button button-primary" type="button" onClick={sign}>
+        {english ? "Sign the letter with Steam" : "Assinar a carta com Steam"}
       </button>
       <p className="form-note" aria-live="polite">
-        {message || "Uma assinatura por Steam ID. Você escolhe se seu nome público aparece na lista."}
+        {status === "error"
+          ? (english ? "We could not record your signature." : "Não foi possível registrar a assinatura.")
+          : (english ? "One signature per Steam ID." : "Uma assinatura por Steam ID.")}
       </p>
     </div>
   );

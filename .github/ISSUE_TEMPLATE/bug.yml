@@ -1,5 +1,5 @@
 name: Problema técnico
-description: Relatar erro no manifesto, geração, compilação ou addon
+description: Relatar erro no portal, catálogo, captions, áudio local ou kit ZIP
 title: "[BUG] "
 labels: ["bug"]
 body:
@@ -18,10 +18,9 @@ body:
   - type: input
     id: dota
     attributes:
-      label: Versão/data do Dota 2
+      label: Build/data do Dota 2
   - type: textarea
     id: logs
     attributes:
       label: Logs relevantes
       render: shell
-

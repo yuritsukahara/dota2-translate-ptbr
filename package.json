@@ -5,17 +5,23 @@
   "type": "module",
   "scripts": {
     "sync:axe": "node scripts/sync-manifest.mjs --hero axe",
-    "sync:catalog": "node scripts/sync-game-catalog.mjs && node scripts/export-web-seed.mjs && node scripts/sync-official-voice-catalog.mjs",
-    "sync:official-voices": "node scripts/sync-official-voice-catalog.mjs",
+    "sync:catalog": "node scripts/sync-game-catalog.mjs && node scripts/sync-official-voice-catalog.mjs && node scripts/export-web-seed.mjs",
+    "sync:official-voices": "node scripts/sync-official-voice-catalog.mjs && node scripts/export-web-seed.mjs",
     "audio:catalog": "node scripts/build-local-mp3-catalog.mjs",
+    "audio:personas": "node scripts/build-local-mp3-catalog.mjs --personas --merge",
     "audio:serve": "node scripts/serve-local-audio-catalog.mjs",
     "translations:codex": "node scripts/generate-automatic-translations-codex.mjs",
+    "translations:status": "node scripts/generate-automatic-translations-codex.mjs --dry-run",
+    "captions:pack": "node scripts/build-local-caption-pack.mjs",
+    "captions:audit": "node scripts/audit-caption-variants.mjs && node scripts/sync-persona-catalog.mjs",
+    "images:personas": "node scripts/extract-persona-images.mjs && node scripts/sync-persona-catalog.mjs",
     "validate": "node scripts/validate.mjs",
     "web:seed": "node scripts/export-web-seed.mjs",
     "web:dev": "npm --prefix web run dev",
-    "web:test": "npm --prefix web test"
+    "web:test": "npm --prefix web test",
+    "check": "npm run validate && npm --prefix web run lint && npm --prefix web test"
   },
   "engines": {
-    "node": ">=20"
+    "node": ">=22.13.0"
   }
 }

@@ -14,7 +14,13 @@ export function getCurrentTranslations(sourceId: string, lines: OfficialVoiceLin
   return Object.fromEntries(
     lines.flatMap((line) => {
       if (line.captionPtBr) {
-        return [[line.id, { text: line.captionPtBr, source: "official" } satisfies CurrentTranslation]];
+        return [[
+          line.id,
+          {
+            text: line.captionPtBr,
+            source: line.captionPtBrSource || "official",
+          } satisfies CurrentTranslation,
+        ]];
       }
       if (community[line.id]) {
         return [[line.id, { text: community[line.id], source: "community" } satisfies CurrentTranslation]];
@@ -30,7 +36,7 @@ export function getCurrentTranslations(sourceId: string, lines: OfficialVoiceLin
 export function currentTranslationLabel(source: CurrentTranslation["source"]) {
   if (source === "official") return "caption oficial";
   if (source === "community") return "tradução da comunidade";
-  return "tradução automática";
+  return "tradução sugerida";
 }
 
 export function countTranslationSources(translations: Record<string, CurrentTranslation>) {

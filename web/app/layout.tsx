@@ -11,15 +11,14 @@ export const metadata: Metadata = {
   metadataBase: new URL(process.env.PUBLIC_SITE_URL || "http://localhost:3000"),
   title: { default: "Dublagem Brasileira Dota 2", template: "%s · Dublagem Brasileira Dota 2" },
   description: "Todos os heróis e o narrador padrão de Dota 2 em português brasileiro.",
-  icons: { icon: "/og.png", shortcut: "/og.png" },
+  icons: { icon: "/favicon.svg", shortcut: "/favicon.svg" },
   openGraph: {
     title: "Dublagem Brasileira Dota 2",
     description: "127 heróis, um narrador e uma comunidade construindo Dota 2 em português brasileiro.",
     locale: "pt_BR",
     type: "website",
-    images: ["/og.png"],
   },
-  twitter: { card: "summary_large_image", images: ["/og.png"] },
+  twitter: { card: "summary" },
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {

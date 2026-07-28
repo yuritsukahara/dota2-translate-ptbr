@@ -1,0 +1,33 @@
+{
+  "source": "Dota 2 VPK local; retratos oficiais de personas e estilos alternativos",
+  "variants": {
+    "antimage-wei": { "asset": "panorama/images/heroes/npc_dota_hero_antimage_persona1_png.vtex_c" },
+    "dragon-knight-davion": { "asset": "panorama/images/heroes/npc_dota_hero_dragon_knight_persona1_png.vtex_c" },
+    "dragon_knight-drag": { "asset": "panorama/images/heroes/npc_dota_hero_dragon_knight_persona1_png.vtex_c" },
+    "invoker-kid": { "asset": "panorama/images/heroes/npc_dota_hero_invoker_persona1_png.vtex_c" },
+    "mirana-nightsilver": { "asset": "panorama/images/heroes/npc_dota_hero_mirana_persona1_png.vtex_c" },
+    "phantom-assassin-asan": { "asset": "panorama/images/heroes/npc_dota_hero_phantom_assassin_persona1_png.vtex_c" },
+    "pudge-toy-butcher": { "asset": "panorama/images/heroes/npc_dota_hero_pudge_persona1_png.vtex_c" },
+    "drow_ranger-dro": { "asset": "panorama/images/heroes/npc_dota_hero_drow_ranger_alt1_png.vtex_c" },
+    "earthshaker-erth": { "asset": "panorama/images/heroes/npc_dota_hero_earthshaker_alt1_png.vtex_c" },
+    "faceless_void-fv": { "asset": "panorama/images/heroes/npc_dota_hero_faceless_void_alt1_png.vtex_c" },
+    "juggernaut-jug": { "asset": "panorama/images/heroes/npc_dota_hero_juggernaut_alt1_png.vtex_c" },
+    "juggernaut-jugsc": { "asset": "panorama/images/heroes/npc_dota_hero_juggernaut_alt2_png.vtex_c" },
+    "monkey_king-mk": { "asset": "panorama/images/heroes/npc_dota_hero_monkey_king_alt1_png.vtex_c" },
+    "ogre_magi-ogm": { "asset": "panorama/images/heroes/npc_dota_hero_ogre_magi_alt1_png.vtex_c" },
+    "ogre_magi-ogmag": { "asset": "panorama/images/heroes/npc_dota_hero_ogre_magi_alt2_png.vtex_c" },
+    "queenofpain-pain": { "asset": "panorama/images/heroes/npc_dota_hero_queenofpain_alt1_png.vtex_c" },
+    "razor-raz": { "asset": "panorama/images/heroes/npc_dota_hero_razor_alt1_png.vtex_c" },
+    "razor-rz": { "asset": "panorama/images/heroes/npc_dota_hero_razor_alt2_png.vtex_c" },
+    "rubick-rub": { "asset": "panorama/images/heroes/npc_dota_hero_rubick_alt_png.vtex_c" },
+    "skywrath_mage-drag": { "asset": "panorama/images/heroes/npc_dota_hero_skywrath_mage_alt1_png.vtex_c" },
+    "spectre-fs": { "asset": "panorama/images/heroes/npc_dota_hero_spectre_alt1_png.vtex_c" },
+    "spectre-spec": { "asset": "panorama/images/heroes/npc_dota_hero_spectre_alt2_png.vtex_c" },
+    "techies-noba": { "asset": "panorama/images/heroes/npc_dota_hero_techies_alt1_png.vtex_c" },
+    "vengefulspirit-imperia": { "asset": "panorama/images/heroes/npc_dota_hero_vengefulspirit_alt1_png.vtex_c" },
+    "vengefulspirit-vng": { "asset": "panorama/images/heroes/npc_dota_hero_vengefulspirit_alt2_png.vtex_c" },
+    "windrunner-wr": { "asset": "panorama/images/heroes/npc_dota_hero_windrunner_alt1_png.vtex_c" },
+    "skeleton_king-wraith": { "asset": "panorama/images/heroes/npc_dota_hero_skeleton_king_alt1_png.vtex_c" },
+    "zuus-zeus": { "asset": "panorama/images/heroes/npc_dota_hero_zuus_alt1_png.vtex_c" }
+  }
+}

@@ -13,6 +13,11 @@ const nextConfig: NextConfig = {
         hostname: "avatars.steamstatic.com",
         pathname: "/**",
       },
+      {
+        protocol: "https",
+        hostname: "avatars.fastly.steamstatic.com",
+        pathname: "/**",
+      },
     ],
   },
 };

@@ -27,7 +27,7 @@ export function OriginalAudio({
       ) : (
         <small>Arquivo não encontrado no catálogo local.</small>
       )}
-      <small>Arquivo extraído do Dota instalado nesta máquina.</small>
+      <small>Arquivo extraído do Dota.</small>
     </span>
   );
 }

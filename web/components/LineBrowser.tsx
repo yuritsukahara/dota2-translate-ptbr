@@ -1,17 +1,91 @@
 "use client";
 
-import { FormEvent, useEffect, useMemo, useState } from "react";
+import {
+  FormEvent,
+  useCallback,
+  useDeferredValue,
+  useEffect,
+  useMemo,
+  useState,
+} from "react";
+import {
+  LegendList,
+  type LegendListRenderItemProps,
+} from "@legendapp/list/react";
 import type { OfficialVoiceLine } from "@/lib/catalog";
 import { categoryLabel } from "@/lib/catalog";
 import { OriginalAudio } from "@/components/OriginalAudio";
 import type { CurrentTranslation } from "@/lib/current-translations";
 import { findRelevantTerms, validateTerminology } from "@/lib/terminology";
 
+type SteamUser = { displayName: string };
+
 function translationLabel(source: CurrentTranslation["source"]) {
   if (source === "official") return "caption oficial";
   if (source === "community") return "tradução da comunidade";
-  return "tradução automática";
+  return "tradução sugerida";
 }
+
+function VoiceLineRow({
+  authChecked,
+  heroId,
+  isLast,
+  line,
+  onSuggest,
+  steamUser,
+  translation,
+}: {
+  authChecked: boolean;
+  heroId: string;
+  isLast: boolean;
+  line: OfficialVoiceLine;
+  onSuggest: (line: OfficialVoiceLine) => void;
+  steamUser: SteamUser | null;
+  translation?: CurrentTranslation;
+}) {
+  return (
+    <article
+      className={`line-row official-line-row${isLast ? " is-last" : ""}`}
+      role="listitem"
+    >
+      <span className="line-id">{line.id}</span>
+      <OriginalAudio key={line.id} sourceId={heroId} lineId={line.id} />
+      <span className="line-copy">
+        <small>EN · caption oficial</small>
+        <strong>{line.captionEn}</strong>
+      </span>
+      <span className="line-copy">
+        <small>
+          PT-BR · {translation ? translationLabel(translation.source) : "sem tradução"}
+        </small>
+        <strong>{translation?.text || "Sem versão PT-BR no catálogo"}</strong>
+      </span>
+      <span className={`status-pill ${translation ? "open" : ""}`}>
+        {translation ? "incluída" : "pendente"}
+      </span>
+      {authChecked && steamUser ? (
+        <button
+          className="caption-select"
+          type="button"
+          onClick={() => onSuggest(line)}
+        >
+          Sugerir alteração
+        </button>
+      ) : authChecked ? (
+        <a
+          className="caption-select"
+          href={`/api/auth/steam/start?returnTo=${encodeURIComponent(heroId === "announcer" ? "/announcer" : `/heroes/${heroId}`)}`}
+        >
+          Entrar para sugerir
+        </a>
+      ) : (
+        <span className="suggestion-auth-loading">Verificando Steam…</span>
+      )}
+    </article>
+  );
+}
+
+const lineKeyExtractor = (line: OfficialVoiceLine) => line.id;
 
 export function LineBrowser({
   heroId,
@@ -23,8 +97,9 @@ export function LineBrowser({
   translations: Record<string, CurrentTranslation>;
 }) {
   const [query, setQuery] = useState("");
+  const deferredQuery = useDeferredValue(query);
   const [category, setCategory] = useState("all");
-  const [steamUser, setSteamUser] = useState<{ displayName: string } | null>(null);
+  const [steamUser, setSteamUser] = useState<SteamUser | null>(null);
   const [authChecked, setAuthChecked] = useState(false);
   const [selectedLine, setSelectedLine] = useState<OfficialVoiceLine | null>(null);
   const [suggestion, setSuggestion] = useState("");
@@ -32,7 +107,7 @@ export function LineBrowser({
   const [busy, setBusy] = useState(false);
   const categories = useMemo(() => [...new Set(lines.map((line) => line.category))].sort(), [lines]);
   const filtered = useMemo(() => {
-    const normalized = query.trim().toLowerCase();
+    const normalized = deferredQuery.trim().toLowerCase();
     return lines.filter((line) =>
       (category === "all" || line.category === category) &&
       (!normalized ||
@@ -40,7 +115,7 @@ export function LineBrowser({
         line.captionEn.toLowerCase().includes(normalized) ||
         (translations[line.id]?.text || "").toLowerCase().includes(normalized)),
     );
-  }, [category, lines, query, translations]);
+  }, [category, deferredQuery, lines, translations]);
   const relevantTerms = selectedLine ? findRelevantTerms(selectedLine.captionEn) : [];
   const terminologyWarnings = selectedLine ? validateTerminology(selectedLine.captionEn, suggestion) : [];
 
@@ -51,11 +126,38 @@ export function LineBrowser({
       .finally(() => setAuthChecked(true));
   }, []);
 
-  function openSuggestion(line: OfficialVoiceLine) {
+  const openSuggestion = useCallback((line: OfficialVoiceLine) => {
     setSelectedLine(line);
     setSuggestion(translations[line.id]?.text || "");
     setMessage("");
-  }
+  }, [translations]);
+
+  const renderLine = useCallback(
+    ({ item, index }: LegendListRenderItemProps<OfficialVoiceLine>) => (
+      <VoiceLineRow
+        authChecked={authChecked}
+        heroId={heroId}
+        isLast={index === filtered.length - 1}
+        line={item}
+        onSuggest={openSuggestion}
+        steamUser={steamUser}
+        translation={translations[item.id]}
+      />
+    ),
+    [
+      authChecked,
+      filtered.length,
+      heroId,
+      openSuggestion,
+      steamUser,
+      translations,
+    ],
+  );
+
+  const rowState = useMemo(
+    () => ({ authChecked, steamUser, translations }),
+    [authChecked, steamUser, translations],
+  );
 
   async function submitSuggestion(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -67,6 +169,11 @@ export function LineBrowser({
       headers: { "content-type": "application/json" },
       body: JSON.stringify({ heroId, lineId: selectedLine.id, text: suggestion }),
     });
+    if (response.status === 401) {
+      const returnTo = heroId === "announcer" ? "/announcer" : `/heroes/${heroId}`;
+      window.location.href = `/api/auth/steam/start?returnTo=${encodeURIComponent(returnTo)}`;
+      return;
+    }
     const payload = await response.json() as { error?: string };
     if (response.ok) {
       setMessage("Sugestão enviada para a comunidade.");
@@ -88,36 +195,24 @@ export function LineBrowser({
       </div>
       <p className="form-note">{filtered.length} de {lines.length} falas visíveis</p>
       <div className="line-list">
-        {filtered.map((line) => (
-          <article className="line-row official-line-row" key={line.id}>
-            <span className="line-id">{line.id}</span>
-            <OriginalAudio sourceId={heroId} lineId={line.id} />
-            <span className="line-copy">
-              <small>EN · caption oficial</small>
-              <strong>{line.captionEn}</strong>
-            </span>
-            <span className="line-copy">
-              <small>
-                PT-BR · {translations[line.id]
-                  ? translationLabel(translations[line.id].source)
-                  : "sem tradução"}
-              </small>
-              <strong>{translations[line.id]?.text || "Sem versão PT-BR no catálogo"}</strong>
-            </span>
-            <span className={`status-pill ${translations[line.id] ? "open" : ""}`}>
-              {translations[line.id] ? "incluída" : "pendente"}
-            </span>
-            {authChecked && steamUser ? (
-              <button className="caption-select" type="button" onClick={() => openSuggestion(line)}>
-                Sugerir alteração
-              </button>
-            ) : authChecked ? (
-              <a className="caption-select" href="/api/auth/steam/start">Entrar para sugerir</a>
-            ) : (
-              <span className="suggestion-auth-loading">Verificando Steam…</span>
-            )}
-          </article>
-        ))}
+        <LegendList
+          aria-label={`Voicelines de ${heroId}`}
+          className="legend-line-list"
+          data={filtered}
+          drawDistance={700}
+          estimatedItemSize={150}
+          extraData={rowState}
+          keyExtractor={lineKeyExtractor}
+          ListEmptyComponent={
+            <p className="line-list-empty">
+              Nenhuma fala corresponde aos filtros atuais.
+            </p>
+          }
+          recycleItems
+          renderItem={renderLine}
+          role="list"
+          useWindowScroll
+        />
       </div>
       {selectedLine && steamUser && (
         <div className="modal-backdrop" role="presentation">

@@ -5,36 +5,8 @@
     {
       "idx": 0,
       "version": "6",
-      "when": 1784860141870,
-      "tag": "0000_sudden_sally_floyd",
-      "breakpoints": true
-    },
-    {
-      "idx": 1,
-      "version": "6",
-      "when": 1785076861835,
-      "tag": "0001_exotic_adam_warlock",
-      "breakpoints": true
-    },
-    {
-      "idx": 2,
-      "version": "6",
-      "when": 1785077506922,
-      "tag": "0002_mushy_sir_ram",
-      "breakpoints": true
-    },
-    {
-      "idx": 3,
-      "version": "6",
-      "when": 1785094371993,
-      "tag": "0003_skinny_brood",
-      "breakpoints": true
-    },
-    {
-      "idx": 4,
-      "version": "6",
-      "when": 1785107944370,
-      "tag": "0004_flawless_post",
+      "when": 1785249610723,
+      "tag": "0000_nappy_franklin_storm",
       "breakpoints": true
     }
   ]

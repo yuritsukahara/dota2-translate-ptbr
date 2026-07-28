@@ -29,7 +29,7 @@ export default async function VoicePackPage({
             <h1 className="page-title">Envie sua interpretação completa</h1>
             <p>
               Grave todas as captions faladas de {hero.name}, organize os WAVs
-              em uma pasta do Google Drive e envie o link para a triagem.
+              em uma pasta do Google Drive e envie o link pelo portal.
               Um pack sempre preserva a voz de um único intérprete.
             </p>
             <Link className="text-link" href={`/heroes/${hero.id}`}>Consultar todas as captions <span>→</span></Link>

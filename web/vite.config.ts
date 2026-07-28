@@ -2,29 +2,8 @@ import vinext from "vinext";
 import { defineConfig } from "vite";
 import { localAudio } from "./lib/local-audio-vite-plugin";
 
-const SITE_CREATOR_PLACEHOLDER_DATABASE_ID =
-  "00000000-0000-4000-8000-000000000000";
-
 // macOS Seatbelt blocks FSEvents, so Codex previews need polling for HMR.
 const isCodexSeatbeltSandbox = process.env.CODEX_SANDBOX === "seatbelt";
-
-const localBindingConfig = {
-  main: "./worker/index.ts",
-  compatibility_flags: ["nodejs_compat"],
-  d1_databases: [
-    {
-      binding: "DB",
-      database_name: "dublagem-brasileira-local",
-      database_id: SITE_CREATOR_PLACEHOLDER_DATABASE_ID,
-    },
-  ],
-  r2_buckets: [
-    {
-      binding: "AUDIO",
-      bucket_name: "dublagem-brasileira-audio-local",
-    },
-  ],
-};
 
 export default defineConfig(async () => {
   // Keep Wrangler and Miniflare state project-local. These are non-secret tool
@@ -45,7 +24,6 @@ export default defineConfig(async () => {
       localAudio(),
       cloudflare({
         viteEnvironment: { name: "rsc", childEnvironments: ["ssr"] },
-        config: localBindingConfig,
       }),
     ],
   };

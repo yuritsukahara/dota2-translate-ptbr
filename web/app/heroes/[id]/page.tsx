@@ -8,8 +8,10 @@ import {
   CURRENT_BUILD,
   getHero,
   getHeroLines,
+  getHeroPersonas,
   heroes,
 } from "@/lib/catalog";
+import { HeroCard } from "@/components/HeroCard";
 import { countTranslationSources, getCurrentTranslations } from "@/lib/current-translations";
 
 export function generateStaticParams() {
@@ -26,6 +28,7 @@ export default async function HeroPage({
   if (!hero) notFound();
   const lines = getHeroLines(id);
   const translations = getCurrentTranslations(id, lines);
+  const heroPersonas = getHeroPersonas(id);
   const includedCount = Object.keys(translations).length;
   const sources = countTranslationSources(translations);
 
@@ -42,7 +45,7 @@ export default async function HeroPage({
             <h1 className="page-title">{hero.name}</h1>
             <p>
               {hero.total} voicelines reconciliadas com captions oficiais em inglês.
-              Traduções automáticas entram diretamente no catálogo PT-BR; a
+              Traduções sugeridas entram diretamente no catálogo PT-BR; a
               comunidade pode sugerir alternativas sem bloquear a inclusão.
             </p>
             <div className="hero-actions">
@@ -54,13 +57,29 @@ export default async function HeroPage({
           <div className="stat-card"><strong>{includedCount}</strong><span>captions PT-BR incluídas</span></div>
           <div className="stat-card"><strong>{sources.official}</strong><span>oficiais do jogo</span></div>
           <div className="stat-card"><strong>{sources.community}</strong><span>traduzidas pela comunidade</span></div>
-          <div className="stat-card"><strong>{sources.automatic}</strong><span>traduções automáticas</span></div>
+          <div className="stat-card"><strong>{sources.automatic}</strong><span>traduções sugeridas</span></div>
         </div>
         <VoicePackPanel heroId={hero.id} heroName={hero.name} />
+        {heroPersonas.length > 0 && (
+          <section className="hero-variants-section">
+            <div className="section-heading compact">
+              <div>
+                <p className="eyebrow">ELENCOS SEPARADOS</p>
+                <h2>Personas e variantes de {hero.name}</h2>
+              </div>
+              <Link className="text-link" href="/personas">Ver inventário completo <span>→</span></Link>
+            </div>
+            <div className="hero-card-grid">
+              {heroPersonas.map((persona) => (
+                <HeroCard key={persona.id} persona={persona} />
+              ))}
+            </div>
+          </section>
+        )}
         <div className="detail-grid official-caption-note" style={{ marginBottom: 50 }}>
           <section className="detail-panel">
             <h2>Fonte das captions</h2>
-            <p className="form-note">Inglês vem de <code>subtitles_{hero.voiceDirectory}_english.txt</code>. Para PT-BR, usamos primeiro a caption oficial; na ausência dela, a tradução da comunidade; e, por último, a tradução automática. Tudo o que o projeto já traduziu permanece incluído com a origem identificada.</p>
+            <p className="form-note">Inglês vem de <code>subtitles_{hero.voiceDirectory}_english.txt</code>. Para PT-BR, usamos primeiro a caption oficial; na ausência dela, a tradução da comunidade; e, por último, uma tradução sugerida. Tudo o que o projeto já traduziu permanece incluído com a origem identificada.</p>
           </section>
           <aside className="side-panel">
             <p className="eyebrow">SOM ORIGINAL</p>

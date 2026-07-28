@@ -51,4 +51,114 @@ for (const manifest of manifests) {
   console.log(`${path.relative(root, manifest)}: ${objects.length} linhas válidas`);
 }
 
+function readJson(relativePath) {
+  return JSON.parse(fs.readFileSync(path.join(root, relativePath), "utf8"));
+}
+
+function assertEqual(label, actual, expected) {
+  if (actual !== expected) {
+    console.error(`${label}: esperado ${expected}, encontrado ${actual}`);
+    failures += 1;
+  }
+}
+
+const heroCatalog = readJson("web/data/heroes.json");
+const voiceCatalog = readJson("web/data/voice-lines.json");
+const personaCatalog = readJson("web/data/personas.json");
+const announcerCatalog = readJson("web/data/announcer-lines.json");
+const suggestedCatalog = readJson("web/data/automatic-translations.json");
+const baseLines = Object.values(voiceCatalog.heroes).flat();
+const personaLines = personaCatalog.variants.flatMap((variant) => variant.lines);
+const announcerLines = announcerCatalog.lines;
+const catalogTotal = baseLines.length + personaLines.length + announcerLines.length;
+
+assertEqual("build do catálogo", String(heroCatalog.build.clientVersion), "6869");
+assertEqual("heróis", heroCatalog.heroes.length, 127);
+assertEqual("linhas base", baseLines.length, 55_357);
+assertEqual("personas e variantes", personaCatalog.variants.length, 39);
+assertEqual("linhas de personas e variantes", personaLines.length, 19_878);
+assertEqual("linhas do narrador", announcerLines.length, 2_074);
+assertEqual("captions totais", catalogTotal, 77_309);
+
+const baseCommunityLines = baseLines.filter(
+  (line) => line.captionPtBrSource === "community" && line.captionPtBr,
+);
+const memory = new Map();
+const ambiguous = new Set();
+for (const line of baseCommunityLines) {
+  const key = line.captionEn.trim().toLocaleLowerCase("en");
+  const existing = memory.get(key);
+  if (existing && existing !== line.captionPtBr) ambiguous.add(key);
+  else memory.set(key, line.captionPtBr);
+}
+for (const key of ambiguous) memory.delete(key);
+
+const sources = { official: 0, community: 0, suggested: 0, missing: 0 };
+const sourceGroups = [
+  ...Object.entries(voiceCatalog.heroes).map(([id, lines]) => ({ id, lines, reuseCommunity: true })),
+  ...personaCatalog.variants.map((variant) => ({ id: variant.id, lines: variant.lines, reuseCommunity: false })),
+  { id: "announcer", lines: announcerLines, reuseCommunity: false },
+];
+for (const source of sourceGroups) {
+  const suggested = suggestedCatalog.translations[source.id] || {};
+  for (const line of source.lines) {
+    if (line.captionPtBr) {
+      if (line.captionPtBrSource === "community") sources.community += 1;
+      else if (line.captionPtBrSource === "automatic") sources.suggested += 1;
+      else sources.official += 1;
+    } else if (
+      source.reuseCommunity &&
+      memory.has(line.captionEn.trim().toLocaleLowerCase("en"))
+    ) {
+      sources.community += 1;
+    } else if (suggested[line.id]) {
+      sources.suggested += 1;
+    } else {
+      sources.missing += 1;
+    }
+  }
+}
+assertEqual("captions oficiais PT-BR", sources.official, 1_399);
+assertEqual("captions comunitárias", sources.community, 4_604);
+assertEqual("captions sugeridas", sources.suggested, 71_306);
+assertEqual("captions sem PT-BR", sources.missing, 0);
+
+const hygieneTargets = [
+  "README.md",
+  "web/README.md",
+  "CONTRIBUTING.md",
+  "ATTRIBUTION.md",
+  ".github",
+  "docs",
+  "web/app",
+  "web/components",
+  "web/lib",
+  "web/db",
+  "web/drizzle",
+];
+const textExtensions = new Set([".md", ".ts", ".tsx", ".js", ".mjs", ".json", ".yml", ".yaml", ".sql", ".css"]);
+function collectTextFiles(target) {
+  const absolute = path.join(root, target);
+  if (!fs.existsSync(absolute)) return [];
+  const stat = fs.statSync(absolute);
+  if (stat.isFile()) return [absolute];
+  return fs.readdirSync(absolute, { withFileTypes: true }).flatMap((entry) =>
+    collectTextFiles(path.relative(root, path.join(absolute, entry.name))),
+  );
+}
+for (const file of hygieneTargets.flatMap(collectTextFiles)) {
+  if (!textExtensions.has(path.extname(file))) continue;
+  if (/\bdiscord\b/i.test(fs.readFileSync(file, "utf8"))) {
+    console.error(`${path.relative(root, file)}: referência obsoleta à identidade removida`);
+    failures += 1;
+  }
+}
+
+console.log(
+  `Catálogo build ${heroCatalog.build.clientVersion}: ${catalogTotal.toLocaleString("pt-BR")} captions ` +
+  `(${sources.official.toLocaleString("pt-BR")} oficiais, ` +
+  `${sources.community.toLocaleString("pt-BR")} comunitárias, ` +
+  `${sources.suggested.toLocaleString("pt-BR")} sugeridas)`,
+);
+
 if (failures) process.exitCode = 1;

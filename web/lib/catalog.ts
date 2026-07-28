@@ -1,6 +1,7 @@
 import heroCatalog from "@/data/heroes.json";
 import voiceCatalog from "@/data/voice-lines.json";
 import announcerCatalog from "@/data/announcer-lines.json";
+import personaCatalog from "@/data/personas.json";
 
 export type Hero = (typeof heroCatalog.heroes)[number];
 export type OfficialVoiceLine = {
@@ -10,7 +11,32 @@ export type OfficialVoiceLine = {
   captionToken: string;
   captionEn: string;
   captionPtBr: string | null;
+  captionPtBrSource?: "official" | "community" | "automatic" | null;
   originalAudio: "dota_local";
+  sourceStatus?: string;
+  voiceScope?: string;
+  voiceDirection?: string;
+  translationStatus?: string;
+  audioStatus?: string;
+};
+
+export type PersonaVariant = {
+  id: string;
+  heroId: string;
+  heroName: string;
+  name: string;
+  type: "persona" | "voice_variant";
+  prefixes: string[];
+  imageUrl: string;
+  iconUrl: string;
+  imageAssetPath?: string | null;
+  voiceDirectory: string;
+  total: number;
+  translated: number;
+  officialBrazilianCaptions: number;
+  reusedCaptions: number;
+  audioAssets: number;
+  lines: OfficialVoiceLine[];
 };
 
 const linesByHero = (
@@ -24,6 +50,9 @@ export const CURRENT_BUILD_DATE = heroCatalog.build.date;
 export const heroes = [...heroCatalog.heroes].sort((left, right) =>
   left.name.localeCompare(right.name, "pt-BR")
 );
+export const personas = (
+  personaCatalog as { variants: PersonaVariant[] }
+).variants;
 
 export type CaptionSource = {
   id: string;
@@ -48,21 +77,17 @@ export const captionSources: CaptionSource[] = [
   ...heroes.map((hero) => ({ ...hero, kind: "hero" as const })),
 ];
 
-export const getAxeLines = () => linesByHero.axe || [];
-export const getLineContext = (id: string) => {
-  for (const [sourceId, lines] of Object.entries(linesByHero)) {
-    const line = lines.find((item) => item.id === id);
-    if (line) return { sourceId, line };
-  }
-  const announcerLine = announcerLines.find((line) => line.id === id);
-  return announcerLine ? { sourceId: "announcer", line: announcerLine } : undefined;
-};
-export const getLine = (id: string) => getLineContext(id)?.line;
 export const getHero = (id: string) => heroes.find((hero) => hero.id === id);
 export const getCaptionSource = (id: string) => captionSources.find((source) => source.id === id);
 export const getHeroLines = (id: string) => id === "announcer" ? announcerLines : linesByHero[id] || [];
 export const getHeroLine = (heroId: string, lineId: string) =>
   getHeroLines(heroId).find((line) => line.id === lineId);
+export const getPersona = (id: string) =>
+  personas.find((persona) => persona.id === id);
+export const getPersonaLines = (id: string) =>
+  getPersona(id)?.lines || [];
+export const getHeroPersonas = (heroId: string) =>
+  personas.filter((persona) => persona.heroId === heroId);
 
 export function categoryLabel(category: string) {
   const labels: Record<string, string> = {

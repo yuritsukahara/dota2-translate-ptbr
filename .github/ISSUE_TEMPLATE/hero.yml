@@ -1,39 +1,27 @@
-name: Adotar um herói
-description: Propor ou assumir tradução, revisão ou gravação de um herói
-title: "[HERÓI] "
+name: Corrigir catálogo
+description: Relatar uma linha, herói, persona ou narrador ausente ou incorreto
+title: "[CATÁLOGO] "
 labels: ["herói"]
 body:
   - type: input
-    id: hero
+    id: source
     attributes:
-      label: Herói
+      label: Herói, persona ou narrador
     validations:
       required: true
-  - type: dropdown
-    id: role
+  - type: input
+    id: line
     attributes:
-      label: Área
-      options:
-        - Tradução
-        - Revisão
-        - Interpretação
-        - Direção
-        - Edição de áudio
-        - Teste técnico
-    validations:
-      required: true
+      label: ID da linha
+      description: Deixe vazio quando o problema afetar a fonte inteira.
   - type: textarea
-    id: scope
+    id: problem
     attributes:
-      label: Escopo
-      description: Categorias ou IDs que você pretende trabalhar.
+      label: O que precisa ser corrigido?
+      description: Para uma nova tradução ou pack de voz, use o próprio portal.
     validations:
       required: true
-  - type: checkboxes
-    id: rights
+  - type: input
+    id: build
     attributes:
-      label: Direitos
-      options:
-        - label: Li as regras de contribuição e não enviarei áudio extraído do jogo ou voz sem consentimento.
-          required: true
-
+      label: Build do Dota 2

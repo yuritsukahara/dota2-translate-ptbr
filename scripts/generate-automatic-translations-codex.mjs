@@ -12,14 +12,42 @@ const args = new Map(
 const batchSize = Number(args.get("--batch") || 50);
 const concurrency = Number(args.get("--concurrency") || 2);
 const limit = Number(args.get("--limit") || 0);
+const dryRun = args.has("--dry-run");
+const dumpPending = args.has("--dump-pending");
 const checkpointPath = path.join(workspace, "build/automatic-translation-codex-checkpoint.json");
 const outputPath = path.join(workspace, "web/data/automatic-translations.json");
 const schemaPath = path.join(workspace, "scripts/schemas/translation-batch.schema.json");
 const tempRoot = path.join(workspace, "build/codex-translator");
+const retrySignal = new Int32Array(new SharedArrayBuffer(4));
+
+function writeFileAtomicWithRetry(filePath, contents) {
+  const tempPath = `${filePath}.${process.pid}.tmp`;
+  fs.writeFileSync(tempPath, contents);
+  let lastError;
+  for (let attempt = 1; attempt <= 30; attempt += 1) {
+    try {
+      fs.renameSync(tempPath, filePath);
+      return;
+    } catch (error) {
+      lastError = error;
+      const transient =
+        error &&
+        ["EACCES", "EBUSY", "EPERM", "UNKNOWN"].includes(error.code);
+      if (!transient) break;
+      Atomics.wait(retrySignal, 0, 0, Math.min(100 * attempt, 1_000));
+    }
+  }
+  try {
+    fs.unlinkSync(tempPath);
+  } catch {}
+  throw lastError;
+}
 
 const voiceCatalog = JSON.parse(fs.readFileSync(path.join(workspace, "web/data/voice-lines.json"), "utf8"));
 const announcer = JSON.parse(fs.readFileSync(path.join(workspace, "web/data/announcer-lines.json"), "utf8")).lines;
-const axeDrafts = JSON.parse(fs.readFileSync(path.join(workspace, "web/data/axe-lines.json"), "utf8"));
+const personas = JSON.parse(
+  fs.readFileSync(path.join(workspace, "web/data/personas.json"), "utf8"),
+).variants;
 const terminology = JSON.parse(fs.readFileSync(path.join(workspace, "web/data/terminology.json"), "utf8"));
 
 const normalize = (value) =>
@@ -41,6 +69,36 @@ const protectedTerms = [
   ...terminology.heroes.map((term) => ({ ...term, type: "herói" })),
   ...terminology.items.map((term) => ({ ...term, type: "item" })),
 ].filter((term) => term.en.length > 2 && term.ptBr.length > 1);
+const ambiguousProtectedTerms = new Set([
+  "axe",
+  "bottle",
+  "dazzle",
+  "doom",
+  "essence",
+  "eye",
+  "flicker",
+  "heart",
+  "laurel",
+  "lion",
+  "mars",
+  "razor",
+  "tiny",
+  "tough",
+  "tusk",
+]);
+const ignoredProtectedTerms = new Set(["tough"]);
+
+function containsWholeCaseSensitive(source, term) {
+  let offset = 0;
+  while (offset < source.length) {
+    const start = source.indexOf(term, offset);
+    if (start < 0) return false;
+    const end = start + term.length;
+    if (!isWord(source[start - 1]) && !isWord(source[end])) return true;
+    offset = start + 1;
+  }
+  return false;
+}
 
 function relevantTermsForLine(line) {
   const source = normalize(line);
@@ -49,6 +107,13 @@ function relevantTermsForLine(line) {
     .sort((left, right) => right.en.length - left.en.length)
     .filter((term) => {
       const normalizedTerm = normalize(term.en);
+      if (ignoredProtectedTerms.has(normalizedTerm)) return false;
+      if (
+        ambiguousProtectedTerms.has(normalizedTerm) &&
+        !containsWholeCaseSensitive(line, term.en)
+      ) {
+        return false;
+      }
       let offset = 0;
       while (offset < source.length) {
         const start = source.indexOf(normalizedTerm, offset);
@@ -85,25 +150,55 @@ function terminologyViolations(source, translated) {
 
 const communityMemory = new Map();
 const ambiguous = new Set();
-for (const line of axeDrafts.filter((item) => item.voiceScope === "spoken" && item.ptBrText)) {
-  const key = normalize(line.sourceText);
+const communityLines = Object.values(voiceCatalog.heroes)
+  .flat()
+  .filter((line) => line.captionPtBrSource === "community" && line.captionPtBr);
+for (const line of communityLines) {
+  const key = normalize(line.captionEn);
   const existing = communityMemory.get(key);
-  if (existing && existing !== line.ptBrText) ambiguous.add(key);
-  else communityMemory.set(key, line.ptBrText);
+  if (existing && existing !== line.captionPtBr) ambiguous.add(key);
+  else communityMemory.set(key, line.captionPtBr);
 }
 for (const key of ambiguous) communityMemory.delete(key);
 
-// O narrador já possui muitas captions oficiais PT-BR; as lacunas restantes
-// entram primeiro na fila para que essa fonte não espere todos os heróis.
-const sources = { announcer, ...voiceCatalog.heroes };
+const sources = {
+  // Personas e variantes entram primeiro para que o catálogo recém-auditado
+  // ganhe cobertura antes de retomar as lacunas restantes dos heróis-base.
+  ...Object.fromEntries(
+    personas.map((persona) => [persona.id, persona.lines]),
+  ),
+  announcer,
+  ...voiceCatalog.heroes,
+};
 const missingOccurrences = Object.entries(sources).flatMap(([sourceId, lines]) =>
   lines
-    .filter((line) => !line.captionPtBr && !communityMemory.has(normalize(line.captionEn)))
+    .filter(
+      (line) =>
+        (!line.captionPtBr || line.captionPtBrSource === "automatic") &&
+        !communityMemory.has(normalize(line.captionEn)),
+    )
     .map((line) => ({ sourceId, lineId: line.id, captionEn: line.captionEn.trim() })),
 );
 const uniqueMissing = [
   ...new Map(missingOccurrences.map((item) => [item.captionEn, item.captionEn])).values(),
 ];
+const persistedAutomatic = new Map();
+const ambiguousPersistedAutomatic = new Set();
+for (const lines of Object.values(sources)) {
+  for (const line of lines) {
+    if (line.captionPtBrSource !== "automatic" || !line.captionPtBr) continue;
+    const source = line.captionEn.trim();
+    const previous = persistedAutomatic.get(source);
+    if (previous && previous !== line.captionPtBr) {
+      ambiguousPersistedAutomatic.add(source);
+    } else {
+      persistedAutomatic.set(source, line.captionPtBr);
+    }
+  }
+}
+for (const source of ambiguousPersistedAutomatic) {
+  persistedAutomatic.delete(source);
+}
 
 fs.mkdirSync(tempRoot, { recursive: true });
 const checkpoint = fs.existsSync(checkpointPath)
@@ -121,8 +216,36 @@ if (invalidatedByGlossary) {
   console.log(`${invalidatedByGlossary} traduções antigas voltaram à fila por violar o glossário.`);
 }
 
-const pending = uniqueMissing.filter((caption) => !checkpoint.translations[caption]);
+const pending = uniqueMissing.filter(
+  (caption) =>
+    !checkpoint.translations[caption] && !persistedAutomatic.has(caption),
+);
 const selected = limit ? pending.slice(0, limit) : pending;
+if (dumpPending) {
+  const pendingSet = new Set(pending);
+  console.log(
+    JSON.stringify(
+      {
+        unique: pending.length,
+        occurrences: missingOccurrences.filter((item) =>
+          pendingSet.has(item.captionEn),
+        ),
+      },
+      null,
+      2,
+    ),
+  );
+  process.exit(0);
+}
+if (dryRun) {
+  console.log(
+    `${Object.keys(sources).length} fontes · ` +
+      `${missingOccurrences.length.toLocaleString("pt-BR")} ocorrências sem PT-BR · ` +
+      `${uniqueMissing.length.toLocaleString("pt-BR")} textos únicos · ` +
+      `${pending.length.toLocaleString("pt-BR")} textos únicos pendentes.`,
+  );
+  process.exit(0);
+}
 
 function promptFor(lines) {
   const glossary = relevantTerms(lines);
@@ -229,7 +352,10 @@ function runCodex(lines, workerId, attempt = 1) {
 
 function saveCheckpoint() {
   checkpoint.updatedAt = new Date().toISOString();
-  fs.writeFileSync(checkpointPath, `${JSON.stringify(checkpoint, null, 2)}\n`);
+  writeFileAtomicWithRetry(
+    checkpointPath,
+    `${JSON.stringify(checkpoint, null, 2)}\n`,
+  );
   writeCatalog();
 }
 
@@ -238,32 +364,45 @@ function writeCatalog() {
   for (const [sourceId, lines] of Object.entries(sources)) {
     translations[sourceId] = Object.fromEntries(
       lines.flatMap((line) => {
-        if (line.captionPtBr || communityMemory.has(normalize(line.captionEn))) return [];
-        const translated = checkpoint.translations[line.captionEn.trim()];
+        if (
+          (line.captionPtBr && line.captionPtBrSource !== "automatic") ||
+          communityMemory.has(normalize(line.captionEn))
+        ) {
+          return [];
+        }
+        const translated =
+          checkpoint.translations[line.captionEn.trim()] ||
+          (line.captionPtBrSource === "automatic" ? line.captionPtBr : null);
         return translated ? [[line.id, translated]] : [];
       }),
     );
   }
   const translatedOccurrences = Object.values(translations)
     .reduce((total, entries) => total + Object.keys(entries).length, 0);
-  fs.writeFileSync(outputPath, `${JSON.stringify({
-    metadata: {
-      status: "automatic",
-      label: "Tradução automática pelo Codex · não revisada",
-      model,
-      generatedAt: new Date().toISOString(),
-      uniqueTranslated: Object.keys(checkpoint.translations).length,
-      translatedOccurrences,
-      totalMissingOccurrences: missingOccurrences.length,
-      complete: translatedOccurrences === missingOccurrences.length,
-      protectedGlossary: {
-        heroes: terminology.heroes.length,
-        items: terminology.items.length,
-        invalidatedOnResume: invalidatedByGlossary,
+  writeFileAtomicWithRetry(
+    outputPath,
+    `${JSON.stringify({
+      metadata: {
+        status: "automatic",
+        label: "Tradução automática pelo Codex · não revisada",
+        model,
+        generatedAt: new Date().toISOString(),
+        uniqueTranslated: new Set([
+          ...Object.keys(checkpoint.translations),
+          ...persistedAutomatic.keys(),
+        ]).size,
+        translatedOccurrences,
+        totalMissingOccurrences: missingOccurrences.length,
+        complete: translatedOccurrences === missingOccurrences.length,
+        protectedGlossary: {
+          heroes: terminology.heroes.length,
+          items: terminology.items.length,
+          invalidatedOnResume: invalidatedByGlossary,
+        },
       },
-    },
-    translations,
-  }, null, 2)}\n`);
+      translations,
+    }, null, 2)}\n`,
+  );
   return translatedOccurrences;
 }
 

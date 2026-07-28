@@ -1,5 +1,6 @@
 import fs from "node:fs";
 import path from "node:path";
+import { listVpkEntries, readVpkEntryRecord } from "./lib/vpk.mjs";
 
 const SIGNATURE = 0x55aa1234;
 const ARCHIVE_INDEX = 0;
@@ -33,21 +34,45 @@ function collectFiles(root) {
   return files.sort((left, right) => left.localeCompare(right));
 }
 
-const [sourceRootArgument, outputBaseArgument] = process.argv.slice(2);
+const [sourceRootArgument, outputBaseArgument, ...options] = process.argv.slice(2);
 if (!sourceRootArgument || !outputBaseArgument) {
   throw new Error(
-    "Uso: node scripts/pack-language-vpk.mjs <diretório-fonte> <base-de-saída>"
+    "Uso: node scripts/pack-language-vpk.mjs <diretório-fonte> <base-de-saída> [--base <pak01_dir.vpk>]"
   );
 }
 
 const sourceRoot = path.resolve(sourceRootArgument);
 const outputBase = path.resolve(outputBaseArgument);
-const entries = collectFiles(sourceRoot).map((absolutePath) => {
+const baseIndex = options.indexOf("--base");
+const baseVpk =
+  baseIndex >= 0 && options[baseIndex + 1]
+    ? path.resolve(options[baseIndex + 1])
+    : null;
+const entriesByPath = new Map();
+
+if (baseVpk && fs.existsSync(baseVpk)) {
+  for (const entry of listVpkEntries(baseVpk)) {
+    entriesByPath.set(entry.path.toLowerCase(), {
+      relativePath: entry.path,
+      data: readVpkEntryRecord(baseVpk, entry)
+    });
+  }
+}
+
+for (const absolutePath of collectFiles(sourceRoot)) {
   const relativePath = path.relative(sourceRoot, absolutePath).replaceAll("\\", "/");
+  entriesByPath.set(relativePath.toLowerCase(), {
+    relativePath,
+    data: fs.readFileSync(absolutePath)
+  });
+}
+
+const entries = [...entriesByPath.values()]
+  .sort((left, right) => left.relativePath.localeCompare(right.relativePath))
+  .map(({ relativePath, data }) => {
   const extension = path.posix.extname(relativePath).slice(1);
   const directory = path.posix.dirname(relativePath);
   const filename = path.posix.basename(relativePath, `.${extension}`);
-  const data = fs.readFileSync(absolutePath);
   return { extension, directory, filename, data };
 });
 

@@ -25,11 +25,15 @@ export function VoicePackForm({ heroId, heroName }: { heroId: string; heroName: 
         followedGuidelines: form.get("followedGuidelines") === "on",
       }),
     });
+    if (response.status === 401) {
+      window.location.href = `/api/auth/steam/start?returnTo=${encodeURIComponent(`/packs/${heroId}`)}`;
+      return;
+    }
     const payload = await response.json() as { error?: string };
     if (response.ok) {
       event.currentTarget.reset();
       setSuccess(true);
-      setMessage(`Pack de ${heroName} enviado para triagem.`);
+      setMessage(`Pack de ${heroName} enviado com sucesso.`);
     } else {
       setSuccess(false);
       setMessage(payload.error || "Não foi possível enviar o pack.");
@@ -56,7 +60,7 @@ export function VoicePackForm({ heroId, heroName }: { heroId: string; heroName: 
         <small>Compartilhe a pasta como “Qualquer pessoa com o link — Leitor”.</small>
       </label>
       <label>
-        Observações para a revisão
+        Observações sobre o pack
         <textarea className="field" name="notes" maxLength={1000} placeholder="Direção de voz, equipamento usado ou informações importantes…" />
       </label>
       <label className="check-row">

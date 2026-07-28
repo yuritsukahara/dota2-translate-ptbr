@@ -52,7 +52,6 @@ export async function POST(request: Request) {
         credit,
         driveFolderUrl,
         notes,
-        status: "pending",
       }),
       db.insert(auditEvents).values({
         id: crypto.randomUUID(),
@@ -64,7 +63,7 @@ export async function POST(request: Request) {
       }),
     ]);
 
-    return Response.json({ submission: { id, heroId, status: "pending" } }, { status: 201 });
+    return Response.json({ submission: { id, heroId } }, { status: 201 });
   } catch (error) {
     if (error instanceof Response) return error;
     return Response.json(

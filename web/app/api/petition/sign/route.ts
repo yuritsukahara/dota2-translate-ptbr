@@ -15,7 +15,6 @@ export async function POST(request: Request) {
       id,
       userId: user.id,
       statementVersion: "2026-07-26",
-      displayPublicly: true,
     }).onConflictDoNothing();
     await db.insert(auditEvents).values({
       id: crypto.randomUUID(),

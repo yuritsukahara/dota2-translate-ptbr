@@ -5,9 +5,11 @@ import type { ReactNode } from "react";
 
 export function HeroCatalog({
   entries,
+  label = "heróis",
   children,
 }: {
   entries: Array<{ id: string; name: string }>;
+  label?: string;
   children: ReactNode;
 }) {
   const [query, setQuery] = useState("");
@@ -26,12 +28,12 @@ export function HeroCatalog({
         <input
           className="field search-field"
           type="search"
-          aria-label="Buscar herói pelo nome"
-          placeholder="Buscar herói pelo nome…"
+          aria-label={label === "heróis" ? "Buscar herói pelo nome" : `Buscar ${label} pelo nome`}
+          placeholder={label === "heróis" ? "Buscar herói pelo nome…" : `Buscar ${label} pelo nome…`}
           value={query}
           onChange={(event) => setQuery(event.target.value)}
         />
-        <span>{visible.length} heróis</span>
+        <span>{visible.length} {label}</span>
       </div>
       <div className="hero-card-grid">
         {visible.map(({ entry, card }) => <div className="hero-card-slot" key={entry.id}>{card}</div>)}

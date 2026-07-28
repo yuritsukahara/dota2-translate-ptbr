@@ -7,3 +7,6 @@ obj/
 *.tsbuildinfo
 .DS_Store
 Thumbs.db
+.vscode/
+audio/compiled/
+data/contatos-estudios-dublagem.csv

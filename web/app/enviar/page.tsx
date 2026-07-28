@@ -15,12 +15,12 @@ export default function SubmitPage() {
       <main className="page-shell">
         <div className="page-intro">
           <div><p className="eyebrow">VOZES DA COMUNIDADE</p><h1 className="page-title">Packs de Voz</h1></div>
-          <p>Escolha um herói, grave todas as falas com caption e envie o link de uma pasta organizada no Google Drive. Cada envio passa por triagem de direitos, formato e consistência.</p>
+          <p>Escolha um herói, grave todas as falas com caption e envie o link de uma pasta organizada no Google Drive. O crédito, a autorização e as diretrizes ficam vinculados ao envio.</p>
         </div>
         <section className="casting-panel">
           <p className="eyebrow">COMO ENVIAR</p>
           <h2>Uma pasta. Um herói. Uma identidade.</h2>
-          <p>Você mantém os arquivos no seu próprio Google Drive. O portal armazena apenas o link, seu crédito e o estado da revisão. As falas de autores diferentes nunca são misturadas no mesmo pack.</p>
+          <p>Você mantém os arquivos no seu próprio Google Drive. O portal armazena apenas o link, seu crédito e suas observações. As falas de autores diferentes nunca são misturadas no mesmo pack.</p>
           <div className="casting-flow">
             <span>01 · escolha o herói</span>
             <span>02 · grave o pack completo</span>

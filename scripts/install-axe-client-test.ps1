@@ -1,7 +1,7 @@
 [CmdletBinding()]
 param(
     [string]$DotaRoot = $env:DOTA2_ROOT,
-    [string]$AddonName = "dota2_translate_ptbr",
+    [string]$CompiledAudioRoot,
     [switch]$KeepCurrentAudioLanguage
 )
 
@@ -13,7 +13,10 @@ if (-not $DotaRoot) {
 $DotaRoot = [System.IO.Path]::GetFullPath($DotaRoot)
 $gameRoot = [System.IO.Path]::GetFullPath((Join-Path $DotaRoot "game"))
 $target = [System.IO.Path]::GetFullPath((Join-Path $gameRoot "dota_brazilian"))
-$compiledRoot = Join-Path $gameRoot "dota_addons\$AddonName\sounds\vo\axe"
+if (-not $CompiledAudioRoot) {
+    $CompiledAudioRoot = Join-Path $repoRoot "audio\compiled\dota_brazilian\sounds\vo\axe"
+}
+$compiledRoot = [System.IO.Path]::GetFullPath($CompiledAudioRoot)
 $spokenPath = Join-Path $repoRoot "data\heroes\axe\spoken-ptbr.json"
 $stateRoot = Join-Path $repoRoot "build\client-test"
 $backupTarget = Join-Path $stateRoot "previous-dota_brazilian"
@@ -58,7 +61,6 @@ try {
             Game core
             Mod dota_brazilian
             Mod dota
-            AddonRoot dota_addons
             PublicContent core
         }
     }
@@ -121,6 +123,6 @@ catch {
     throw
 }
 
-Write-Host "Teste do Axe instalado com $copied vozes-guia."
+Write-Host "Pack de áudio do Axe instalado diretamente na camada dota_brazilian com $copied vozes."
 Write-Host "O menu Áudio agora pode usar Português-Brasil."
 Write-Host "Para desfazer: .\scripts\restore-axe-client-test.ps1"

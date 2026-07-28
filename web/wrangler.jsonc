@@ -1,0 +1,40 @@
+{
+	"$schema": "node_modules/wrangler/config-schema.json",
+	"name": "dota2-translate-ptbr-web",
+	"account_id": "d498ec719fbf21aff0f0e165e46efe41",
+	"main": "worker/index.ts",
+	"compatibility_date": "2026-05-22",
+	"compatibility_flags": [
+		"nodejs_compat"
+	],
+	"d1_databases": [
+		{
+			"binding": "DB",
+			"database_name": "dublagem-brasileira-local",
+			"database_id": "00000000-0000-4000-8000-000000000000",
+			"migrations_dir": "drizzle"
+		}
+	],
+	"env": {
+		"production": {
+			"name": "dublagem-brasileira-dota2",
+			"vars": {
+				"PUBLIC_SITE_URL": "https://traducao.tangoleague.gg"
+			},
+			"routes": [
+				{
+					"pattern": "traducao.tangoleague.gg",
+					"custom_domain": true
+				}
+			],
+			"d1_databases": [
+				{
+					"binding": "DB",
+					"database_name": "dublagem-brasileira-prod",
+					"database_id": "a669681c-cc94-4293-b1da-97366ebceb96",
+					"migrations_dir": "drizzle"
+				}
+			]
+		}
+	}
+}
