@@ -92,9 +92,9 @@ for (const line of [...baseLines, ...personaLines, ...announcerLines]) {
   }
 }
 assertEqual("captions oficiais PT-BR", sources.official, 1_399);
-assertEqual("captions comunitárias", sources.community, 1_647);
-assertEqual("captions sugeridas", sources.suggested, 71_121);
-assertEqual("captions sem PT-BR", sources.missing, 3_427);
+assertEqual("captions comunitárias", sources.community, 4_828);
+assertEqual("captions sugeridas", sources.suggested, 71_367);
+assertEqual("captions sem PT-BR", sources.missing, 0);
 
 const hygieneTargets = [
   "README.md",

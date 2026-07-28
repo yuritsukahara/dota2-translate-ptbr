@@ -158,6 +158,18 @@ if (!skipPayload && File.Exists(releaseArchive))
     Expect(
         names.Contains("layers/captions-axe/dota_brazilian/pak01_dir.vpk"),
         "O pacote deve conter o modo captions + Axe.");
+    Expect(
+        names.Contains(
+            "layers/captions/dota_brazilian/resource/subtitles/subtitles_axe_brazilian.txt"),
+        "O modo de captions deve manter o arquivo individual do Axe.");
+    Expect(
+        names.Contains(
+            "layers/captions/dota_brazilian/resource/subtitles/subtitles_crystalmaiden_brazilian.txt"),
+        "O modo de captions deve manter o arquivo individual da Crystal Maiden.");
+    Expect(
+        names.Contains(
+            "layers/captions/dota_brazilian/resource/subtitles/subtitles_announcer_brazilian.txt"),
+        "O modo de captions deve manter o narrador padrão ancorado.");
 
     var manifestEntry = archive.GetEntry("payload-manifest.json");
     Expect(manifestEntry is not null, "O pacote deve conter o manifesto interno.");
@@ -167,7 +179,7 @@ if (!skipPayload && File.Exists(releaseArchive))
         var payloadManifest = await JsonSerializer.DeserializeAsync<PayloadManifest>(
             manifestStream,
             new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
-        Expect(payloadManifest?.Version == "6869.1", "A versão interna deve ser 6869.1.");
+        Expect(payloadManifest?.Version == "6869.2", "A versão interna deve ser 6869.2.");
         foreach (var file in payloadManifest?.Files ?? [])
         {
             var entry = archive.GetEntry(file.Path);

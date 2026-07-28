@@ -4,6 +4,7 @@ import fs from "node:fs";
 import { createRequire } from "node:module";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { listVpkEntries } from "./lib/vpk.mjs";
 
 const scriptDirectory = path.dirname(fileURLToPath(import.meta.url));
 const repositoryRoot = path.resolve(scriptDirectory, "..");
@@ -34,6 +35,14 @@ const captionManifestPath = path.join(
   "caption-pack",
   "dota_brazilian",
   "caption-pack-manifest.json",
+);
+const captionSubtitlesRoot = path.join(
+  repositoryRoot,
+  "build",
+  "caption-pack",
+  "dota_brazilian",
+  "resource",
+  "subtitles",
 );
 const captionAnchorPath = path.join(
   repositoryRoot,
@@ -89,13 +98,17 @@ if (!fs.existsSync(axeAudioRoot)) {
 
 fs.rmSync(releaseRoot, { recursive: true, force: true });
 for (const overlayRoot of [captionsOverlayRoot, axeOverlayRoot]) {
-  fs.mkdirSync(path.join(overlayRoot, "resource", "subtitles"), { recursive: true });
+  const overlaySubtitlesRoot = path.join(
+    overlayRoot,
+    "resource",
+    "subtitles",
+  );
+  fs.mkdirSync(overlaySubtitlesRoot, { recursive: true });
+  fs.cpSync(captionSubtitlesRoot, overlaySubtitlesRoot, { recursive: true });
   fs.copyFileSync(
     captionAnchorPath,
     path.join(
-      overlayRoot,
-      "resource",
-      "subtitles",
+      overlaySubtitlesRoot,
       "subtitles_announcer_brazilian.txt",
     ),
   );
@@ -124,6 +137,32 @@ run("pack-language-vpk.mjs", [
   path.join(axeLanguageRoot, "pak01"),
 ]);
 
+const expectedSubtitleFiles = fs
+  .readdirSync(captionSubtitlesRoot)
+  .filter((name) => name.endsWith("_brazilian.txt"))
+  .sort();
+for (const [modeRoot, overlayRoot] of [
+  [captionsLanguageRoot, captionsOverlayRoot],
+  [axeLanguageRoot, axeOverlayRoot],
+]) {
+  const packedEntries = new Set(
+    listVpkEntries(path.join(modeRoot, "pak01_dir.vpk")).map(
+      (entry) => entry.path,
+    ),
+  );
+  for (const filename of expectedSubtitleFiles) {
+    const entry = `resource/subtitles/${filename}`;
+    if (!packedEntries.has(entry)) {
+      throw new Error(`Caption ausente no VPK: ${entry}`);
+    }
+  }
+  fs.cpSync(
+    path.join(overlayRoot, "resource", "subtitles"),
+    path.join(modeRoot, "resource", "subtitles"),
+    { recursive: true },
+  );
+}
+
 const gameInfo = `"GameInfo"
 {
     LayeredOnMod dota
@@ -150,7 +189,7 @@ const captionManifest = JSON.parse(fs.readFileSync(captionManifestPath, "utf8"))
 const payloadFiles = collectFiles(stagingRoot);
 const payloadManifest = {
   schemaVersion: 1,
-  version: `${captionManifest.build.clientVersion}.1`,
+  version: `${captionManifest.build.clientVersion}.2`,
   createdAt: new Date().toISOString(),
   dotaBuild: captionManifest.build,
   captions: {

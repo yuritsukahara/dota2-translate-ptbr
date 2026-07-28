@@ -58,7 +58,13 @@ test("página de release explica opções, camada de idioma e download", async (
   assert.match(page, /não altera mecânicas/i);
   assert.match(page, /backup antes de começar/i);
   assert.match(page, /DublagemBrasileiraDota2\.exe/);
-  assert.equal(manifest.captions.tokens, 76_901);
+  assert.equal(manifest.captions.tokens, 77_594);
+  assert.equal(
+    manifest.captions.sources.official +
+      manifest.captions.sources.community +
+      manifest.captions.sources.suggested,
+    manifest.captions.tokens,
+  );
   assert.equal(manifest.voicePacks[0].lines, 243);
   assert.match(css, /\.release-mode-grid/);
 });
@@ -94,7 +100,13 @@ test("catálogo fixado ao build 6869 possui os totais esperados", async () => {
     ).length,
     1_399,
   );
-  assert.equal(suggested.metadata.translatedOccurrences, 71_316);
+  assert.equal(suggested.metadata.translatedOccurrences, 71_348);
+  assert.equal(
+    [...baseLines, ...personaLines, ...announcer.lines].filter(
+      (line) => !line.captionPtBr,
+    ).length,
+    0,
+  );
   assert.equal(
     voices.heroes.axe.filter(
       (line) => line.captionPtBrSource === "community" && line.captionPtBr,
@@ -163,7 +175,7 @@ test("schema limpo contém somente as seis tabelas do produto", async () => {
 });
 
 test("as três ações protegidas exigem sessão e retorno Steam seguro", async () => {
-  const [petition, captions, packs, start, callback, openid, auth] =
+  const [petition, captions, packs, start, callback, openid, auth, lineBrowser] =
     await Promise.all([
       file("app/api/petition/sign/route.ts"),
       file("app/api/caption-suggestions/route.ts"),
@@ -172,6 +184,7 @@ test("as três ações protegidas exigem sessão e retorno Steam seguro", async 
       file("app/api/auth/steam/callback/route.ts"),
       file("lib/steam-openid.ts"),
       file("lib/auth.ts"),
+      file("components/LineBrowser.tsx"),
     ]);
   for (const route of [petition, captions, packs]) {
     assert.match(route, /assertSameOrigin/);
@@ -185,6 +198,12 @@ test("as três ações protegidas exigem sessão e retorno Steam seguro", async 
   assert.match(openid, /safeReturnPath/);
   assert.ok(openid.includes('startsWith("//")'));
   assert.ok(openid.includes('startsWith("/api/auth/")'));
+  assert.match(captions, /db\.batch\(\[/);
+  assert.match(captions, /db\.insert\(captionSuggestions\)/);
+  assert.match(captions, /db\.insert\(auditEvents\)/);
+  assert.match(captions, /status: 201/);
+  assert.match(lineBrowser, /fetch\("\/api\/caption-suggestions"/);
+  assert.match(lineBrowser, /Sugestão enviada para a comunidade\./);
 });
 
 test("petição consulta a API, publica perfil Steam e impede assinatura duplicada", async () => {
@@ -209,7 +228,7 @@ test("petição consulta a API, publica perfil Steam e impede assinatura duplica
   assert.doesNotMatch([page, content, button, schema, api].join("\n"), /displayPublicly/);
 });
 
-test("packs usam Google Drive, perfil Steam e kits R2 com 243 falas do Axe", async () => {
+test("packs usam Google Drive, perfil Steam e kits R2 com 284 falas verbais do Axe", async () => {
   const [voicesText, personasText, variantIdsText, submitPage, form, packPage, route, drive, template, profile, profileApi, worker] = await Promise.all([
     file("data/voice-lines.json"),
     file("data/personas.json"),
@@ -233,7 +252,7 @@ test("packs usam Google Drive, perfil Steam e kits R2 com 243 falas do Axe", asy
       line.voiceScope !== "excluded_nonverbal" &&
       line.voiceScope !== "excluded_no_official_caption",
   );
-  assert.equal(required.length, 243);
+  assert.equal(required.length, 284);
   assert.equal(variants.length, 41);
   assert.deepEqual(variantIds, variants.map((variant) => variant.id));
   assert.match(submitPage, /personas\.map/);

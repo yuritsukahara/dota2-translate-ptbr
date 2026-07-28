@@ -1,7 +1,7 @@
 {
   "build": "6869",
   "catalogTotal": 77594,
-  "translatedTotal": 74167,
+  "translatedTotal": 77594,
   "heroCount": 127,
   "personaCount": 41,
   "featuredHeroes": [
@@ -10,9 +10,9 @@
       "name": "Crystal Maiden",
       "imageUrl": "https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/heroes/crystal_maiden.png?",
       "total": 281,
-      "translated": 255,
+      "translated": 281,
       "official": 0,
-      "community": 0,
+      "community": 26,
       "suggested": 255,
       "voicePrefix": "cm"
     },
@@ -21,9 +21,9 @@
       "name": "Invoker",
       "imageUrl": "https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/heroes/invoker.png?",
       "total": 326,
-      "translated": 297,
+      "translated": 326,
       "official": 0,
-      "community": 0,
+      "community": 29,
       "suggested": 297,
       "voicePrefix": "invo"
     },
@@ -43,9 +43,9 @@
       "name": "Pudge",
       "imageUrl": "https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/heroes/pudge.png?",
       "total": 285,
-      "translated": 253,
+      "translated": 285,
       "official": 0,
-      "community": 0,
+      "community": 32,
       "suggested": 253,
       "voicePrefix": "pud"
     }
@@ -56,9 +56,9 @@
       "name": "Conduit of the Blueheart — Persona da Crystal Maiden",
       "imageUrl": "/images/personas/crystal_maiden-blueheart.png",
       "total": 643,
-      "translated": 639,
+      "translated": 643,
       "official": 0,
-      "community": 3,
+      "community": 7,
       "suggested": 636,
       "voicePrefix": "cm_wolf"
     },
@@ -67,9 +67,9 @@
       "name": "Asan — Persona da Phantom Assassin",
       "imageUrl": "/images/personas/phantom-assassin-asan.png",
       "total": 961,
-      "translated": 957,
+      "translated": 961,
       "official": 0,
-      "community": 8,
+      "community": 12,
       "suggested": 949,
       "voicePrefix": "pa_asan"
     },
@@ -78,9 +78,9 @@
       "name": "Davion — Persona do Dragon Knight",
       "imageUrl": "/images/personas/dragon-knight-davion.png",
       "total": 1296,
-      "translated": 1281,
+      "translated": 1296,
       "official": 0,
-      "community": 18,
+      "community": 33,
       "suggested": 1263,
       "voicePrefix": "dk"
     },
@@ -89,9 +89,9 @@
       "name": "Invoker Criança",
       "imageUrl": "/images/personas/invoker-kid.png",
       "total": 1326,
-      "translated": 1296,
+      "translated": 1326,
       "official": 0,
-      "community": 51,
+      "community": 81,
       "suggested": 1245,
       "voicePrefix": "kidvoker + kidvo"
     }
