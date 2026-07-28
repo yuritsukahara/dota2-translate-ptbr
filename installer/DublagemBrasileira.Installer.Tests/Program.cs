@@ -1,11 +1,45 @@
 using DublagemBrasileira.Installer.Services;
 using DublagemBrasileira.Installer.Models;
+using System.IO;
 using System.IO.Compression;
 using System.Security.Cryptography;
 using System.Text.Json;
+using System.Windows.Controls;
+using System.Windows.Media.Imaging;
 
 var failures = new List<string>();
 var locator = new DotaLocator();
+
+var tangoLogoLoaded = false;
+Exception? tangoLogoError = null;
+var logoThread = new Thread(() =>
+{
+    try
+    {
+        var app = new DublagemBrasileira.Installer.App();
+        app.InitializeComponent();
+        var window = new DublagemBrasileira.Installer.MainWindow();
+        var logo = window.FindName("TangoLeagueLogo") as Image;
+        tangoLogoLoaded =
+            logo?.Source is BitmapSource source &&
+            source.PixelWidth > 0 &&
+            source.PixelHeight > 0;
+        window.Close();
+        app.Shutdown();
+    }
+    catch (Exception error)
+    {
+        tangoLogoError = error;
+    }
+});
+logoThread.SetApartmentState(ApartmentState.STA);
+logoThread.Start();
+logoThread.Join();
+Expect(
+    tangoLogoLoaded,
+    tangoLogoError is null
+        ? "A logo da Tango League deve carregar do recurso incorporado."
+        : $"A logo da Tango League deve carregar: {tangoLogoError.Message}");
 
 var parsed = DotaLocator.ParseLibraryFolders(
     """

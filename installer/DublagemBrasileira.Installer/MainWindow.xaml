@@ -436,10 +436,11 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
-                <Image Width="78"
+                <Image x:Name="TangoLeagueLogo"
+                       Width="78"
                        Height="25"
                        VerticalAlignment="Center"
-                       Source="Assets/tangoleague-logo-text-black.png"
+                       Source="/DublagemBrasileiraDota2;component/Assets/tangoleague-logo-text-black.png"
                        Stretch="Uniform"/>
                 <TextBlock Grid.Column="1"
                            Margin="14,0"
