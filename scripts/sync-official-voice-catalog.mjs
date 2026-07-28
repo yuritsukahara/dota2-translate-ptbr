@@ -3,6 +3,11 @@ import path from "node:path";
 import process from "node:process";
 import { fileURLToPath } from "node:url";
 import { listVpkEntries, readVpkEntry } from "./lib/vpk.mjs";
+import {
+  baseVoicePrefixes,
+  isCuratedVariantStem,
+  matchesVoicePrefix,
+} from "./lib/voice-sets.mjs";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const defaultDota =
@@ -28,6 +33,7 @@ const directoryAliases = {
   storm_spirit: "stormspirit",
   witch_doctor: "witchdoctor",
 };
+const nonverbalHeroes = new Set(["marci", "wisp"]);
 
 function parseValveTokens(buffer) {
   const source = buffer.toString("utf8").replace(/^\uFEFF/, "");
@@ -68,9 +74,41 @@ const heroCatalog = JSON.parse(fs.readFileSync(heroesPath, "utf8"));
 const suggestions = fs.existsSync(suggestionsPath)
   ? JSON.parse(fs.readFileSync(suggestionsPath, "utf8")).translations || {}
   : {};
+const suggestionsByLineId = new Map();
+const ambiguousSuggestions = new Set();
+for (const translations of Object.values(suggestions)) {
+  for (const [lineId, text] of Object.entries(translations)) {
+    const previous = suggestionsByLineId.get(lineId);
+    if (previous && previous !== text) ambiguousSuggestions.add(lineId);
+    else suggestionsByLineId.set(lineId, text);
+  }
+}
+for (const lineId of ambiguousSuggestions) suggestionsByLineId.delete(lineId);
 const existingCatalog = fs.existsSync(outputPath)
   ? JSON.parse(fs.readFileSync(outputPath, "utf8"))
   : { heroes: {} };
+const personasPath = path.join(root, "web", "data", "personas.json");
+const existingPersonas = fs.existsSync(personasPath)
+  ? JSON.parse(fs.readFileSync(personasPath, "utf8")).variants || []
+  : [];
+const knownTranslations = new Map();
+const ambiguousTranslations = new Set();
+for (const line of [
+  ...Object.values(existingCatalog.heroes || {}).flat(),
+  ...existingPersonas.flatMap((variant) => variant.lines || []),
+]) {
+  if (!line.captionPtBr) continue;
+  const previous = knownTranslations.get(line.id);
+  if (previous && previous.text !== line.captionPtBr) {
+    ambiguousTranslations.add(line.id);
+  } else {
+    knownTranslations.set(line.id, {
+      text: line.captionPtBr,
+      source: line.captionPtBrSource || "community",
+    });
+  }
+}
+for (const lineId of ambiguousTranslations) knownTranslations.delete(lineId);
 const linesByHero = {};
 
 for (const hero of heroCatalog.heroes) {
@@ -123,42 +161,65 @@ for (const hero of heroCatalog.heroes) {
     if (!assetPath) continue;
     const official = brazilianTokens.get(token.key) || null;
     const community = preservedCommunity.get(stem) || null;
-    const suggested = suggestions[hero.id]?.[stem] || null;
+    const suggested =
+      suggestions[hero.id]?.[stem] || suggestionsByLineId.get(stem) || null;
+    const known = knownTranslations.get(stem);
     matchedCandidates.push({
       id: stem,
       assetPath,
       category: categoryFromStem(stem),
       captionEn: token.value,
-      captionPtBr: official || community || suggested,
+      captionPtBr: official || community || suggested || known?.text || null,
       captionPtBrSource: official
         ? "official"
         : community
           ? "community"
           : suggested
             ? "automatic"
-            : null,
+            : known?.source || null,
     });
   }
 
-  const groups = new Map();
-  for (const line of matchedCandidates) {
-    const prefix = line.id.split("_", 1)[0];
-    if (!groups.has(prefix)) groups.set(prefix, []);
-    groups.get(prefix).push(line);
+  const configuredBasePrefixes = baseVoicePrefixes[hero.id];
+  let selectedPrefixes = configuredBasePrefixes || [];
+  let matched;
+  if (nonverbalHeroes.has(hero.id)) {
+    matched = [];
+    selectedPrefixes = [];
+  } else if (configuredBasePrefixes) {
+    matched = matchedCandidates.filter(
+      (line) =>
+        configuredBasePrefixes.some((prefix) =>
+          matchesVoicePrefix(line.id, prefix),
+        ) && !isCuratedVariantStem(hero.id, line.id),
+    );
+  } else {
+    const groups = new Map();
+    for (const line of matchedCandidates) {
+      const prefix = line.id.split("_", 1)[0];
+      if (!groups.has(prefix)) groups.set(prefix, []);
+      groups.get(prefix).push(line);
+    }
+    const selectedPrefix = [...groups.keys()].sort((left, right) => {
+      const scoreDifference =
+        prefixScore(right, directory, hero.name) -
+        prefixScore(left, directory, hero.name);
+      if (scoreDifference) return scoreDifference;
+      return groups.get(right).length - groups.get(left).length;
+    })[0];
+    selectedPrefixes = selectedPrefix ? [selectedPrefix] : [];
+    matched = selectedPrefix
+      ? groups
+          .get(selectedPrefix)
+          .filter((line) => !isCuratedVariantStem(hero.id, line.id))
+      : [];
   }
-  const selectedPrefix = [...groups.keys()].sort((left, right) => {
-    const scoreDifference =
-      prefixScore(right, directory, hero.name) -
-      prefixScore(left, directory, hero.name);
-    if (scoreDifference) return scoreDifference;
-    return groups.get(right).length - groups.get(left).length;
-  })[0];
-  const matched = selectedPrefix ? groups.get(selectedPrefix) : [];
 
   matched.sort((left, right) => left.id.localeCompare(right.id));
   linesByHero[hero.id] = matched.map(({ assetPath: _assetPath, ...line }) => line);
   hero.voiceDirectory = directory;
-  hero.voicePrefix = selectedPrefix || "";
+  hero.voicePrefix = selectedPrefixes[0] || "";
+  hero.voicePrefixes = selectedPrefixes;
   hero.assetTotal = matched.length;
   hero.total = matched.length;
   hero.officialEnglishCaptions = matched.length;

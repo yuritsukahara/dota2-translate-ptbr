@@ -36,7 +36,7 @@ catalog.heroes.axe = (catalog.heroes.axe || []).map((line) => {
   if (!draft) return line;
   incorporated += 1;
   const hasOfficialTranslation =
-    Boolean(line.captionPtBr) && line.captionPtBrSource !== "community";
+    Boolean(line.captionPtBr) && line.captionPtBrSource === "official";
   const hasCommunityTranslation =
     !hasOfficialTranslation &&
     draft.voiceScope === "spoken" &&
@@ -49,7 +49,7 @@ catalog.heroes.axe = (catalog.heroes.axe || []).map((line) => {
       ? "official"
       : hasCommunityTranslation
         ? "community"
-        : null,
+        : line.captionPtBrSource,
     sourceStatus: draft.sourceStatus,
     voiceScope: draft.voiceScope,
     voiceDirection: draft.voiceDirection,

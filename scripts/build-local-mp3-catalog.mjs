@@ -126,6 +126,10 @@ const extractPersonas = has("--personas");
 const dryRun = has("--dry-run");
 const indexOnly = has("--index-only");
 const mergeExisting = has("--merge");
+const droppedHeroIds = argument("--drop", "")
+  .split(",")
+  .map((value) => value.trim())
+  .filter(Boolean);
 
 if (indexOnly) {
   const existingCatalogPath = path.join(outputRoot, "catalog.json");
@@ -254,9 +258,18 @@ const existingCatalogPath = path.join(outputRoot, "catalog.json");
 const existingCatalog = mergeExisting && fs.existsSync(existingCatalogPath)
   ? JSON.parse(fs.readFileSync(existingCatalogPath, "utf8"))
   : null;
-const retainedLines = existingCatalog?.lines?.filter((line) => !selectedHeroIds.includes(line.heroId)) || [];
-const retainedExclusions = existingCatalog?.exclusions?.filter((line) => !selectedHeroIds.includes(line.heroId)) || [];
-const retainedFailures = existingCatalog?.failures?.filter((line) => !line.heroId || !selectedHeroIds.includes(line.heroId)) || [];
+const replacedHeroIds = new Set([...selectedHeroIds, ...droppedHeroIds]);
+const retainedLines =
+  existingCatalog?.lines?.filter((line) => !replacedHeroIds.has(line.heroId)) ||
+  [];
+const retainedExclusions =
+  existingCatalog?.exclusions?.filter(
+    (line) => !replacedHeroIds.has(line.heroId),
+  ) || [];
+const retainedFailures =
+  existingCatalog?.failures?.filter(
+    (line) => !line.heroId || !replacedHeroIds.has(line.heroId),
+  ) || [];
 const catalogLines = [...retainedLines, ...result].sort((left, right) =>
   left.heroName.localeCompare(right.heroName, "pt-BR") || left.id.localeCompare(right.id, "en")
 );

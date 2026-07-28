@@ -21,10 +21,10 @@ necessário, à autorização escrita do titular da propriedade intelectual.
 Nosso catálogo técnico atual contém:
 
 - 127 heróis-base;
-- 55.357 ativos de voz;
-- 37.523 textos únicos;
-- aproximadamente 210.528 palavras únicas em inglês;
-- opção futura de 39 personas/variantes e narrador.
+- 46.871 ativos de voz-base;
+- 32.713 textos únicos na voz-base;
+- aproximadamente 178.266 palavras nos textos únicos em inglês da voz-base;
+- opção futura de 41 personas/variantes e narrador.
 
 Gostaríamos de receber uma estimativa separada para três cenários:
 
@@ -77,7 +77,7 @@ Atenciosamente,
 Somos uma iniciativa independente da comunidade brasileira, sem vínculo,
 patrocínio ou aprovação da Valve, e estamos estudando a viabilidade de
 localização/dublagem de Dota 2 em PT-BR. O escopo preliminar tem 127 heróis,
-37.523 falas únicas e cerca de 210 mil palavras. Buscamos orçamento separado
+32.713 falas únicas e cerca de 178 mil palavras. Buscamos orçamento separado
 para piloto de 10 heróis, elenco-base e expansão. A produção e eventual
 captação serão condicionadas à análise jurídica e às autorizações necessárias.
 Qual é o melhor contato para enviarmos o briefing completo?

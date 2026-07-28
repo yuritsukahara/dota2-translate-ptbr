@@ -6,12 +6,13 @@ import { fileURLToPath } from "node:url";
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const buildRoot = path.join(root, "build", "r2-audio", "build-6869");
 const statePath = path.join(root, "build", "r2-audio", "upload-state.json");
-const wrangler = path.join(
+const wranglerCli = path.join(
   root,
   "web",
   "node_modules",
-  ".bin",
-  process.platform === "win32" ? "wrangler.cmd" : "wrangler",
+  "wrangler",
+  "bin",
+  "wrangler.js",
 );
 const bucket = "dublagem-brasileira-media";
 const concurrency = Math.max(
@@ -69,8 +70,9 @@ async function saveState() {
 function upload(artifact) {
   return new Promise((resolve, reject) => {
     const child = spawn(
-      wrangler,
+      process.execPath,
       [
+        wranglerCli,
         "r2",
         "object",
         "put",

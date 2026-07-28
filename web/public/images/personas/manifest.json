@@ -1,7 +1,19 @@
 {
-  "generatedAt": "2026-07-27T20:29:38.645Z",
+  "generatedAt": "2026-07-28T20:13:23.679Z",
   "source": "Dota 2 VPK local",
   "images": [
+    {
+      "variantId": "axe-automaton",
+      "assetPath": "panorama/images/heroes/npc_dota_hero_axe_carnival_png.vtex_c",
+      "imageUrl": "/images/personas/axe-automaton.png",
+      "bytes": 61059
+    },
+    {
+      "variantId": "axe-jung",
+      "assetPath": "panorama/images/heroes/npc_dota_hero_axe_alt_png.vtex_c",
+      "imageUrl": "/images/personas/axe-jung.png",
+      "bytes": 24513
+    },
     {
       "variantId": "antimage-wei",
       "assetPath": "panorama/images/heroes/npc_dota_hero_antimage_persona1_png.vtex_c",
@@ -9,15 +21,21 @@
       "bytes": 21897
     },
     {
+      "variantId": "bristleback-auto",
+      "assetPath": "panorama/images/heroes/npc_dota_hero_bristleback_carnival_png.vtex_c",
+      "imageUrl": "/images/personas/bristleback-auto.png",
+      "bytes": 19621
+    },
+    {
+      "variantId": "crystal_maiden-blueheart",
+      "assetPath": "panorama/images/heroes/npc_dota_hero_crystal_maiden_persona1_png.vtex_c",
+      "imageUrl": "/images/personas/crystal_maiden-blueheart.png",
+      "bytes": 17622
+    },
+    {
       "variantId": "dragon-knight-davion",
       "assetPath": "panorama/images/heroes/npc_dota_hero_dragon_knight_persona1_png.vtex_c",
       "imageUrl": "/images/personas/dragon-knight-davion.png",
-      "bytes": 20072
-    },
-    {
-      "variantId": "dragon_knight-drag",
-      "assetPath": "panorama/images/heroes/npc_dota_hero_dragon_knight_persona1_png.vtex_c",
-      "imageUrl": "/images/personas/dragon_knight-drag.png",
       "bytes": 20072
     },
     {
@@ -39,10 +57,22 @@
       "bytes": 20321
     },
     {
+      "variantId": "phantom_assassin-arcana",
+      "assetPath": "panorama/images/heroes/npc_dota_hero_phantom_assassin_alt1_png.vtex_c",
+      "imageUrl": "/images/personas/phantom_assassin-arcana.png",
+      "bytes": 21815
+    },
+    {
       "variantId": "pudge-toy-butcher",
       "assetPath": "panorama/images/heroes/npc_dota_hero_pudge_persona1_png.vtex_c",
       "imageUrl": "/images/personas/pudge-toy-butcher.png",
       "bytes": 147969
+    },
+    {
+      "variantId": "pudge-arcana",
+      "assetPath": "panorama/images/heroes/npc_dota_hero_pudge_alt1_png.vtex_c",
+      "imageUrl": "/images/personas/pudge-arcana.png",
+      "bytes": 22790
     },
     {
       "variantId": "drow_ranger-dro",
@@ -63,22 +93,40 @@
       "bytes": 21203
     },
     {
-      "variantId": "juggernaut-jug",
-      "assetPath": "panorama/images/heroes/npc_dota_hero_juggernaut_alt1_png.vtex_c",
-      "imageUrl": "/images/personas/juggernaut-jug.png",
-      "bytes": 22857
-    },
-    {
       "variantId": "juggernaut-jugsc",
       "assetPath": "panorama/images/heroes/npc_dota_hero_juggernaut_alt2_png.vtex_c",
       "imageUrl": "/images/personas/juggernaut-jugsc.png",
       "bytes": 19601
     },
     {
-      "variantId": "monkey_king-mk",
+      "variantId": "legion_commander-arcana",
+      "assetPath": "panorama/images/heroes/npc_dota_hero_legion_commander_alt1_png.vtex_c",
+      "imageUrl": "/images/personas/legion_commander-arcana.png",
+      "bytes": 20568
+    },
+    {
+      "variantId": "legion_commander-auto",
+      "assetPath": "panorama/images/heroes/npc_dota_hero_legion_commander_carnival_png.vtex_c",
+      "imageUrl": "/images/personas/legion_commander-auto.png",
+      "bytes": 21567
+    },
+    {
+      "variantId": "monkey_king-arcana",
       "assetPath": "panorama/images/heroes/npc_dota_hero_monkey_king_alt1_png.vtex_c",
-      "imageUrl": "/images/personas/monkey_king-mk.png",
+      "imageUrl": "/images/personas/monkey_king-arcana.png",
       "bytes": 21385
+    },
+    {
+      "variantId": "morphling-auto",
+      "assetPath": "panorama/images/heroes/npc_dota_hero_morphling_carnival_png.vtex_c",
+      "imageUrl": "/images/personas/morphling-auto.png",
+      "bytes": 18977
+    },
+    {
+      "variantId": "nevermore-arcana",
+      "assetPath": "panorama/images/heroes/npc_dota_hero_nevermore_alt1_png.vtex_c",
+      "imageUrl": "/images/personas/nevermore-arcana.png",
+      "bytes": 20561
     },
     {
       "variantId": "ogre_magi-ogm",
@@ -87,22 +135,16 @@
       "bytes": 23648
     },
     {
-      "variantId": "ogre_magi-ogmag",
-      "assetPath": "panorama/images/heroes/npc_dota_hero_ogre_magi_alt2_png.vtex_c",
-      "imageUrl": "/images/personas/ogre_magi-ogmag.png",
-      "bytes": 23426
+      "variantId": "oracle-auto",
+      "assetPath": "panorama/images/heroes/npc_dota_hero_oracle_carnival_png.vtex_c",
+      "imageUrl": "/images/personas/oracle-auto.png",
+      "bytes": 22022
     },
     {
       "variantId": "queenofpain-pain",
       "assetPath": "panorama/images/heroes/npc_dota_hero_queenofpain_alt1_png.vtex_c",
       "imageUrl": "/images/personas/queenofpain-pain.png",
       "bytes": 21254
-    },
-    {
-      "variantId": "razor-raz",
-      "assetPath": "panorama/images/heroes/npc_dota_hero_razor_alt1_png.vtex_c",
-      "imageUrl": "/images/personas/razor-raz.png",
-      "bytes": 21569
     },
     {
       "variantId": "razor-rz",
@@ -123,16 +165,16 @@
       "bytes": 20529
     },
     {
-      "variantId": "spectre-fs",
-      "assetPath": "panorama/images/heroes/npc_dota_hero_spectre_alt1_png.vtex_c",
-      "imageUrl": "/images/personas/spectre-fs.png",
-      "bytes": 21869
-    },
-    {
       "variantId": "spectre-spec",
       "assetPath": "panorama/images/heroes/npc_dota_hero_spectre_alt2_png.vtex_c",
       "imageUrl": "/images/personas/spectre-spec.png",
       "bytes": 19771
+    },
+    {
+      "variantId": "terrorblade-arcana",
+      "assetPath": "panorama/images/heroes/npc_dota_hero_terrorblade_alt1_png.vtex_c",
+      "imageUrl": "/images/personas/terrorblade-arcana.png",
+      "bytes": 23172
     },
     {
       "variantId": "techies-noba",
@@ -147,9 +189,9 @@
       "bytes": 21441
     },
     {
-      "variantId": "vengefulspirit-vng",
+      "variantId": "vengefulspirit-crownfall",
       "assetPath": "panorama/images/heroes/npc_dota_hero_vengefulspirit_alt2_png.vtex_c",
-      "imageUrl": "/images/personas/vengefulspirit-vng.png",
+      "imageUrl": "/images/personas/vengefulspirit-crownfall.png",
       "bytes": 21984
     },
     {

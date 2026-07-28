@@ -172,9 +172,9 @@ PT-BR. Como controle fora do Axe,
 dicionário global contém também os demais heróis.
 
 Personas e variantes permanecem em um inventário separado da cobertura base.
-A auditoria local encontrou 39 grupos relevantes, com 19.878 captions oficiais
-em inglês. Destas, 8.049 puderam reutilizar uma tradução PT-BR existente porque
-o texto inglês era exatamente igual. Essas 8.049 correspondências também entram
+A auditoria local encontrou 41 grupos relevantes, com 28.649 captions oficiais
+em inglês. Destas, 28.184 puderam reutilizar uma tradução PT-BR existente por
+line ID ou texto inglês já catalogado. Essas correspondências também entram
 no pacote completo; as linhas exclusivas não são preenchidas automaticamente
 por esse reaproveitamento.
 

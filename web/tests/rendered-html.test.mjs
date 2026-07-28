@@ -61,11 +61,11 @@ test("catálogo fixado ao build 6869 possui os totais esperados", async () => {
 
   assert.equal(String(heroes.build.clientVersion), "6869");
   assert.equal(heroes.heroes.length, 127);
-  assert.equal(baseLines.length, 55_357);
-  assert.equal(personas.variants.length, 39);
-  assert.equal(personaLines.length, 19_878);
+  assert.equal(baseLines.length, 46_871);
+  assert.equal(personas.variants.length, 41);
+  assert.equal(personaLines.length, 28_649);
   assert.equal(announcer.lines.length, 2_074);
-  assert.equal(baseLines.length + personaLines.length + announcer.lines.length, 77_309);
+  assert.equal(baseLines.length + personaLines.length + announcer.lines.length, 77_594);
   assert.equal(
     announcer.lines.filter(
       (line) =>
@@ -73,9 +73,9 @@ test("catálogo fixado ao build 6869 possui os totais esperados", async () => {
     ).length,
     1_399,
   );
-  assert.equal(suggested.metadata.translatedOccurrences, 71_306);
+  assert.equal(suggested.metadata.translatedOccurrences, 71_316);
   assert.equal(
-    baseLines.filter(
+    voices.heroes.axe.filter(
       (line) => line.captionPtBrSource === "community" && line.captionPtBr,
     ).length,
     243,
@@ -213,7 +213,7 @@ test("packs usam Google Drive, perfil Steam e kits R2 com 243 falas do Axe", asy
       line.voiceScope !== "excluded_no_official_caption",
   );
   assert.equal(required.length, 243);
-  assert.equal(variants.length, 39);
+  assert.equal(variants.length, 41);
   assert.deepEqual(variantIds, variants.map((variant) => variant.id));
   assert.match(submitPage, /personas\.map/);
   assert.match(submitPage, /Variante de voz/);

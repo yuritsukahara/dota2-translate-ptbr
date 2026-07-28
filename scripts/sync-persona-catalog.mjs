@@ -3,6 +3,11 @@ import path from "node:path";
 import process from "node:process";
 import { fileURLToPath } from "node:url";
 import { listVpkEntries, readVpkEntry } from "./lib/vpk.mjs";
+import {
+  baseVoicePrefixes,
+  curatedVoiceVariants,
+  matchesVoicePrefix,
+} from "./lib/voice-sets.mjs";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const dotaRoot =
@@ -22,50 +27,7 @@ const imageOverridePath = path.join(
   "persona-image-overrides.json",
 );
 
-const personaDefinitions = [
-  {
-    id: "antimage-wei",
-    heroId: "antimage",
-    prefixes: ["amp"],
-    name: "Wei — Persona da Anti-Mage",
-    type: "persona",
-  },
-  {
-    id: "dragon-knight-davion",
-    heroId: "dragon_knight",
-    prefixes: ["dk"],
-    name: "Davion — Persona do Dragon Knight",
-    type: "persona",
-  },
-  {
-    id: "invoker-kid",
-    heroId: "invoker",
-    prefixes: ["kidvoker", "kidvo"],
-    name: "Invoker Criança",
-    type: "persona",
-  },
-  {
-    id: "mirana-nightsilver",
-    heroId: "mirana",
-    prefixes: ["mir"],
-    name: "Mirana de Nightsilver",
-    type: "persona",
-  },
-  {
-    id: "phantom-assassin-asan",
-    heroId: "phantom_assassin",
-    prefixes: ["phass"],
-    name: "Asan — Persona da Phantom Assassin",
-    type: "persona",
-  },
-  {
-    id: "pudge-toy-butcher",
-    heroId: "pudge",
-    prefixes: ["toy"],
-    name: "Açougueiro de Brinquedo",
-    type: "persona",
-  },
-];
+const personaDefinitions = curatedVoiceVariants;
 
 function parseTokens(buffer) {
   const source = buffer.toString("utf8").replace(/^\uFEFF/, "");
@@ -116,6 +78,16 @@ const voiceCatalog = JSON.parse(
 const automatic = JSON.parse(
   fs.readFileSync(path.join(dataRoot, "automatic-translations.json"), "utf8"),
 );
+const automaticByLineId = new Map();
+const ambiguousAutomatic = new Set();
+for (const translations of Object.values(automatic.translations || {})) {
+  for (const [lineId, text] of Object.entries(translations)) {
+    const previous = automaticByLineId.get(lineId);
+    if (previous && previous !== text) ambiguousAutomatic.add(lineId);
+    else automaticByLineId.set(lineId, text);
+  }
+}
+for (const lineId of ambiguousAutomatic) automaticByLineId.delete(lineId);
 const audit = JSON.parse(fs.readFileSync(auditPath, "utf8"));
 const imageOverrides = fs.existsSync(imageOverridePath)
   ? JSON.parse(fs.readFileSync(imageOverridePath, "utf8")).variants
@@ -147,7 +119,9 @@ for (const key of ambiguousMemory) memoryCandidates.delete(key);
 
 const knownPrefixKeys = new Set(
   personaDefinitions.flatMap((definition) =>
-    definition.prefixes.map((prefix) => `${definition.heroId}:${prefix}`),
+    definition.prefixes.map(
+      (prefix) => `${definition.heroId}:${prefix.split("_", 1)[0]}`,
+    ),
   ),
 );
 const definitions = [
@@ -156,7 +130,8 @@ const definitions = [
     .filter(
       (group) =>
         group.official >= 20 &&
-        !knownPrefixKeys.has(`${group.heroId}:${group.prefix}`),
+        !knownPrefixKeys.has(`${group.heroId}:${group.prefix}`) &&
+        !(baseVoicePrefixes[group.heroId] || []).includes(group.prefix),
     )
     .map((group) => ({
       id: `${group.heroId}-${group.prefix}`,
@@ -186,13 +161,18 @@ for (const definition of definitions) {
       )
     : new Map();
   const lines = parseTokens(readVpkEntry(vpkPath, englishPath))
-    .filter((token) =>
-      definition.prefixes.includes(variantPrefix(token.key, directory)),
-    )
+    .filter((token) => {
+      const stem = stemFromToken(token.key, directory);
+      return definition.prefixes.some((prefix) =>
+        matchesVoicePrefix(stem, prefix),
+      );
+    })
     .map((token) => {
       const stem = stemFromToken(token.key, directory);
       const official = officialBrazilian.get(token.key);
-      const generated = automatic.translations[definition.id]?.[stem];
+      const generated =
+        automatic.translations[definition.id]?.[stem] ||
+        automaticByLineId.get(stem);
       const reused = memoryCandidates.get(normalizeEnglish(token.value));
       return {
         id: stem,

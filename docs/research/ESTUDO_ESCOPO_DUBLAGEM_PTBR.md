@@ -48,14 +48,15 @@ reduzindo mínimos de convocação.
 
 Os números abaixo foram calculados a partir dos catálogos versionados no
 repositório. “Ativos” são arquivos/entradas; “textos únicos” removem repetições
-literais em inglês.
+literais em inglês após aparar espaços; a contagem de palavras separa esses
+textos únicos por espaços.
 
 | Bloco | Personagens/variantes | Ativos | Textos únicos | Palavras únicas em inglês |
 | --- | ---: | ---: | ---: | ---: |
-| Heróis-base | 127 | 55.357 | 37.523 | 210.528 |
-| Personas e variantes | 39 | 19.878 | 14.577 | 86.938 |
-| Narrador | — | 2.074 | 1.588 | 5.775 |
-| **Total expandido** | — | **77.309** | **53.688** | **303.241** |
+| Heróis-base | 127 | 46.871 | 32.713 | 178.266 |
+| Personas e variantes | 41 | 28.649 | 21.249 | 130.317 |
+| Narrador | — | 2.074 | 1.615 | 5.854 |
+| **Total expandido** | — | **77.594** | **47.000** | **268.199** |
 
 O catálogo inclui falas curtas, variações, interações, esforços vocais e
 repetições técnicas. Antes de fechar contrato, o estúdio precisa auditar:
@@ -74,9 +75,9 @@ aproximadamente 400 a 1.000 palavras gravadas por hora de estúdio.
 
 | Escopo | Palavras | Horas de cabine indicativas |
 | --- | ---: | ---: |
-| 10 heróis, por proporcionalidade simples | ~16.600 | 17 a 42 |
-| 127 heróis-base | 210.528 | 211 a 527 |
-| Base + personas + narrador | 303.241 | 304 a 759 |
+| 10 heróis, por proporcionalidade simples | ~14.037 | 15 a 36 |
+| 127 heróis-base | 178.266 | 179 a 446 |
+| Base + personas + narrador | 268.199 | 269 a 671 |
 
 A proporcionalidade do piloto é apenas uma aproximação: alguns heróis têm muito
 mais falas que outros. O orçamento deve usar a contagem real dos dez escolhidos.

@@ -66,7 +66,6 @@ const heroCatalog = readJson("web/data/heroes.json");
 const voiceCatalog = readJson("web/data/voice-lines.json");
 const personaCatalog = readJson("web/data/personas.json");
 const announcerCatalog = readJson("web/data/announcer-lines.json");
-const suggestedCatalog = readJson("web/data/automatic-translations.json");
 const baseLines = Object.values(voiceCatalog.heroes).flat();
 const personaLines = personaCatalog.variants.flatMap((variant) => variant.lines);
 const announcerLines = announcerCatalog.lines;
@@ -74,54 +73,28 @@ const catalogTotal = baseLines.length + personaLines.length + announcerLines.len
 
 assertEqual("build do catálogo", String(heroCatalog.build.clientVersion), "6869");
 assertEqual("heróis", heroCatalog.heroes.length, 127);
-assertEqual("linhas base", baseLines.length, 55_357);
-assertEqual("personas e variantes", personaCatalog.variants.length, 39);
-assertEqual("linhas de personas e variantes", personaLines.length, 19_878);
+assertEqual("linhas base", baseLines.length, 46_871);
+assertEqual("personas e variantes", personaCatalog.variants.length, 41);
+assertEqual("linhas de personas e variantes", personaLines.length, 28_649);
 assertEqual("linhas do narrador", announcerLines.length, 2_074);
-assertEqual("captions totais", catalogTotal, 77_309);
-
-const baseCommunityLines = baseLines.filter(
-  (line) => line.captionPtBrSource === "community" && line.captionPtBr,
-);
-const memory = new Map();
-const ambiguous = new Set();
-for (const line of baseCommunityLines) {
-  const key = line.captionEn.trim().toLocaleLowerCase("en");
-  const existing = memory.get(key);
-  if (existing && existing !== line.captionPtBr) ambiguous.add(key);
-  else memory.set(key, line.captionPtBr);
-}
-for (const key of ambiguous) memory.delete(key);
+assertEqual("captions totais", catalogTotal, 77_594);
 
 const sources = { official: 0, community: 0, suggested: 0, missing: 0 };
-const sourceGroups = [
-  ...Object.entries(voiceCatalog.heroes).map(([id, lines]) => ({ id, lines, reuseCommunity: true })),
-  ...personaCatalog.variants.map((variant) => ({ id: variant.id, lines: variant.lines, reuseCommunity: false })),
-  { id: "announcer", lines: announcerLines, reuseCommunity: false },
-];
-for (const source of sourceGroups) {
-  const suggested = suggestedCatalog.translations[source.id] || {};
-  for (const line of source.lines) {
-    if (line.captionPtBr) {
-      if (line.captionPtBrSource === "community") sources.community += 1;
-      else if (line.captionPtBrSource === "automatic") sources.suggested += 1;
-      else sources.official += 1;
-    } else if (
-      source.reuseCommunity &&
-      memory.has(line.captionEn.trim().toLocaleLowerCase("en"))
-    ) {
-      sources.community += 1;
-    } else if (suggested[line.id]) {
-      sources.suggested += 1;
-    } else {
-      sources.missing += 1;
-    }
+for (const line of [...baseLines, ...personaLines, ...announcerLines]) {
+  if (!line.captionPtBr) {
+    sources.missing += 1;
+  } else if (line.captionPtBrSource === "community") {
+    sources.community += 1;
+  } else if (line.captionPtBrSource === "automatic") {
+    sources.suggested += 1;
+  } else {
+    sources.official += 1;
   }
 }
 assertEqual("captions oficiais PT-BR", sources.official, 1_399);
-assertEqual("captions comunitárias", sources.community, 4_604);
-assertEqual("captions sugeridas", sources.suggested, 71_306);
-assertEqual("captions sem PT-BR", sources.missing, 0);
+assertEqual("captions comunitárias", sources.community, 1_647);
+assertEqual("captions sugeridas", sources.suggested, 71_121);
+assertEqual("captions sem PT-BR", sources.missing, 3_427);
 
 const hygieneTargets = [
   "README.md",

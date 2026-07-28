@@ -6,14 +6,15 @@ por intérprete, perfis Steam e uma petição por áudio oficial.
 
 ## Snapshot do build 6869
 
-- 127 heróis e 55.357 linhas base;
-- 39 personas ou variantes e 19.878 linhas;
+- 127 heróis e 46.871 linhas base;
+- 41 personas ou variantes e 28.649 linhas;
 - narrador padrão com 2.074 linhas;
-- 77.309 captions no total;
+- 77.594 captions verbais no total;
 - 1.399 captions oficiais PT-BR;
-- 4.604 traduções comunitárias;
-- 71.306 traduções sugeridas;
-- 77.296 MP3s no catálogo local, pois 13 vocalizações não verbais são excluídas.
+- 1.647 traduções comunitárias;
+- 71.121 traduções sugeridas;
+- 3.427 captions ainda sem versão PT-BR;
+- 77.594 MP3s no catálogo local, sem falhas de extração.
 
 A origem de cada texto permanece visível. O portal prioriza a caption oficial
 PT-BR, depois a versão comunitária e, por fim, a tradução sugerida. Gemidos e
