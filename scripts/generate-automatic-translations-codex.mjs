@@ -384,7 +384,7 @@ function writeCatalog() {
     `${JSON.stringify({
       metadata: {
         status: "automatic",
-        label: "Tradução automática pelo Codex · não revisada",
+        label: "Sugestões iniciais pelo Codex · não revisadas",
         model,
         generatedAt: new Date().toISOString(),
         uniqueTranslated: new Set([

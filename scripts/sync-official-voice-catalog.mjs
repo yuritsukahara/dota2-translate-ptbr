@@ -45,6 +45,10 @@ function parseValveTokens(buffer) {
     }));
 }
 
+function normalizeEnglish(value) {
+  return value.trim().toLocaleLowerCase("en");
+}
+
 function categoryFromStem(stem) {
   return stem
     .replace(/^[^_]+_/, "")
@@ -109,6 +113,22 @@ for (const line of [
   }
 }
 for (const lineId of ambiguousTranslations) knownTranslations.delete(lineId);
+const communityMemory = new Map();
+const ambiguousCommunityMemory = new Set();
+for (const line of [
+  ...Object.values(existingCatalog.heroes || {}).flat(),
+  ...existingPersonas.flatMap((variant) => variant.lines || []),
+]) {
+  if (line.captionPtBrSource !== "community" || !line.captionPtBr) continue;
+  const key = normalizeEnglish(line.captionEn);
+  const previous = communityMemory.get(key);
+  if (previous && previous !== line.captionPtBr) {
+    ambiguousCommunityMemory.add(key);
+  } else {
+    communityMemory.set(key, line.captionPtBr);
+  }
+}
+for (const key of ambiguousCommunityMemory) communityMemory.delete(key);
 const linesByHero = {};
 
 for (const hero of heroCatalog.heroes) {
@@ -164,19 +184,26 @@ for (const hero of heroCatalog.heroes) {
     const suggested =
       suggestions[hero.id]?.[stem] || suggestionsByLineId.get(stem) || null;
     const known = knownTranslations.get(stem);
+    const reusedCommunity = communityMemory.get(normalizeEnglish(token.value));
     matchedCandidates.push({
       id: stem,
       assetPath,
       category: categoryFromStem(stem),
       captionEn: token.value,
-      captionPtBr: official || community || suggested || known?.text || null,
+      captionPtBr:
+        official ||
+        community ||
+        suggested ||
+        known?.text ||
+        reusedCommunity ||
+        null,
       captionPtBrSource: official
         ? "official"
         : community
           ? "community"
           : suggested
             ? "automatic"
-            : known?.source || null,
+            : known?.source || (reusedCommunity ? "community" : null),
     });
   }
 
@@ -264,5 +291,5 @@ const ptBrLines = Object.values(linesByHero)
   .flat()
   .filter((line) => line.captionPtBr).length;
 console.log(
-  `${heroCatalog.heroes.length} heróis; ${totalLines} voicelines com caption EN; ${ptBrLines} com caption oficial PT-BR.`
+  `${heroCatalog.heroes.length} heróis; ${totalLines} voicelines com caption EN; ${ptBrLines} com caption PT-BR.`
 );

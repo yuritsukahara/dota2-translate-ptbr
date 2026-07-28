@@ -100,6 +100,8 @@ const entryPaths = new Set(entries.map((entry) => entry.path));
 
 const memoryCandidates = new Map();
 const ambiguousMemory = new Set();
+const communityMemory = new Map();
+const ambiguousCommunityMemory = new Set();
 for (const [heroId, lines] of Object.entries(voiceCatalog.heroes)) {
   for (const line of lines) {
     const text =
@@ -113,9 +115,18 @@ for (const [heroId, lines] of Object.entries(voiceCatalog.heroes)) {
     const previous = memoryCandidates.get(key);
     if (previous && previous.text !== text) ambiguousMemory.add(key);
     else memoryCandidates.set(key, { text, source });
+    if (line.captionPtBrSource === "community" && line.captionPtBr) {
+      const previousCommunity = communityMemory.get(key);
+      if (previousCommunity && previousCommunity !== line.captionPtBr) {
+        ambiguousCommunityMemory.add(key);
+      } else {
+        communityMemory.set(key, line.captionPtBr);
+      }
+    }
   }
 }
 for (const key of ambiguousMemory) memoryCandidates.delete(key);
+for (const key of ambiguousCommunityMemory) communityMemory.delete(key);
 
 const knownPrefixKeys = new Set(
   personaDefinitions.flatMap((definition) =>
@@ -173,6 +184,7 @@ for (const definition of definitions) {
       const generated =
         automatic.translations[definition.id]?.[stem] ||
         automaticByLineId.get(stem);
+      const reusedCommunity = communityMemory.get(normalizeEnglish(token.value));
       const reused = memoryCandidates.get(normalizeEnglish(token.value));
       return {
         id: stem,
@@ -180,12 +192,15 @@ for (const definition of definitions) {
         category: categoryFromStem(stem),
         captionToken: token.key,
         captionEn: token.value,
-        captionPtBr: official || generated || reused?.text || null,
+        captionPtBr:
+          official || generated || reusedCommunity || reused?.text || null,
         captionPtBrSource: official
           ? "official"
           : generated
             ? "automatic"
-            : reused?.source || null,
+            : reusedCommunity
+              ? "community"
+              : reused?.source || null,
         originalAudio: "dota_local",
       };
     });

@@ -11,9 +11,9 @@ por intérprete, perfis Steam e uma petição por áudio oficial.
 - narrador padrão com 2.074 linhas;
 - 77.594 captions verbais no total;
 - 1.399 captions oficiais PT-BR;
-- 1.647 traduções comunitárias;
-- 71.121 traduções sugeridas;
-- 3.427 captions ainda sem versão PT-BR;
+- 4.828 traduções comunitárias;
+- 71.367 traduções sugeridas;
+- nenhuma caption verbal sem versão PT-BR;
 - 77.594 MP3s no catálogo local, sem falhas de extração.
 
 A origem de cada texto permanece visível. O portal prioriza a caption oficial

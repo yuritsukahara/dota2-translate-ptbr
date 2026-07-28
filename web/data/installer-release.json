@@ -1,18 +1,18 @@
 {
   "schemaVersion": 1,
-  "version": "6869.1",
-  "createdAt": "2026-07-28T21:40:43.679Z",
+  "version": "6869.2",
+  "createdAt": "2026-07-28T22:53:38.471Z",
   "dotaBuild": {
     "clientVersion": "6869",
     "date": "Jul 24 2026"
   },
   "captions": {
-    "tokens": 76901,
+    "tokens": 77594,
     "files": 126,
     "sources": {
       "official": 1399,
-      "community": 4381,
-      "suggested": 71121
+      "community": 4828,
+      "suggested": 71367
     }
   },
   "voicePacks": [
@@ -23,7 +23,7 @@
   ],
   "payload": {
     "url": "https://github.com/yuritsukahara/dota2-translate-ptbr/releases/download/installer-channel-stable/dublagem-ptbr-payload.zip",
-    "bytes": 27209022,
-    "sha256": "caf56b9faa08e07482244c37119f8161dd9d29634be6bb29f563412f8a50e0bb"
+    "bytes": 34347821,
+    "sha256": "3d8ab62391746198f557eeda27393c33ffb2ab5f7643c3e9eb69bff1e2ad6b5c"
   }
 }
