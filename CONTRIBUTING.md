@@ -1,81 +1,46 @@
 # Como contribuir
 
-Obrigado por ajudar a construir uma dublagem brasileira comunitária, respeitosa e tecnicamente sustentável.
+Há dois fluxos diferentes: contribuições de conteúdo pelo portal e alterações
+técnicas pelo Git.
 
-## 1. Escolha um lote
+## Captions
 
-Abra ou assuma uma issue de herói. Para o Axe, escolha uma categoria do manifesto, como `move`, `attack` ou `ability_berserk`. Evite editar as mesmas linhas de outro PR.
+Abra a página do herói, persona ou narrador, entre com Steam e use **Sugerir
+alteração** na própria linha. Preserve intenção, humor e duração aproximada da
+fala, além dos nomes oficiais de heróis e itens mostrados pela interface.
 
-## 2. Tradução
+A sugestão é armazenada com a autoria Steam. Não é necessário abrir issue ou
+pull request para esse fluxo.
 
-Edite `pt_br` e mude `status` de `placeholder` para `translated`.
+## Packs de voz
 
-Critérios:
+1. Escolha o herói na página de envio.
+2. Baixe o kit ZIP e use o checklist de falas verbais.
+3. Grave um WAV por ID, mantendo um único intérprete para o pack inteiro.
+4. Compartilhe a pasta do Google Drive como leitora.
+5. Entre com Steam e envie o link, crédito e observações pelo formulário.
 
-- preserve intenção, humor, função de gameplay e duração aproximada;
-- prefira português brasileiro oral e natural;
-- mantenha nomes oficiais já localizados no cliente;
-- documente trocadilhos e alternativas em `notes`;
-- não copie traduções de terceiros sem licença;
-- não inclua em massa o roteiro original em inglês no repositório.
+Diretrizes:
 
-Uma segunda pessoa deve revisar sentido, consistência e duração antes da gravação.
+- WAV PCM mono, 16-bit, 24 ou 48 kHz;
+- até 20 segundos e 10 MB por arquivo;
+- nome idêntico ao ID indicado no checklist;
+- sem música, clipping ou redução de ruído agressiva;
+- voz própria ou autorização documentada;
+- consentimento para crédito e licença CC BY 4.0.
 
-## 3. Gravação
+Não envie WAVs pelo Git. Áudio extraído do jogo, material sem licença ou
+imitação vocal sem consentimento não é aceito.
 
-Coloque o WAV em:
+## Código, catálogos e documentação
 
-```text
-audio/recordings/<heroi>/<id>.wav
-```
-
-Exemplo:
-
-```text
-audio/recordings/axe/axe_move_01.wav
-```
-
-Especificação mínima:
-
-- WAV PCM, 16-bit;
-- mono;
-- 24 kHz ou 48 kHz;
-- pico máximo recomendado entre -6 dBFS e -3 dBFS;
-- sem clipping, redução de ruído agressiva, música ou efeitos;
-- silêncio curto no começo e no fim;
-- nome idêntico ao `id` do CSV.
-
-Preencha `actor`, `license` e mude `status` para `recorded`. Depois da revisão técnica e artística, um mantenedor muda para `reviewed`.
-
-Ao enviar uma gravação, você declara que:
-
-1. é a pessoa gravada ou possui autorização escrita dela;
-2. tem direito de publicar a interpretação;
-3. aceita licenciá-la conforme a coluna `license`;
-4. permite edição técnica, distribuição e uso no projeto;
-5. não está imitando deliberadamente uma pessoa real sem consentimento.
-
-Voz sintética só pode ser enviada quando o modelo, o dataset e a pessoa representada permitem esse uso de forma documentada. Clonagem ou imitação do ator original não será aceita.
-
-## 4. Teste
+Antes de abrir um pull request:
 
 ```powershell
-npm run validate
-.\scripts\generate-test-voices.ps1 -Only "axe_move_*"
-.\scripts\install-test-addon.ps1
+npm install --prefix web
+npm run check
 ```
 
-O comando de geração cria guias TTS, não masters finais. Para escutar uma gravação final no addon, copie o WAV aprovado para o mesmo caminho relativo dentro de `build/content/dota2_translate_ptbr/sounds/vo/<heroi>/` antes de instalar.
-
-## 5. Pull request
-
-Explique:
-
-- quais IDs mudaram;
-- quem traduziu, revisou e interpretou;
-- como o áudio foi capturado;
-- qual licença foi concedida;
-- como o lote foi testado.
-
-PRs que incluam áudio original do Dota 2, material sem licença ou imitação vocal não autorizada serão fechados.
-
+Descreva o escopo, os IDs afetados, a origem dos dados e como a mudança foi
+testada. Não versione segredos Steam, arquivos do jogo, MP3s, WAVs ou conteúdo
+de `build/`.

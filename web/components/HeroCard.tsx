@@ -1,25 +1,100 @@
-import Link from "next/link";
-import { percent } from "@/lib/catalog";
+import Link from "@/src/compat/link";
+import Image from "@/src/compat/image";
+import {
+  getHeroLines,
+  type Hero,
+  type PersonaVariant,
+} from "@/lib/catalog";
+import { countTranslationSources, getCurrentTranslations } from "@/lib/current-translations";
 
-type Hero = {
-  id: string; name: string; subtitle: string; total: number;
-  translated: number; recorded: number; reviewed: number; active: boolean;
-};
+type HeroCardProps =
+  | { hero: Hero; persona?: never }
+  | { hero?: never; persona: PersonaVariant };
 
-export function HeroCard({ hero }: { hero: Hero }) {
+export function HeroCard(props: HeroCardProps) {
+  const card = props.persona
+    ? {
+        entry: props.persona as Hero | PersonaVariant,
+        href: `/personas/${props.persona.id}`,
+        lines: props.persona.lines,
+        totalCaptions: props.persona.total,
+        typeLabel:
+          props.persona.type === "persona" ? "PERSONA" : "VARIANTE DE VOZ",
+        voicePrefix: props.persona.prefixes.join(" + "),
+      }
+    : {
+        entry: props.hero as Hero | PersonaVariant,
+        href: `/heroes/${props.hero.id}`,
+        lines: getHeroLines(props.hero.id),
+        totalCaptions: props.hero.officialEnglishCaptions,
+        typeLabel: "BASE",
+        voicePrefix: props.hero.voicePrefix || "—",
+      };
+  const {
+    entry,
+    href,
+    lines,
+    totalCaptions,
+    typeLabel,
+    voicePrefix,
+  } = card;
+  const translations = getCurrentTranslations(entry.id, lines);
+  const translated = Object.keys(translations).length;
+  const sources = countTranslationSources(translations);
+  const coverage = totalCaptions
+    ? Math.round((translated / totalCaptions) * 100)
+    : 0;
   const body = (
     <>
-      <span className="hero-card-number">{hero.name.slice(0, 1)}</span>
-      <span className="hero-card-status">{hero.active ? "● CAMPANHA ATIVA" : "EM PREPARAÇÃO"}</span>
-      <h3>{hero.name}</h3>
-      <p>{hero.subtitle}</p>
-      <div className="hero-card-footer">
-        <span>{hero.total || "—"} falas</span>
-        <span>{percent(hero.reviewed, hero.total)}% completo</span>
+      <div className="hero-card-visual">
+        <Image
+          className="hero-card-image"
+          src={entry.imageUrl}
+          alt=""
+          width={320}
+          height={180}
+          unoptimized={entry.imageUrl.startsWith("/")}
+        />
+        <span className="hero-card-status">{typeLabel}</span>
+      </div>
+      <div className="hero-card-content">
+        <div className="hero-card-heading">
+          <h3>{entry.name}</h3>
+          <span className="hero-card-coverage">{coverage}%</span>
+        </div>
+        <p className="hero-card-caption-count">
+          <strong>{translated}</strong>
+          <span>
+            de {totalCaptions} captions PT-BR incluídas
+          </span>
+        </p>
+        <div
+          className="hero-card-progress"
+          role="progressbar"
+          aria-label={`Cobertura de captions PT-BR de ${entry.name}`}
+          aria-valuemin={0}
+          aria-valuemax={100}
+          aria-valuenow={coverage}
+        >
+          <span style={{ width: `${coverage}%` }} />
+        </div>
+        <div className="hero-card-sources" aria-label="Origem das traduções">
+          <span>
+            <b>{sources.official}</b> oficial
+          </span>
+          <span>
+            <b>{sources.community}</b> comunidade
+          </span>
+          <span>
+            <b>{sources.automatic}</b> sugerida
+          </span>
+        </div>
+        <div className="hero-card-footer">
+          <span>{entry.total} voicelines</span>
+          <span>{voicePrefix}</span>
+        </div>
       </div>
     </>
   );
-  return hero.active
-    ? <Link className="hero-card active" href={`/heroes/${hero.id}`}>{body}</Link>
-    : <article className="hero-card disabled">{body}</article>;
+  return <Link className="hero-card active" href={href}>{body}</Link>;
 }

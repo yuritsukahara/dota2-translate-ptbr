@@ -1,19 +1,16 @@
 ## Escopo
 
-Liste herói, categorias e IDs alterados.
+Descreva as páginas, scripts, catálogos ou documentos alterados.
 
-## Créditos e direitos
+## Origem e direitos
 
-- Tradução:
-- Revisão:
-- Interpretação:
-- Licença:
-- Consentimento/documentação:
+- Origem dos dados:
+- Build do Dota, quando aplicável:
+- Confirmação de que nenhum MP3, WAV, segredo ou arquivo proprietário foi adicionado:
 
 ## Testes
 
-- [ ] Executei `npm run validate`.
-- [ ] Não incluí áudio extraído do Dota 2.
-- [ ] Não usei imitação ou clonagem vocal sem consentimento documentado.
-- [ ] Conferi nomes, formato, volume e duração dos WAVs.
-
+- [ ] Executei `npm run check`.
+- [ ] Testei as páginas afetadas em desktop e mobile.
+- [ ] Conferi nomes de heróis, itens e IDs.
+- [ ] Não incluí conteúdo de `build/`, `.vscode/` ou `audio/compiled/`.

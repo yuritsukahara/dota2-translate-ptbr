@@ -1,48 +1,113 @@
-import Link from "next/link";
-import { Header } from "@/components/Header";
-import { ProgressRail } from "@/components/ProgressRail";
-import { HeroCard } from "@/components/HeroCard";
-import { heroes, percent } from "@/lib/catalog";
+import Link from "@/src/compat/link";
+import { FeaturedCatalogCard } from "@/components/FeaturedCatalogCard";
+import homeSummary from "@/data/home-summary.json";
+import { AnimatedCounter } from "@/components/AnimatedCounter";
 
 export const metadata = {
-  title: "Dota 2 Translate PT-BR — Cada herói. Cada fala.",
-  description: "Portal comunitário para traduzir, gravar, revisar e instalar todas as vozes base do Dota 2 em português brasileiro.",
+  title: "Dublagem Brasileira Dota 2",
+  description:
+    "Portal comunitário para traduzir captions e reunir packs de voz de Dota 2 em português brasileiro.",
 };
 
 export default function Home() {
-  const axe = heroes[0];
+  const {
+    build,
+    catalogTotal,
+    translatedTotal,
+    heroCount,
+    personaCount,
+    featuredHeroes,
+    featuredPersonas,
+  } = homeSummary;
+  const coverage = Math.floor((translatedTotal / catalogTotal) * 100);
   return (
     <>
-      <Header />
       <main>
         <section className="hero-shell">
           <div className="hero-grid">
             <div className="hero-copy">
-              <p className="eyebrow">PROJETO COMUNITÁRIO · BUILD 2026-07-23</p>
-              <h1>Cada herói.<br /><span>Cada fala.</span></h1>
+              <p className="eyebrow">
+                DUBLAGEM BRASILEIRA DOTA 2 · BUILD {build}
+              </p>
+              <h1>
+                Dublagem de Dota 2
+                <span>Em português.</span>
+              </h1>
               <p className="hero-lead">
-                Uma dublagem brasileira construída em público — com inventário verificável,
-                votação da comunidade, revisão humana e instalação reversível.
+                Um catálogo aberto para traduzir as vozes de todos os heróis e
+                do narrador padrão, formar elencos brasileiros e levar essa
+                demanda à Valve.
               </p>
               <div className="hero-actions">
-                <Link className="button button-primary" href="/heroes/axe">Explorar as 285 falas</Link>
-                <Link className="button button-ghost" href="/enviar">Enviar uma proposta</Link>
+                <Link className="button button-ghost" href="/heroes">
+                  Explorar os 127 heróis
+                </Link>
+                <Link className="button button-ghost" href="/releases">
+                  Baixar instalador
+                </Link>
+                <Link className="button button-primary" href="/peticao">
+                  Assinar a petição
+                </Link>
               </div>
               <dl className="hero-metrics">
-                <div><dt>285</dt><dd>slots mapeados</dd></div>
-                <div><dt>100%</dt><dd>cobertura técnica</dd></div>
-                <div><dt>0</dt><dd>áudios da Valve hospedados</dd></div>
+                <div>
+                  <dt>{heroCount}</dt>
+                  <dd>heróis</dd>
+                </div>
+                <div>
+                  <dt>{personaCount}</dt>
+                  <dd>personas e variantes</dd>
+                </div>
+                <div>
+                  <dt>1</dt>
+                  <dd>narrador padrão</dd>
+                </div>
+                <div>
+                  <dt>{translatedTotal.toLocaleString("pt-BR")}</dt>
+                  <dd>linhas PT-BR incluídas</dd>
+                </div>
               </dl>
             </div>
-            <div className="campaign-card" aria-label="Progresso da campanha do Axe">
-              <div className="campaign-mark" aria-hidden="true">AXE</div>
-              <p className="card-kicker">CAMPANHA ATIVA</p>
-              <h2>Axe abre o caminho</h2>
-              <p>O inventário está completo. Agora a comunidade decide como ele vai soar em português.</p>
-              <ProgressRail label="Tradução aprovada" value={percent(axe.translated, axe.total)} tone="gold" />
-              <ProgressRail label="Áudio gravado" value={percent(axe.recorded, axe.total)} tone="rust" />
-              <ProgressRail label="Revisado e lançado" value={percent(axe.reviewed, axe.total)} tone="red" />
-              <Link className="text-link" href="/heroes/axe">Ver campanha <span>→</span></Link>
+            <div
+              className="campaign-card"
+              aria-label="Progresso geral das traduções"
+            >
+              <div className="campaign-mark" aria-hidden="true">
+                PT-BR
+              </div>
+              <p className="card-kicker">COBERTURA GERAL</p>
+              <h2>Linhas de Voz traduzidas</h2>
+              <p>
+                {translatedTotal.toLocaleString("pt-BR")} de{" "}
+                {catalogTotal.toLocaleString("pt-BR")} captions já possuem uma
+                versão brasileira incluída.
+              </p>
+              <div className="progress-row">
+                <div className="progress-label">
+                  <span>Catálogo PT-BR</span>
+                  <span>{coverage}%</span>
+                </div>
+                <div className="progress-track">
+                  <div
+                    className="progress-fill"
+                    style={{ width: `${coverage}%` }}
+                  />
+                </div>
+              </div>
+              <ol className="campaign-casting-list">
+                <li>
+                  <span>01</span>Inglês oficial preservado
+                </li>
+                <li>
+                  <span>02</span>PT-BR incluído conforme é gerado
+                </li>
+                <li>
+                  <span>03</span>Alternativas abertas à comunidade
+                </li>
+              </ol>
+              <Link className="text-link" href="/announcer">
+                Ver o narrador padrão <span>→</span>
+              </Link>
             </div>
           </div>
         </section>
@@ -50,42 +115,95 @@ export default function Home() {
         <section className="section section-dark">
           <div className="section-heading">
             <div>
-              <p className="eyebrow">COBERTURA HONESTA</p>
-              <h2>100% tem um significado.</h2>
+              <p className="eyebrow">UM PROJETO PARA O JOGO INTEIRO</p>
+              <h2>Texto, voz e comunidade.</h2>
             </div>
-            <p>Um herói só fica completo quando cada slot base possui tradução, gravação e duas revisões independentes.</p>
+            <p>
+              As legendas foram traduzidas para o PT-BR. A tradução inicial
+              entra no catálogo imediatamente e sugestões comunitárias podem
+              aperfeiçoá-la.
+            </p>
           </div>
           <div className="principle-grid">
-            <article><span>01</span><h3>Inventário</h3><p>Os nomes técnicos vêm do VPK instalado e ficam fixados a uma versão do jogo.</p></article>
-            <article><span>02</span><h3>Comunidade</h3><p>Propostas abertas, apoio múltiplo e histórico público — sem esconder alternativas.</p></article>
-            <article><span>03</span><h3>Curadoria</h3><p>Quórum, revisão linguística e revisão técnica antes de qualquer release.</p></article>
-            <article><span>04</span><h3>Instalação</h3><p>Pacotes verificados, backup automático e restauração sem tocar em executáveis.</p></article>
+            <article>
+              <span>01</span>
+              <h3>Catálogo</h3>
+              <p className="principle-stat">
+                <AnimatedCounter
+                  className="principle-counter"
+                  value={catalogTotal}
+                />
+                <span className="principle-counter-copy">
+                  captions do jogo organizadas por herói, persona, narrador e
+                  build.
+                </span>
+              </p>
+            </article>
+            <article>
+              <span>02</span>
+              <h3>Tradução</h3>
+              <p>
+                O Codex gera a base PT-BR e cada origem permanece claramente
+                identificada.
+              </p>
+            </article>
+            <article>
+              <span>03</span>
+              <h3>Comunidade</h3>
+              <p>
+                Qualquer pessoa pode sugerir uma alternativa mais natural e
+                contribuir usando sua identidade Steam.
+              </p>
+            </article>
+            <article>
+              <span>04</span>
+              <h3>Vozes</h3>
+              <p>
+                Cada pack mantém um único intérprete para preservar a identidade
+                do personagem.
+              </p>
+            </article>
           </div>
         </section>
 
         <section className="section">
           <div className="section-heading compact">
-            <div><p className="eyebrow">HERÓIS</p><h2>Campanhas da comunidade</h2></div>
-            <Link className="text-link" href="/heroes">Ver todos <span>→</span></Link>
+            <div>
+              <p className="eyebrow">UM ELENCO PARA CADA HERÓI</p>
+              <h2>Herois padrões</h2>
+            </div>
+            <Link className="text-link" href="/heroes">
+              Ver todos <span>→</span>
+            </Link>
           </div>
           <div className="hero-card-grid">
-            {heroes.map((hero) => <HeroCard key={hero.id} hero={hero} />)}
+            {featuredHeroes.map((hero) => (
+              <FeaturedCatalogCard key={hero.id} entry={hero} kind="hero" />
+            ))}
           </div>
         </section>
 
-        <section className="section release-banner">
-          <div>
-            <p className="eyebrow">RELEASE v0.1.0</p>
-            <h2>O laboratório já funciona.</h2>
-            <p>O pacote do Axe contém 285 vozes-guia geradas pelo projeto e um addon compilável com as ferramentas oficiais.</p>
+        <section className="section section-personas">
+          <div className="section-heading compact">
+            <div>
+              <p className="eyebrow">PERSONAS TAMBÉM TÊM VOZ PRÓPRIA</p>
+              <h2>Personas</h2>
+            </div>
+            <Link className="text-link" href="/personas">
+              Ver todas <span>→</span>
+            </Link>
           </div>
-          <Link className="button button-primary" href="/releases">Baixar e instalar</Link>
+          <div className="hero-card-grid">
+            {featuredPersonas.map((persona) => (
+              <FeaturedCatalogCard
+                key={persona.id}
+                entry={persona}
+                kind="persona"
+              />
+            ))}
+          </div>
         </section>
       </main>
-      <footer className="footer">
-        <p>Dota 2 Translate PT-BR · Projeto comunitário não afiliado à Valve.</p>
-        <div><Link href="/creditos">Créditos</Link><a href="https://github.com/yuritsukahara/dota2-translate-ptbr">GitHub</a></div>
-      </footer>
     </>
   );
 }

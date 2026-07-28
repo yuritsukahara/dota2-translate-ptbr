@@ -70,3 +70,47 @@ export function listVpkEntries(vpkPath) {
 
   return entries;
 }
+
+export function readVpkEntry(vpkPath, entryPath) {
+  const normalizedPath = entryPath.replaceAll("\\", "/").toLowerCase();
+  const entry = listVpkEntries(vpkPath).find(
+    (candidate) => candidate.path.toLowerCase() === normalizedPath
+  );
+  if (!entry) {
+    throw new Error(`Entrada não encontrada no VPK: ${entryPath}`);
+  }
+  return readVpkEntryRecord(vpkPath, entry);
+}
+
+export function readVpkEntryRecord(vpkPath, entry) {
+  if (entry.preloadBytes) {
+    throw new Error(
+      `Entrada com preload ainda não suportada pelo extrator: ${entry.path}`
+    );
+  }
+
+  const archivePath =
+    entry.archiveIndex === 0x7fff
+      ? vpkPath
+      : vpkPath.replace(
+          /_dir\.vpk$/i,
+          `_${String(entry.archiveIndex).padStart(3, "0")}.vpk`
+        );
+  const handle = fs.openSync(archivePath, "r");
+  try {
+    const buffer = Buffer.allocUnsafe(entry.entryLength);
+    const bytesRead = fs.readSync(
+      handle,
+      buffer,
+      0,
+      entry.entryLength,
+      entry.entryOffset
+    );
+    if (bytesRead !== entry.entryLength) {
+      throw new Error(`Entrada truncada ao ler ${entry.path}.`);
+    }
+    return buffer;
+  } finally {
+    fs.closeSync(handle);
+  }
+}

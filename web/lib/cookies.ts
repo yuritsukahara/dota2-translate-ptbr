@@ -7,6 +7,7 @@ export function parseCookies(header: string | null) {
   return result;
 }
 
-export function cookie(name: string, value: string, maxAge: number) {
-  return `${name}=${encodeURIComponent(value)}; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=${maxAge}`;
+export function cookie(name: string, value: string, maxAge: number, secure = true) {
+  const secureAttribute = secure ? "; Secure" : "";
+  return `${name}=${encodeURIComponent(value)}; Path=/; HttpOnly${secureAttribute}; SameSite=Lax; Max-Age=${maxAge}`;
 }

@@ -1,4 +1,0 @@
-"DOTAHeroes"
-{
-    "Version" "1"
-}

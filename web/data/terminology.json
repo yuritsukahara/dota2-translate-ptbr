@@ -1,0 +1,4028 @@
+{
+  "source": "Arquivos oficiais de localização do Dota 2 instalado localmente",
+  "generatedAt": "2026-07-26T19:30:30.854Z",
+  "heroes": [
+    {
+      "key": "npc_dota_hero_abaddon",
+      "en": "Abaddon",
+      "ptBr": "Abaddon"
+    },
+    {
+      "key": "npc_dota_hero_alchemist",
+      "en": "Alchemist",
+      "ptBr": "Alchemist"
+    },
+    {
+      "key": "npc_dota_hero_ancient_apparition",
+      "en": "Ancient Apparition",
+      "ptBr": "Ancient Apparition"
+    },
+    {
+      "key": "npc_dota_hero_antimage",
+      "en": "Anti-Mage",
+      "ptBr": "Anti-Mage"
+    },
+    {
+      "key": "npc_dota_hero_arc_warden",
+      "en": "Arc Warden",
+      "ptBr": "Arc Warden"
+    },
+    {
+      "key": "npc_dota_hero_axe",
+      "en": "Axe",
+      "ptBr": "Axe"
+    },
+    {
+      "key": "npc_dota_hero_bane",
+      "en": "Bane",
+      "ptBr": "Bane"
+    },
+    {
+      "key": "npc_dota_hero_batrider",
+      "en": "Batrider",
+      "ptBr": "Batrider"
+    },
+    {
+      "key": "npc_dota_hero_beastmaster",
+      "en": "Beastmaster",
+      "ptBr": "Beastmaster"
+    },
+    {
+      "key": "npc_dota_hero_bloodseeker",
+      "en": "Bloodseeker",
+      "ptBr": "Bloodseeker"
+    },
+    {
+      "key": "npc_dota_hero_bounty_hunter",
+      "en": "Bounty Hunter",
+      "ptBr": "Bounty Hunter"
+    },
+    {
+      "key": "npc_dota_hero_brewmaster",
+      "en": "Brewmaster",
+      "ptBr": "Brewmaster"
+    },
+    {
+      "key": "npc_dota_hero_bristleback",
+      "en": "Bristleback",
+      "ptBr": "Bristleback"
+    },
+    {
+      "key": "npc_dota_hero_broodmother",
+      "en": "Broodmother",
+      "ptBr": "Broodmother"
+    },
+    {
+      "key": "npc_dota_hero_centaur",
+      "en": "Centaur Warrunner",
+      "ptBr": "Centaur Warrunner"
+    },
+    {
+      "key": "npc_dota_hero_chaos_knight",
+      "en": "Chaos Knight",
+      "ptBr": "Chaos Knight"
+    },
+    {
+      "key": "npc_dota_hero_chen",
+      "en": "Chen",
+      "ptBr": "Chen"
+    },
+    {
+      "key": "npc_dota_hero_clinkz",
+      "en": "Clinkz",
+      "ptBr": "Clinkz"
+    },
+    {
+      "key": "npc_dota_hero_rattletrap",
+      "en": "Clockwerk",
+      "ptBr": "Clockwerk"
+    },
+    {
+      "key": "npc_dota_hero_crystal_maiden",
+      "en": "Crystal Maiden",
+      "ptBr": "Crystal Maiden"
+    },
+    {
+      "key": "npc_dota_hero_dark_seer",
+      "en": "Dark Seer",
+      "ptBr": "Dark Seer"
+    },
+    {
+      "key": "npc_dota_hero_dark_willow",
+      "en": "Dark Willow",
+      "ptBr": "Dark Willow"
+    },
+    {
+      "key": "npc_dota_hero_dawnbreaker",
+      "en": "Dawnbreaker",
+      "ptBr": "Dawnbreaker"
+    },
+    {
+      "key": "npc_dota_hero_dazzle",
+      "en": "Dazzle",
+      "ptBr": "Dazzle"
+    },
+    {
+      "key": "npc_dota_hero_death_prophet",
+      "en": "Death Prophet",
+      "ptBr": "Death Prophet"
+    },
+    {
+      "key": "npc_dota_hero_disruptor",
+      "en": "Disruptor",
+      "ptBr": "Disruptor"
+    },
+    {
+      "key": "npc_dota_hero_doom_bringer",
+      "en": "Doom",
+      "ptBr": "Doom"
+    },
+    {
+      "key": "npc_dota_hero_dragon_knight",
+      "en": "Dragon Knight",
+      "ptBr": "Dragon Knight"
+    },
+    {
+      "key": "npc_dota_hero_drow_ranger",
+      "en": "Drow Ranger",
+      "ptBr": "Drow Ranger"
+    },
+    {
+      "key": "npc_dota_hero_earth_spirit",
+      "en": "Earth Spirit",
+      "ptBr": "Earth Spirit"
+    },
+    {
+      "key": "npc_dota_hero_earthshaker",
+      "en": "Earthshaker",
+      "ptBr": "Earthshaker"
+    },
+    {
+      "key": "npc_dota_hero_elder_titan",
+      "en": "Elder Titan",
+      "ptBr": "Elder Titan"
+    },
+    {
+      "key": "npc_dota_hero_ember_spirit",
+      "en": "Ember Spirit",
+      "ptBr": "Ember Spirit"
+    },
+    {
+      "key": "npc_dota_hero_enchantress",
+      "en": "Enchantress",
+      "ptBr": "Enchantress"
+    },
+    {
+      "key": "npc_dota_hero_enigma",
+      "en": "Enigma",
+      "ptBr": "Enigma"
+    },
+    {
+      "key": "npc_dota_hero_faceless_void",
+      "en": "Faceless Void",
+      "ptBr": "Faceless Void"
+    },
+    {
+      "key": "npc_dota_hero_grimstroke",
+      "en": "Grimstroke",
+      "ptBr": "Grimstroke"
+    },
+    {
+      "key": "npc_dota_hero_gyrocopter",
+      "en": "Gyrocopter",
+      "ptBr": "Gyrocopter"
+    },
+    {
+      "key": "npc_dota_hero_hoodwink",
+      "en": "Hoodwink",
+      "ptBr": "Hoodwink"
+    },
+    {
+      "key": "npc_dota_hero_huskar",
+      "en": "Huskar",
+      "ptBr": "Huskar"
+    },
+    {
+      "key": "npc_dota_hero_invoker",
+      "en": "Invoker",
+      "ptBr": "Invoker"
+    },
+    {
+      "key": "npc_dota_hero_wisp",
+      "en": "Io",
+      "ptBr": "Io"
+    },
+    {
+      "key": "npc_dota_hero_jakiro",
+      "en": "Jakiro",
+      "ptBr": "Jakiro"
+    },
+    {
+      "key": "npc_dota_hero_juggernaut",
+      "en": "Juggernaut",
+      "ptBr": "Juggernaut"
+    },
+    {
+      "key": "npc_dota_hero_keeper_of_the_light",
+      "en": "Keeper of the Light",
+      "ptBr": "Keeper of the Light"
+    },
+    {
+      "key": "npc_dota_hero_kez",
+      "en": "Kez",
+      "ptBr": "Kez"
+    },
+    {
+      "key": "npc_dota_hero_kunkka",
+      "en": "Kunkka",
+      "ptBr": "Kunkka"
+    },
+    {
+      "key": "npc_dota_hero_largo",
+      "en": "Largo",
+      "ptBr": "Largo"
+    },
+    {
+      "key": "npc_dota_hero_legion_commander",
+      "en": "Legion Commander",
+      "ptBr": "Legion Commander"
+    },
+    {
+      "key": "npc_dota_hero_leshrac",
+      "en": "Leshrac",
+      "ptBr": "Leshrac"
+    },
+    {
+      "key": "npc_dota_hero_lich",
+      "en": "Lich",
+      "ptBr": "Lich"
+    },
+    {
+      "key": "npc_dota_hero_life_stealer",
+      "en": "Lifestealer",
+      "ptBr": "Lifestealer"
+    },
+    {
+      "key": "npc_dota_hero_lina",
+      "en": "Lina",
+      "ptBr": "Lina"
+    },
+    {
+      "key": "npc_dota_hero_lion",
+      "en": "Lion",
+      "ptBr": "Lion"
+    },
+    {
+      "key": "npc_dota_hero_lone_druid",
+      "en": "Lone Druid",
+      "ptBr": "Lone Druid"
+    },
+    {
+      "key": "npc_dota_hero_luna",
+      "en": "Luna",
+      "ptBr": "Luna"
+    },
+    {
+      "key": "npc_dota_hero_lycan",
+      "en": "Lycan",
+      "ptBr": "Lycan"
+    },
+    {
+      "key": "npc_dota_hero_magnataur",
+      "en": "Magnus",
+      "ptBr": "Magnus"
+    },
+    {
+      "key": "npc_dota_hero_marci",
+      "en": "Marci",
+      "ptBr": "Marci"
+    },
+    {
+      "key": "npc_dota_hero_mars",
+      "en": "Mars",
+      "ptBr": "Mars"
+    },
+    {
+      "key": "npc_dota_hero_medusa",
+      "en": "Medusa",
+      "ptBr": "Medusa"
+    },
+    {
+      "key": "npc_dota_hero_meepo",
+      "en": "Meepo",
+      "ptBr": "Meepo"
+    },
+    {
+      "key": "npc_dota_hero_mirana",
+      "en": "Mirana",
+      "ptBr": "Mirana"
+    },
+    {
+      "key": "npc_dota_hero_monkey_king",
+      "en": "Monkey King",
+      "ptBr": "Monkey King"
+    },
+    {
+      "key": "npc_dota_hero_morphling",
+      "en": "Morphling",
+      "ptBr": "Morphling"
+    },
+    {
+      "key": "npc_dota_hero_muerta",
+      "en": "Muerta",
+      "ptBr": "Muerta"
+    },
+    {
+      "key": "npc_dota_hero_naga_siren",
+      "en": "Naga Siren",
+      "ptBr": "Naga Siren"
+    },
+    {
+      "key": "npc_dota_hero_furion",
+      "en": "Nature's Prophet",
+      "ptBr": "Nature's Prophet"
+    },
+    {
+      "key": "npc_dota_hero_necrolyte",
+      "en": "Necrophos",
+      "ptBr": "Necrophos"
+    },
+    {
+      "key": "npc_dota_hero_night_stalker",
+      "en": "Night Stalker",
+      "ptBr": "Night Stalker"
+    },
+    {
+      "key": "npc_dota_hero_nyx_assassin",
+      "en": "Nyx Assassin",
+      "ptBr": "Nyx Assassin"
+    },
+    {
+      "key": "npc_dota_hero_ogre_magi",
+      "en": "Ogre Magi",
+      "ptBr": "Ogre Magi"
+    },
+    {
+      "key": "npc_dota_hero_omniknight",
+      "en": "Omniknight",
+      "ptBr": "Omniknight"
+    },
+    {
+      "key": "npc_dota_hero_oracle",
+      "en": "Oracle",
+      "ptBr": "Oracle"
+    },
+    {
+      "key": "npc_dota_hero_obsidian_destroyer",
+      "en": "Outworld Devourer",
+      "ptBr": "Outworld Devourer"
+    },
+    {
+      "key": "npc_dota_hero_pangolier",
+      "en": "Pangolier",
+      "ptBr": "Pangolier"
+    },
+    {
+      "key": "npc_dota_hero_phantom_assassin",
+      "en": "Phantom Assassin",
+      "ptBr": "Phantom Assassin"
+    },
+    {
+      "key": "npc_dota_hero_phantom_lancer",
+      "en": "Phantom Lancer",
+      "ptBr": "Phantom Lancer"
+    },
+    {
+      "key": "npc_dota_hero_phoenix",
+      "en": "Phoenix",
+      "ptBr": "Phoenix"
+    },
+    {
+      "key": "npc_dota_hero_primal_beast",
+      "en": "Primal Beast",
+      "ptBr": "Primal Beast"
+    },
+    {
+      "key": "npc_dota_hero_puck",
+      "en": "Puck",
+      "ptBr": "Puck"
+    },
+    {
+      "key": "npc_dota_hero_pudge",
+      "en": "Pudge",
+      "ptBr": "Pudge"
+    },
+    {
+      "key": "npc_dota_hero_pugna",
+      "en": "Pugna",
+      "ptBr": "Pugna"
+    },
+    {
+      "key": "npc_dota_hero_queenofpain",
+      "en": "Queen of Pain",
+      "ptBr": "Queen of Pain"
+    },
+    {
+      "key": "npc_dota_hero_razor",
+      "en": "Razor",
+      "ptBr": "Razor"
+    },
+    {
+      "key": "npc_dota_hero_riki",
+      "en": "Riki",
+      "ptBr": "Riki"
+    },
+    {
+      "key": "npc_dota_hero_ringmaster",
+      "en": "Ring Master",
+      "ptBr": "Ring Master"
+    },
+    {
+      "key": "npc_dota_hero_rubick",
+      "en": "Rubick",
+      "ptBr": "Rubick"
+    },
+    {
+      "key": "npc_dota_hero_sand_king",
+      "en": "Sand King",
+      "ptBr": "Sand King"
+    },
+    {
+      "key": "npc_dota_hero_shadow_demon",
+      "en": "Shadow Demon",
+      "ptBr": "Shadow Demon"
+    },
+    {
+      "key": "npc_dota_hero_nevermore",
+      "en": "Shadow Fiend",
+      "ptBr": "Shadow Fiend"
+    },
+    {
+      "key": "npc_dota_hero_shadow_shaman",
+      "en": "Shadow Shaman",
+      "ptBr": "Shadow Shaman"
+    },
+    {
+      "key": "npc_dota_hero_silencer",
+      "en": "Silencer",
+      "ptBr": "Silencer"
+    },
+    {
+      "key": "npc_dota_hero_skywrath_mage",
+      "en": "Skywrath Mage",
+      "ptBr": "Skywrath Mage"
+    },
+    {
+      "key": "npc_dota_hero_slardar",
+      "en": "Slardar",
+      "ptBr": "Slardar"
+    },
+    {
+      "key": "npc_dota_hero_slark",
+      "en": "Slark",
+      "ptBr": "Slark"
+    },
+    {
+      "key": "npc_dota_hero_snapfire",
+      "en": "Snapfire",
+      "ptBr": "Snapfire"
+    },
+    {
+      "key": "npc_dota_hero_sniper",
+      "en": "Sniper",
+      "ptBr": "Sniper"
+    },
+    {
+      "key": "npc_dota_hero_spectre",
+      "en": "Spectre",
+      "ptBr": "Spectre"
+    },
+    {
+      "key": "npc_dota_hero_spirit_breaker",
+      "en": "Spirit Breaker",
+      "ptBr": "Spirit Breaker"
+    },
+    {
+      "key": "npc_dota_hero_storm_spirit",
+      "en": "Storm Spirit",
+      "ptBr": "Storm Spirit"
+    },
+    {
+      "key": "npc_dota_hero_sven",
+      "en": "Sven",
+      "ptBr": "Sven"
+    },
+    {
+      "key": "npc_dota_hero_techies",
+      "en": "Techies",
+      "ptBr": "Techies"
+    },
+    {
+      "key": "npc_dota_hero_templar_assassin",
+      "en": "Templar Assassin",
+      "ptBr": "Templar Assassin"
+    },
+    {
+      "key": "npc_dota_hero_terrorblade",
+      "en": "Terrorblade",
+      "ptBr": "Terrorblade"
+    },
+    {
+      "key": "npc_dota_hero_tidehunter",
+      "en": "Tidehunter",
+      "ptBr": "Tidehunter"
+    },
+    {
+      "key": "npc_dota_hero_shredder",
+      "en": "Timbersaw",
+      "ptBr": "Timbersaw"
+    },
+    {
+      "key": "npc_dota_hero_tinker",
+      "en": "Tinker",
+      "ptBr": "Tinker"
+    },
+    {
+      "key": "npc_dota_hero_tiny",
+      "en": "Tiny",
+      "ptBr": "Tiny"
+    },
+    {
+      "key": "npc_dota_hero_treant",
+      "en": "Treant Protector",
+      "ptBr": "Treant Protector"
+    },
+    {
+      "key": "npc_dota_hero_troll_warlord",
+      "en": "Troll Warlord",
+      "ptBr": "Troll Warlord"
+    },
+    {
+      "key": "npc_dota_hero_tusk",
+      "en": "Tusk",
+      "ptBr": "Tusk"
+    },
+    {
+      "key": "npc_dota_hero_abyssal_underlord",
+      "en": "Underlord",
+      "ptBr": "Underlord"
+    },
+    {
+      "key": "npc_dota_hero_undying",
+      "en": "Undying",
+      "ptBr": "Undying"
+    },
+    {
+      "key": "npc_dota_hero_ursa",
+      "en": "Ursa",
+      "ptBr": "Ursa"
+    },
+    {
+      "key": "npc_dota_hero_vengefulspirit",
+      "en": "Vengeful Spirit",
+      "ptBr": "Vengeful Spirit"
+    },
+    {
+      "key": "npc_dota_hero_venomancer",
+      "en": "Venomancer",
+      "ptBr": "Venomancer"
+    },
+    {
+      "key": "npc_dota_hero_viper",
+      "en": "Viper",
+      "ptBr": "Viper"
+    },
+    {
+      "key": "npc_dota_hero_visage",
+      "en": "Visage",
+      "ptBr": "Visage"
+    },
+    {
+      "key": "npc_dota_hero_void_spirit",
+      "en": "Void Spirit",
+      "ptBr": "Void Spirit"
+    },
+    {
+      "key": "npc_dota_hero_warlock",
+      "en": "Warlock",
+      "ptBr": "Warlock"
+    },
+    {
+      "key": "npc_dota_hero_weaver",
+      "en": "Weaver",
+      "ptBr": "Weaver"
+    },
+    {
+      "key": "npc_dota_hero_windrunner",
+      "en": "Windranger",
+      "ptBr": "Windranger"
+    },
+    {
+      "key": "npc_dota_hero_winter_wyvern",
+      "en": "Winter Wyvern",
+      "ptBr": "Winter Wyvern"
+    },
+    {
+      "key": "npc_dota_hero_witch_doctor",
+      "en": "Witch Doctor",
+      "ptBr": "Witch Doctor"
+    },
+    {
+      "key": "npc_dota_hero_skeleton_king",
+      "en": "Wraith King",
+      "ptBr": "Wraith King"
+    },
+    {
+      "key": "npc_dota_hero_zuus",
+      "en": "Zeus",
+      "ptBr": "Zeus"
+    }
+  ],
+  "items": [
+    {
+      "key": "dota_tooltip_ability_item_enhancement_alert_bound:f",
+      "en": "{noun, gender, other{Alert}}",
+      "ptBr": "Atenção"
+    },
+    {
+      "key": "dota_tooltip_ability_item_enhancement_audacious_bound:f",
+      "en": "{noun, gender, other{Audacious}}",
+      "ptBr": "Ousadia"
+    },
+    {
+      "key": "dota_tooltip_ability_item_enhancement_boundless_bound:f",
+      "en": "{noun, gender, other{Boundless}}",
+      "ptBr": "Alcance"
+    },
+    {
+      "key": "dota_tooltip_ability_item_enhancement_brawny_bound:f",
+      "en": "{noun, gender, other{Brawny}}",
+      "ptBr": "Robustez"
+    },
+    {
+      "key": "dota_tooltip_ability_item_enhancement_crude_bound:f",
+      "en": "{noun, gender, other{Crude}}",
+      "ptBr": "Rispidez"
+    },
+    {
+      "key": "dota_tooltip_ability_item_enhancement_dominant_bound:f",
+      "en": "{noun, gender, other{Dominant}}",
+      "ptBr": "Dominância"
+    },
+    {
+      "key": "dota_tooltip_ability_item_enhancement_evolved_bound:f",
+      "en": "{noun, gender, other{Evolved}}",
+      "ptBr": "Evolução"
+    },
+    {
+      "key": "dota_tooltip_ability_item_enhancement_feverish_bound:f",
+      "en": "{noun, gender, other{Feverish}}",
+      "ptBr": "Fervor"
+    },
+    {
+      "key": "dota_tooltip_ability_item_enhancement_fierce_bound:f",
+      "en": "{noun, gender, other{Fierce}}",
+      "ptBr": "Ferocidade"
+    },
+    {
+      "key": "dota_tooltip_ability_item_enhancement_fleetfooted_bound:f",
+      "en": "{noun, gender, other{Fleetfooted}}",
+      "ptBr": "Correria"
+    },
+    {
+      "key": "dota_tooltip_ability_item_enhancement_greedy_bound:f",
+      "en": "{noun, gender, other{Greedy}}",
+      "ptBr": "Ganância"
+    },
+    {
+      "key": "dota_tooltip_ability_item_enhancement_hulking_bound:f",
+      "en": "{noun, gender, other{Hulking}}",
+      "ptBr": "Peso"
+    },
+    {
+      "key": "dota_tooltip_ability_item_enhancement_keen_eyed_bound:f",
+      "en": "{noun, gender, other{Keen-eyed}}",
+      "ptBr": "Diligência"
+    },
+    {
+      "key": "dota_tooltip_ability_item_enhancement_manic_bound:f",
+      "en": "{noun, gender, other{Manic}}",
+      "ptBr": "Mania"
+    },
+    {
+      "key": "dota_tooltip_ability_item_enhancement_mystical_bound:f",
+      "en": "{noun, gender, other{Mystical}}",
+      "ptBr": "Misticismo"
+    },
+    {
+      "key": "dota_tooltip_ability_item_enhancement_nimble_bound:f",
+      "en": "{noun, gender, other{Nimble}}",
+      "ptBr": "Leveza"
+    },
+    {
+      "key": "dota_tooltip_ability_item_enhancement_quickened_bound:f",
+      "en": "{noun, gender, other{Quickened}}",
+      "ptBr": "Aceleração"
+    },
+    {
+      "key": "dota_tooltip_ability_item_enhancement_restorative_bound:f",
+      "en": "{noun, gender, other{Restorative}}",
+      "ptBr": "Restauração"
+    },
+    {
+      "key": "dota_tooltip_ability_item_enhancement_thick_bound:f",
+      "en": "{noun, gender, other{Thick}}",
+      "ptBr": "Espessura"
+    },
+    {
+      "key": "dota_tooltip_ability_item_enhancement_timeless_bound:f",
+      "en": "{noun, gender, other{Timeless}}",
+      "ptBr": "Atemporalidade"
+    },
+    {
+      "key": "dota_tooltip_ability_item_enhancement_titanic_bound:f",
+      "en": "{noun, gender, other{Titanic}}",
+      "ptBr": "Titã"
+    },
+    {
+      "key": "dota_tooltip_ability_item_enhancement_tough_bound:f",
+      "en": "{noun, gender, other{Tough}}",
+      "ptBr": "Reforço"
+    },
+    {
+      "key": "dota_tooltip_ability_item_enhancement_curious_bound:f",
+      "en": "{noun, gender, other{Unleashed}}",
+      "ptBr": "Potencial"
+    },
+    {
+      "key": "dota_tooltip_ability_item_enhancement_vampiric_bound:f",
+      "en": "{noun, gender, other{Vampiric}}",
+      "ptBr": "Vampirismo"
+    },
+    {
+      "key": "dota_tooltip_ability_item_enhancement_vast_bound:f",
+      "en": "{noun, gender, other{Vast}}",
+      "ptBr": "Grandeza"
+    },
+    {
+      "key": "dota_tooltip_ability_item_enhancement_vital_bound:f",
+      "en": "{noun, gender, other{Vital}}",
+      "ptBr": "Vitalidade"
+    },
+    {
+      "key": "dota_tooltip_ability_item_enhancement_wise_bound:f",
+      "en": "{noun, gender, other{Wise}}",
+      "ptBr": "Lucidez"
+    },
+    {
+      "key": "dota_tooltip_ability_item_hydras_breath_agility",
+      "en": "+$agi",
+      "ptBr": "+$agi"
+    },
+    {
+      "key": "dota_tooltip_ability_item_specialists_array_all_stats",
+      "en": "+$all",
+      "ptBr": "+$all"
+    },
+    {
+      "key": "dota_tooltip_ability_item_chasm_stone_aoe_bonus",
+      "en": "+$aoe_bonus",
+      "ptBr": "+$aoe_bonus"
+    },
+    {
+      "key": "dota_tooltip_ability_item_enhancement_thick_bonus_armor",
+      "en": "+$armor",
+      "ptBr": "+$armor"
+    },
+    {
+      "key": "dota_tooltip_ability_item_enhancement_dominant_attack_speed",
+      "en": "+$attack",
+      "ptBr": "+$attack"
+    },
+    {
+      "key": "dota_tooltip_ability_item_hydras_breath_base_attack_range",
+      "en": "+$attack_range",
+      "ptBr": "+$attack_range"
+    },
+    {
+      "key": "dota_tooltip_ability_item_enhancement_boundless_bonus_attack_range",
+      "en": "+$attack_range_all",
+      "ptBr": "+$attack_range_all"
+    },
+    {
+      "key": "dota_tooltip_ability_item_penta_edged_sword_melee_attack_range",
+      "en": "+$attack_range_melee",
+      "ptBr": "+$attack_range_melee"
+    },
+    {
+      "key": "dota_tooltip_ability_item_enhancement_boundless_bonus_cast_range",
+      "en": "+$cast_range",
+      "ptBr": "+$cast_range"
+    },
+    {
+      "key": "dota_tooltip_ability_item_foragers_health_bonus_damage",
+      "en": "+$damage",
+      "ptBr": "+$damage"
+    },
+    {
+      "key": "dota_tooltip_ability_item_chasm_stone_bonus_health",
+      "en": "+$health",
+      "ptBr": "+$health"
+    },
+    {
+      "key": "dota_tooltip_ability_item_enhancement_vital_health_regen",
+      "en": "+$hp_regen",
+      "ptBr": "+$hp_regen"
+    },
+    {
+      "key": "dota_tooltip_ability_item_foragers_mana_bonus_int",
+      "en": "+$int",
+      "ptBr": "+$int"
+    },
+    {
+      "key": "dota_tooltip_ability_item_enhancement_restorative_bonus_mana",
+      "en": "+$mana",
+      "ptBr": "+$mana"
+    },
+    {
+      "key": "dota_tooltip_ability_item_enhancement_thick_bonus_mana_regen",
+      "en": "+$mana_regen",
+      "ptBr": "+$mana_regen"
+    },
+    {
+      "key": "dota_tooltip_ability_item_foragers_stats_bonus_move_speed",
+      "en": "+$move_speed",
+      "ptBr": "+$move_speed"
+    },
+    {
+      "key": "dota_tooltip_ability_item_enhancement_evolved_primary_stat",
+      "en": "+$primary_attribute",
+      "ptBr": "+$primary_attribute"
+    },
+    {
+      "key": "dota_tooltip_ability_item_devastator_projectile_speed",
+      "en": "+$projectile_speed",
+      "ptBr": "+$projectile_speed"
+    },
+    {
+      "key": "dota_tooltip_ability_item_power_treads_bonus_stat",
+      "en": "+$selected_attrib",
+      "ptBr": "+$selected_attrib"
+    },
+    {
+      "key": "dota_tooltip_ability_item_hydras_breath_strength",
+      "en": "+$str",
+      "ptBr": "+$str"
+    },
+    {
+      "key": "dota_tooltip_ability_item_enhancement_fierce_bonus_night_vision",
+      "en": "+Bonus Night Vision",
+      "ptBr": "+de visão noturna adicional"
+    },
+    {
+      "key": "dota_tooltip_ability_item_third_eye_bonus_vision",
+      "en": "+BONUS VISION",
+      "ptBr": "+DE VISÃO ADICIONAL"
+    },
+    {
+      "key": "dota_tooltip_ability_item_phase_boots_bonus_damage_melee",
+      "en": "+Damage (MELEE)",
+      "ptBr": "+de dano (CORPO A CORPO)"
+    },
+    {
+      "key": "dota_tooltip_ability_item_phase_boots_bonus_damage_range",
+      "en": "+Damage (RANGED)",
+      "ptBr": "+de dano (LONGO ALCANCE)"
+    },
+    {
+      "key": "dota_tooltip_ability_item_enhancement_wise_bonus_xpm",
+      "en": "+Experience per Minute",
+      "ptBr": "+de XP por minuto"
+    },
+    {
+      "key": "dota_tooltip_ability_item_enhancement_greedy_bonus_gpm",
+      "en": "+GPM BONUS",
+      "ptBr": "+de ouro por minuto"
+    },
+    {
+      "key": "dota_tooltip_ability_item_enhancement_audacious_magic_damage",
+      "en": "+Magic Attack Damage",
+      "ptBr": "+de dano de ataque mágico"
+    },
+    {
+      "key": "dota_tooltip_ability_item_trident_magic_damage_attack",
+      "en": "+Magic Damage Attack",
+      "ptBr": "+de dano mágico p/ ataques"
+    },
+    {
+      "key": "dota_tooltip_ability_item_witless_shako_max_health",
+      "en": "+Max Health Increase",
+      "ptBr": "+de vida máxima"
+    },
+    {
+      "key": "dota_tooltip_ability_item_power_treads_bonus_movement_speed_melee",
+      "en": "+Move Speed (Melee Heroes)",
+      "ptBr": "+de velocidade de movimento (CORPO A CORPO)"
+    },
+    {
+      "key": "dota_tooltip_ability_item_power_treads_bonus_movement_speed_ranged",
+      "en": "+Move Speed (Ranged Heroes)",
+      "ptBr": "+de velocidade de movimento (LONGO ALCANCE)"
+    },
+    {
+      "key": "dota_tooltip_ability_item_enhancement_vampiric_bonus_night_vision",
+      "en": "+Night Vision",
+      "ptBr": "+de visão noturna"
+    },
+    {
+      "key": "dota_tooltip_ability_item_pupils_gift_secondary_stats",
+      "en": "+SECONDARY STATS",
+      "ptBr": "+aos atributos secundários"
+    },
+    {
+      "key": "dota_tooltip_ability_item_abyssal_blade",
+      "en": "Abyssal Blade",
+      "ptBr": "Lâmina Abissal"
+    },
+    {
+      "key": "dota_tooltip_ability_item_recipe_abyssal_blade",
+      "en": "Abyssal Blade Recipe",
+      "ptBr": "Receita: Lâmina Abissal"
+    },
+    {
+      "key": "dota_tooltip_ability_item_aegis",
+      "en": "Aegis of the Immortal",
+      "ptBr": "Égide do Imortal"
+    },
+    {
+      "key": "dota_tooltip_ability_item_aeon_disk",
+      "en": "Aeon Disk",
+      "ptBr": "Disco dos Éons"
+    },
+    {
+      "key": "dota_tooltip_ability_item_recipe_aeon_disk",
+      "en": "Aeon Disk Recipe",
+      "ptBr": "Receita: Disco dos Éons"
+    },
+    {
+      "key": "dota_tooltip_ability_item_aether_lens",
+      "en": "Aether Lens",
+      "ptBr": "Lente do Éter"
+    },
+    {
+      "key": "dota_tooltip_ability_item_recipe_aether_lens",
+      "en": "Aether Lens Recipe",
+      "ptBr": "Receita: Lente do Éter"
+    },
+    {
+      "key": "dota_tooltip_ability_item_aghsfort_void_spirit_aether_remnant_cooldown",
+      "en": "Aether Remnant: Cooldown",
+      "ptBr": "Resquício Etéreo: Intervalo entre Usos"
+    },
+    {
+      "key": "dota_tooltip_ability_item_aghsfort_void_spirit_aether_remnant_damage",
+      "en": "Aether Remnant: Damage",
+      "ptBr": "Resquício Etéreo: Dano"
+    },
+    {
+      "key": "dota_tooltip_ability_item_aghsfort_void_spirit_aether_remnant_manacost",
+      "en": "Aether Remnant: Mana Cost",
+      "ptBr": "Resquício Etéreo: Custo de Mana"
+    },
+    {
+      "key": "dota_tooltip_ability_item_ultimate_scepter_2",
+      "en": "Aghanim's Blessing",
+      "ptBr": "Bênção de Aghanim"
+    },
+    {
+      "key": "dota_tooltip_ability_item_ultimate_scepter_roshan",
+      "en": "Aghanim's Blessing - Roshan",
+      "ptBr": "Bênção de Aghanim — Roshan"
+    },
+    {
+      "key": "dota_tooltip_ability_item_recipe_ultimate_scepter_2",
+      "en": "Aghanim's Blessing Recipe",
+      "ptBr": "Receita: Bênção de Aghanim"
+    },
+    {
+      "key": "dota_tooltip_ability_item_ultimate_scepter",
+      "en": "Aghanim's Scepter",
+      "ptBr": "Cetro de Aghanim"
+    },
+    {
+      "key": "dota_tooltip_ability_item_aghanims_shard_roshan",
+      "en": "Aghanim's Shard - Consumable",
+      "ptBr": "Fragmento de Aghanim — Consumível"
+    },
+    {
+      "key": "dota_tooltip_ability_item_aghanims_shard_2",
+      "en": "Aghanim's Shard Consumed",
+      "ptBr": "Fragmento de Aghanim consumido"
+    },
+    {
+      "key": "dota_tooltip_ability_item_recipe_aghanims_shard_2",
+      "en": "Aghanim's Shard Consumed Recipe",
+      "ptBr": "Receita: Fragmento de Aghanim consumido"
+    },
+    {
+      "key": "dota_tooltip_ability_item_power_treads_agi",
+      "en": "Agility",
+      "ptBr": "Agilidade"
+    },
+    {
+      "key": "dota_tooltip_ability_item_enhancement_alert",
+      "en": "Alert",
+      "ptBr": "Atenção"
+    },
+    {
+      "key": "dota_tooltip_ability_item_ambient_sorcery",
+      "en": "Ambient Sorcery",
+      "ptBr": "Feitiçaria Ambiental"
+    },
+    {
+      "key": "dota_tooltip_ability_item_amorphotic_shell",
+      "en": "Amorphotic Shell",
+      "ptBr": "Casca Amórfica"
+    },
+    {
+      "key": "dota_tooltip_ability_item_ancient_guardian",
+      "en": "Ancient Guardian",
+      "ptBr": "Guardião Ancestral"
+    },
+    {
+      "key": "dota_tooltip_ability_item_courier",
+      "en": "Animal Courier",
+      "ptBr": "Entregador"
+    },
+    {
+      "key": "dota_tooltip_ability_item_apex",
+      "en": "Apex",
+      "ptBr": "Apogeu"
+    },
+    {
+      "key": "dota_tooltip_ability_item_arcane_blink",
+      "en": "Arcane Blink",
+      "ptBr": "Translocação Arcana"
+    },
+    {
+      "key": "dota_tooltip_ability_item_recipe_arcane_blink",
+      "en": "Arcane Blink Recipe",
+      "ptBr": "Receita: Translocação Arcana"
+    },
+    {
+      "key": "dota_tooltip_ability_item_arcane_boots",
+      "en": "Arcane Boots",
+      "ptBr": "Botas Arcanas"
+    },
+    {
+      "key": "dota_tooltip_ability_item_recipe_arcane_boots",
+      "en": "Arcane Boots Recipe",
+      "ptBr": "Receita: Botas Arcanas"
+    },
+    {
+      "key": "dota_tooltip_ability_item_arcane_ring",
+      "en": "Arcane Ring",
+      "ptBr": "Anel Arcano"
+    },
+    {
+      "key": "dota_tooltip_ability_item_force_field",
+      "en": "Arcanist's Armor",
+      "ptBr": "Proteção do Arcanista"
+    },
+    {
+      "key": "dota_tooltip_ability_item_armlet",
+      "en": "Armlet of Mordiggian",
+      "ptBr": "Bracelete de Mordiggian"
+    },
+    {
+      "key": "dota_tooltip_ability_item_recipe_armlet",
+      "en": "Armlet of Mordiggian Recipe",
+      "ptBr": "Receita: Bracelete de Mordiggian"
+    },
+    {
+      "key": "dota_tooltip_ability_item_orb_of_destruction_armor_reduction",
+      "en": "ARMOR REDUCTION:",
+      "ptBr": "REDUÇÃO DE ARMADURA:"
+    },
+    {
+      "key": "dota_tooltip_ability_item_ascetic_cap",
+      "en": "Ascetic's Cap",
+      "ptBr": "Chapéu do Asceta"
+    },
+    {
+      "key": "dota_tooltip_ability_item_ash_legion_shield:n",
+      "en": "Ash Legion Shield",
+      "ptBr": "#|m|#Escudo da Legião de Cinzas"
+    },
+    {
+      "key": "dota_tooltip_ability_item_assault",
+      "en": "Assault Cuirass",
+      "ptBr": "Couraça de Combate"
+    },
+    {
+      "key": "dota_tooltip_ability_item_recipe_assault",
+      "en": "Assault Cuirass Recipe",
+      "ptBr": "Receita: Couraça de Combate"
+    },
+    {
+      "key": "dota_tooltip_ability_item_aghsfort_void_spirit_astral_step_max_travel_distance",
+      "en": "Astral Step: Cast Range",
+      "ptBr": "Projeção Astral: Alcance de Uso"
+    },
+    {
+      "key": "dota_tooltip_ability_item_aghsfort_void_spirit_astral_step_cooldown",
+      "en": "Astral Step: Cooldown",
+      "ptBr": "Projeção Astral: Intervalo entre Usos"
+    },
+    {
+      "key": "dota_tooltip_ability_item_aghsfort_void_spirit_astral_step_manacost",
+      "en": "Astral Step: Mana Cost",
+      "ptBr": "Projeção Astral: Custo de Mana"
+    },
+    {
+      "key": "dota_tooltip_ability_item_aghsfort_void_spirit_astral_step_pop_damage",
+      "en": "Astral Step: Void Mark Damage",
+      "ptBr": "Projeção Astral: Dano da Marca do Vazio"
+    },
+    {
+      "key": "dota_tooltip_ability_item_enhancement_audacious",
+      "en": "Audacious",
+      "ptBr": "Ousadia"
+    },
+    {
+      "key": "dota_tooltip_ability_item_spy_gadget_attack_range",
+      "en": "AURA BONUS ATTACK RANGE (RANGED ONLY):",
+      "ptBr": "ALCANCE DE ATAQUE ADICIONAL P/ LONGO ALCANCE (AURA):"
+    },
+    {
+      "key": "dota_tooltip_ability_item_spy_gadget_cast_range",
+      "en": "AURA BONUS CAST RANGE:",
+      "ptBr": "ALCANCE DE USO ADICIONAL (AURA):"
+    },
+    {
+      "key": "dota_tooltip_ability_item_unhallowed_icon_hp_regen",
+      "en": "AURA HP REGEN:",
+      "ptBr": "REGENERAÇÃO DE VIDA (AURA):"
+    },
+    {
+      "key": "dota_tooltip_ability_item_avianas_feather",
+      "en": "Aviana's Feather",
+      "ptBr": "Pena de Aviana"
+    },
+    {
+      "key": "dota_tooltip_ability_item_furion_gold_bag",
+      "en": "Bag of Gold",
+      "ptBr": "Bolsa de Ouro"
+    },
+    {
+      "key": "dota_tooltip_ability_item_ballista",
+      "en": "Ballista",
+      "ptBr": "Balista"
+    },
+    {
+      "key": "dota_tooltip_ability_item_banana",
+      "en": "Banana",
+      "ptBr": "Banana"
+    },
+    {
+      "key": "dota_tooltip_ability_item_boots_of_elves",
+      "en": "Band of Elvenskin",
+      "ptBr": "Braçadeira Élfica"
+    },
+    {
+      "key": "dota_tooltip_ability_item_bfury",
+      "en": "Battle Fury",
+      "ptBr": "Fúria de Batalha"
+    },
+    {
+      "key": "dota_tooltip_ability_item_recipe_bfury",
+      "en": "Battle Fury Recipe",
+      "ptBr": "Receita: Fúria de Batalha"
+    },
+    {
+      "key": "dota_tooltip_ability_item_ofrenda",
+      "en": "Beloved Memory",
+      "ptBr": "Memória Querida"
+    },
+    {
+      "key": "dota_tooltip_ability_item_belt_of_strength",
+      "en": "Belt of Strength",
+      "ptBr": "Cinturão da Força"
+    },
+    {
+      "key": "dota_tooltip_ability_item_black_grimoire",
+      "en": "Black Grimoire\\n(Warlock)",
+      "ptBr": "Grimório das Trevas\\n(Warlock)"
+    },
+    {
+      "key": "dota_tooltip_ability_item_black_king_bar",
+      "en": "Black King Bar",
+      "ptBr": "Bastão Preto da Realeza"
+    },
+    {
+      "key": "dota_tooltip_ability_item_recipe_black_king_bar",
+      "en": "Black King Bar Recipe",
+      "ptBr": "Receita: Bastão Preto da Realeza"
+    },
+    {
+      "key": "dota_tooltip_ability_item_blade_mail",
+      "en": "Blade Mail",
+      "ptBr": "Cota de Lâminas"
+    },
+    {
+      "key": "dota_tooltip_ability_item_recipe_blade_mail",
+      "en": "Blade Mail Recipe",
+      "ptBr": "Receita: Cota de Lâminas"
+    },
+    {
+      "key": "dota_tooltip_ability_item_blade_of_alacrity",
+      "en": "Blade of Alacrity",
+      "ptBr": "Lâmina da Alacridade"
+    },
+    {
+      "key": "dota_tooltip_ability_item_blades_of_attack",
+      "en": "Blades of Attack",
+      "ptBr": "Garras de Ataque"
+    },
+    {
+      "key": "dota_tooltip_ability_item_black_powder_bag",
+      "en": "Blast Rig",
+      "ptBr": "Adereço Explosivo"
+    },
+    {
+      "key": "dota_tooltip_ability_item_blink",
+      "en": "Blink Dagger",
+      "ptBr": "Adaga de Translocação"
+    },
+    {
+      "key": "dota_tooltip_ability_item_blitz_knuckles",
+      "en": "Blitz Knuckles",
+      "ptBr": "Soqueira"
+    },
+    {
+      "key": "dota_tooltip_ability_item_royale_with_cheese",
+      "en": "Block of Cheese",
+      "ptBr": "Bloco de Queijo"
+    },
+    {
+      "key": "dota_tooltip_ability_item_blood_grenade",
+      "en": "Blood Grenade",
+      "ptBr": "Granada de Sangue"
+    },
+    {
+      "key": "dota_tooltip_ability_item_bloodstone",
+      "en": "Bloodstone",
+      "ptBr": "Pedra de Sangue"
+    },
+    {
+      "key": "dota_tooltip_ability_item_recipe_bloodstone",
+      "en": "Bloodstone Recipe",
+      "ptBr": "Receita: Pedra de Sangue"
+    },
+    {
+      "key": "dota_tooltip_ability_item_bloodthorn",
+      "en": "Bloodthorn",
+      "ptBr": "Espinho Sangrento"
+    },
+    {
+      "key": "dota_tooltip_ability_item_recipe_bloodthorn",
+      "en": "Bloodthorn Recipe",
+      "ptBr": "Receita: Espinho Sangrento"
+    },
+    {
+      "key": "dota_tooltip_ability_item_bogduggs_baldric",
+      "en": "Bogdugg's Baldric",
+      "ptBr": "Cinturão de Bogdugg"
+    },
+    {
+      "key": "dota_tooltip_ability_item_bogduggs_cudgel",
+      "en": "Bogdugg's Cudgel",
+      "ptBr": "Clava de Bogdugg"
+    },
+    {
+      "key": "dota_tooltip_ability_item_bogduggs_lucky_femur",
+      "en": "Bogdugg's Lucky Femur",
+      "ptBr": "Fêmur da Sorte de Bogdugg"
+    },
+    {
+      "key": "dota_tooltip_ability_item_amorphotic_shell_bonus_agility",
+      "en": "BONUS AGILITY:",
+      "ptBr": "AGILIDADE ADICIONAL:"
+    },
+    {
+      "key": "dota_tooltip_ability_item_rhyziks_eye_bonus_all_stats",
+      "en": "BONUS ALL STATS:",
+      "ptBr": "ADICIONAL P/ TODOS OS ATRIBUTOS:"
+    },
+    {
+      "key": "dota_tooltip_ability_item_the_caustic_finale_bonus_attack_speed",
+      "en": "BONUS ATTACK SPEED:",
+      "ptBr": "VEL. DE ATAQUE ADICIONAL:"
+    },
+    {
+      "key": "dota_tooltip_ability_item_rippers_lash_bonus_damage_creep",
+      "en": "BONUS DAMAGE (CREEPS):",
+      "ptBr": "DANO ADICIONAL (CRIATURAS):"
+    },
+    {
+      "key": "dota_tooltip_ability_item_rippers_lash_bonus_damage_hero",
+      "en": "BONUS DAMAGE (HEROES):",
+      "ptBr": "DANO ADICIONAL (HERÓIS):"
+    },
+    {
+      "key": "dota_tooltip_ability_item_the_caustic_finale_bonus_damage",
+      "en": "BONUS DAMAGE:",
+      "ptBr": "DANO ADICIONAL:"
+    },
+    {
+      "key": "dota_tooltip_ability_item_rhyziks_eye_hp_regen_sec",
+      "en": "BONUS HP REGEN:",
+      "ptBr": "REGEN. DE VIDA ADICIONAL:"
+    },
+    {
+      "key": "dota_tooltip_ability_item_amorphotic_shell_bonus_intelligence",
+      "en": "BONUS INTELLIGENCE:",
+      "ptBr": "INTELIGÊNCIA ADICIONAL:"
+    },
+    {
+      "key": "dota_tooltip_ability_item_rhyziks_eye_mana_regen_sec",
+      "en": "BONUS MANA REGEN:",
+      "ptBr": "REGEN. DE MANA ADICIONAL:"
+    },
+    {
+      "key": "dota_tooltip_ability_item_amorphotic_shell_bonus_strength",
+      "en": "BONUS STRENGTH:",
+      "ptBr": "FORÇA ADICIONAL:"
+    },
+    {
+      "key": "dota_tooltip_ability_item_book_of_agility",
+      "en": "Book of Agility",
+      "ptBr": "Livro de Agilidade"
+    },
+    {
+      "key": "dota_tooltip_ability_item_book_of_greater_agility",
+      "en": "Book of Celerity",
+      "ptBr": "Livro de Celeridade"
+    },
+    {
+      "key": "dota_tooltip_ability_item_book_of_greater_strength",
+      "en": "Book of Fortitude",
+      "ptBr": "Livro de Fortitude"
+    },
+    {
+      "key": "dota_tooltip_ability_item_book_of_greater_intelligence",
+      "en": "Book of Insight",
+      "ptBr": "Livro de Introspecção"
+    },
+    {
+      "key": "dota_tooltip_ability_item_book_of_intelligence",
+      "en": "Book of Intelligence",
+      "ptBr": "Livro de Inteligência"
+    },
+    {
+      "key": "dota_tooltip_ability_item_book_of_shadows",
+      "en": "Book of Shadows",
+      "ptBr": "Livro das Sombras"
+    },
+    {
+      "key": "dota_tooltip_ability_item_book_of_strength",
+      "en": "Book of Strength",
+      "ptBr": "Livro de Força"
+    },
+    {
+      "key": "dota_tooltip_ability_item_demonicon:n",
+      "en": "Book of the Dead",
+      "ptBr": "#|m|#Livro dos Mortos"
+    },
+    {
+      "key": "dota_tooltip_ability_item_boots_of_bearing",
+      "en": "Boots of Bearing",
+      "ptBr": "Botas Vigorosas"
+    },
+    {
+      "key": "dota_tooltip_ability_item_recipe_boots_of_bearing",
+      "en": "Boots of Bearing Recipe",
+      "ptBr": "Receita: Botas Vigorosas"
+    },
+    {
+      "key": "dota_tooltip_ability_item_boots",
+      "en": "Boots of Speed",
+      "ptBr": "Botas de Velocidade"
+    },
+    {
+      "key": "dota_tooltip_ability_item_travel_boots",
+      "en": "Boots of Travel",
+      "ptBr": "Botas de Teletransporte"
+    },
+    {
+      "key": "dota_tooltip_ability_item_travel_boots_2",
+      "en": "Boots of Travel 2",
+      "ptBr": "Botas de Teletransporte II"
+    },
+    {
+      "key": "dota_tooltip_ability_item_recipe_travel_boots",
+      "en": "Boots of Travel Recipe",
+      "ptBr": "Receita: Botas de Teletransporte"
+    },
+    {
+      "key": "dota_tooltip_ability_item_bottle",
+      "en": "Bottle",
+      "ptBr": "Garrafa"
+    },
+    {
+      "key": "dota_tooltip_ability_item_enhancement_boundless",
+      "en": "Boundless",
+      "ptBr": "Alcance"
+    },
+    {
+      "key": "dota_tooltip_ability_item_bracer",
+      "en": "Bracer",
+      "ptBr": "Braçadeira"
+    },
+    {
+      "key": "dota_tooltip_ability_item_recipe_bracer",
+      "en": "Bracer Recipe",
+      "ptBr": "Receita: Braçadeira"
+    },
+    {
+      "key": "dota_tooltip_ability_item_enhancement_brawny",
+      "en": "Brawny",
+      "ptBr": "Robustez"
+    },
+    {
+      "key": "dota_tooltip_ability_item_misericorde:n",
+      "en": "Brigand's Blade",
+      "ptBr": "#|f|#Lâmina do Salteador"
+    },
+    {
+      "key": "dota_tooltip_ability_item_broadsword",
+      "en": "Broadsword",
+      "ptBr": "Espada Larga"
+    },
+    {
+      "key": "dota_tooltip_ability_item_broom_handle",
+      "en": "Broom Handle",
+      "ptBr": "Cabo de Vassoura"
+    },
+    {
+      "key": "dota_tooltip_ability_item_buckler",
+      "en": "Buckler",
+      "ptBr": "Broquel"
+    },
+    {
+      "key": "dota_tooltip_ability_item_recipe_buckler",
+      "en": "Buckler Recipe",
+      "ptBr": "Receita: Broquel"
+    },
+    {
+      "key": "dota_tooltip_ability_item_bullwhip",
+      "en": "Bullwhip",
+      "ptBr": "Chicote"
+    },
+    {
+      "key": "dota_tooltip_ability_item_butterfly",
+      "en": "Butterfly",
+      "ptBr": "Borboleta"
+    },
+    {
+      "key": "dota_tooltip_ability_item_carapace_of_qaldin",
+      "en": "Carapace of Qaldin",
+      "ptBr": "Carapaça de Qaldin"
+    },
+    {
+      "key": "dota_tooltip_ability_item_the_caustic_finale_caustic_damage",
+      "en": "CAUSTIC DAMAGE:",
+      "ptBr": "DANO DA EXPLOSÃO:"
+    },
+    {
+      "key": "dota_tooltip_ability_item_the_caustic_finale_caustic_radius",
+      "en": "CAUSTIC RADIUS:",
+      "ptBr": "RAIO DA EXPLOSÃO:"
+    },
+    {
+      "key": "dota_tooltip_ability_item_ceremonial_robe:n",
+      "en": "Ceremonial Robe",
+      "ptBr": "#|f|#Túnica Cerimonial"
+    },
+    {
+      "key": "dota_tooltip_ability_item_chainmail",
+      "en": "Chainmail",
+      "ptBr": "Cota de Malha"
+    },
+    {
+      "key": "dota_tooltip_ability_item_chasm_stone:n",
+      "en": "Chasm Stone",
+      "ptBr": "#|f|#Pedra do Abismo"
+    },
+    {
+      "key": "dota_tooltip_ability_item_cheese",
+      "en": "Cheese",
+      "ptBr": "Queijo"
+    },
+    {
+      "key": "dota_tooltip_ability_item_chipped_vest:n",
+      "en": "Chipped Vest",
+      "ptBr": "#|m|#Colete Lascado"
+    },
+    {
+      "key": "dota_tooltip_ability_item_circlet",
+      "en": "Circlet",
+      "ptBr": "Tiara"
+    },
+    {
+      "key": "dota_tooltip_ability_item_clarity",
+      "en": "Clarity",
+      "ptBr": "Poção de Clareza"
+    },
+    {
+      "key": "dota_tooltip_ability_item_claymore",
+      "en": "Claymore",
+      "ptBr": "Claymore"
+    },
+    {
+      "key": "dota_tooltip_ability_item_cloak",
+      "en": "Cloak",
+      "ptBr": "Manto"
+    },
+    {
+      "key": "dota_tooltip_ability_item_cloak_of_flames",
+      "en": "Cloak of Flames",
+      "ptBr": "Capa Flamejante"
+    },
+    {
+      "key": "dota_tooltip_ability_item_bear_cloak",
+      "en": "Cloak of the Bear",
+      "ptBr": "Manto do Urso"
+    },
+    {
+      "key": "dota_tooltip_ability_item_clumsy_net",
+      "en": "Clumsy Net",
+      "ptBr": "Rede Desajeitada"
+    },
+    {
+      "key": "dota_tooltip_ability_item_conjurers_catalyst:n",
+      "en": "Conjurer's Catalyst",
+      "ptBr": "#|m|#Catalisador do Conjurador"
+    },
+    {
+      "key": "dota_tooltip_ability_item_consecrated_wraps",
+      "en": "Consecrated Wraps",
+      "ptBr": "Faixas Consagradas"
+    },
+    {
+      "key": "dota_tooltip_ability_item_recipe_consecrated_wraps",
+      "en": "Consecrated Wraps Recipe",
+      "ptBr": "Receita: Faixas Consagradas"
+    },
+    {
+      "key": "dota_tooltip_ability_item_cursed_item_slot",
+      "en": "Continuum Curse",
+      "ptBr": "Maldição Contínua"
+    },
+    {
+      "key": "dota_tooltip_ability_item_cursed_key",
+      "en": "Continuum Key",
+      "ptBr": "Chave do Contínuo"
+    },
+    {
+      "key": "dota_tooltip_ability_item_holy_locket_use_cooldown",
+      "en": "COOLDOWN:",
+      "ptBr": "INTERVALO ENTRE USOS:"
+    },
+    {
+      "key": "dota_tooltip_ability_item_cornucopia",
+      "en": "Cornucopia",
+      "ptBr": "Cornucópia"
+    },
+    {
+      "key": "dota_tooltip_ability_item_craggy_coat",
+      "en": "Craggy Coat",
+      "ptBr": "Proteção Rochosa"
+    },
+    {
+      "key": "dota_tooltip_ability_item_creed_of_omniscience",
+      "en": "Creed of Omniscience",
+      "ptBr": "Credo da Onisciência"
+    },
+    {
+      "key": "dota_tooltip_ability_item_crellas_crozier",
+      "en": "Crella's Crozier",
+      "ptBr": "Báculo de Crella"
+    },
+    {
+      "key": "dota_tooltip_ability_item_recipe_crellas_crozier",
+      "en": "Crella's Crozier Recipe",
+      "ptBr": "Receita: Báculo de Crella"
+    },
+    {
+      "key": "dota_tooltip_ability_item_crimson_guard",
+      "en": "Crimson Guard",
+      "ptBr": "Proteção Carmesim"
+    },
+    {
+      "key": "dota_tooltip_ability_item_recipe_crimson_guard",
+      "en": "Crimson Guard Recipe",
+      "ptBr": "Receita: Proteção Carmesim"
+    },
+    {
+      "key": "dota_tooltip_ability_item_crippling_crossbow:n",
+      "en": "Crippling Crossbow",
+      "ptBr": "#|f|#Besta Debilitante"
+    },
+    {
+      "key": "dota_tooltip_ability_item_crown",
+      "en": "Crown",
+      "ptBr": "Coroa"
+    },
+    {
+      "key": "dota_tooltip_ability_item_enhancement_crude",
+      "en": "Crude",
+      "ptBr": "Rispidez"
+    },
+    {
+      "key": "dota_tooltip_ability_item_lesser_crit",
+      "en": "Crystalys",
+      "ptBr": "Cristális"
+    },
+    {
+      "key": "dota_tooltip_ability_item_recipe_lesser_crit",
+      "en": "Crystalys Recipe",
+      "ptBr": "Receita: Cristális"
+    },
+    {
+      "key": "dota_tooltip_ability_item_greater_crit",
+      "en": "Daedalus",
+      "ptBr": "Dédalo"
+    },
+    {
+      "key": "dota_tooltip_ability_item_recipe_greater_crit",
+      "en": "Daedalus Recipe",
+      "ptBr": "Receita: Dédalo"
+    },
+    {
+      "key": "dota_tooltip_ability_item_dagger_of_ristul:n",
+      "en": "Dagger of Ristul",
+      "ptBr": "#|f|#Adaga de Ristul"
+    },
+    {
+      "key": "dota_tooltip_ability_item_dagon_5",
+      "en": "Dagon",
+      "ptBr": "Dagon"
+    },
+    {
+      "key": "dota_tooltip_ability_item_dagon_2l",
+      "en": "Dagon (level 2)",
+      "ptBr": "Dagon (nível 2)"
+    },
+    {
+      "key": "dota_tooltip_ability_item_dagon_3l",
+      "en": "Dagon (level 3)",
+      "ptBr": "Dagon (nível 3)"
+    },
+    {
+      "key": "dota_tooltip_ability_item_dagon_4l",
+      "en": "Dagon (level 4)",
+      "ptBr": "Dagon (nível 4)"
+    },
+    {
+      "key": "dota_tooltip_ability_item_dagon_5l",
+      "en": "Dagon (level 5)",
+      "ptBr": "Dagon (nível 5)"
+    },
+    {
+      "key": "dota_tooltip_ability_item_recipe_dagon",
+      "en": "Dagon Recipe",
+      "ptBr": "Receita: Dagon"
+    },
+    {
+      "key": "dota_tooltip_ability_item_dandelion_amulet",
+      "en": "Dandelion Amulet",
+      "ptBr": "Amuleto de Dente-de-Leão"
+    },
+    {
+      "key": "dota_tooltip_ability_item_light_collector_health_regen",
+      "en": "DAY HP REGEN:",
+      "ptBr": "REGEN. DE VIDA (DIA):"
+    },
+    {
+      "key": "dota_tooltip_ability_item_defiant_shell:n",
+      "en": "Defiant Shell",
+      "ptBr": "#|m|#Casco Rebelde"
+    },
+    {
+      "key": "dota_tooltip_ability_item_demon_edge",
+      "en": "Demon Edge",
+      "ptBr": "Lâmina Demoníaca"
+    },
+    {
+      "key": "dota_tooltip_ability_item_desolator",
+      "en": "Desolator",
+      "ptBr": "Desoladora"
+    },
+    {
+      "key": "dota_tooltip_ability_item_dezun_bloodrite:n",
+      "en": "Dezun Bloodrite",
+      "ptBr": "#|m|#Ritual Sangrento de Dezun"
+    },
+    {
+      "key": "dota_tooltip_ability_item_diadem",
+      "en": "Diadem",
+      "ptBr": "Diadema"
+    },
+    {
+      "key": "dota_tooltip_ability_item_diffusal_blade",
+      "en": "Diffusal Blade",
+      "ptBr": "Lâmina Difusora"
+    },
+    {
+      "key": "dota_tooltip_ability_item_recipe_diffusal_blade",
+      "en": "Diffusal Blade Recipe",
+      "ptBr": "Receita: Lâmina Difusora"
+    },
+    {
+      "key": "dota_tooltip_ability_item_divine_regalia_broken:n",
+      "en": "Disgraced Regalia",
+      "ptBr": "#|f|#Regalia Arruinada"
+    },
+    {
+      "key": "dota_tooltip_ability_item_disperser",
+      "en": "Disperser",
+      "ptBr": "Dispersora"
+    },
+    {
+      "key": "dota_tooltip_ability_item_recipe_disperser",
+      "en": "Disperser Recipe",
+      "ptBr": "Receita: Dispersora"
+    },
+    {
+      "key": "dota_tooltip_ability_item_aghsfort_void_spirit_dissimilate_cooldown",
+      "en": "Dissimilate: Cooldown",
+      "ptBr": "Sumiço: Intervalo entre Usos"
+    },
+    {
+      "key": "dota_tooltip_ability_item_aghsfort_void_spirit_dissimilate_damage",
+      "en": "Dissimilate: Damage",
+      "ptBr": "Sumiço: Dano"
+    },
+    {
+      "key": "dota_tooltip_ability_item_aghsfort_void_spirit_dissimilate_manacost",
+      "en": "Dissimilate: Mana Cost",
+      "ptBr": "Sumiço: Custo de Mana"
+    },
+    {
+      "key": "dota_tooltip_ability_item_rapier",
+      "en": "Divine Rapier",
+      "ptBr": "Rapieira Divina"
+    },
+    {
+      "key": "dota_tooltip_ability_item_recipe_rapier",
+      "en": "Divine Rapier Recipe",
+      "ptBr": "Receita: Rapieira Divina"
+    },
+    {
+      "key": "dota_tooltip_ability_item_divine_regalia:n",
+      "en": "Divine Regalia",
+      "ptBr": "#|f|#Regalia Divina"
+    },
+    {
+      "key": "dota_tooltip_ability_item_enhancement_dominant",
+      "en": "Dominant",
+      "ptBr": "Dominância"
+    },
+    {
+      "key": "dota_tooltip_ability_item_dormant_curio:n",
+      "en": "Dormant Curio",
+      "ptBr": "#|m|#Tesouro Adormecido"
+    },
+    {
+      "key": "dota_tooltip_ability_item_doubloon",
+      "en": "Doubloon",
+      "ptBr": "Dobrão"
+    },
+    {
+      "key": "dota_tooltip_ability_item_dragon_lance",
+      "en": "Dragon Lance",
+      "ptBr": "Lança Dracônica"
+    },
+    {
+      "key": "dota_tooltip_ability_item_recipe_dragon_lance",
+      "en": "Dragon Lance Recipe",
+      "ptBr": "Receita: Lança Dracônica"
+    },
+    {
+      "key": "dota_tooltip_ability_item_dragon_scale",
+      "en": "Dragon Scale",
+      "ptBr": "Escama de Dragão"
+    },
+    {
+      "key": "dota_tooltip_ability_item_ancient_janggo",
+      "en": "Drum of Endurance",
+      "ptBr": "Tambor de Resistência"
+    },
+    {
+      "key": "dota_tooltip_ability_item_recipe_ancient_janggo",
+      "en": "Drum of Endurance Recipe",
+      "ptBr": "Receita: Tambor de Resistência"
+    },
+    {
+      "key": "dota_tooltip_ability_item_duelist_gloves:n",
+      "en": "Duelist Gloves",
+      "ptBr": "#|f|#Luvas Duelistas"
+    },
+    {
+      "key": "dota_tooltip_ability_item_orb_of_destruction_duration",
+      "en": "DURATION:",
+      "ptBr": "DURAÇÃO:"
+    },
+    {
+      "key": "dota_tooltip_ability_item_dust",
+      "en": "Dust of Appearance",
+      "ptBr": "Areia da Revelação"
+    },
+    {
+      "key": "dota_tooltip_ability_item_eagle",
+      "en": "Eaglesong",
+      "ptBr": "Canto da Águia"
+    },
+    {
+      "key": "dota_tooltip_ability_item_echo_sabre",
+      "en": "Echo Sabre",
+      "ptBr": "Sabre Ecoante"
+    },
+    {
+      "key": "dota_tooltip_ability_item_roshans_banner_radius",
+      "en": "EFFECT RADIUS:",
+      "ptBr": "RAIO DO EFEITO:"
+    },
+    {
+      "key": "dota_tooltip_ability_item_eldwurms_edda",
+      "en": "Eldwurm's Edda",
+      "ptBr": "Edda da Ancivorme"
+    },
+    {
+      "key": "dota_tooltip_ability_item_elixer",
+      "en": "Elixir",
+      "ptBr": "Elixir"
+    },
+    {
+      "key": "dota_tooltip_ability_item_elven_tunic",
+      "en": "Elven Tunic",
+      "ptBr": "Túnica Élfica"
+    },
+    {
+      "key": "dota_tooltip_ability_item_enchanted_mango",
+      "en": "Enchanted Mango",
+      "ptBr": "Manga Encantada"
+    },
+    {
+      "key": "dota_tooltip_ability_item_enchanted_quiver",
+      "en": "Enchanted Quiver",
+      "ptBr": "Aljava Encantada"
+    },
+    {
+      "key": "dota_tooltip_ability_item_enchanters_bauble:n",
+      "en": "Enchanter's Bauble",
+      "ptBr": "#|m|#Cacareco da Encantadora"
+    },
+    {
+      "key": "dota_tooltip_ability_item_energy_booster",
+      "en": "Energy Booster",
+      "ptBr": "Amplificador de Energia"
+    },
+    {
+      "key": "dota_tooltip_ability_item_essence_distiller",
+      "en": "Essence Distiller",
+      "ptBr": "Destilador de Essências"
+    },
+    {
+      "key": "dota_tooltip_ability_item_recipe_essence_distiller",
+      "en": "Essence Distiller Recipe",
+      "ptBr": "Receita: Destilador de Essências"
+    },
+    {
+      "key": "dota_tooltip_ability_item_essence_ring:n",
+      "en": "Essence Ring",
+      "ptBr": "#|m|#Anel da Essência"
+    },
+    {
+      "key": "dota_tooltip_ability_item_eternal_shroud",
+      "en": "Eternal Shroud",
+      "ptBr": "Mortalha Eterna"
+    },
+    {
+      "key": "dota_tooltip_ability_item_recipe_eternal_shroud",
+      "en": "Eternal Shroud Recipe",
+      "ptBr": "Receita: Mortalha Eterna"
+    },
+    {
+      "key": "dota_tooltip_ability_item_ethereal_blade",
+      "en": "Ethereal Blade",
+      "ptBr": "Lâmina Etérea"
+    },
+    {
+      "key": "dota_tooltip_ability_item_recipe_ethereal_blade",
+      "en": "Ethereal Blade Recipe",
+      "ptBr": "Receita: Lâmina Etérea"
+    },
+    {
+      "key": "dota_tooltip_ability_item_cyclone",
+      "en": "Eul's Scepter of Divinity",
+      "ptBr": "Cetro Divino de Eul"
+    },
+    {
+      "key": "dota_tooltip_ability_item_recipe_cyclone",
+      "en": "Eul's Scepter Recipe",
+      "ptBr": "Receita: Cetro de Eul"
+    },
+    {
+      "key": "dota_tooltip_ability_item_enhancement_evolved",
+      "en": "Evolved",
+      "ptBr": "Evolução"
+    },
+    {
+      "key": "dota_tooltip_ability_item_ex_machina",
+      "en": "Ex Machina",
+      "ptBr": "Ex Machina"
+    },
+    {
+      "key": "dota_tooltip_ability_item_skadi",
+      "en": "Eye of Skadi",
+      "ptBr": "Olho de Skadi"
+    },
+    {
+      "key": "dota_tooltip_ability_item_recipe_skadi",
+      "en": "Eye of Skadi Recipe",
+      "ptBr": "Receita: Olho de Skadi"
+    },
+    {
+      "key": "dota_tooltip_ability_item_eye_of_the_vizier",
+      "en": "Eye of the Vizier",
+      "ptBr": "Olho do Vizir"
+    },
+    {
+      "key": "dota_tooltip_ability_item_shadow_amulet_fade_time",
+      "en": "FADE TIME:",
+      "ptBr": "ATRASO DE DESVANECIMENTO:"
+    },
+    {
+      "key": "dota_tooltip_ability_item_faded_broach",
+      "en": "Faded Broach",
+      "ptBr": "Broche Desbotado"
+    },
+    {
+      "key": "dota_tooltip_ability_item_paintball",
+      "en": "Fae Grenade",
+      "ptBr": "Granada Feérica"
+    },
+    {
+      "key": "dota_tooltip_ability_item_faerie_fire",
+      "en": "Faerie Fire",
+      "ptBr": "Fogo de Fada"
+    },
+    {
+      "key": "dota_tooltip_ability_item_mysterious_hat",
+      "en": "Fairy's Trinket",
+      "ptBr": "Pingente de Fada"
+    },
+    {
+      "key": "dota_tooltip_ability_item_falcon_blade",
+      "en": "Falcon Blade",
+      "ptBr": "Lâmina do Falcão"
+    },
+    {
+      "key": "dota_tooltip_ability_item_recipe_falcon_blade",
+      "en": "Falcon Blade Recipe",
+      "ptBr": "Receita: Lâmina do Falcão"
+    },
+    {
+      "key": "dota_tooltip_ability_item_falconers_glove:n",
+      "en": "Falconer's Glove",
+      "ptBr": "#|f|#Luva de Falcoaria"
+    },
+    {
+      "key": "dota_tooltip_ability_item_fallen_sky:n",
+      "en": "Fallen Sky",
+      "ptBr": "#|m|#Impacto Celeste"
+    },
+    {
+      "key": "dota_tooltip_ability_item_enhancement_feverish",
+      "en": "Feverish",
+      "ptBr": "Fervor"
+    },
+    {
+      "key": "dota_tooltip_ability_item_enhancement_fierce",
+      "en": "Fierce",
+      "ptBr": "Ferocidade"
+    },
+    {
+      "key": "dota_tooltip_ability_item_flayers_bota:n",
+      "en": "Flayer's Bota",
+      "ptBr": "#|f|#Frasco do Esfolador"
+    },
+    {
+      "key": "dota_tooltip_ability_item_enhancement_fleetfooted",
+      "en": "Fleetfooted",
+      "ptBr": "Correria"
+    },
+    {
+      "key": "dota_tooltip_ability_item_flicker",
+      "en": "Flicker",
+      "ptBr": "Tremeluzente"
+    },
+    {
+      "key": "dota_tooltip_ability_item_fluffy_hat",
+      "en": "Fluffy Hat",
+      "ptBr": "Chapéu Fofinho"
+    },
+    {
+      "key": "dota_tooltip_ability_item_flying_courier",
+      "en": "Flying Courier",
+      "ptBr": "Entregador Aéreo"
+    },
+    {
+      "key": "dota_tooltip_ability_item_foragers_kit:n",
+      "en": "Forager's Kit",
+      "ptBr": "#|m|#Kit de Forragem"
+    },
+    {
+      "key": "dota_tooltip_ability_item_force_boots",
+      "en": "Force Boots",
+      "ptBr": "Botas de Força"
+    },
+    {
+      "key": "dota_tooltip_ability_item_force_staff",
+      "en": "Force Staff",
+      "ptBr": "Cajado de Força"
+    },
+    {
+      "key": "dota_tooltip_ability_item_recipe_force_staff",
+      "en": "Force Staff Recipe",
+      "ptBr": "Receita: Cajado de Força"
+    },
+    {
+      "key": "dota_tooltip_ability_item_ofrenda_pledge",
+      "en": "Forebearer's Fortune",
+      "ptBr": "Fardo dos Ancestrais"
+    },
+    {
+      "key": "dota_tooltip_ability_item_fusion_rune",
+      "en": "Fusion Rune",
+      "ptBr": "Runa Fundida"
+    },
+    {
+      "key": "dota_tooltip_ability_item_gale_guard:n",
+      "en": "Gale Guard",
+      "ptBr": "#|f|#Proteção Eólica"
+    },
+    {
+      "key": "dota_tooltip_ability_item_gauntlets",
+      "en": "Gauntlets of Strength",
+      "ptBr": "Manoplas da Força"
+    },
+    {
+      "key": "dota_tooltip_ability_item_gem",
+      "en": "Gem of True Sight",
+      "ptBr": "Gema da Visão Verdadeira"
+    },
+    {
+      "key": "dota_tooltip_ability_item_ghost",
+      "en": "Ghost Scepter",
+      "ptBr": "Cetro Fantasma"
+    },
+    {
+      "key": "dota_tooltip_ability_item_giant_maul:n",
+      "en": "Giant's Maul",
+      "ptBr": "#|f|#Marreta do Gigante"
+    },
+    {
+      "key": "dota_tooltip_ability_item_giants_ring",
+      "en": "Giant's Ring",
+      "ptBr": "Anel do Gigante"
+    },
+    {
+      "key": "dota_tooltip_ability_item_gungir",
+      "en": "Gleipnir",
+      "ptBr": "Gleipnir"
+    },
+    {
+      "key": "dota_tooltip_ability_item_recipe_gungir",
+      "en": "Gleipnir Recipe",
+      "ptBr": "Receita: Gleipnir"
+    },
+    {
+      "key": "dota_tooltip_ability_item_glimmer_cape",
+      "en": "Glimmer Cape",
+      "ptBr": "Capa Cintilante"
+    },
+    {
+      "key": "dota_tooltip_ability_item_recipe_glimmer_cape",
+      "en": "Glimmer Cape Recipe",
+      "ptBr": "Receita: Capa Cintilante"
+    },
+    {
+      "key": "dota_tooltip_ability_item_glimmerdark_shield",
+      "en": "Glimmerdark Shield",
+      "ptBr": "Escudo da Escuridão Cintilante"
+    },
+    {
+      "key": "dota_tooltip_ability_item_gloves",
+      "en": "Gloves of Haste",
+      "ptBr": "Luvas de Ímpeto"
+    },
+    {
+      "key": "dota_tooltip_ability_item_gossamer_cape:n",
+      "en": "Gossamer Cape",
+      "ptBr": "#|m|#Capa de Seda"
+    },
+    {
+      "key": "dota_tooltip_ability_item_gravel_foot",
+      "en": "Gravel Foot",
+      "ptBr": "Pé de Cascalho"
+    },
+    {
+      "key": "dota_tooltip_ability_item_great_famango",
+      "en": "Great Healing Lotus",
+      "ptBr": "Lótus Restaurador Grande"
+    },
+    {
+      "key": "dota_tooltip_ability_item_greater_faerie_fire",
+      "en": "Greater Faerie Fire",
+      "ptBr": "Grande Fogo de Fada"
+    },
+    {
+      "key": "dota_tooltip_ability_item_greater_famango",
+      "en": "Greater Healing Lotus",
+      "ptBr": "Lótus Restaurador Maior"
+    },
+    {
+      "key": "dota_tooltip_ability_item_enhancement_greedy",
+      "en": "Greedy",
+      "ptBr": "Ganância"
+    },
+    {
+      "key": "dota_tooltip_ability_item_halloween_candy_corn",
+      "en": "Greevil Taffy",
+      "ptBr": "Caramelo de Greevil"
+    },
+    {
+      "key": "dota_tooltip_ability_item_grisgris",
+      "en": "Gris-Gris",
+      "ptBr": "Gris-Gris"
+    },
+    {
+      "key": "dota_tooltip_ability_item_grove_bow",
+      "en": "Grove Bow",
+      "ptBr": "Arco do Arvoredo"
+    },
+    {
+      "key": "dota_tooltip_ability_item_guardian_greaves",
+      "en": "Guardian Greaves",
+      "ptBr": "Grevas Guardiãs"
+    },
+    {
+      "key": "dota_tooltip_ability_item_recipe_guardian_greaves",
+      "en": "Guardian Greaves Recipe",
+      "ptBr": "Receita: Grevas Guardiãs"
+    },
+    {
+      "key": "dota_tooltip_ability_item_guardian_shell",
+      "en": "Guardian Shell",
+      "ptBr": "Couraça do Guardião"
+    },
+    {
+      "key": "dota_tooltip_ability_item_gunpowder_gauntlets:n",
+      "en": "Gunpowder Gauntlet",
+      "ptBr": "#|f|#Manopla Explosiva"
+    },
+    {
+      "key": "dota_tooltip_ability_item_hand_of_midas",
+      "en": "Hand of Midas",
+      "ptBr": "Mão de Midas"
+    },
+    {
+      "key": "dota_tooltip_ability_item_recipe_hand_of_midas",
+      "en": "Hand of Midas Recipe",
+      "ptBr": "Receita: Mão de Midas"
+    },
+    {
+      "key": "dota_tooltip_ability_item_harmonizer:n",
+      "en": "Harmonizer",
+      "ptBr": "#|f|#Harmonizadora"
+    },
+    {
+      "key": "dota_tooltip_ability_item_harpoon",
+      "en": "Harpoon",
+      "ptBr": "Arpão"
+    },
+    {
+      "key": "dota_tooltip_ability_item_recipe_harpoon",
+      "en": "Harpoon Recipe",
+      "ptBr": "Receita: Arpão"
+    },
+    {
+      "key": "dota_tooltip_ability_item_havoc_hammer",
+      "en": "Havoc Hammer",
+      "ptBr": "Martelo da Destruição"
+    },
+    {
+      "key": "dota_tooltip_ability_item_headdress",
+      "en": "Headdress",
+      "ptBr": "Cocar"
+    },
+    {
+      "key": "dota_tooltip_ability_item_recipe_headdress",
+      "en": "Headdress Recipe",
+      "ptBr": "Receita: Cocar"
+    },
+    {
+      "key": "dota_tooltip_ability_item_famango",
+      "en": "Healing Lotus",
+      "ptBr": "Lótus Restaurador"
+    },
+    {
+      "key": "dota_tooltip_ability_item_flask",
+      "en": "Healing Salve",
+      "ptBr": "Bálsamo de Cura"
+    },
+    {
+      "key": "dota_tooltip_ability_item_heart",
+      "en": "Heart of Tarrasque",
+      "ptBr": "Coração do Tarrasque"
+    },
+    {
+      "key": "dota_tooltip_ability_item_recipe_heart",
+      "en": "Heart of Tarrasque Recipe",
+      "ptBr": "Receita: Coração do Tarrasque"
+    },
+    {
+      "key": "dota_tooltip_ability_item_heavens_halberd",
+      "en": "Heaven's Halberd",
+      "ptBr": "Alabarda Celestial"
+    },
+    {
+      "key": "dota_tooltip_ability_item_recipe_heavens_halberd",
+      "en": "Heaven's Halberd Recipe",
+      "ptBr": "Receita: Alabarda Celestial"
+    },
+    {
+      "key": "dota_tooltip_ability_item_helm_of_iron_will",
+      "en": "Helm of Iron Will",
+      "ptBr": "Elmo da Vontade Férrea"
+    },
+    {
+      "key": "dota_tooltip_ability_item_helm_of_the_dominator",
+      "en": "Helm of the Dominator",
+      "ptBr": "Elmo do Dominador"
+    },
+    {
+      "key": "dota_tooltip_ability_item_recipe_helm_of_the_dominator",
+      "en": "Helm of the Dominator Recipe",
+      "ptBr": "Receita: Elmo do Dominador"
+    },
+    {
+      "key": "dota_tooltip_ability_item_helm_of_the_overlord",
+      "en": "Helm of the Overlord",
+      "ptBr": "Elmo do Soberano"
+    },
+    {
+      "key": "dota_tooltip_ability_item_recipe_helm_of_the_overlord",
+      "en": "Helm of the Overlord Recipe",
+      "ptBr": "Receita: Elmo do Soberano"
+    },
+    {
+      "key": "dota_tooltip_ability_item_helm_of_the_undying:n",
+      "en": "Helm of the Undying",
+      "ptBr": "#|m|#Elmo do Morto-Vivo"
+    },
+    {
+      "key": "dota_tooltip_ability_item_roshans_banner_health_tooltip",
+      "en": "HITS TO KILL:",
+      "ptBr": "ACERTOS PARA DESTRUIR:"
+    },
+    {
+      "key": "dota_tooltip_ability_item_holy_locket",
+      "en": "Holy Locket",
+      "ptBr": "Pingente Sagrado"
+    },
+    {
+      "key": "dota_tooltip_ability_item_recipe_holy_locket",
+      "en": "Holy Locket Recipe",
+      "ptBr": "Receita: Pingente Sagrado"
+    },
+    {
+      "key": "dota_tooltip_ability_item_hood_of_defiance",
+      "en": "Hood of Defiance",
+      "ptBr": "Capuz da Audácia"
+    },
+    {
+      "key": "dota_tooltip_ability_item_enhancement_hulking",
+      "en": "Hulking",
+      "ptBr": "Peso"
+    },
+    {
+      "key": "dota_tooltip_ability_item_hurricane_pike",
+      "en": "Hurricane Pike",
+      "ptBr": "Lança Furacão"
+    },
+    {
+      "key": "dota_tooltip_ability_item_recipe_hurricane_pike",
+      "en": "Hurricane Pike Recipe",
+      "ptBr": "Receita: Lança Furacão"
+    },
+    {
+      "key": "dota_tooltip_ability_item_hydras_breath",
+      "en": "Hydra's Breath",
+      "ptBr": "Sopro da Hidra"
+    },
+    {
+      "key": "dota_tooltip_ability_item_hyperstone",
+      "en": "Hyperstone",
+      "ptBr": "Pedra do Ímpeto"
+    },
+    {
+      "key": "dota_tooltip_ability_item_ice_dragon_maw",
+      "en": "Ice Dragon Maw",
+      "ptBr": "Presas do Dragão de Gelo"
+    },
+    {
+      "key": "dota_tooltip_ability_item_idol_of_screeauk:n",
+      "en": "Idol of Scree'auk",
+      "ptBr": "#|m|#Ídolo de Scree'Auk"
+    },
+    {
+      "key": "dota_tooltip_ability_item_illusionsts_cape",
+      "en": "Illusionist's Cape",
+      "ptBr": "Capa do Ilusionista"
+    },
+    {
+      "key": "dota_tooltip_ability_item_illusionsts_cape_illusion_duration",
+      "en": "IMAGE DURATION:",
+      "ptBr": "DURAÇÃO DA IMAGEM:"
+    },
+    {
+      "key": "dota_tooltip_ability_item_imp_claw",
+      "en": "Imp Claw",
+      "ptBr": "Garra de Duende"
+    },
+    {
+      "key": "dota_tooltip_ability_item_infused_raindrop",
+      "en": "Infused Raindrops",
+      "ptBr": "Gotas Infundidas"
+    },
+    {
+      "key": "dota_tooltip_ability_item_power_treads_int",
+      "en": "Intelligence",
+      "ptBr": "Inteligência"
+    },
+    {
+      "key": "dota_tooltip_ability_item_branches",
+      "en": "Iron Branch",
+      "ptBr": "Galho de Ferro"
+    },
+    {
+      "key": "dota_tooltip_ability_item_iron_talon:n",
+      "en": "Iron Talon",
+      "ptBr": "#|f|#Garras de Ferro"
+    },
+    {
+      "key": "dota_tooltip_ability_item_recipe_iron_talon",
+      "en": "Iron Talon Recipe",
+      "ptBr": "Receita: Garras de Ferro"
+    },
+    {
+      "key": "dota_tooltip_ability_item_foragers_stats",
+      "en": "Ironwood Nut",
+      "ptBr": "Noz Galho-de-Ferro"
+    },
+    {
+      "key": "dota_tooltip_ability_item_ironwood_tree",
+      "en": "Ironwood Tree",
+      "ptBr": "Árvore Galho-de-Ferro"
+    },
+    {
+      "key": "dota_tooltip_ability_item_javelin",
+      "en": "Javelin",
+      "ptBr": "Lança"
+    },
+    {
+      "key": "dota_tooltip_ability_item_jidi_pollen_bag:n",
+      "en": "Jidi Pollen Bag",
+      "ptBr": "#|m|#Pólen de Jidi"
+    },
+    {
+      "key": "dota_tooltip_ability_item_kaya",
+      "en": "Kaya",
+      "ptBr": "Kaya"
+    },
+    {
+      "key": "dota_tooltip_ability_item_kaya_and_sange",
+      "en": "Kaya and Sange",
+      "ptBr": "Kaya e Sange"
+    },
+    {
+      "key": "dota_tooltip_ability_item_recipe_kaya_and_sange",
+      "en": "Kaya and Sange Recipe",
+      "ptBr": "Receita: Kaya e Sange"
+    },
+    {
+      "key": "dota_tooltip_ability_item_recipe_kaya",
+      "en": "Kaya Recipe",
+      "ptBr": "Receita: Kaya"
+    },
+    {
+      "key": "dota_tooltip_ability_item_keen_optic",
+      "en": "Keen Optic",
+      "ptBr": "Visor Keen"
+    },
+    {
+      "key": "dota_tooltip_ability_item_enhancement_keen_eyed",
+      "en": "Keen-eyed",
+      "ptBr": "Diligência"
+    },
+    {
+      "key": "dota_tooltip_ability_item_angels_demise",
+      "en": "Khanda",
+      "ptBr": "Khanda"
+    },
+    {
+      "key": "dota_tooltip_ability_item_recipe_angels_demise",
+      "en": "Khanda Recipe",
+      "ptBr": "Receita: Khanda"
+    },
+    {
+      "key": "dota_tooltip_ability_item_kobold_cup:n",
+      "en": "Kobold Cup",
+      "ptBr": "#|f|#Taça Kobold"
+    },
+    {
+      "key": "dota_tooltip_ability_item_lance_of_pursuit",
+      "en": "Lance of Pursuit",
+      "ptBr": "Lança Perseguidora"
+    },
+    {
+      "key": "dota_tooltip_ability_item_tidehunter_fish",
+      "en": "Leviathan's Fish",
+      "ptBr": "Peixe do Leviatã"
+    },
+    {
+      "key": "dota_tooltip_ability_item_lifestone",
+      "en": "Lifestone",
+      "ptBr": "Pedra da Vida"
+    },
+    {
+      "key": "dota_tooltip_ability_item_light_collector",
+      "en": "Light Collector",
+      "ptBr": "Coletor Fótico"
+    },
+    {
+      "key": "dota_tooltip_ability_item_sphere",
+      "en": "Linken's Sphere",
+      "ptBr": "Esfera de Linken"
+    },
+    {
+      "key": "dota_tooltip_ability_item_recipe_sphere",
+      "en": "Linken's Sphere Recipe",
+      "ptBr": "Receita: Esfera de Linken"
+    },
+    {
+      "key": "dota_tooltip_ability_item_longclaws_amulet",
+      "en": "Longclaw's Amulet",
+      "ptBr": "Amuleto de Garralonga"
+    },
+    {
+      "key": "dota_tooltip_ability_item_lotus_orb",
+      "en": "Lotus Orb",
+      "ptBr": "Orbe de Lótus"
+    },
+    {
+      "key": "dota_tooltip_ability_item_recipe_lotus_orb",
+      "en": "Lotus Orb Recipe",
+      "ptBr": "Receita: Orbe de Lótus"
+    },
+    {
+      "key": "dota_tooltip_ability_item_madstone_bundle",
+      "en": "Madstone Bundle",
+      "ptBr": "Lascas de Insanite"
+    },
+    {
+      "key": "dota_tooltip_ability_item_maelstrom",
+      "en": "Maelstrom",
+      "ptBr": "Maelstrom"
+    },
+    {
+      "key": "dota_tooltip_ability_item_recipe_maelstrom",
+      "en": "Maelstrom Recipe",
+      "ptBr": "Receita: Maelstrom"
+    },
+    {
+      "key": "dota_tooltip_ability_item_mage_loop",
+      "en": "Mage Loop",
+      "ptBr": "Ciclo do Mago"
+    },
+    {
+      "key": "dota_tooltip_ability_item_mage_slayer",
+      "en": "Mage Slayer",
+      "ptBr": "Assassina de Magos"
+    },
+    {
+      "key": "dota_tooltip_ability_item_recipe_mage_slayer",
+      "en": "Mage Slayer Recipe",
+      "ptBr": "Receita: Assassina de Magos"
+    },
+    {
+      "key": "dota_tooltip_ability_item_panic_button:n",
+      "en": "Magic Lamp",
+      "ptBr": "#|f|#Lâmpada Mágica"
+    },
+    {
+      "key": "dota_tooltip_ability_item_magic_stick",
+      "en": "Magic Stick",
+      "ptBr": "Graveto Mágico"
+    },
+    {
+      "key": "dota_tooltip_ability_item_magic_wand",
+      "en": "Magic Wand",
+      "ptBr": "Varinha Mágica"
+    },
+    {
+      "key": "dota_tooltip_ability_item_recipe_magic_wand",
+      "en": "Magic Wand Recipe",
+      "ptBr": "Receita: Varinha Mágica"
+    },
+    {
+      "key": "dota_tooltip_ability_item_magnifying_monocle:n",
+      "en": "Magnifying Monocle",
+      "ptBr": "#|m|#Monóculo Ampliador"
+    },
+    {
+      "key": "dota_tooltip_ability_item_mana_draught:n",
+      "en": "Mana Draught",
+      "ptBr": "#|m|#Frasco de Mana"
+    },
+    {
+      "key": "dota_tooltip_ability_item_mango_tree",
+      "en": "Mango Tree",
+      "ptBr": "Mangueira"
+    },
+    {
+      "key": "dota_tooltip_ability_item_enhancement_manic",
+      "en": "Manic",
+      "ptBr": "Mania"
+    },
+    {
+      "key": "dota_tooltip_ability_item_manta",
+      "en": "Manta Style",
+      "ptBr": "Machado Ilusório"
+    },
+    {
+      "key": "dota_tooltip_ability_item_recipe_manta",
+      "en": "Manta Style Recipe",
+      "ptBr": "Receita: Machado Ilusório"
+    },
+    {
+      "key": "dota_tooltip_ability_item_mantle",
+      "en": "Mantle of Intelligence",
+      "ptBr": "Manto da Inteligência"
+    },
+    {
+      "key": "dota_tooltip_ability_item_martyrs_plate",
+      "en": "Martyr's Plate",
+      "ptBr": "Placa do Mártir"
+    },
+    {
+      "key": "dota_tooltip_ability_item_mask_of_madness",
+      "en": "Mask of Madness",
+      "ptBr": "Máscara da Loucura"
+    },
+    {
+      "key": "dota_tooltip_ability_item_recipe_mask_of_madness",
+      "en": "Mask of Madness Recipe",
+      "ptBr": "Receita: Máscara da Loucura"
+    },
+    {
+      "key": "dota_tooltip_ability_item_the_caustic_finale_max_stack_count",
+      "en": "MAX STACK COUNT:",
+      "ptBr": "MÁX. DE ACÚMULOS:"
+    },
+    {
+      "key": "dota_tooltip_ability_item_medallion_of_courage:n",
+      "en": "Medallion of Courage",
+      "ptBr": "#|m|#Medalhão de Coragem"
+    },
+    {
+      "key": "dota_tooltip_ability_item_mekansm",
+      "en": "Mekansm",
+      "ptBr": "Mekansm"
+    },
+    {
+      "key": "dota_tooltip_ability_item_recipe_mekansm",
+      "en": "Mekansm Recipe",
+      "ptBr": "Receita: Mekansm"
+    },
+    {
+      "key": "dota_tooltip_ability_item_muertas_gun",
+      "en": "Mercy & Grace",
+      "ptBr": "Misericórdia e Graça"
+    },
+    {
+      "key": "dota_tooltip_ability_item_metamorphic_mandible:n",
+      "en": "Metamorphic Mandible",
+      "ptBr": "#|f|#Mandíbula Metamórfica"
+    },
+    {
+      "key": "dota_tooltip_ability_item_meteor_hammer",
+      "en": "Meteor Hammer",
+      "ptBr": "Martelo Meteorítico"
+    },
+    {
+      "key": "dota_tooltip_ability_item_recipe_meteor_hammer",
+      "en": "Meteor Hammer Recipe",
+      "ptBr": "Receita: Martelo Meteorítico"
+    },
+    {
+      "key": "dota_tooltip_ability_item_mind_breaker:n",
+      "en": "Mind Breaker",
+      "ptBr": "#|f|#Quebramentes"
+    },
+    {
+      "key": "dota_tooltip_ability_item_minotaur_horn:n",
+      "en": "Minotaur Horn",
+      "ptBr": "#|m|#Chifre de Minotauro"
+    },
+    {
+      "key": "dota_tooltip_ability_item_mirror_shield",
+      "en": "Mirror Shield",
+      "ptBr": "Escudo Espelhado"
+    },
+    {
+      "key": "dota_tooltip_ability_item_mithril_hammer",
+      "en": "Mithril Hammer",
+      "ptBr": "Martelo de Mítrio"
+    },
+    {
+      "key": "dota_tooltip_ability_item_mjollnir",
+      "en": "Mjollnir",
+      "ptBr": "Mjollnir"
+    },
+    {
+      "key": "dota_tooltip_ability_item_recipe_mjollnir",
+      "en": "Mjollnir Recipe",
+      "ptBr": "Receita: Mjollnir"
+    },
+    {
+      "key": "dota_tooltip_ability_item_monkey_king_bar",
+      "en": "Monkey King Bar",
+      "ptBr": "Bastão do Rei Macaco"
+    },
+    {
+      "key": "dota_tooltip_ability_item_recipe_monkey_king_bar",
+      "en": "Monkey King Bar Recipe",
+      "ptBr": "Receita: Bastão do Rei Macaco"
+    },
+    {
+      "key": "dota_tooltip_ability_item_lifesteal",
+      "en": "Morbid Mask",
+      "ptBr": "Máscara Mórbida"
+    },
+    {
+      "key": "dota_tooltip_ability_item_mystic_staff",
+      "en": "Mystic Staff",
+      "ptBr": "Cajado Místico"
+    },
+    {
+      "key": "dota_tooltip_ability_item_enhancement_mystical",
+      "en": "Mystical",
+      "ptBr": "Misticismo"
+    },
+    {
+      "key": "dota_tooltip_ability_item_necronomicon_3",
+      "en": "Necronomicon",
+      "ptBr": "Necronomicon"
+    },
+    {
+      "key": "dota_tooltip_ability_item_necronomicon_2l",
+      "en": "Necronomicon (level 2)",
+      "ptBr": "Necronomicon (nível 2)"
+    },
+    {
+      "key": "dota_tooltip_ability_item_necronomicon_3l",
+      "en": "Necronomicon (level 3)",
+      "ptBr": "Necronomicon (nível 3)"
+    },
+    {
+      "key": "dota_tooltip_ability_item_recipe_necronomicon",
+      "en": "Necronomicon Recipe",
+      "ptBr": "Receita: Necronomicon"
+    },
+    {
+      "key": "dota_tooltip_ability_item_nemesis_curse:n",
+      "en": "Nemesis Curse",
+      "ptBr": "#|f|#Maldição do Nêmesis"
+    },
+    {
+      "key": "dota_tooltip_ability_item_nether_shawl",
+      "en": "Nether Shawl",
+      "ptBr": "Xale das Profundezas"
+    },
+    {
+      "key": "dota_tooltip_ability_item_light_collector_mana_regen",
+      "en": "NIGHT MANA REGEN:",
+      "ptBr": "REGEN. DE MANA (NOITE):"
+    },
+    {
+      "key": "dota_tooltip_ability_item_enhancement_nimble",
+      "en": "Nimble",
+      "ptBr": "Leveza"
+    },
+    {
+      "key": "dota_tooltip_ability_item_ninja_gear:n",
+      "en": "Ninja Gear",
+      "ptBr": "#|m|#Equipamento Ninja"
+    },
+    {
+      "key": "dota_tooltip_ability_item_null_talisman",
+      "en": "Null Talisman",
+      "ptBr": "Talismã Nulo"
+    },
+    {
+      "key": "dota_tooltip_ability_item_recipe_null_talisman",
+      "en": "Null Talisman Recipe",
+      "ptBr": "Receita: Talismã Nulo"
+    },
+    {
+      "key": "dota_tooltip_ability_item_nullifier",
+      "en": "Nullifier",
+      "ptBr": "Anulador"
+    },
+    {
+      "key": "dota_tooltip_ability_item_recipe_nullifier",
+      "en": "Nullifier Recipe",
+      "ptBr": "Receita: Anulador"
+    },
+    {
+      "key": "dota_tooltip_ability_item_oblivion_staff",
+      "en": "Oblivion Staff",
+      "ptBr": "Cajado do Oblívio"
+    },
+    {
+      "key": "dota_tooltip_ability_item_oblivions_locket",
+      "en": "Oblivion's Locket",
+      "ptBr": "Medalhão do Esquecimento"
+    },
+    {
+      "key": "dota_tooltip_ability_item_ward_dispenser",
+      "en": "Observer and Sentry Wards",
+      "ptBr": "Sentinelas Observadoras e Reveladoras"
+    },
+    {
+      "key": "dota_tooltip_ability_item_ward_dispenser_observer_duration_minutes_tooltip",
+      "en": "OBSERVER DURATION (MINUTES):",
+      "ptBr": "DURAÇÃO EM MINUTOS DA SENTINELA OBSERVADORA:"
+    },
+    {
+      "key": "dota_tooltip_ability_item_ward_dispenser_observer_vision_range_tooltip",
+      "en": "OBSERVER VISION RANGE:",
+      "ptBr": "RAIO DE VISÃO DA SENTINELA OBSERVADORA:"
+    },
+    {
+      "key": "dota_tooltip_ability_item_ward_observer",
+      "en": "Observer Ward",
+      "ptBr": "Sentinela Observadora"
+    },
+    {
+      "key": "dota_tooltip_ability_item_occult_bracelet:n",
+      "en": "Occult Bracelet",
+      "ptBr": "#|m|#Bracelete Oculto"
+    },
+    {
+      "key": "dota_tooltip_ability_item_ocean_heart",
+      "en": "Ocean Heart",
+      "ptBr": "Coração do Oceano"
+    },
+    {
+      "key": "dota_tooltip_ability_item_octarine_core",
+      "en": "Octarine Core",
+      "ptBr": "Núcleo Octarina"
+    },
+    {
+      "key": "dota_tooltip_ability_item_recipe_octarine_core",
+      "en": "Octarine Core Recipe",
+      "ptBr": "Receita: Núcleo Octarina"
+    },
+    {
+      "key": "dota_tooltip_ability_item_ogre_axe",
+      "en": "Ogre Axe",
+      "ptBr": "Machado do Ogro"
+    },
+    {
+      "key": "dota_tooltip_ability_item_ogre_seal_totem:n",
+      "en": "Ogre Seal Totem",
+      "ptBr": "#|m|#Totem da Morsa Ogro"
+    },
+    {
+      "key": "dota_tooltip_ability_item_blight_stone",
+      "en": "Orb of Blight",
+      "ptBr": "Orbe Enferrujado"
+    },
+    {
+      "key": "dota_tooltip_ability_item_orb_of_corrosion",
+      "en": "Orb of Corrosion",
+      "ptBr": "Orbe Corrosivo"
+    },
+    {
+      "key": "dota_tooltip_ability_item_recipe_orb_of_corrosion",
+      "en": "Orb of Corrosion Recipe",
+      "ptBr": "Receita: Orbe Corrosivo"
+    },
+    {
+      "key": "dota_tooltip_ability_item_orb_of_destruction:n",
+      "en": "Orb of Destruction",
+      "ptBr": "#|m|#Orbe da Destruição"
+    },
+    {
+      "key": "dota_tooltip_ability_item_orb_of_frost",
+      "en": "Orb of Frost",
+      "ptBr": "Orbe Congelado"
+    },
+    {
+      "key": "dota_tooltip_ability_item_orb_of_venom",
+      "en": "Orb of Venom",
+      "ptBr": "Orbe Venenoso"
+    },
+    {
+      "key": "dota_tooltip_ability_item_orchid",
+      "en": "Orchid Malevolence",
+      "ptBr": "Orquídea Malevolente"
+    },
+    {
+      "key": "dota_tooltip_ability_item_recipe_orchid",
+      "en": "Orchid Malevolence Recipe",
+      "ptBr": "Receita: Orquídea Malevolente"
+    },
+    {
+      "key": "dota_tooltip_ability_item_outworld_staff:n",
+      "en": "Outworld Staff",
+      "ptBr": "#|m|#Cajado D'outromundo"
+    },
+    {
+      "key": "dota_tooltip_ability_item_overwhelming_blink",
+      "en": "Overwhelming Blink",
+      "ptBr": "Translocação Esmagadora"
+    },
+    {
+      "key": "dota_tooltip_ability_item_recipe_overwhelming_blink",
+      "en": "Overwhelming Blink Recipe",
+      "ptBr": "Receita: Translocação Esmagadora"
+    },
+    {
+      "key": "dota_tooltip_ability_item_paladin_sword",
+      "en": "Paladin Sword",
+      "ptBr": "Espada Paladina"
+    },
+    {
+      "key": "dota_tooltip_ability_item_devastator",
+      "en": "Parasma",
+      "ptBr": "Parasma"
+    },
+    {
+      "key": "dota_tooltip_ability_item_recipe_devastator",
+      "en": "Parasma Recipe",
+      "ptBr": "Receita: Parasma"
+    },
+    {
+      "key": "dota_tooltip_ability_item_partisans_brand:n",
+      "en": "Partisan's Brand",
+      "ptBr": "#|f|#Ferro do Partidário"
+    },
+    {
+      "key": "dota_tooltip_ability_item_pavise",
+      "en": "Pavise",
+      "ptBr": "Blindagem"
+    },
+    {
+      "key": "dota_tooltip_ability_item_recipe_pavise",
+      "en": "Pavise Recipe",
+      "ptBr": "Receita: Blindagem"
+    },
+    {
+      "key": "dota_tooltip_ability_item_paw_of_lucius",
+      "en": "Paw of Lucius",
+      "ptBr": "Garra de Lucius"
+    },
+    {
+      "key": "dota_tooltip_ability_item_pelt_of_the_old_wolf",
+      "en": "Pelt of the Old Wolf",
+      "ptBr": "Pele do Velho Lobo"
+    },
+    {
+      "key": "dota_tooltip_ability_item_penta_edged_sword",
+      "en": "Penta-Edged Sword",
+      "ptBr": "Espada Pentalaminada"
+    },
+    {
+      "key": "dota_tooltip_ability_item_pers",
+      "en": "Perseverance",
+      "ptBr": "Perseverança"
+    },
+    {
+      "key": "dota_tooltip_ability_item_book_of_blessed_agility",
+      "en": "Personalized Book of Agility",
+      "ptBr": "Livro Personalizado de Agilidade"
+    },
+    {
+      "key": "dota_tooltip_ability_item_book_of_boss_beating_agility",
+      "en": "Personalized Book of Celerity",
+      "ptBr": "Livro Personalizado de Celeridade"
+    },
+    {
+      "key": "dota_tooltip_ability_item_book_of_boss_beating_strength",
+      "en": "Personalized Book of Fortitude",
+      "ptBr": "Livro Personalizado de Fortitude"
+    },
+    {
+      "key": "dota_tooltip_ability_item_book_of_boss_beating_intelligence",
+      "en": "Personalized Book of Insight",
+      "ptBr": "Livro Personalizado de Introspecção"
+    },
+    {
+      "key": "dota_tooltip_ability_item_book_of_blessed_intelligence",
+      "en": "Personalized Book of Intelligence",
+      "ptBr": "Livro Personalizado de Inteligência"
+    },
+    {
+      "key": "dota_tooltip_ability_item_book_of_blessed_strength",
+      "en": "Personalized Book of Strength",
+      "ptBr": "Livro Personalizado de Força"
+    },
+    {
+      "key": "dota_tooltip_ability_item_phase_boots",
+      "en": "Phase Boots",
+      "ptBr": "Botas de Fase"
+    },
+    {
+      "key": "dota_tooltip_ability_item_philosophers_stone",
+      "en": "Philosopher's Stone",
+      "ptBr": "Pedra Filosofal"
+    },
+    {
+      "key": "dota_tooltip_ability_item_phoenix_ash",
+      "en": "Phoenix Ash",
+      "ptBr": "Cinzas de Fênix"
+    },
+    {
+      "key": "dota_tooltip_ability_item_phylactery",
+      "en": "Phylactery",
+      "ptBr": "Filactério"
+    },
+    {
+      "key": "dota_tooltip_ability_item_recipe_phylactery",
+      "en": "Phylactery Recipe",
+      "ptBr": "Receita: Filactério"
+    },
+    {
+      "key": "dota_tooltip_ability_item_unstable_wand:n",
+      "en": "Pig Pole",
+      "ptBr": "#|m|#Cajado Suíno"
+    },
+    {
+      "key": "dota_tooltip_ability_item_pipe",
+      "en": "Pipe of Insight",
+      "ptBr": "Cachimbo de Introspecção"
+    },
+    {
+      "key": "dota_tooltip_ability_item_recipe_pipe",
+      "en": "Pipe of Insight Recipe",
+      "ptBr": "Receita: Cachimbo de Introspecção"
+    },
+    {
+      "key": "dota_tooltip_ability_item_pirate_hat:n",
+      "en": "Pirate Hat",
+      "ptBr": "#|m|#Chapéu de Pirata"
+    },
+    {
+      "key": "dota_tooltip_ability_item_platemail",
+      "en": "Platemail",
+      "ptBr": "Armadura de Placas"
+    },
+    {
+      "key": "dota_tooltip_ability_item_pocket_roshan",
+      "en": "Pocket Roshan",
+      "ptBr": "Roshan de Bolso"
+    },
+    {
+      "key": "dota_tooltip_ability_item_pocket_tower",
+      "en": "Pocket Tower",
+      "ptBr": "Torre de Bolso"
+    },
+    {
+      "key": "dota_tooltip_ability_item_point_booster",
+      "en": "Point Booster",
+      "ptBr": "Amplificador de Pontos"
+    },
+    {
+      "key": "dota_tooltip_ability_item_polliwog_charm:n",
+      "en": "Pollywog Charm",
+      "ptBr": "#|m|#Amuleto do Girino"
+    },
+    {
+      "key": "dota_tooltip_ability_item_poor_mans_shield:n",
+      "en": "Poor Man's Shield",
+      "ptBr": "#|m|#Escudo Desgastado"
+    },
+    {
+      "key": "dota_tooltip_ability_item_possessed_mask",
+      "en": "Possessed Mask",
+      "ptBr": "Máscara Possuída"
+    },
+    {
+      "key": "dota_tooltip_ability_item_stonefeather_satchel_feathers",
+      "en": "Pound of Feathers",
+      "ptBr": "Quilo de Penas"
+    },
+    {
+      "key": "dota_tooltip_ability_item_stonefeather_satchel_rocks",
+      "en": "Pound of Rocks",
+      "ptBr": "Quilo de Rochas"
+    },
+    {
+      "key": "dota_tooltip_ability_item_power_treads",
+      "en": "Power Treads",
+      "ptBr": "Coturnos do Poder"
+    },
+    {
+      "key": "dota_tooltip_ability_item_precious_egg",
+      "en": "Precious Egg",
+      "ptBr": "Ovo Precioso"
+    },
+    {
+      "key": "dota_tooltip_ability_item_preserved_skull",
+      "en": "Preserved Skull",
+      "ptBr": "Crânio Preservado"
+    },
+    {
+      "key": "dota_tooltip_ability_item_princes_knife",
+      "en": "Prince's Knife",
+      "ptBr": "Faca do Príncipe"
+    },
+    {
+      "key": "dota_tooltip_ability_item_prophets_pendulum:n",
+      "en": "Prophet's Pendulum",
+      "ptBr": "#|m|#Pêndulo do Profeta"
+    },
+    {
+      "key": "dota_tooltip_ability_item_psychic_headband:n",
+      "en": "Psychic Headband",
+      "ptBr": "#|m|#Diadema Paranormal"
+    },
+    {
+      "key": "dota_tooltip_ability_item_pupils_gift",
+      "en": "Pupil's Gift",
+      "ptBr": "Presente do Pupilo"
+    },
+    {
+      "key": "dota_tooltip_ability_item_pyrrhic_cloak:n",
+      "en": "Pyrrhic Cloak",
+      "ptBr": "#|f|#Capa Pírrica"
+    },
+    {
+      "key": "dota_tooltip_ability_item_quarterstaff",
+      "en": "Quarterstaff",
+      "ptBr": "Bastão"
+    },
+    {
+      "key": "dota_tooltip_ability_item_quelling_blade",
+      "en": "Quelling Blade",
+      "ptBr": "Machado Supressor"
+    },
+    {
+      "key": "dota_tooltip_ability_item_enhancement_quickened",
+      "en": "Quickened",
+      "ptBr": "Aceleração"
+    },
+    {
+      "key": "dota_tooltip_ability_item_quickening_charm",
+      "en": "Quickening Charm",
+      "ptBr": "Amuleto da Aceleração"
+    },
+    {
+      "key": "dota_tooltip_ability_item_quicksilver_amulet",
+      "en": "Quicksilver Amulet",
+      "ptBr": "Amuleto de Mercúrio"
+    },
+    {
+      "key": "dota_tooltip_ability_item_radiance",
+      "en": "Radiance",
+      "ptBr": "Resplendor"
+    },
+    {
+      "key": "dota_tooltip_ability_item_recipe_radiance",
+      "en": "Radiance Recipe",
+      "ptBr": "Receita: Resplendor"
+    },
+    {
+      "key": "dota_tooltip_ability_item_rattlecage:n",
+      "en": "Rattlecage",
+      "ptBr": "#|f|#Placa Torácica"
+    },
+    {
+      "key": "dota_tooltip_ability_item_reaver",
+      "en": "Reaver",
+      "ptBr": "Devastador"
+    },
+    {
+      "key": "dota_tooltip_ability_item_recipe_fallen_sky",
+      "en": "Recipe: Fallen Sky",
+      "ptBr": "Receita: Impacto Celeste"
+    },
+    {
+      "key": "dota_tooltip_ability_item_refresher",
+      "en": "Refresher Orb",
+      "ptBr": "Orbe Restaurador"
+    },
+    {
+      "key": "dota_tooltip_ability_item_recipe_refresher",
+      "en": "Refresher Orb Recipe",
+      "ptBr": "Receita: Orbe Restaurador"
+    },
+    {
+      "key": "dota_tooltip_ability_item_repair_kit",
+      "en": "Repair Kit",
+      "ptBr": "Kit de Reparo"
+    },
+    {
+      "key": "dota_tooltip_ability_item_aghsfort_void_spirit_resonant_pulse_base_absorb",
+      "en": "Resonant Pulse: Base Shield Absorb",
+      "ptBr": "Pulso Ressonante: Absorção Base do Escudo"
+    },
+    {
+      "key": "dota_tooltip_ability_item_aghsfort_void_spirit_resonant_pulse_absorb_per_unit",
+      "en": "Resonant Pulse: Bonus Absorb Per Unit Hit",
+      "ptBr": "Pulso Ressonante: Absorção Adicional por Unidade Atingida"
+    },
+    {
+      "key": "dota_tooltip_ability_item_aghsfort_void_spirit_resonant_pulse_damage",
+      "en": "Resonant Pulse: Damage",
+      "ptBr": "Pulso Ressonante: Dano"
+    },
+    {
+      "key": "dota_tooltip_ability_item_aghsfort_void_spirit_resonant_pulse_manacost",
+      "en": "Resonant Pulse: Mana Cost",
+      "ptBr": "Pulso Ressonante: Custo de Mana"
+    },
+    {
+      "key": "dota_tooltip_ability_item_enhancement_restorative",
+      "en": "Restorative",
+      "ptBr": "Restauração"
+    },
+    {
+      "key": "dota_tooltip_ability_item_revenants_brooch",
+      "en": "Revenant's Brooch",
+      "ptBr": "Broche do Regressor"
+    },
+    {
+      "key": "dota_tooltip_ability_item_recipe_revenants_brooch",
+      "en": "Revenant's Brooch Recipe",
+      "ptBr": "Receita: Broche do Regressor"
+    },
+    {
+      "key": "dota_tooltip_ability_item_rhyziks_eye",
+      "en": "Rhyzik's Eye",
+      "ptBr": "Olho de Rhyzik"
+    },
+    {
+      "key": "dota_tooltip_ability_item_riftshadow_prism:n",
+      "en": "Riftshadow Prism",
+      "ptBr": "#|m|#Prisma de Crevasse"
+    },
+    {
+      "key": "dota_tooltip_ability_item_ring_of_aquila",
+      "en": "Ring of Aquila",
+      "ptBr": "Anel de Áquila"
+    },
+    {
+      "key": "dota_tooltip_ability_item_ring_of_basilius",
+      "en": "Ring of Basilius",
+      "ptBr": "Anel de Basílio"
+    },
+    {
+      "key": "dota_tooltip_ability_item_recipe_ring_of_basilius",
+      "en": "Ring of Basilius Recipe",
+      "ptBr": "Receita: Anel de Basílio"
+    },
+    {
+      "key": "dota_tooltip_ability_item_ring_of_health",
+      "en": "Ring of Health",
+      "ptBr": "Anel de Vida"
+    },
+    {
+      "key": "dota_tooltip_ability_item_ring_of_protection",
+      "en": "Ring of Protection",
+      "ptBr": "Anel de Proteção"
+    },
+    {
+      "key": "dota_tooltip_ability_item_ring_of_regen",
+      "en": "Ring of Regen",
+      "ptBr": "Anel de Regeneração"
+    },
+    {
+      "key": "dota_tooltip_ability_item_ring_of_tarrasque",
+      "en": "Ring of Tarrasque",
+      "ptBr": "Anel do Tarrasque"
+    },
+    {
+      "key": "dota_tooltip_ability_item_rippers_lash:n",
+      "en": "Ripper's Lash",
+      "ptBr": "#|m|#Chicote Espinhoso"
+    },
+    {
+      "key": "dota_tooltip_ability_item_river_painter7",
+      "en": "River Vial: Blood",
+      "ptBr": "Frasco do Rio: Sangue"
+    },
+    {
+      "key": "dota_tooltip_ability_item_river_painter",
+      "en": "River Vial: Chrome",
+      "ptBr": "Frasco do Rio: Cromado"
+    },
+    {
+      "key": "dota_tooltip_ability_item_river_painter2",
+      "en": "River Vial: Dry",
+      "ptBr": "Frasco do Rio: Seco"
+    },
+    {
+      "key": "dota_tooltip_ability_item_river_painter5",
+      "en": "River Vial: Electrified",
+      "ptBr": "Frasco do Rio: Elétrico"
+    },
+    {
+      "key": "dota_tooltip_ability_item_river_painter4",
+      "en": "River Vial: Oil",
+      "ptBr": "Frasco do Rio: Óleo"
+    },
+    {
+      "key": "dota_tooltip_ability_item_river_painter6",
+      "en": "River Vial: Potion",
+      "ptBr": "Frasco do Rio: Poção"
+    },
+    {
+      "key": "dota_tooltip_ability_item_river_painter3",
+      "en": "River Vial: Slime",
+      "ptBr": "Frasco do Rio: Gosma"
+    },
+    {
+      "key": "dota_tooltip_ability_item_robe",
+      "en": "Robe of the Magi",
+      "ptBr": "Túnica dos Magos"
+    },
+    {
+      "key": "dota_tooltip_ability_item_rod_of_atos",
+      "en": "Rod of Atos",
+      "ptBr": "Bastão de Atos"
+    },
+    {
+      "key": "dota_tooltip_ability_item_recipe_rod_of_atos",
+      "en": "Rod of Atos Recipe",
+      "ptBr": "Receita: Bastão de Atos"
+    },
+    {
+      "key": "dota_tooltip_ability_item_roshans_banner",
+      "en": "Roshan's Banner",
+      "ptBr": "Estandarte de Roshan"
+    },
+    {
+      "key": "dota_tooltip_ability_item_royal_jelly",
+      "en": "Royal Jelly",
+      "ptBr": "Geleia Real"
+    },
+    {
+      "key": "dota_tooltip_ability_item_bottle_double_damage",
+      "en": "Rune: Amplify Damage",
+      "ptBr": "Runa: Dano Aumentado"
+    },
+    {
+      "key": "dota_tooltip_ability_item_bottle_arcane",
+      "en": "Rune: Arcane",
+      "ptBr": "Runa: Arcana"
+    },
+    {
+      "key": "dota_tooltip_ability_item_bottle_bounty",
+      "en": "Rune: Bounty",
+      "ptBr": "Runa: Recompensas"
+    },
+    {
+      "key": "dota_tooltip_ability_item_bottle_haste",
+      "en": "Rune: Haste",
+      "ptBr": "Runa: Ímpeto"
+    },
+    {
+      "key": "dota_tooltip_ability_item_bottle_illusion",
+      "en": "Rune: Illusion",
+      "ptBr": "Runa: Ilusão"
+    },
+    {
+      "key": "dota_tooltip_ability_item_bottle_invisible",
+      "en": "Rune: Invisibility",
+      "ptBr": "Runa: Invisibilidade"
+    },
+    {
+      "key": "dota_tooltip_ability_item_bottle_regeneration",
+      "en": "Rune: Regeneration",
+      "ptBr": "Runa: Regeneração"
+    },
+    {
+      "key": "dota_tooltip_ability_item_bottle_shield",
+      "en": "Rune: Shield",
+      "ptBr": "Runa: Proteção"
+    },
+    {
+      "key": "dota_tooltip_ability_item_bottle_water",
+      "en": "Rune: Water",
+      "ptBr": "Runa: Água"
+    },
+    {
+      "key": "dota_tooltip_ability_item_bottle_xp",
+      "en": "Rune: Wisdom",
+      "ptBr": "Runa: Sabedoria"
+    },
+    {
+      "key": "dota_tooltip_ability_item_relic",
+      "en": "Sacred Relic",
+      "ptBr": "Relíquia Sagrada"
+    },
+    {
+      "key": "dota_tooltip_ability_item_safety_bubble",
+      "en": "Safety Bubble",
+      "ptBr": "Bolha Protetora"
+    },
+    {
+      "key": "dota_tooltip_ability_item_sobi_mask",
+      "en": "Sage's Mask",
+      "ptBr": "Máscara do Sábio"
+    },
+    {
+      "key": "dota_tooltip_ability_item_sange",
+      "en": "Sange",
+      "ptBr": "Sange"
+    },
+    {
+      "key": "dota_tooltip_ability_item_sange_and_yasha",
+      "en": "Sange and Yasha",
+      "ptBr": "Sange e Yasha"
+    },
+    {
+      "key": "dota_tooltip_ability_item_recipe_sange",
+      "en": "Sange Recipe",
+      "ptBr": "Receita: Sange"
+    },
+    {
+      "key": "dota_tooltip_ability_item_satanic",
+      "en": "Satanic",
+      "ptBr": "Satânico"
+    },
+    {
+      "key": "dota_tooltip_ability_item_recipe_satanic",
+      "en": "Satanic Recipe",
+      "ptBr": "Receita: Satânico"
+    },
+    {
+      "key": "dota_tooltip_ability_item_ofrenda_shovel",
+      "en": "Scrying Shovel",
+      "ptBr": "Pá Clarividente"
+    },
+    {
+      "key": "dota_tooltip_ability_item_sheepstick",
+      "en": "Scythe of Vyse",
+      "ptBr": "Foice de Vyse"
+    },
+    {
+      "key": "dota_tooltip_ability_item_recipe_sheepstick",
+      "en": "Scythe of Vyse Recipe",
+      "ptBr": "Receita: Foice de Vyse"
+    },
+    {
+      "key": "dota_tooltip_ability_item_searing_signet:n",
+      "en": "Searing Signet",
+      "ptBr": "#|m|#Selo Chamuscante"
+    },
+    {
+      "key": "dota_tooltip_ability_item_seeds_of_serenity",
+      "en": "Seeds of Serenity",
+      "ptBr": "Sementes Serenas"
+    },
+    {
+      "key": "dota_tooltip_ability_item_seer_stone",
+      "en": "Seer Stone",
+      "ptBr": "Pedra do Augúrio"
+    },
+    {
+      "key": "dota_tooltip_ability_item_ward_dispenser_sentry_duration_minutes_tooltip",
+      "en": "SENTRY DURATION (MINUTES):",
+      "ptBr": "DURAÇÃO EM MINUTOS DA SENTINELA REVELADORA:"
+    },
+    {
+      "key": "dota_tooltip_ability_item_ward_dispenser_true_sight_range",
+      "en": "SENTRY TRUE SIGHT RANGE:",
+      "ptBr": "RAIO DA VISÃO VERDADEIRA DA SENTINELA REVELADORA:"
+    },
+    {
+      "key": "dota_tooltip_ability_item_ward_sentry",
+      "en": "Sentry Ward",
+      "ptBr": "Sentinela Reveladora"
+    },
+    {
+      "key": "dota_tooltip_ability_item_serrated_shiv:n",
+      "en": "Serrated Shiv",
+      "ptBr": "#|f|#Faca de Serra"
+    },
+    {
+      "key": "dota_tooltip_ability_item_shadow_amulet",
+      "en": "Shadow Amulet",
+      "ptBr": "Amuleto das Sombras"
+    },
+    {
+      "key": "dota_tooltip_ability_item_invis_sword",
+      "en": "Shadow Blade",
+      "ptBr": "Lâmina das Sombras"
+    },
+    {
+      "key": "dota_tooltip_ability_item_shawl",
+      "en": "Shawl",
+      "ptBr": "Xale"
+    },
+    {
+      "key": "dota_tooltip_ability_item_shivas_guard",
+      "en": "Shiva's Guard",
+      "ptBr": "Proteção de Shiva"
+    },
+    {
+      "key": "dota_tooltip_ability_item_recipe_shivas_guard",
+      "en": "Shiva's Guard Recipe",
+      "ptBr": "Receita: Proteção de Shiva"
+    },
+    {
+      "key": "dota_tooltip_ability_item_sign_of_the_arachnid",
+      "en": "Sign of the Arachnid",
+      "ptBr": "Símbolo do Aracnídeo"
+    },
+    {
+      "key": "dota_tooltip_ability_item_dredged_trident",
+      "en": "Siltbreaker's Dredged Trident",
+      "ptBr": "Tridente Dragado de Quebralama"
+    },
+    {
+      "key": "dota_tooltip_ability_item_silver_edge",
+      "en": "Silver Edge",
+      "ptBr": "Lâmina de Prata"
+    },
+    {
+      "key": "dota_tooltip_ability_item_recipe_silver_edge",
+      "en": "Silver Edge Recipe",
+      "ptBr": "Receita: Lâmina de Prata"
+    },
+    {
+      "key": "dota_tooltip_ability_item_sisters_shroud:n",
+      "en": "Sister's Shroud",
+      "ptBr": "#|m|#Mortalha das Irmãs"
+    },
+    {
+      "key": "dota_tooltip_ability_item_basher",
+      "en": "Skull Basher",
+      "ptBr": "Esmagador de Crânios"
+    },
+    {
+      "key": "dota_tooltip_ability_item_recipe_basher",
+      "en": "Skull Basher Recipe",
+      "ptBr": "Receita: Esmagador de Crânios"
+    },
+    {
+      "key": "dota_tooltip_ability_item_slippers",
+      "en": "Slippers of Agility",
+      "ptBr": "Sapatilhas da Agilidade"
+    },
+    {
+      "key": "dota_tooltip_ability_item_slippers_of_the_abyss",
+      "en": "Slippers of the Abyss",
+      "ptBr": "Sandálias do Abismo"
+    },
+    {
+      "key": "dota_tooltip_ability_item_smoke_of_deceit",
+      "en": "Smoke of Deceit",
+      "ptBr": "Fumaça da Enganação"
+    },
+    {
+      "key": "dota_tooltip_ability_item_solar_crest",
+      "en": "Solar Crest",
+      "ptBr": "Brasão Solar"
+    },
+    {
+      "key": "dota_tooltip_ability_item_recipe_solar_crest",
+      "en": "Solar Crest Recipe",
+      "ptBr": "Receita: Brasão Solar"
+    },
+    {
+      "key": "dota_tooltip_ability_item_soul_booster",
+      "en": "Soul Booster",
+      "ptBr": "Amplificador Espiritual"
+    },
+    {
+      "key": "dota_tooltip_ability_item_soul_ring",
+      "en": "Soul Ring",
+      "ptBr": "Anel da Alma"
+    },
+    {
+      "key": "dota_tooltip_ability_item_recipe_soul_ring",
+      "en": "Soul Ring Recipe",
+      "ptBr": "Receita: Anel da Alma"
+    },
+    {
+      "key": "dota_tooltip_ability_item_spark_of_courage:n",
+      "en": "Spark of Courage",
+      "ptBr": "#|f|#Faísca da Coragem"
+    },
+    {
+      "key": "dota_tooltip_ability_item_specialists_array",
+      "en": "Specialist's Array",
+      "ptBr": "Kit do Especialista"
+    },
+    {
+      "key": "dota_tooltip_ability_item_spell_prism",
+      "en": "Spell Prism",
+      "ptBr": "Prisma Enfeitiçado"
+    },
+    {
+      "key": "dota_tooltip_ability_item_spellslinger:n",
+      "en": "Spellslinger",
+      "ptBr": "#|m|#Pingente Arcano"
+    },
+    {
+      "key": "dota_tooltip_ability_item_spider_legs:n",
+      "en": "Spider Legs",
+      "ptBr": "#|f|#Pernas de Aranha"
+    },
+    {
+      "key": "dota_tooltip_ability_item_spirit_vessel",
+      "en": "Spirit Vessel",
+      "ptBr": "Receptáculo Espiritual"
+    },
+    {
+      "key": "dota_tooltip_ability_item_recipe_spirit_vessel",
+      "en": "Spirit Vessel Recipe",
+      "ptBr": "Receita: Receptáculo Espiritual"
+    },
+    {
+      "key": "dota_tooltip_ability_item_splintmail",
+      "en": "Splintmail",
+      "ptBr": "Armadura de Talas"
+    },
+    {
+      "key": "dota_tooltip_ability_item_staff_of_wizardry",
+      "en": "Staff of Wizardry",
+      "ptBr": "Cajado da Feitiçaria"
+    },
+    {
+      "key": "dota_tooltip_ability_item_stonefeather_satchel:n",
+      "en": "Stonefeather Satchel",
+      "ptBr": "#|f|#Bolsa de Penocha"
+    },
+    {
+      "key": "dota_tooltip_ability_item_stonework_pendant",
+      "en": "Stonework Pendant",
+      "ptBr": "Pingente Rochoso"
+    },
+    {
+      "key": "dota_tooltip_ability_item_stony_coat",
+      "en": "Stony Coat",
+      "ptBr": "Casaco Rochoso"
+    },
+    {
+      "key": "dota_tooltip_ability_item_stormcrafter",
+      "en": "Stormcrafter",
+      "ptBr": "Tormentador"
+    },
+    {
+      "key": "dota_tooltip_ability_item_stout_shield",
+      "en": "Stout Shield",
+      "ptBr": "Escudo Robusto"
+    },
+    {
+      "key": "dota_tooltip_ability_item_power_treads_str",
+      "en": "Strength",
+      "ptBr": "Força"
+    },
+    {
+      "key": "dota_tooltip_ability_item_desolator_2:n",
+      "en": "Stygian Desolator",
+      "ptBr": "#|f|#Desoladora Infernal"
+    },
+    {
+      "key": "dota_tooltip_ability_item_swift_blink",
+      "en": "Swift Blink",
+      "ptBr": "Translocação Veloz"
+    },
+    {
+      "key": "dota_tooltip_ability_item_recipe_swift_blink",
+      "en": "Swift Blink Recipe",
+      "ptBr": "Receita: Translocação Veloz"
+    },
+    {
+      "key": "dota_tooltip_ability_item_talisman_of_evasion",
+      "en": "Talisman of Evasion",
+      "ptBr": "Talismã de Evasão"
+    },
+    {
+      "key": "dota_tooltip_ability_item_tango",
+      "en": "Tango",
+      "ptBr": "Tango"
+    },
+    {
+      "key": "dota_tooltip_ability_item_tango_single",
+      "en": "Tango (Shared)",
+      "ptBr": "Tango (compartilhado)"
+    },
+    {
+      "key": "dota_tooltip_ability_item_spy_gadget",
+      "en": "Telescope",
+      "ptBr": "Telescópio"
+    },
+    {
+      "key": "dota_tooltip_ability_item_the_caustic_finale",
+      "en": "The Caustic Finale",
+      "ptBr": "Final Cáustico"
+    },
+    {
+      "key": "dota_tooltip_ability_item_the_leveller",
+      "en": "The Leveller",
+      "ptBr": "Niveladora"
+    },
+    {
+      "key": "dota_tooltip_ability_item_enhancement_thick",
+      "en": "Thick",
+      "ptBr": "Espessura"
+    },
+    {
+      "key": "dota_tooltip_ability_item_third_eye",
+      "en": "Third Eye",
+      "ptBr": "Terceiro Olho"
+    },
+    {
+      "key": "dota_tooltip_ability_item_tiara_of_selemene",
+      "en": "Tiara of Selemene",
+      "ptBr": "Tiara de Selemene"
+    },
+    {
+      "key": "dota_tooltip_ability_item_tier1_token",
+      "en": "Tier 1 Token",
+      "ptBr": "Ficha de Classe 1"
+    },
+    {
+      "key": "dota_tooltip_ability_item_tier2_token",
+      "en": "Tier 2 Token",
+      "ptBr": "Ficha de Classe 2"
+    },
+    {
+      "key": "dota_tooltip_ability_item_tier3_token",
+      "en": "Tier 3 Token",
+      "ptBr": "Ficha de Classe 3"
+    },
+    {
+      "key": "dota_tooltip_ability_item_tier4_token",
+      "en": "Tier 4 Token",
+      "ptBr": "Ficha de Classe 4"
+    },
+    {
+      "key": "dota_tooltip_ability_item_tier5_token",
+      "en": "Tier 5 Token",
+      "ptBr": "Ficha de Classe 5"
+    },
+    {
+      "key": "dota_tooltip_ability_item_enhancement_timeless",
+      "en": "Timeless",
+      "ptBr": "Atemporalidade"
+    },
+    {
+      "key": "dota_tooltip_ability_item_timeless_relic",
+      "en": "Timeless Relic",
+      "ptBr": "Relíquia Atemporal"
+    },
+    {
+      "key": "dota_tooltip_ability_item_titan_sliver",
+      "en": "Titan Sliver",
+      "ptBr": "Lasca Titânica"
+    },
+    {
+      "key": "dota_tooltip_ability_item_enhancement_titanic",
+      "en": "Titanic",
+      "ptBr": "Titã"
+    },
+    {
+      "key": "dota_tooltip_ability_item_mutation_tombstone",
+      "en": "Tombstone",
+      "ptBr": "Lápide"
+    },
+    {
+      "key": "dota_tooltip_ability_item_tome_of_knowledge",
+      "en": "Tome of Knowledge",
+      "ptBr": "Tomo do Conhecimento"
+    },
+    {
+      "key": "dota_tooltip_ability_item_foragers_mana",
+      "en": "Tomo'kan Ringcap",
+      "ptBr": "Cogumelo de Tomo'kan"
+    },
+    {
+      "key": "dota_tooltip_ability_item_enhancement_tough",
+      "en": "Tough",
+      "ptBr": "Reforço"
+    },
+    {
+      "key": "dota_tooltip_ability_item_tpscroll",
+      "en": "Town Portal Scroll",
+      "ptBr": "Pergaminho de Teletransporte"
+    },
+    {
+      "key": "dota_tooltip_ability_item_travel_boots_2_tp_channel_time",
+      "en": "TOWN PORTAL SCROLL CHANNEL TIME:",
+      "ptBr": "TEMPO DE CANALIZAÇÃO DO PERGAMINHO DE TP:"
+    },
+    {
+      "key": "dota_tooltip_ability_item_travel_boots_2_tp_cooldown",
+      "en": "TOWN PORTAL SCROLL COOLDOWN:",
+      "ptBr": "INTERVALO P/ PERGAMINHO DE TP:"
+    },
+    {
+      "key": "dota_tooltip_ability_item_tranquil_boots",
+      "en": "Tranquil Boots",
+      "ptBr": "Botas Serenas"
+    },
+    {
+      "key": "dota_tooltip_ability_item_recipe_tranquil_boots",
+      "en": "Tranquil Boots Recipe",
+      "ptBr": "Receita: Botas Serenas"
+    },
+    {
+      "key": "dota_tooltip_ability_item_treads_of_ermacor",
+      "en": "Treads of Ermacor",
+      "ptBr": "Coturnos de Ermacor"
+    },
+    {
+      "key": "dota_tooltip_ability_item_trickster_cloak",
+      "en": "Trickster Cloak",
+      "ptBr": "Capa do Trapaceiro"
+    },
+    {
+      "key": "dota_tooltip_ability_item_trident",
+      "en": "Trident",
+      "ptBr": "Tridente"
+    },
+    {
+      "key": "dota_tooltip_ability_item_recipe_trident",
+      "en": "Trident Recipe",
+      "ptBr": "Receita: Tridente"
+    },
+    {
+      "key": "dota_tooltip_ability_item_trusty_shovel:n",
+      "en": "Trusty Shovel",
+      "ptBr": "#|f|#Pá de Confiança"
+    },
+    {
+      "key": "dota_tooltip_ability_item_pogo_stick:n",
+      "en": "Tumbler's Toy",
+      "ptBr": "#|m|#Cavalo de Pau"
+    },
+    {
+      "key": "dota_tooltip_ability_item_ultimate_orb",
+      "en": "Ultimate Orb",
+      "ptBr": "Orbe Supremo"
+    },
+    {
+      "key": "dota_tooltip_ability_item_unhallowed_icon",
+      "en": "Unhallowed Icon",
+      "ptBr": "Ícone Profano"
+    },
+    {
+      "key": "dota_tooltip_ability_item_enhancement_curious",
+      "en": "Unleashed",
+      "ptBr": "Potencial"
+    },
+    {
+      "key": "dota_tooltip_ability_item_unrelenting_eye:n",
+      "en": "Unrelenting Eye",
+      "ptBr": "#|m|#Olho Incansável"
+    },
+    {
+      "key": "dota_tooltip_ability_item_unwavering_condition",
+      "en": "Unwavering Condition",
+      "ptBr": "Condicionamento Inabalável"
+    },
+    {
+      "key": "dota_tooltip_ability_item_urn_of_shadows",
+      "en": "Urn of Shadows",
+      "ptBr": "Urna das Sombras"
+    },
+    {
+      "key": "dota_tooltip_ability_item_recipe_urn_of_shadows",
+      "en": "Urn of Shadows Recipe",
+      "ptBr": "Receita: Urna das Sombras"
+    },
+    {
+      "key": "dota_tooltip_ability_item_vambrace",
+      "en": "Vambrace",
+      "ptBr": "Avambraço"
+    },
+    {
+      "key": "dota_tooltip_ability_item_vampire_fangs",
+      "en": "Vampire Fangs",
+      "ptBr": "Presas Vampíricas"
+    },
+    {
+      "key": "dota_tooltip_ability_item_enhancement_vampiric",
+      "en": "Vampiric",
+      "ptBr": "Vampirismo"
+    },
+    {
+      "key": "dota_tooltip_ability_item_vanguard",
+      "en": "Vanguard",
+      "ptBr": "Vanguarda"
+    },
+    {
+      "key": "dota_tooltip_ability_item_enhancement_vast",
+      "en": "Vast",
+      "ptBr": "Grandeza"
+    },
+    {
+      "key": "dota_tooltip_ability_item_aghsfort_bloodstone",
+      "en": "Vault Bloodstone",
+      "ptBr": "Pedra de Sangue do Cofre"
+    },
+    {
+      "key": "dota_tooltip_ability_item_veil_of_discord",
+      "en": "Veil of Discord",
+      "ptBr": "Véu da Discórdia"
+    },
+    {
+      "key": "dota_tooltip_ability_item_recipe_veil_of_discord",
+      "en": "Veil of Discord Recipe",
+      "ptBr": "Receita: Véu da Discórdia"
+    },
+    {
+      "key": "dota_tooltip_ability_item_vindicators_axe",
+      "en": "Vindicator's Axe",
+      "ptBr": "Machado do Defensor"
+    },
+    {
+      "key": "dota_tooltip_ability_item_corrupting_blade",
+      "en": "Violet Blade",
+      "ptBr": "Lâmina Violeta"
+    },
+    {
+      "key": "dota_tooltip_ability_item_enhancement_vital",
+      "en": "Vital",
+      "ptBr": "Vitalidade"
+    },
+    {
+      "key": "dota_tooltip_ability_item_foragers_health",
+      "en": "Vital Toadstool",
+      "ptBr": "Amanita Vital"
+    },
+    {
+      "key": "dota_tooltip_ability_item_vitality_booster",
+      "en": "Vitality Booster",
+      "ptBr": "Amplificador de Vitalidade"
+    },
+    {
+      "key": "dota_tooltip_ability_item_vladmir",
+      "en": "Vladmir's Offering",
+      "ptBr": "Oferenda de Vladmir"
+    },
+    {
+      "key": "dota_tooltip_ability_item_recipe_vladmir",
+      "en": "Vladmir's Offering Recipe",
+      "ptBr": "Receita: Oferenda de Vladmir"
+    },
+    {
+      "key": "dota_tooltip_ability_item_void_stone",
+      "en": "Void Stone",
+      "ptBr": "Pedra do Vazio"
+    },
+    {
+      "key": "dota_tooltip_ability_item_voodoo_mask",
+      "en": "Voodoo Mask",
+      "ptBr": "Máscara de Vudu"
+    },
+    {
+      "key": "dota_tooltip_ability_item_wand_of_the_brine",
+      "en": "Wand of the Brine",
+      "ptBr": "Varinha de Salmoura"
+    },
+    {
+      "key": "dota_tooltip_ability_item_watchers_gaze",
+      "en": "Watcher's Gaze",
+      "ptBr": "Olhar do Observador"
+    },
+    {
+      "key": "dota_tooltip_ability_item_weighted_dice:n",
+      "en": "Weighted Dice",
+      "ptBr": "#|m|#Dados Viciados"
+    },
+    {
+      "key": "dota_tooltip_ability_item_whisper_of_the_dread:n",
+      "en": "Whisper of the Dread",
+      "ptBr": "#|m|#Sussurro Apavorante"
+    },
+    {
+      "key": "dota_tooltip_ability_item_wind_lace",
+      "en": "Wind Lace",
+      "ptBr": "Fita Eólica"
+    },
+    {
+      "key": "dota_tooltip_ability_item_wind_waker",
+      "en": "Wind Waker",
+      "ptBr": "Domador Eólico"
+    },
+    {
+      "key": "dota_tooltip_ability_item_recipe_wind_waker",
+      "en": "Wind Waker Recipe",
+      "ptBr": "Receita: Domador Eólico"
+    },
+    {
+      "key": "dota_tooltip_ability_item_winter_embrace",
+      "en": "Winter's Embrace",
+      "ptBr": "Abraço Invernal"
+    },
+    {
+      "key": "dota_tooltip_ability_item_enhancement_wise",
+      "en": "Wise",
+      "ptBr": "Lucidez"
+    },
+    {
+      "key": "dota_tooltip_ability_item_witch_blade",
+      "en": "Witch Blade",
+      "ptBr": "Lâmina do Bruxo"
+    },
+    {
+      "key": "dota_tooltip_ability_item_recipe_witch_blade",
+      "en": "Witch Blade Recipe",
+      "ptBr": "Receita: Lâmina do Bruxo"
+    },
+    {
+      "key": "dota_tooltip_ability_item_heavy_blade",
+      "en": "Witchbane",
+      "ptBr": "Perdição da Bruxa"
+    },
+    {
+      "key": "dota_tooltip_ability_item_witless_shako",
+      "en": "Witless Shako",
+      "ptBr": "Barretina Desmiolada"
+    },
+    {
+      "key": "dota_tooltip_ability_item_wizard_hat",
+      "en": "Wizard Hat",
+      "ptBr": "Chapéu do Feiticeiro"
+    },
+    {
+      "key": "dota_tooltip_ability_item_woodland_striders",
+      "en": "Woodland Striders",
+      "ptBr": "Botinas Florestais"
+    },
+    {
+      "key": "dota_tooltip_ability_item_wraith_band",
+      "en": "Wraith Band",
+      "ptBr": "Tiara Assombrada"
+    },
+    {
+      "key": "dota_tooltip_ability_item_recipe_wraith_band",
+      "en": "Wraith Band Recipe",
+      "ptBr": "Receita: Tiara Assombrada"
+    },
+    {
+      "key": "dota_tooltip_ability_item_wraith_pact",
+      "en": "Wraith Pact",
+      "ptBr": "Pacto Espectral"
+    },
+    {
+      "key": "dota_tooltip_ability_item_yasha",
+      "en": "Yasha",
+      "ptBr": "Yasha"
+    },
+    {
+      "key": "dota_tooltip_ability_item_yasha_and_kaya",
+      "en": "Yasha and Kaya",
+      "ptBr": "Yasha e Kaya"
+    },
+    {
+      "key": "dota_tooltip_ability_item_recipe_yasha_and_kaya",
+      "en": "Yasha and Kaya Recipe",
+      "ptBr": "Receita: Yasha e Kaya"
+    },
+    {
+      "key": "dota_tooltip_ability_item_recipe_yasha",
+      "en": "Yasha Recipe",
+      "ptBr": "Receita: Yasha"
+    },
+    {
+      "key": "dota_tooltip_ability_item_zealots_helm:n",
+      "en": "Zealot's Helm",
+      "ptBr": "#|m|#Elmo do Devoto"
+    }
+  ]
+}

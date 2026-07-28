@@ -1,60 +1,92 @@
-import axeLines from "@/data/axe-lines.json";
+import heroCatalog from "@/data/heroes.json";
+import voiceCatalog from "@/data/voice-lines.json";
+import announcerCatalog from "@/data/announcer-lines.json";
+import personaCatalog from "@/data/personas.json";
 
-export type CatalogLine = (typeof axeLines)[number];
+export type Hero = (typeof heroCatalog.heroes)[number];
+export type OfficialVoiceLine = {
+  id: string;
+  category: string;
+  captionEn: string;
+  captionPtBr: string | null;
+  captionPtBrSource?: "official" | "community" | "automatic" | null;
+  sourceStatus?: string;
+  voiceScope?: string;
+  voiceDirection?: string;
+  translationStatus?: string;
+  audioStatus?: string;
+};
 
-export const CURRENT_BUILD = "2026-07-23";
+export type PersonaVariant = {
+  id: string;
+  heroId: string;
+  heroName: string;
+  name: string;
+  type: "persona" | "voice_variant";
+  prefixes: string[];
+  imageUrl: string;
+  iconUrl: string;
+  imageAssetPath?: string | null;
+  voiceDirectory: string;
+  total: number;
+  translated: number;
+  officialBrazilianCaptions: number;
+  reusedCaptions: number;
+  audioAssets: number;
+  lines: OfficialVoiceLine[];
+};
 
-export const heroes = [
-  {
-    id: "axe",
-    name: "Axe",
-    subtitle: "Exército de um homem só",
-    total: axeLines.length,
-    translated: axeLines.filter((line) => line.translationStatus === "approved").length,
-    recorded: axeLines.filter((line) => line.audioStatus === "recorded").length,
-    reviewed: axeLines.filter((line) => line.releaseStatus === "included").length,
-    active: true,
-  },
-  { id: "crystal_maiden", name: "Crystal Maiden", subtitle: "Próxima campanha", total: 0, translated: 0, recorded: 0, reviewed: 0, active: false },
-  { id: "pudge", name: "Pudge", subtitle: "Inventário em preparação", total: 0, translated: 0, recorded: 0, reviewed: 0, active: false },
-  { id: "juggernaut", name: "Juggernaut", subtitle: "Inventário em preparação", total: 0, translated: 0, recorded: 0, reviewed: 0, active: false },
-] as const;
+const linesByHero = (
+  voiceCatalog as { heroes: Record<string, OfficialVoiceLine[]> }
+).heroes;
+const announcerLines = announcerCatalog.lines as OfficialVoiceLine[];
 
-export const getAxeLines = () => axeLines as CatalogLine[];
-export const getLine = (id: string) => axeLines.find((line) => line.id === id);
+export const CURRENT_BUILD = heroCatalog.build.clientVersion;
+export const CURRENT_BUILD_DATE = heroCatalog.build.date;
 
-export function categoryLabel(category: string) {
-  const labels: Record<string, string> = {
-    ability_battlehunger: "Fome de Batalha",
-    ability_berserk: "Chamado do Berserker",
-    ability_cullingblade: "Lâmina de Abate",
-    ability_failure: "Habilidade falhou",
-    ally: "Aliados",
-    anger: "Raiva",
-    attack: "Ataque",
-    battlebegins: "Início da batalha",
-    blink: "Translocação",
-    blinkcull: "Translocação e abate",
-    bottle: "Garrafa",
-    cast: "Conjuração",
-    death: "Morte",
-    deny: "Negação",
-    firstblood: "Primeiro sangue",
-    happy: "Felicidade",
-    kill: "Abate",
-    killspecial: "Abate especial",
-    laugh: "Risada",
-    level: "Novo nível",
-    move: "Movimento",
-    nomana: "Sem mana",
-    pain: "Dor",
-    respawn: "Renascimento",
-    rival: "Rivais",
-    spawn: "Entrada",
-    win: "Vitória",
-  };
-  return labels[category] || category.replaceAll("_", " ");
-}
+export const heroes = [...heroCatalog.heroes].sort((left, right) =>
+  left.name.localeCompare(right.name, "pt-BR")
+);
+export const personas = (
+  personaCatalog as { variants: PersonaVariant[] }
+).variants;
+
+export type CaptionSource = {
+  id: string;
+  name: string;
+  total: number;
+  officialEnglishCaptions: number;
+  officialBrazilianCaptions: number;
+  kind: "hero" | "announcer";
+};
+
+export const announcerSource: CaptionSource = {
+  id: "announcer",
+  name: "Narrador padrão",
+  total: announcerLines.length,
+  officialEnglishCaptions: announcerLines.length,
+  officialBrazilianCaptions: announcerLines.filter((line) => line.captionPtBr).length,
+  kind: "announcer",
+};
+
+export const captionSources: CaptionSource[] = [
+  announcerSource,
+  ...heroes.map((hero) => ({ ...hero, kind: "hero" as const })),
+];
+
+export const getHero = (id: string) => heroes.find((hero) => hero.id === id);
+export const getCaptionSource = (id: string) => captionSources.find((source) => source.id === id);
+export const getHeroLines = (id: string) => id === "announcer" ? announcerLines : linesByHero[id] || [];
+export const getHeroLine = (heroId: string, lineId: string) =>
+  getHeroLines(heroId).find((line) => line.id === lineId);
+export const getPersona = (id: string) =>
+  personas.find((persona) => persona.id === id);
+export const getPersonaLines = (id: string) =>
+  getPersona(id)?.lines || [];
+export const getVoicePackSource = (id: string) =>
+  getHero(id) || getPersona(id);
+export const getHeroPersonas = (heroId: string) =>
+  personas.filter((persona) => persona.heroId === heroId);
 
 export function percent(value: number, total: number) {
   return total ? Math.round((value / total) * 100) : 0;

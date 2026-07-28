@@ -1,0 +1,128 @@
+[CmdletBinding()]
+param(
+    [string]$DotaRoot = $env:DOTA2_ROOT,
+    [string]$CompiledAudioRoot,
+    [switch]$KeepCurrentAudioLanguage
+)
+
+$ErrorActionPreference = "Stop"
+$repoRoot = Split-Path -Parent $PSScriptRoot
+if (-not $DotaRoot) {
+    $DotaRoot = "C:\Program Files (x86)\Steam\steamapps\common\dota 2 beta"
+}
+$DotaRoot = [System.IO.Path]::GetFullPath($DotaRoot)
+$gameRoot = [System.IO.Path]::GetFullPath((Join-Path $DotaRoot "game"))
+$target = [System.IO.Path]::GetFullPath((Join-Path $gameRoot "dota_brazilian"))
+if (-not $CompiledAudioRoot) {
+    $CompiledAudioRoot = Join-Path $repoRoot "audio\compiled\dota_brazilian\sounds\vo\axe"
+}
+$compiledRoot = [System.IO.Path]::GetFullPath($CompiledAudioRoot)
+$spokenPath = Join-Path $repoRoot "data\heroes\axe\spoken-ptbr.json"
+$stateRoot = Join-Path $repoRoot "build\client-test"
+$backupTarget = Join-Path $stateRoot "previous-dota_brazilian"
+$bootPath = Join-Path $gameRoot "dota\cfg\boot.vcfg"
+$bootBackup = Join-Path $stateRoot "boot.vcfg.backup"
+
+if ($target -ne (Join-Path $gameRoot "dota_brazilian")) {
+    throw "Destino de idioma inesperado: $target"
+}
+if (Get-Process -Name dota2 -ErrorAction SilentlyContinue) {
+    throw "Feche o Dota 2 antes de instalar o teste."
+}
+foreach ($required in @($compiledRoot, $spokenPath, $bootPath)) {
+    if (-not (Test-Path -LiteralPath $required)) {
+        throw "Caminho necessário não encontrado: $required"
+    }
+}
+
+New-Item -ItemType Directory -Force -Path $stateRoot | Out-Null
+if (Test-Path -LiteralPath $backupTarget) {
+    throw "Já existe um backup pendente em $backupTarget. Execute restore-axe-client-test.ps1 primeiro."
+}
+if (Test-Path -LiteralPath $target) {
+    Move-Item -LiteralPath $target -Destination $backupTarget
+}
+Copy-Item -LiteralPath $bootPath -Destination $bootBackup -Force
+
+try {
+    $audioTarget = Join-Path $target "sounds\vo\axe"
+    New-Item -ItemType Directory -Force -Path $audioTarget | Out-Null
+    $gameInfo = @'
+"GameInfo"
+{
+    LayeredOnMod dota
+
+    FileSystem
+    {
+        SearchPaths
+        {
+            Game dota_brazilian
+            Game dota
+            Game core
+            Mod dota_brazilian
+            Mod dota
+            PublicContent core
+        }
+    }
+}
+'@
+    [System.IO.File]::WriteAllText(
+        (Join-Path $target "gameinfo.gi"),
+        $gameInfo,
+        [System.Text.UTF8Encoding]::new($false)
+    )
+
+    $spokenIds = @((Get-Content -LiteralPath $spokenPath -Raw | ConvertFrom-Json).PSObject.Properties.Name)
+    $copied = 0
+    foreach ($id in $spokenIds) {
+        $source = Join-Path $compiledRoot "$id.vsnd_c"
+        if (-not (Test-Path -LiteralPath $source)) {
+            throw "Áudio compilado ausente: $source"
+        }
+        Copy-Item -LiteralPath $source -Destination (Join-Path $audioTarget "$id.vsnd_c") -Force
+        $copied += 1
+    }
+
+    $vpkSource = Join-Path $target "_vpk_source"
+    $vpkAudioTarget = Join-Path $vpkSource "sounds\vo\axe"
+    New-Item -ItemType Directory -Force -Path $vpkAudioTarget | Out-Null
+    Copy-Item -Path (Join-Path $audioTarget "*.vsnd_c") -Destination $vpkAudioTarget -Force
+    & node (Join-Path $repoRoot "scripts\pack-language-vpk.mjs") $vpkSource (Join-Path $target "pak01")
+    if ($LASTEXITCODE -ne 0) {
+        throw "Falha ao criar o VPK da camada brasileira."
+    }
+    Remove-Item -LiteralPath $vpkSource -Recurse -Force
+
+    if (-not $KeepCurrentAudioLanguage) {
+        $boot = Get-Content -LiteralPath $bootPath -Raw
+        $updated = [regex]::Replace(
+            $boot,
+            '("AudioLanguage"\s+")[^"]+(")',
+            '${1}brazilian$2'
+        )
+        if ($updated -eq $boot -and $boot -notmatch '"AudioLanguage"\s+"brazilian"') {
+            throw "Não foi possível localizar AudioLanguage em $bootPath"
+        }
+        [System.IO.File]::WriteAllText(
+            $bootPath,
+            $updated,
+            [System.Text.UTF8Encoding]::new($false)
+        )
+    }
+}
+catch {
+    if (Test-Path -LiteralPath $target) {
+        Remove-Item -LiteralPath $target -Recurse -Force
+    }
+    if (Test-Path -LiteralPath $backupTarget) {
+        Move-Item -LiteralPath $backupTarget -Destination $target
+    }
+    if (Test-Path -LiteralPath $bootBackup) {
+        Copy-Item -LiteralPath $bootBackup -Destination $bootPath -Force
+    }
+    throw
+}
+
+Write-Host "Pack de áudio do Axe instalado diretamente na camada dota_brazilian com $copied vozes."
+Write-Host "O menu Áudio agora pode usar Português-Brasil."
+Write-Host "Para desfazer: .\scripts\restore-axe-client-test.ps1"

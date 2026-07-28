@@ -1,0 +1,99 @@
+{
+  "build": "6869",
+  "catalogTotal": 77594,
+  "translatedTotal": 74167,
+  "heroCount": 127,
+  "personaCount": 41,
+  "featuredHeroes": [
+    {
+      "id": "crystal_maiden",
+      "name": "Crystal Maiden",
+      "imageUrl": "https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/heroes/crystal_maiden.png?",
+      "total": 281,
+      "translated": 255,
+      "official": 0,
+      "community": 0,
+      "suggested": 255,
+      "voicePrefix": "cm"
+    },
+    {
+      "id": "invoker",
+      "name": "Invoker",
+      "imageUrl": "https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/heroes/invoker.png?",
+      "total": 326,
+      "translated": 297,
+      "official": 0,
+      "community": 0,
+      "suggested": 297,
+      "voicePrefix": "invo"
+    },
+    {
+      "id": "juggernaut",
+      "name": "Juggernaut",
+      "imageUrl": "https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/heroes/juggernaut.png?",
+      "total": 312,
+      "translated": 312,
+      "official": 0,
+      "community": 27,
+      "suggested": 285,
+      "voicePrefix": "jug + jugg"
+    },
+    {
+      "id": "pudge",
+      "name": "Pudge",
+      "imageUrl": "https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/heroes/pudge.png?",
+      "total": 285,
+      "translated": 253,
+      "official": 0,
+      "community": 0,
+      "suggested": 253,
+      "voicePrefix": "pud"
+    }
+  ],
+  "featuredPersonas": [
+    {
+      "id": "crystal_maiden-blueheart",
+      "name": "Conduit of the Blueheart — Persona da Crystal Maiden",
+      "imageUrl": "/images/personas/crystal_maiden-blueheart.png",
+      "total": 643,
+      "translated": 639,
+      "official": 0,
+      "community": 3,
+      "suggested": 636,
+      "voicePrefix": "cm_wolf"
+    },
+    {
+      "id": "phantom-assassin-asan",
+      "name": "Asan — Persona da Phantom Assassin",
+      "imageUrl": "/images/personas/phantom-assassin-asan.png",
+      "total": 961,
+      "translated": 957,
+      "official": 0,
+      "community": 8,
+      "suggested": 949,
+      "voicePrefix": "pa_asan"
+    },
+    {
+      "id": "dragon-knight-davion",
+      "name": "Davion — Persona do Dragon Knight",
+      "imageUrl": "/images/personas/dragon-knight-davion.png",
+      "total": 1296,
+      "translated": 1281,
+      "official": 0,
+      "community": 18,
+      "suggested": 1263,
+      "voicePrefix": "dk"
+    },
+    {
+      "id": "invoker-kid",
+      "name": "Invoker Criança",
+      "imageUrl": "/images/personas/invoker-kid.png",
+      "total": 1326,
+      "translated": 1296,
+      "official": 0,
+      "community": 51,
+      "suggested": 1245,
+      "voicePrefix": "kidvoker + kidvo"
+    }
+  ]
+}

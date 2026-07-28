@@ -3,7 +3,12 @@ dist/
 node_modules/
 bin/
 obj/
+installer/**/bin/
+installer/**/obj/
 *.log
 *.tsbuildinfo
 .DS_Store
 Thumbs.db
+.vscode/
+audio/compiled/
+data/contatos-estudios-dublagem.csv

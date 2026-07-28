@@ -1,0 +1,20 @@
+export function BrandMark({ className }: { className?: string }) {
+  return (
+    <svg
+      aria-hidden="true"
+      className={className}
+      viewBox="0 0 600 600"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <rect width="600" height="600" rx="142" fill="#12633f" />
+      <g
+        fill="#ffd84d"
+        transform="translate(300 300) scale(.78) translate(-300 -300)"
+      >
+        <path d="M95 145.5 149 115l361 306-36 86-113-26L95 145.5Z" />
+        <path d="m458.3 90.2 61.7 46.8-8.7 75.4-132.1-102 79.1-20.2Z" />
+        <path d="m84 466.6 16.7-93.6L228 482.8 131.6 506 84 466.6Z" />
+      </g>
+    </svg>
+  );
+}

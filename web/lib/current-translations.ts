@@ -1,0 +1,41 @@
+import type { OfficialVoiceLine } from "@/lib/catalog";
+import { getCommunityPreviews } from "@/lib/community-preview";
+
+export type CurrentTranslation = {
+  text: string;
+  source: "official" | "community" | "automatic";
+};
+
+export function getCurrentTranslations(sourceId: string, lines: OfficialVoiceLine[]) {
+  const community = getCommunityPreviews(sourceId);
+
+  return Object.fromEntries(
+    lines.flatMap((line) => {
+      if (line.captionPtBr) {
+        return [[
+          line.id,
+          {
+            text: line.captionPtBr,
+            source: line.captionPtBrSource || "official",
+          } satisfies CurrentTranslation,
+        ]];
+      }
+      if (community[line.id]) {
+        return [[line.id, { text: community[line.id], source: "community" } satisfies CurrentTranslation]];
+      }
+      return [];
+    }),
+  ) as Record<string, CurrentTranslation>;
+}
+
+export function currentTranslationLabel(source: CurrentTranslation["source"]) {
+  if (source === "official") return "caption oficial";
+  if (source === "community") return "tradução da comunidade";
+  return "tradução sugerida";
+}
+
+export function countTranslationSources(translations: Record<string, CurrentTranslation>) {
+  const counts = { official: 0, community: 0, automatic: 0 };
+  for (const translation of Object.values(translations)) counts[translation.source] += 1;
+  return counts;
+}

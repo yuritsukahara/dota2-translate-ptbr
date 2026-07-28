@@ -6,13 +6,17 @@ param(
     [int]$Rate = -2,
     [ValidateRange(0, 100)]
     [int]$Volume = 100,
-    [string]$Only = ""
+    [string]$Only = "",
+    [Alias("Sample")]
+    [switch]$SpokenOnly,
+    [switch]$Clean
 )
 
 $ErrorActionPreference = "Stop"
 $repoRoot = Split-Path -Parent $PSScriptRoot
 $manifestPath = Join-Path $repoRoot "data\heroes\$Hero\lines.csv"
 $outputRoot = Join-Path $repoRoot "build\content\dota2_translate_ptbr"
+$heroOutput = Join-Path $outputRoot "sounds\vo\$Hero"
 
 if (-not (Test-Path -LiteralPath $manifestPath)) {
     throw "Manifesto não encontrado: $manifestPath"
@@ -42,8 +46,24 @@ $format = [System.Speech.AudioFormat.SpeechAudioFormatInfo]::new(
 )
 
 $lines = Import-Csv -LiteralPath $manifestPath
+if ($SpokenOnly) {
+    $spokenPath = Join-Path $repoRoot "data\heroes\$Hero\spoken-ptbr.json"
+    if (-not (Test-Path -LiteralPath $spokenPath)) {
+        throw "Lista de falas verbais não encontrada: $spokenPath"
+    }
+    $spokenIds = @((Get-Content -LiteralPath $spokenPath -Raw | ConvertFrom-Json).PSObject.Properties.Name)
+    $lines = @($lines | Where-Object { $_.id -in $spokenIds })
+}
 if ($Only) {
     $lines = @($lines | Where-Object { $_.id -like $Only })
+}
+if ($Clean -and (Test-Path -LiteralPath $heroOutput)) {
+    $resolvedBuild = [System.IO.Path]::GetFullPath((Join-Path $repoRoot "build"))
+    $resolvedHeroOutput = [System.IO.Path]::GetFullPath($heroOutput)
+    if (-not $resolvedHeroOutput.StartsWith($resolvedBuild + [System.IO.Path]::DirectorySeparatorChar)) {
+        throw "Recusa ao limpar caminho fora de build: $resolvedHeroOutput"
+    }
+    Remove-Item -LiteralPath $resolvedHeroOutput -Recurse -Force
 }
 
 $generated = 0
@@ -59,6 +79,15 @@ try {
         $destinationDirectory = Split-Path -Parent $destination
         New-Item -ItemType Directory -Force -Path $destinationDirectory | Out-Null
 
+        if ($line.voice_direction -match "derrotado|pesado") {
+            $synth.Rate = [Math]::Max(-10, $Rate - 2)
+        }
+        elseif ($line.voice_direction -match "ritmo rápido") {
+            $synth.Rate = [Math]::Min(10, $Rate + 1)
+        }
+        else {
+            $synth.Rate = $Rate
+        }
         $synth.SetOutputToWaveFile($destination, $format)
         $synth.Speak($line.pt_br)
         $synth.SetOutputToNull()
