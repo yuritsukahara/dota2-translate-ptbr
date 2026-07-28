@@ -133,52 +133,73 @@ public sealed class PayloadPackageService
             throw new InvalidDataException("A URL do pacote não é HTTPS válida.");
         }
 
-        var partialPath = $"{archivePath}.part";
-        if (File.Exists(partialPath))
-        {
-            File.Delete(partialPath);
-        }
+        var partialPath =
+            $"{archivePath}.{Environment.ProcessId}.{Guid.NewGuid():N}.part";
 
         _log($"Baixando {(payload.Bytes / 1024d / 1024d):0.0} MB do GitHub…");
         _progress(0);
-        using var response = await _httpClient.GetAsync(
-            payloadUri,
-            HttpCompletionOption.ResponseHeadersRead,
-            cancellationToken);
-        response.EnsureSuccessStatusCode();
-
-        var total = response.Content.Headers.ContentLength ?? payload.Bytes;
-        await using var source = await response.Content.ReadAsStreamAsync(cancellationToken);
-        await using var destination = new FileStream(
-            partialPath,
-            FileMode.Create,
-            FileAccess.Write,
-            FileShare.None,
-            81920,
-            useAsync: true);
-        var buffer = new byte[81920];
-        long downloaded = 0;
-        int read;
-        while ((read = await source.ReadAsync(buffer, cancellationToken)) > 0)
+        try
         {
-            await destination.WriteAsync(buffer.AsMemory(0, read), cancellationToken);
-            downloaded += read;
-            if (total > 0)
+            using (var response = await _httpClient.GetAsync(
+                       payloadUri,
+                       HttpCompletionOption.ResponseHeadersRead,
+                       cancellationToken))
             {
-                _progress(Math.Clamp((double)downloaded / total, 0, 1));
+                response.EnsureSuccessStatusCode();
+                var total = response.Content.Headers.ContentLength ?? payload.Bytes;
+
+                await using (var source =
+                             await response.Content.ReadAsStreamAsync(cancellationToken))
+                await using (var destination = new FileStream(
+                                 partialPath,
+                                 FileMode.CreateNew,
+                                 FileAccess.Write,
+                                 FileShare.None,
+                                 81920,
+                                 useAsync: true))
+                {
+                    var buffer = new byte[81920];
+                    long downloaded = 0;
+                    int read;
+                    while ((read = await source.ReadAsync(buffer, cancellationToken)) > 0)
+                    {
+                        await destination.WriteAsync(
+                            buffer.AsMemory(0, read),
+                            cancellationToken);
+                        downloaded += read;
+                        if (total > 0)
+                        {
+                            _progress(Math.Clamp((double)downloaded / total, 0, 1));
+                        }
+                    }
+
+                    await destination.FlushAsync(cancellationToken);
+                }
+            }
+
+            if (!await HasExpectedHashAsync(
+                    partialPath,
+                    payload.Sha256,
+                    cancellationToken))
+            {
+                throw new InvalidDataException(
+                    "O download não passou pela verificação SHA-256. Tente novamente.");
+            }
+
+            File.Move(partialPath, archivePath, overwrite: true);
+            _log("Download concluído e autenticidade do arquivo verificada.");
+        }
+        finally
+        {
+            try
+            {
+                File.Delete(partialPath);
+            }
+            catch (IOException)
+            {
+                _log("O Windows ainda está liberando um arquivo temporário do download.");
             }
         }
-
-        await destination.FlushAsync(cancellationToken);
-        if (!await HasExpectedHashAsync(partialPath, payload.Sha256, cancellationToken))
-        {
-            File.Delete(partialPath);
-            throw new InvalidDataException(
-                "O download não passou pela verificação SHA-256. Tente novamente.");
-        }
-
-        File.Move(partialPath, archivePath, overwrite: true);
-        _log("Download concluído e autenticidade do arquivo verificada.");
     }
 
     private static void ExtractSecurely(string archivePath, string destination)
