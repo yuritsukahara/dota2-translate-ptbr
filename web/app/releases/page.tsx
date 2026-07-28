@@ -39,7 +39,12 @@ export default function ReleasesPage() {
             </a>
           </div>
           <p className="release-requirements">
-            Windows 10/11 · x64 · download sob demanda · backup automático
+            Windows 10/11 · x64 · download sob demanda · backup antes da instalação
+          </p>
+          <p className="release-requirements">
+            Para compartilhar, envie somente o arquivo{" "}
+            <strong>DublagemBrasileiraDota2.exe</strong>. A pasta{" "}
+            <code>bin/Debug</code> existe apenas para desenvolvimento.
           </p>
         </div>
 
@@ -113,7 +118,7 @@ export default function ReleasesPage() {
           <p>
             Como é uma iniciativa comunitária, uma atualização do jogo pode
             exigir o reparo ou a reinstalação da camada. O instalador cria um
-            backup automaticamente e oferece restauração.
+            backup antes de começar e oferece restauração.
           </p>
         </div>
       </section>
