@@ -41,11 +41,6 @@ export default function ReleasesPage() {
           <p className="release-requirements">
             Windows 10/11 · x64 · download sob demanda · backup antes da instalação
           </p>
-          <p className="release-requirements">
-            Para compartilhar, envie somente o arquivo{" "}
-            <strong>DublagemBrasileiraDota2.exe</strong>. A pasta{" "}
-            <code>bin/Debug</code> existe apenas para desenvolvimento.
-          </p>
         </div>
 
         <aside className="release-summary" aria-label="Conteúdo da versão">

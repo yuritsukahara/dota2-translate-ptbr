@@ -57,7 +57,6 @@ test("página de release explica opções, camada de idioma e download", async (
   assert.match(page, /camada de idioma/);
   assert.match(page, /não altera mecânicas/i);
   assert.match(page, /backup antes de começar/i);
-  assert.match(page, /bin\/Debug/);
   assert.match(page, /DublagemBrasileiraDota2\.exe/);
   assert.equal(manifest.captions.tokens, 76_901);
   assert.equal(manifest.voicePacks[0].lines, 243);
