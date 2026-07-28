@@ -5,17 +5,20 @@ import test from "node:test";
 const file = (relativePath) =>
   readFile(new URL(`../${relativePath}`, import.meta.url), "utf8");
 
-test("portal usa identidade Steam e mantém somente a navegação atual", async () => {
-  const [layout, header, footer, home, css] = await Promise.all([
-    file("app/layout.tsx"),
+test("portal Vite usa identidade Steam e mantém somente a navegação atual", async () => {
+  const [html, app, header, footer, home, css, analytics, packageText] = await Promise.all([
+    file("index.html"),
+    file("src/App.tsx"),
     file("components/Header.tsx"),
     file("components/Footer.tsx"),
     file("app/page.tsx"),
     file("app/globals.css"),
+    file("components/GoogleAnalytics.tsx"),
+    file("package.json"),
   ]);
-  assert.match(layout, /<html lang="pt-BR">/);
-  assert.match(layout, /favicon\.svg/);
-  assert.doesNotMatch(layout, /og\.png/);
+  assert.match(html, /<html lang="pt-BR">/);
+  assert.match(html, /favicon\.svg/);
+  assert.doesNotMatch(html, /og\.png/);
   assert.match(header, /api\/auth\/steam\/start/);
   assert.match(header, /href="\/heroes"/);
   assert.match(header, /href="\/personas"/);
@@ -30,6 +33,13 @@ test("portal usa identidade Steam e mantém somente a navegação atual", async 
   assert.match(css, /\.hero-card-grid,\s*\.stats-grid/);
   assert.match(css, /\.line-row \{ grid-template-columns: 1fr auto; \}/);
   assert.match(css, /\.mobile-nav \{ display: block; \}/);
+  assert.match(app, /<GoogleAnalytics/);
+  assert.match(analytics, /page_view/);
+  assert.match(analytics, /isLocalHost/);
+  assert.doesNotMatch(analytics, /user_id/);
+  assert.match(app, /G-XJESRK7NV7/);
+  assert.match(packageText, /"build": "vite build"/);
+  assert.doesNotMatch(packageText, /vinext|next/);
 });
 
 test("catálogo fixado ao build 6869 possui os totais esperados", async () => {
@@ -56,7 +66,13 @@ test("catálogo fixado ao build 6869 possui os totais esperados", async () => {
   assert.equal(personaLines.length, 19_878);
   assert.equal(announcer.lines.length, 2_074);
   assert.equal(baseLines.length + personaLines.length + announcer.lines.length, 77_309);
-  assert.equal(announcer.lines.filter((line) => line.captionPtBr).length, 1_399);
+  assert.equal(
+    announcer.lines.filter(
+      (line) =>
+        line.captionPtBrSource === "official" && line.captionPtBr,
+    ).length,
+    1_399,
+  );
   assert.equal(suggested.metadata.translatedOccurrences, 71_306);
   assert.equal(
     baseLines.filter(
@@ -120,7 +136,9 @@ test("schema limpo contém somente as seis tabelas do produto", async () => {
   assert.doesNotMatch(schema, /displayPublicly|verified|roles|proposals|votes|audioClips/);
   assert.doesNotMatch(migration, /discord|display_publicly|verified/i);
   assert.doesNotMatch(env, /ADMIN_/);
-  assert.doesNotMatch(config, /r2_buckets|AUDIO/);
+  assert.match(config, /"binding": "MEDIA"/);
+  assert.match(config, /"binding": "SUBMISSIONS"/);
+  assert.doesNotMatch(config, /"binding": "AUDIO"/);
 });
 
 test("as três ações protegidas exigem sessão e retorno Steam seguro", async () => {
@@ -148,33 +166,46 @@ test("as três ações protegidas exigem sessão e retorno Steam seguro", async 
   assert.ok(openid.includes('startsWith("/api/auth/")'));
 });
 
-test("petição publica nome e avatar Steam e impede assinatura duplicada", async () => {
-  const [page, content, button, schema, api] = await Promise.all([
+test("petição consulta a API, publica perfil Steam e impede assinatura duplicada", async () => {
+  const [page, content, button, schema, api, query] = await Promise.all([
     file("app/peticao/page.tsx"),
     file("components/PetitionPageContent.tsx"),
     file("components/PetitionButton.tsx"),
     file("db/schema.ts"),
     file("app/api/petition/sign/route.ts"),
+    file("app/api/petition/route.ts"),
   ]);
-  assert.match(page, /avatarUrl/);
+  assert.match(page, /PetitionPageContent/);
+  assert.match(query, /avatar/);
   assert.match(content, /nome e avatar públicos da Steam aparecem nesta lista/);
+  assert.match(content, /fetch\("\/api\/petition"/);
   assert.match(button, /Obrigado por assinar!/);
-  assert.match(button, /router\.refresh\(\)/);
+  assert.match(button, /alreadySigned \|\| signedLocally/);
+  assert.match(button, /onSigned/);
+  assert.match(query, /currentUser\(request\)/);
   assert.match(schema, /userId: text\("user_id"\)\.notNull\(\)\.unique\(\)/);
   assert.match(api, /onConflictDoNothing/);
   assert.doesNotMatch([page, content, button, schema, api].join("\n"), /displayPublicly/);
 });
 
-test("packs usam Google Drive, perfil Steam e kit Axe com 243 falas", async () => {
-  const [voicesText, form, route, drive, template, profile] = await Promise.all([
+test("packs usam Google Drive, perfil Steam e kits R2 com 243 falas do Axe", async () => {
+  const [voicesText, personasText, variantIdsText, submitPage, form, packPage, route, drive, template, profile, profileApi, worker] = await Promise.all([
     file("data/voice-lines.json"),
+    file("data/personas.json"),
+    file("data/voice-pack-variant-ids.json"),
+    file("app/enviar/page.tsx"),
     file("components/VoicePackForm.tsx"),
+    file("app/packs/[hero]/page.tsx"),
     file("app/api/voice-packs/route.ts"),
     file("lib/google-drive.ts"),
-    file("lib/voice-pack-template.ts"),
+    file("../scripts/build-r2-media.mjs"),
     file("app/perfil/[id]/page.tsx"),
+    file("app/api/profiles/[id]/route.ts"),
+    file("worker/index.ts"),
   ]);
   const axe = JSON.parse(voicesText).heroes.axe;
+  const variants = JSON.parse(personasText).variants;
+  const variantIds = JSON.parse(variantIdsText);
   const required = axe.filter(
     (line) =>
       line.captionEn &&
@@ -182,14 +213,28 @@ test("packs usam Google Drive, perfil Steam e kit Axe com 243 falas", async () =
       line.voiceScope !== "excluded_no_official_caption",
   );
   assert.equal(required.length, 243);
+  assert.equal(variants.length, 39);
+  assert.deepEqual(variantIds, variants.map((variant) => variant.id));
+  assert.match(submitPage, /personas\.map/);
+  assert.match(submitPage, /Variante de voz/);
   assert.match(form, /driveFolderUrl/);
   assert.match(form, /followedGuidelines/);
+  assert.match(packPage, /Baixar pasta preparada/);
+  assert.match(packPage, /api\/voice-pack-template\/\$\{source\.id\}/);
   assert.match(route, /normalizeGoogleDriveFolderUrl/);
+  assert.match(route, /voicePackVariantIds\.includes/);
   assert.match(drive, /drive\.google\.com/);
   assert.match(template, /README\.txt/);
   assert.match(template, /CHECKLIST\.txt/);
   assert.match(template, /\[ \] \$\{line\.id\}/);
-  assert.match(profile, /voicePackSubmissions/);
+  assert.match(template, /personas\.variants\.map/);
+  assert.match(profile, /api\/profiles/);
+  assert.match(profileApi, /voicePackSubmissions/);
+  assert.match(route, /runtimeEnv\.SUBMISSIONS\.put/);
+  assert.match(worker, /env\.MEDIA\.get/);
+  assert.match(worker, /audio\/build-6869\/indexes/);
+  assert.match(worker, /accept-ranges/);
+  assert.match(worker, /content-range/);
   assert.doesNotMatch(profile, /voicePacks|audioClips/);
 });
 

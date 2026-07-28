@@ -1,4 +1,4 @@
-import Link from "next/link";
+import Link from "@/src/compat/link";
 
 export function VoicePackPanel({
   heroId,

@@ -40,6 +40,10 @@ function escapeValve(value) {
     .replaceAll("\n", "\\n");
 }
 
+function captionToken(directory, line) {
+  return `${directory}_${line.id}`;
+}
+
 const sharedMemory = new Map();
 const ambiguous = new Set();
 const communityLines = Object.values(voiceCatalog.heroes)
@@ -101,12 +105,16 @@ function includeCatalogedVariants(sourceId, tokens) {
     .filter((variant) => variant.heroId === sourceId)
     .flatMap((variant) =>
       variant.lines
-        .filter((line) => line.captionPtBr && !seen.has(line.captionToken))
+        .filter((line) => {
+          const token = captionToken(variant.voiceDirectory, line);
+          return line.captionPtBr && !seen.has(token);
+        })
         .map((line) => {
-          seen.add(line.captionToken);
+          const token = captionToken(variant.voiceDirectory, line);
+          seen.add(token);
           return {
             id: `${variant.id}:${line.id}`,
-            token: line.captionToken,
+            token,
             text: line.captionPtBr,
             source: line.captionPtBrSource || "community",
             variantId: variant.id,
@@ -123,6 +131,7 @@ const sources = [];
 for (const hero of heroes.heroes) {
   if (requestedHero && requestedHero !== hero.id) continue;
   const lines = voiceCatalog.heroes[hero.id] || [];
+  const directory = hero.voiceDirectory || hero.id;
   const tokens = includeCatalogedVariants(
     hero.id,
     expandKnownVoiceVariants(hero.id, lines.flatMap((line) => {
@@ -130,7 +139,7 @@ for (const hero of heroes.heroes) {
       return resolved
         ? [{
             id: line.id,
-            token: line.captionToken,
+            token: captionToken(directory, line),
             text: resolved.text,
             source: resolved.source,
           }]
@@ -140,7 +149,7 @@ for (const hero of heroes.heroes) {
   if (!tokens.length) continue;
   sources.push({
     id: hero.id,
-    directory: hero.voiceDirectory || hero.id,
+    directory,
     tokens,
   });
 }
@@ -151,7 +160,7 @@ if (!requestedHero || requestedHero === "announcer") {
     return resolved
       ? [{
           id: line.id,
-          token: line.captionToken,
+          token: line.id,
           text: resolved.text,
           source: resolved.source,
         }]

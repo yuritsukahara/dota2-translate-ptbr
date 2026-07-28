@@ -1,38 +1,27 @@
-import Image from "next/image";
-import Link from "next/link";
-import { notFound } from "next/navigation";
-import { Header } from "@/components/Header";
+import Image from "@/src/compat/image";
+import Link from "@/src/compat/link";
+import { useParams } from "@/src/compat/navigation";
 import { LineBrowser } from "@/components/LineBrowser";
 import {
   CURRENT_BUILD,
   getPersona,
   getPersonaLines,
-  personas,
 } from "@/lib/catalog";
 import {
   countTranslationSources,
   getCurrentTranslations,
 } from "@/lib/current-translations";
 
-export function generateStaticParams() {
-  return personas.map((persona) => ({ id: persona.id }));
-}
-
-export default async function PersonaPage({
-  params,
-}: {
-  params: Promise<{ id: string }>;
-}) {
-  const { id } = await params;
+export default function PersonaPage() {
+  const { id = "" } = useParams<{ id: string }>();
   const persona = getPersona(id);
-  if (!persona) notFound();
+  if (!persona) return null;
   const lines = getPersonaLines(id);
   const translations = getCurrentTranslations(id, lines);
   const sources = countTranslationSources(translations);
 
   return (
     <>
-      <Header />
       <main className="page-shell">
         <div className="hero-detail-head persona-detail-head">
           <Image

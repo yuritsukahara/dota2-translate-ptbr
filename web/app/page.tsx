@@ -1,14 +1,6 @@
-import Link from "next/link";
-import { Header } from "@/components/Header";
-import { HeroCard } from "@/components/HeroCard";
-import {
-  CURRENT_BUILD,
-  captionSources,
-  getHeroLines,
-  heroes,
-  personas,
-} from "@/lib/catalog";
-import { getCurrentTranslations } from "@/lib/current-translations";
+import Link from "@/src/compat/link";
+import { FeaturedCatalogCard } from "@/components/FeaturedCatalogCard";
+import homeSummary from "@/data/home-summary.json";
 import { AnimatedCounter } from "@/components/AnimatedCounter";
 
 export const metadata = {
@@ -18,42 +10,27 @@ export const metadata = {
 };
 
 export default function Home() {
-  const projectCaptionSources = [
-    ...captionSources.map((source) => ({
-      id: source.id,
-      lines: getHeroLines(source.id),
-    })),
-    ...personas.map((persona) => ({
-      id: persona.id,
-      lines: persona.lines,
-    })),
-  ];
-  const translatedTotal = projectCaptionSources.reduce(
-    (sum, source) =>
-      sum + Object.keys(getCurrentTranslations(source.id, source.lines)).length,
-    0,
-  );
-  const catalogTotal = projectCaptionSources.reduce(
-    (sum, source) => sum + source.lines.length,
-    0,
-  );
+  const {
+    build,
+    catalogTotal,
+    translatedTotal,
+    heroCount,
+    personaCount,
+    featuredHeroes,
+    featuredPersonas,
+  } = homeSummary;
   const coverage = Math.floor((translatedTotal / catalogTotal) * 100);
-  const featuredIds = ["crystal_maiden", "invoker", "juggernaut", "pudge"];
-  const featuredHeroes = featuredIds
-    .map((id) => heroes.find((hero) => hero.id === id))
-    .filter((hero): hero is NonNullable<typeof hero> => Boolean(hero));
   return (
     <>
-      <Header />
       <main>
         <section className="hero-shell">
           <div className="hero-grid">
             <div className="hero-copy">
               <p className="eyebrow">
-                DUBLAGEM BRASILEIRA DOTA 2 · BUILD {CURRENT_BUILD}
+                DUBLAGEM BRASILEIRA DOTA 2 · BUILD {build}
               </p>
               <h1>
-                Dublagem de Dota 2<span> </span>
+                Dublagem de Dota 2
                 <span>Em português.</span>
               </h1>
               <p className="hero-lead">
@@ -74,11 +51,11 @@ export default function Home() {
               </div>
               <dl className="hero-metrics">
                 <div>
-                  <dt>{heroes.length}</dt>
+                  <dt>{heroCount}</dt>
                   <dd>heróis</dd>
                 </div>
                 <div>
-                  <dt>{personas.length}</dt>
+                  <dt>{personaCount}</dt>
                   <dd>personas e variantes</dd>
                 </div>
                 <div>
@@ -201,7 +178,7 @@ export default function Home() {
           </div>
           <div className="hero-card-grid">
             {featuredHeroes.map((hero) => (
-              <HeroCard key={hero.id} hero={hero} />
+              <FeaturedCatalogCard key={hero.id} entry={hero} kind="hero" />
             ))}
           </div>
         </section>
@@ -217,12 +194,13 @@ export default function Home() {
             </Link>
           </div>
           <div className="hero-card-grid">
-            {personas
-              .filter((item) => item.type === "persona")
-              .slice(0, 4)
-              .map((persona) => (
-                <HeroCard key={persona.id} persona={persona} />
-              ))}
+            {featuredPersonas.map((persona) => (
+              <FeaturedCatalogCard
+                key={persona.id}
+                entry={persona}
+                kind="persona"
+              />
+            ))}
           </div>
         </section>
       </main>

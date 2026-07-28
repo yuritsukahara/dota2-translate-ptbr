@@ -1,5 +1,6 @@
-import vinext from "vinext";
+import react from "@vitejs/plugin-react";
 import { defineConfig } from "vite";
+import { fileURLToPath, URL } from "node:url";
 import { localAudio } from "./lib/local-audio-vite-plugin";
 
 // macOS Seatbelt blocks FSEvents, so Codex previews need polling for HMR.
@@ -16,15 +17,26 @@ export default defineConfig(async () => {
   const { cloudflare } = await import("@cloudflare/vite-plugin");
 
   return {
-    server: isCodexSeatbeltSandbox
-      ? { watch: { useFsEvents: false, usePolling: true } }
-      : undefined,
+    server: {
+      port: 3000,
+      strictPort: true,
+      ...(isCodexSeatbeltSandbox
+        ? { watch: { useFsEvents: false, usePolling: true } }
+        : {}),
+    },
+    preview: {
+      port: 3000,
+      strictPort: true,
+    },
     plugins: [
-      vinext(),
+      react(),
       localAudio(),
-      cloudflare({
-        viteEnvironment: { name: "rsc", childEnvironments: ["ssr"] },
-      }),
+      cloudflare(),
     ],
+    resolve: {
+      alias: {
+        "@": fileURLToPath(new URL(".", import.meta.url)),
+      },
+    },
   };
 });

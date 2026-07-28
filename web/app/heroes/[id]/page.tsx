@@ -1,7 +1,6 @@
-import { notFound } from "next/navigation";
-import Image from "next/image";
-import Link from "next/link";
-import { Header } from "@/components/Header";
+import { useParams } from "@/src/compat/navigation";
+import Image from "@/src/compat/image";
+import Link from "@/src/compat/link";
 import { LineBrowser } from "@/components/LineBrowser";
 import { VoicePackPanel } from "@/components/VoicePackPanel";
 import {
@@ -9,23 +8,14 @@ import {
   getHero,
   getHeroLines,
   getHeroPersonas,
-  heroes,
 } from "@/lib/catalog";
 import { HeroCard } from "@/components/HeroCard";
 import { countTranslationSources, getCurrentTranslations } from "@/lib/current-translations";
 
-export function generateStaticParams() {
-  return heroes.map((hero) => ({ id: hero.id }));
-}
-
-export default async function HeroPage({
-  params,
-}: {
-  params: Promise<{ id: string }>;
-}) {
-  const { id } = await params;
+export default function HeroPage() {
+  const { id = "" } = useParams<{ id: string }>();
   const hero = getHero(id);
-  if (!hero) notFound();
+  if (!hero) return null;
   const lines = getHeroLines(id);
   const translations = getCurrentTranslations(id, lines);
   const heroPersonas = getHeroPersonas(id);
@@ -34,7 +24,6 @@ export default async function HeroPage({
 
   return (
     <>
-      <Header />
       <main className="page-shell">
         <div className="hero-detail-head">
           <Image src={hero.imageUrl} alt={`Retrato de ${hero.name}`} width={616} height={346} priority={hero.id === "axe"} />

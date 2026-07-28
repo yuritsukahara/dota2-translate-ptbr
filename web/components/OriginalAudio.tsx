@@ -21,11 +21,11 @@ export function OriginalAudio({
           controls
           preload="none"
           src={localUrl}
-          aria-label={`Ouvir áudio original local de ${lineId}`}
+          aria-label={`Ouvir áudio original de ${lineId}`}
           onError={() => setUnavailable(true)}
         />
       ) : (
-        <small>Arquivo não encontrado no catálogo local.</small>
+        <small>Arquivo não encontrado no catálogo de áudio.</small>
       )}
       <small>Arquivo extraído do Dota.</small>
     </span>

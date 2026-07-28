@@ -1,7 +1,7 @@
 "use client";
 
-import Image from "next/image";
-import { useState } from "react";
+import Image from "@/src/compat/image";
+import { useCallback, useEffect, useState } from "react";
 import { PetitionButton } from "@/components/PetitionButton";
 
 type Signature = {
@@ -63,15 +63,48 @@ const copies = {
 } as const;
 
 export function PetitionPageContent({
-  total,
-  recent,
-  alreadySigned,
-}: {
-  total: number;
-  recent: Signature[];
-  alreadySigned: boolean;
-}) {
+}: Record<string, never>) {
   const [language, setLanguage] = useState<keyof typeof copies>("pt-BR");
+  const [total, setTotal] = useState(0);
+  const [recent, setRecent] = useState<Signature[]>([]);
+  const [alreadySigned, setAlreadySigned] = useState(false);
+  const loadPetition = useCallback(async () => {
+    const response = await fetch("/api/petition", {
+      cache: "no-store",
+      credentials: "same-origin",
+    });
+    if (!response.ok) return;
+    const payload = await response.json() as {
+      total: number;
+      recent: Signature[];
+      alreadySigned: boolean;
+    };
+    setTotal(payload.total);
+    setRecent(payload.recent);
+    setAlreadySigned(payload.alreadySigned);
+  }, []);
+
+  useEffect(() => {
+    let active = true;
+    void fetch("/api/petition", {
+      cache: "no-store",
+      credentials: "same-origin",
+    })
+      .then(async (response) => response.ok ? await response.json() as {
+        total: number;
+        recent: Signature[];
+        alreadySigned: boolean;
+      } : null)
+      .then((payload) => {
+        if (!active || !payload) return;
+        setTotal(payload.total);
+        setRecent(payload.recent);
+        setAlreadySigned(payload.alreadySigned);
+      });
+    return () => {
+      active = false;
+    };
+  }, []);
   const copy = copies[language];
   const locale = language === "pt-BR" ? "pt-BR" : "en-US";
 
@@ -90,7 +123,11 @@ export function PetitionPageContent({
           <p className="eyebrow">{copy.heroEyebrow}</p>
           <h1>{copy.heroTitle}</h1>
           <p className="petition-lead">{copy.heroLead}</p>
-          <PetitionButton alreadySigned={alreadySigned} language={language} />
+          <PetitionButton
+            alreadySigned={alreadySigned}
+            language={language}
+            onSigned={loadPetition}
+          />
         </div>
         <aside className="petition-counter">
           <strong>{total.toLocaleString(locale)}</strong>

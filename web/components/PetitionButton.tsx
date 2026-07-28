@@ -1,19 +1,19 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
-
 export function PetitionButton({
   alreadySigned,
   language,
+  onSigned,
 }: {
   alreadySigned: boolean;
   language: "pt-BR" | "en";
+  onSigned?: () => void;
 }) {
-  const router = useRouter();
-  const [signed, setSigned] = useState(alreadySigned);
+  const [signedLocally, setSignedLocally] = useState(false);
   const [status, setStatus] = useState<"" | "error">("");
   const english = language === "en";
+  const signed = alreadySigned || signedLocally;
 
   async function sign() {
     setStatus("");
@@ -26,8 +26,8 @@ export function PetitionButton({
       setStatus("error");
       return;
     }
-    setSigned(true);
-    router.refresh();
+    setSignedLocally(true);
+    onSigned?.();
   }
 
   if (signed) {

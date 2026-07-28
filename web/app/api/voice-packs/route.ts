@@ -1,10 +1,12 @@
 import { getDb } from "@/db";
 import { auditEvents, voicePackSubmissions } from "@/db/schema";
 import { requireUser } from "@/lib/auth";
-import { getHero } from "@/lib/catalog";
+import heroCatalog from "@/data/heroes.json";
+import voicePackVariantIds from "@/data/voice-pack-variant-ids.json";
 import { assertSameOrigin } from "@/lib/csrf";
 import { normalizeGoogleDriveFolderUrl } from "@/lib/google-drive";
 import { assertRateLimit } from "@/lib/rate-limit";
+import { runtimeEnv } from "@/lib/runtime-env";
 
 export async function POST(request: Request) {
   try {
@@ -26,8 +28,10 @@ export async function POST(request: Request) {
     const notes = String(body.notes || "").trim();
     const driveFolderUrl = normalizeGoogleDriveFolderUrl(String(body.driveFolderUrl || ""));
 
-    if (!getHero(heroId)) {
-      return Response.json({ error: "Herói não encontrado." }, { status: 404 });
+    const isBaseHero = heroCatalog.heroes.some((hero) => hero.id === heroId);
+    const isVariant = voicePackVariantIds.includes(heroId);
+    if (!isBaseHero && !isVariant) {
+      return Response.json({ error: "Personagem ou variante não encontrado." }, { status: 404 });
     }
     if (credit.length < 2 || credit.length > 100) {
       return Response.json({ error: "Informe um crédito público entre 2 e 100 caracteres." }, { status: 400 });
@@ -62,6 +66,27 @@ export async function POST(request: Request) {
         metadata: JSON.stringify({ heroId, driveProvider: "google_drive" }),
       }),
     ]);
+    try {
+      await runtimeEnv.SUBMISSIONS.put(
+        `voice-packs/${user.steamId}/${id}.json`,
+        JSON.stringify({
+          id,
+          heroId,
+          authorId: user.id,
+          steamId: user.steamId,
+          credit,
+          driveFolderUrl,
+          notes,
+          submittedAt: new Date().toISOString(),
+        }),
+        {
+          httpMetadata: { contentType: "application/json; charset=utf-8" },
+          customMetadata: { heroId, authorId: user.id },
+        },
+      );
+    } catch {
+      // O registro D1 continua sendo a fonte de verdade se o espelho R2 falhar.
+    }
 
     return Response.json({ submission: { id, heroId } }, { status: 201 });
   } catch (error) {

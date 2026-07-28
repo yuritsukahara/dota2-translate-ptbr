@@ -6,13 +6,10 @@ import personaCatalog from "@/data/personas.json";
 export type Hero = (typeof heroCatalog.heroes)[number];
 export type OfficialVoiceLine = {
   id: string;
-  assetPath: string;
   category: string;
-  captionToken: string;
   captionEn: string;
   captionPtBr: string | null;
   captionPtBrSource?: "official" | "community" | "automatic" | null;
-  originalAudio: "dota_local";
   sourceStatus?: string;
   voiceScope?: string;
   voiceDirection?: string;
@@ -86,41 +83,10 @@ export const getPersona = (id: string) =>
   personas.find((persona) => persona.id === id);
 export const getPersonaLines = (id: string) =>
   getPersona(id)?.lines || [];
+export const getVoicePackSource = (id: string) =>
+  getHero(id) || getPersona(id);
 export const getHeroPersonas = (heroId: string) =>
   personas.filter((persona) => persona.heroId === heroId);
-
-export function categoryLabel(category: string) {
-  const labels: Record<string, string> = {
-    ability_battlehunger: "Fome de Batalha",
-    ability_berserk: "Chamado do Berserker",
-    ability_cullingblade: "Lâmina de Abate",
-    ability_failure: "Habilidade falhou",
-    ally: "Aliados",
-    anger: "Raiva",
-    attack: "Ataque",
-    battlebegins: "Início da batalha",
-    blink: "Translocação",
-    blinkcull: "Translocação e abate",
-    bottle: "Garrafa",
-    cast: "Conjuração",
-    death: "Morte",
-    deny: "Negação",
-    firstblood: "Primeiro sangue",
-    happy: "Felicidade",
-    kill: "Abate",
-    killspecial: "Abate especial",
-    laugh: "Risada",
-    level: "Novo nível",
-    move: "Movimento",
-    nomana: "Sem mana",
-    pain: "Dor",
-    respawn: "Renascimento",
-    rival: "Rivais",
-    spawn: "Entrada",
-    win: "Vitória",
-  };
-  return labels[category] || category.replaceAll("_", " ");
-}
 
 export function percent(value: number, total: number) {
   return total ? Math.round((value / total) * 100) : 0;

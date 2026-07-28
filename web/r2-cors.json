@@ -1,0 +1,25 @@
+{
+  "rules": [
+    {
+      "allowed": {
+        "origins": [
+          "https://dublagem.tangoleague.gg"
+        ],
+        "methods": [
+          "GET",
+          "HEAD"
+        ],
+        "headers": [
+          "Range"
+        ]
+      },
+      "exposeHeaders": [
+        "Accept-Ranges",
+        "Content-Length",
+        "Content-Range",
+        "ETag"
+      ],
+      "maxAgeSeconds": 86400
+    }
+  ]
+}

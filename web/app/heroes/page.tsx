@@ -1,5 +1,4 @@
-import { Header } from "@/components/Header";
-import Link from "next/link";
+import Link from "@/src/compat/link";
 import { HeroCard } from "@/components/HeroCard";
 import { HeroCatalog } from "@/components/HeroCatalog";
 import { CURRENT_BUILD, getHeroLines, heroes, personas } from "@/lib/catalog";
@@ -18,7 +17,6 @@ export default function HeroesPage() {
   );
   return (
     <>
-      <Header />
       <main className="page-shell">
         <div className="page-intro">
           <div><p className="eyebrow">INVENTÁRIO BASE · BUILD {CURRENT_BUILD}</p><h1 className="page-title">Heróis</h1></div>

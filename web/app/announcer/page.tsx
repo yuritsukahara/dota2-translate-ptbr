@@ -1,4 +1,3 @@
-import { Header } from "@/components/Header";
 import { LineBrowser } from "@/components/LineBrowser";
 import { announcerSource, CURRENT_BUILD, getHeroLines } from "@/lib/catalog";
 import { countTranslationSources, getCurrentTranslations } from "@/lib/current-translations";
@@ -15,7 +14,6 @@ export default function AnnouncerPage() {
 
   return (
     <>
-      <Header />
       <main className="page-shell">
         <div className="page-intro">
           <div>

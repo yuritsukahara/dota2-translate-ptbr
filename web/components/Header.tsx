@@ -1,9 +1,10 @@
 "use client";
 
-import Image from "next/image";
-import Link from "next/link";
+import Image from "@/src/compat/image";
+import Link from "@/src/compat/link";
 import { useEffect, useState } from "react";
 import { BrandMark } from "@/components/BrandMark";
+import { usePathname } from "@/src/compat/navigation";
 
 type SteamUser = {
   id: string;
@@ -12,13 +13,27 @@ type SteamUser = {
 };
 
 export function Header() {
+  const pathname = usePathname();
   const [steamUser, setSteamUser] = useState<SteamUser | null | undefined>(undefined);
+
+  function navProps(section: string) {
+    const active =
+      pathname === section ||
+      pathname.startsWith(`${section}/`) ||
+      (section === "/enviar" && pathname.startsWith("/packs/"));
+    return {
+      className: active ? "active" : undefined,
+      "aria-current": active ? ("page" as const) : undefined,
+    };
+  }
 
   useEffect(() => {
     let active = true;
     fetch("/api/auth/me", { cache: "no-store", credentials: "same-origin" })
-      .then((response) => response.json())
-      .then((payload: { user?: SteamUser | null }) => {
+      .then(async (response) =>
+        await response.json() as { user?: SteamUser | null },
+      )
+      .then((payload) => {
         if (active) setSteamUser(payload.user || null);
       })
       .catch(() => {
@@ -75,23 +90,23 @@ export function Header() {
         <span>Dublagem Brasileira Dota 2<small>VOZES DA COMUNIDADE EM PT-BR</small></span>
       </Link>
       <nav className="main-nav" aria-label="Navegação principal">
-        <Link href="/heroes">Heróis</Link>
-        <Link href="/personas">Personas</Link>
-        <Link href="/announcer">Narrador</Link>
-        <Link href="/enviar">Packs de Voz</Link>
-        <Link href="/peticao">Petição</Link>
-        <Link href="/como-funciona">Projeto</Link>
+        <Link href="/heroes" {...navProps("/heroes")}>Heróis</Link>
+        <Link href="/personas" {...navProps("/personas")}>Personas</Link>
+        <Link href="/announcer" {...navProps("/announcer")}>Narrador</Link>
+        <Link href="/enviar" {...navProps("/enviar")}>Packs de Voz</Link>
+        <Link href="/peticao" {...navProps("/peticao")}>Petição</Link>
+        <Link href="/como-funciona" {...navProps("/como-funciona")}>Projeto</Link>
         {authControl()}
       </nav>
       <details className="mobile-nav">
         <summary>Menu</summary>
         <nav aria-label="Navegação principal no celular">
-          <Link href="/heroes">Heróis</Link>
-          <Link href="/personas">Personas</Link>
-          <Link href="/announcer">Narrador</Link>
-          <Link href="/enviar">Packs de Voz</Link>
-          <Link href="/peticao">Petição</Link>
-          <Link href="/como-funciona">Projeto</Link>
+          <Link href="/heroes" {...navProps("/heroes")}>Heróis</Link>
+          <Link href="/personas" {...navProps("/personas")}>Personas</Link>
+          <Link href="/announcer" {...navProps("/announcer")}>Narrador</Link>
+          <Link href="/enviar" {...navProps("/enviar")}>Packs de Voz</Link>
+          <Link href="/peticao" {...navProps("/peticao")}>Petição</Link>
+          <Link href="/como-funciona" {...navProps("/como-funciona")}>Projeto</Link>
           {authControl()}
         </nav>
       </details>

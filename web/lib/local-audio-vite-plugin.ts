@@ -4,6 +4,14 @@ import { resolve, sep } from "node:path";
 import type { Plugin } from "vite";
 
 const audioRoot = resolve(process.cwd(), "..", "build", "local-audio", "mp3");
+const kitRoot = resolve(
+  process.cwd(),
+  "..",
+  "build",
+  "r2-public",
+  "kits",
+  "build-6869",
+);
 
 export function localAudio(): Plugin {
   return {
@@ -11,6 +19,38 @@ export function localAudio(): Plugin {
     apply: "serve",
     configureServer(server) {
       server.middlewares.use(async (request, response, next) => {
+        if (request.url?.startsWith("/api/voice-pack-template/")) {
+          try {
+            const pathname = decodeURIComponent(
+              new URL(request.url, "http://localhost").pathname,
+            );
+            const sourceId = pathname.slice(
+              "/api/voice-pack-template/".length,
+            );
+            if (!/^[a-z0-9_-]{2,80}$/i.test(sourceId)) {
+              response.statusCode = 403;
+              return response.end("Personagem inválido.");
+            }
+            const target = resolve(kitRoot, `${sourceId}.zip`);
+            if (!target.startsWith(`${kitRoot}${sep}`)) {
+              response.statusCode = 403;
+              return response.end("Arquivo inválido.");
+            }
+            const info = await stat(target);
+            response.statusCode = 200;
+            response.setHeader("content-type", "application/zip");
+            response.setHeader("content-length", String(info.size));
+            response.setHeader(
+              "content-disposition",
+              `attachment; filename="${sourceId}-voice-pack.zip"`,
+            );
+            if (request.method === "HEAD") return response.end();
+            return createReadStream(target).pipe(response);
+          } catch {
+            response.statusCode = 404;
+            return response.end("Kit local não encontrado.");
+          }
+        }
         if (!request.url?.startsWith("/audio/")) return next();
         try {
           const pathname = decodeURIComponent(new URL(request.url, "http://localhost").pathname);

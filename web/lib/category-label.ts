@@ -1,0 +1,32 @@
+export function categoryLabel(category: string) {
+  const labels: Record<string, string> = {
+    ability_battlehunger: "Fome de Batalha",
+    ability_berserk: "Chamado do Berserker",
+    ability_cullingblade: "Lâmina de Abate",
+    ability_failure: "Habilidade falhou",
+    ally: "Aliados",
+    anger: "Raiva",
+    attack: "Ataque",
+    battlebegins: "Início da batalha",
+    blink: "Translocação",
+    blinkcull: "Translocação e abate",
+    bottle: "Garrafa",
+    cast: "Conjuração",
+    death: "Morte",
+    deny: "Negação",
+    firstblood: "Primeiro sangue",
+    happy: "Felicidade",
+    kill: "Abate",
+    killspecial: "Abate especial",
+    laugh: "Risada",
+    level: "Novo nível",
+    move: "Movimento",
+    nomana: "Sem mana",
+    pain: "Dor",
+    respawn: "Renascimento",
+    rival: "Rivais",
+    spawn: "Entrada",
+    win: "Vitória",
+  };
+  return labels[category] || category.replaceAll("_", " ");
+}

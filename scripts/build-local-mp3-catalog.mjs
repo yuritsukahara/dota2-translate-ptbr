@@ -40,14 +40,18 @@ function safeJson(value) {
   return JSON.stringify(value).replaceAll("<", "\\u003c");
 }
 
-function normalizeAnnouncerAssetPath(assetPath) {
-  const directory = path.posix.dirname(assetPath);
-  const filename = path.posix.basename(assetPath);
-  const folder = path.posix.basename(directory);
-  const redundantPrefix = `${folder}_`;
-  return filename.startsWith(redundantPrefix)
-    ? `${directory}/${filename.slice(redundantPrefix.length)}`
-    : assetPath;
+function voiceAssetPath(directory, line) {
+  return `sounds/vo/${directory}/${line.id}.vsnd_c`;
+}
+
+function announcerAssetPath(line) {
+  const directory = line.id.startsWith("announcer_killing_spree_")
+    ? "announcer_killing_spree"
+    : "announcer";
+  const id = line.id.startsWith(`${directory}_`)
+    ? line.id.slice(directory.length + 1)
+    : line.id;
+  return `sounds/vo/${directory}/${id}.vsnd_c`;
 }
 
 function extractEmbeddedMp3(resource, id) {
@@ -143,13 +147,27 @@ const personaCatalog = fs.existsSync(personaCatalogPath)
   ? JSON.parse(fs.readFileSync(personaCatalogPath, "utf8"))
   : { variants: [] };
 const voiceSources = {
-  ...voiceCatalog.heroes,
+  ...Object.fromEntries(
+    heroCatalog.heroes.map((hero) => [
+      hero.id,
+      (voiceCatalog.heroes[hero.id] || []).map((line) => ({
+        ...line,
+        assetPath: voiceAssetPath(hero.voiceDirectory || hero.id, line),
+      })),
+    ]),
+  ),
   announcer: announcerCatalog.lines.map((line) => ({
     ...line,
-    assetPath: normalizeAnnouncerAssetPath(line.assetPath),
+    assetPath: announcerAssetPath(line),
   })),
   ...Object.fromEntries(
-    personaCatalog.variants.map((variant) => [variant.id, variant.lines]),
+    personaCatalog.variants.map((variant) => [
+      variant.id,
+      variant.lines.map((line) => ({
+        ...line,
+        assetPath: voiceAssetPath(variant.voiceDirectory, line),
+      })),
+    ]),
   ),
 };
 const heroNames = new Map([

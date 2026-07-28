@@ -11,6 +11,12 @@ const dotaRoot = process.env.DOTA2_ROOT || defaultDota;
 const vpkPath = path.join(dotaRoot, "game", "dota", "pak01_dir.vpk");
 const heroesPath = path.join(root, "web", "data", "heroes.json");
 const outputPath = path.join(root, "web", "data", "voice-lines.json");
+const suggestionsPath = path.join(
+  root,
+  "web",
+  "data",
+  "automatic-translations.json",
+);
 
 const directoryAliases = {
   crystal_maiden: "crystalmaiden",
@@ -59,6 +65,12 @@ function prefixScore(prefix, directory, heroName) {
 const entries = listVpkEntries(vpkPath);
 const entryPaths = new Set(entries.map((entry) => entry.path));
 const heroCatalog = JSON.parse(fs.readFileSync(heroesPath, "utf8"));
+const suggestions = fs.existsSync(suggestionsPath)
+  ? JSON.parse(fs.readFileSync(suggestionsPath, "utf8")).translations || {}
+  : {};
+const existingCatalog = fs.existsSync(outputPath)
+  ? JSON.parse(fs.readFileSync(outputPath, "utf8"))
+  : { heroes: {} };
 const linesByHero = {};
 
 for (const hero of heroCatalog.heroes) {
@@ -94,6 +106,14 @@ for (const hero of heroCatalog.heroes) {
     : new Map();
 
   const matchedCandidates = [];
+  const preservedCommunity = new Map(
+    (existingCatalog.heroes?.[hero.id] || [])
+      .filter(
+        (line) =>
+          line.captionPtBrSource === "community" && line.captionPtBr,
+      )
+      .map((line) => [line.id, line.captionPtBr]),
+  );
   for (const token of englishTokens) {
     const stem = token.key.startsWith(`${directory}_`)
       ? token.key.slice(directory.length + 1)
@@ -101,14 +121,22 @@ for (const hero of heroCatalog.heroes) {
     if (stem.startsWith("auto_")) continue;
     const assetPath = assetByStem.get(stem);
     if (!assetPath) continue;
+    const official = brazilianTokens.get(token.key) || null;
+    const community = preservedCommunity.get(stem) || null;
+    const suggested = suggestions[hero.id]?.[stem] || null;
     matchedCandidates.push({
       id: stem,
       assetPath,
       category: categoryFromStem(stem),
-      captionToken: token.key,
       captionEn: token.value,
-      captionPtBr: brazilianTokens.get(token.key) || null,
-      originalAudio: "dota_local",
+      captionPtBr: official || community || suggested,
+      captionPtBrSource: official
+        ? "official"
+        : community
+          ? "community"
+          : suggested
+            ? "automatic"
+            : null,
     });
   }
 
@@ -128,7 +156,7 @@ for (const hero of heroCatalog.heroes) {
   const matched = selectedPrefix ? groups.get(selectedPrefix) : [];
 
   matched.sort((left, right) => left.id.localeCompare(right.id));
-  linesByHero[hero.id] = matched;
+  linesByHero[hero.id] = matched.map(({ assetPath: _assetPath, ...line }) => line);
   hero.voiceDirectory = directory;
   hero.voicePrefix = selectedPrefix || "";
   hero.assetTotal = matched.length;

@@ -1,4 +1,3 @@
-import { Header } from "@/components/Header";
 import { HeroCatalog } from "@/components/HeroCatalog";
 import { HeroCard } from "@/components/HeroCard";
 import { CURRENT_BUILD, personas } from "@/lib/catalog";
@@ -16,7 +15,6 @@ export default function PersonasPage() {
   );
   return (
     <>
-      <Header />
       <main className="page-shell">
         <div className="page-intro">
           <div>

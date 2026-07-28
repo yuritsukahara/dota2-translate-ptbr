@@ -1,5 +1,4 @@
-import Link from "next/link";
-import { Header } from "@/components/Header";
+import Link from "@/src/compat/link";
 import { HowItWorks } from "@/components/HowItWorks";
 
 export const metadata = {
@@ -11,7 +10,6 @@ export const metadata = {
 export default function HowItWorksPage() {
   return (
     <>
-      <Header />
       <main className="page-shell explainer-page">
         <div className="page-intro">
           <div>

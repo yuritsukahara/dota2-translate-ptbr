@@ -12,6 +12,10 @@ const vpkPath = path.join(dotaRoot, "game", "dota", "pak01_dir.vpk");
 const dataRoot = path.join(root, "web", "data");
 const auditPath = path.join(root, "build", "caption-variant-audit.json");
 const outputPath = path.join(dataRoot, "personas.json");
+const voicePackVariantIdsPath = path.join(
+  dataRoot,
+  "voice-pack-variant-ids.json",
+);
 const imageOverridePath = path.join(
   root,
   "data",
@@ -238,7 +242,10 @@ for (const definition of definitions) {
         line.captionPtBrSource === "automatic",
     ).length,
     audioAssets: lines.filter((line) => line.assetPath).length,
-    lines,
+    lines: lines.map(
+      ({ assetPath: _assetPath, captionToken: _captionToken, originalAudio: _originalAudio, ...line }) =>
+        line,
+    ),
   });
 }
 
@@ -254,6 +261,11 @@ const output = {
   variants,
 };
 fs.writeFileSync(outputPath, `${JSON.stringify(output, null, 2)}\n`, "utf8");
+fs.writeFileSync(
+  voicePackVariantIdsPath,
+  `${JSON.stringify(variants.map((variant) => variant.id), null, 2)}\n`,
+  "utf8",
+);
 
 console.log(
   `${variants.length} personas/variantes; ` +

@@ -1,11 +1,8 @@
-import { Header } from "@/components/Header";
-import Image from "next/image";
 export const metadata = { title: "Créditos e direitos" };
 
 export default function CreditsPage() {
   return (
     <>
-      <Header />
       <main className="page-shell">
         <div className="page-intro">
           <div>
@@ -33,12 +30,6 @@ export default function CreditsPage() {
               Traduções e packs comunitários permanecem creditados aos seus
               respectivos autores.
             </p>
-            <Image
-              className="credit-logo"
-              src="/logos/tangoleague-logo-banner-full-color.webp"
-              alt="Tango League — Liga Brasileira de Dota 2"
-              unoptimized
-            />
           </section>
           <aside className="side-panel">
             <p className="eyebrow">LICENÇAS</p>

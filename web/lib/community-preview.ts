@@ -11,7 +11,7 @@ for (const line of communityLines) {
   const key = line.captionEn.trim().toLocaleLowerCase("en");
   const existing = translationMemory.get(key);
   if (existing && existing !== line.captionPtBr) ambiguous.add(key);
-  else translationMemory.set(key, line.captionPtBr);
+  else translationMemory.set(key, line.captionPtBr!);
 }
 for (const key of ambiguous) translationMemory.delete(key);
 

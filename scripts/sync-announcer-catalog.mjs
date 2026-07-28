@@ -3,6 +3,10 @@ import path from "node:path";
 import { readVpkEntry } from "./lib/vpk.mjs";
 
 const workspace = path.resolve(import.meta.dirname, "..");
+const suggestionsPath = path.join(
+  workspace,
+  "web/data/automatic-translations.json",
+);
 const defaultVpk =
   "C:/Program Files (x86)/Steam/steamapps/common/dota 2 beta/game/dota/pak01_dir.vpk";
 const vpkPath = process.argv[2] || process.env.DOTA_VPK_PATH || defaultVpk;
@@ -32,17 +36,27 @@ const killingSpreeEnglish = parseTokens(
 );
 const english = new Map([...regularEnglish, ...killingSpreeEnglish]);
 const brazilian = parseTokens("resource/subtitles/subtitles_announcer_brazilian.txt");
+const suggestions = fs.existsSync(suggestionsPath)
+  ? JSON.parse(fs.readFileSync(suggestionsPath, "utf8")).translations
+      ?.announcer || {}
+  : {};
 const lines = [...english]
   .filter(([id, caption]) => id && caption && id.toLowerCase() !== "language")
-  .map(([id, captionEn]) => ({
-    id,
-    assetPath: `sounds/vo/${killingSpreeEnglish.has(id) ? "announcer_killing_spree" : "announcer"}/${id}.vsnd_c`,
-    category: category(id),
-    captionToken: id,
-    captionEn,
-    captionPtBr: brazilian.get(id) || null,
-    originalAudio: "dota_local",
-  }))
+  .map(([id, captionEn]) => {
+    const official = brazilian.get(id) || null;
+    const suggested = suggestions[id] || null;
+    return {
+      id,
+      category: category(id),
+      captionEn,
+      captionPtBr: official || suggested,
+      captionPtBrSource: official
+        ? "official"
+        : suggested
+          ? "automatic"
+          : null,
+    };
+  })
   .sort((left, right) => left.id.localeCompare(right.id, "en"));
 
 const output = {

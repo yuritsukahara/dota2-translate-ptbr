@@ -32,8 +32,12 @@ instalação local do jogo. Arquivos de áudio não são versionados no Git.
 6. O perfil Steam mostra somente os packs realmente enviados por aquele usuário.
 7. A petição aceita uma assinatura pública por Steam ID.
 
-Steam OpenID é a única identidade do portal. O áudio permanece no Google Drive
-do intérprete e o portal guarda somente a contribuição enviada.
+Steam OpenID é a única identidade do portal. Packs completos continuam sendo
+referenciados pelo Google Drive; kits públicos e espelhos técnicos usam
+Cloudflare R2. O repositório não recebe WAVs.
+
+O frontend é um SPA React/Vite estático. A Cloudflare executa o Worker somente
+nas APIs, usa D1 para dados estruturados e R2 para arquivos.
 
 ## Desenvolvimento
 

@@ -1,7 +1,6 @@
 import { getDb } from "@/db";
 import { auditEvents, captionSuggestions } from "@/db/schema";
 import { requireUser } from "@/lib/auth";
-import { getCaptionSource, getHeroLine } from "@/lib/catalog";
 import { assertSameOrigin } from "@/lib/csrf";
 import { assertRateLimit } from "@/lib/rate-limit";
 import { validateTerminology } from "@/lib/terminology";
@@ -14,18 +13,23 @@ export async function POST(request: Request) {
     const payload = await request.json() as {
       heroId?: string;
       lineId?: string;
+      sourceText?: string;
       text?: string;
     };
     const heroId = payload.heroId?.trim() || "";
     const lineId = payload.lineId?.trim() || "";
+    const sourceText = payload.sourceText?.trim() || "";
     const text = payload.text?.trim() || "";
-    const hero = getCaptionSource(heroId);
-    const line = getHeroLine(heroId, lineId);
 
-    if (!hero || !line) {
+    if (
+      !/^[a-z0-9_-]{2,80}$/i.test(heroId) ||
+      !/^[a-z0-9_-]{2,160}$/i.test(lineId) ||
+      sourceText.length < 1 ||
+      sourceText.length > 1_000
+    ) {
       return Response.json(
-        { error: "Herói ou caption não encontrada." },
-        { status: 404 },
+        { error: "Herói ou caption inválida." },
+        { status: 400 },
       );
     }
     if (text.length < 2 || text.length > 500) {
@@ -35,7 +39,7 @@ export async function POST(request: Request) {
       );
     }
 
-    const terminologyWarnings = validateTerminology(line.captionEn, text);
+    const terminologyWarnings = validateTerminology(sourceText, text);
     if (terminologyWarnings.length) {
       return Response.json(
         {

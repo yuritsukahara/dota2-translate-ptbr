@@ -13,7 +13,7 @@ import {
   type LegendListRenderItemProps,
 } from "@legendapp/list/react";
 import type { OfficialVoiceLine } from "@/lib/catalog";
-import { categoryLabel } from "@/lib/catalog";
+import { categoryLabel } from "@/lib/category-label";
 import { OriginalAudio } from "@/components/OriginalAudio";
 import type { CurrentTranslation } from "@/lib/current-translations";
 import { findRelevantTerms, validateTerminology } from "@/lib/terminology";
@@ -121,8 +121,10 @@ export function LineBrowser({
 
   useEffect(() => {
     fetch("/api/auth/me")
-      .then((response) => response.json())
-      .then((payload: { user?: { displayName: string } | null }) => setSteamUser(payload.user || null))
+      .then(async (response) =>
+        await response.json() as { user?: { displayName: string } | null },
+      )
+      .then((payload) => setSteamUser(payload.user || null))
       .finally(() => setAuthChecked(true));
   }, []);
 
@@ -167,7 +169,12 @@ export function LineBrowser({
     const response = await fetch("/api/caption-suggestions", {
       method: "POST",
       headers: { "content-type": "application/json" },
-      body: JSON.stringify({ heroId, lineId: selectedLine.id, text: suggestion }),
+      body: JSON.stringify({
+        heroId,
+        lineId: selectedLine.id,
+        sourceText: selectedLine.captionEn,
+        text: suggestion,
+      }),
     });
     if (response.status === 401) {
       const returnTo = heroId === "announcer" ? "/announcer" : `/heroes/${heroId}`;

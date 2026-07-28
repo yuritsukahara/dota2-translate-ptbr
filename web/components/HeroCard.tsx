@@ -1,5 +1,5 @@
-import Link from "next/link";
-import Image from "next/image";
+import Link from "@/src/compat/link";
+import Image from "@/src/compat/image";
 import {
   getHeroLines,
   type Hero,
@@ -12,9 +12,9 @@ type HeroCardProps =
   | { hero?: never; persona: PersonaVariant };
 
 export function HeroCard(props: HeroCardProps) {
-  const card = "persona" in props
+  const card = props.persona
     ? {
-        entry: props.persona,
+        entry: props.persona as Hero | PersonaVariant,
         href: `/personas/${props.persona.id}`,
         lines: props.persona.lines,
         totalCaptions: props.persona.total,
@@ -23,7 +23,7 @@ export function HeroCard(props: HeroCardProps) {
         voicePrefix: props.persona.prefixes.join(" + "),
       }
     : {
-        entry: props.hero,
+        entry: props.hero as Hero | PersonaVariant,
         href: `/heroes/${props.hero.id}`,
         lines: getHeroLines(props.hero.id),
         totalCaptions: props.hero.officialEnglishCaptions,
