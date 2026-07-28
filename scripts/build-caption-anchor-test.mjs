@@ -14,6 +14,7 @@ const captionPackRoot = path.join(
   "caption-pack",
   "dota_brazilian",
 );
+const dataRoot = path.join(root, "web", "data");
 const manifestPath = path.join(captionPackRoot, "caption-pack-manifest.json");
 const subtitlesRoot = path.join(captionPackRoot, "resource", "subtitles");
 const outputRoot = path.join(
@@ -24,6 +25,8 @@ const outputRoot = path.join(
   "subtitles",
 );
 const outputPath = path.join(outputRoot, "subtitles_announcer_brazilian.txt");
+const outputManifestPath = path.join(outputRoot, "caption-anchor-manifest.json");
+const maxAnchorTokens = Number(process.env.CAPTION_ANCHOR_MAX_TOKENS || 55_000);
 
 if (!fs.existsSync(manifestPath)) {
   throw new Error(`Gere primeiro o pacote de captions: ${manifestPath}`);
@@ -56,9 +59,43 @@ for (const entry of manifest.entries || []) {
     rowsByToken.set(token, match[0].trimEnd());
   }
 }
-const captionRows = [...rowsByToken.values()].join("\r\n");
+const officialTokens = new Set(
+  [...announcer.matchAll(/^\s*"([^"]+)"\s+"([^"]*)"\s*$/gm)]
+    .map((match) => match[1])
+    .filter((token) => token !== "Language"),
+);
+const announcerCatalog = JSON.parse(
+  fs.readFileSync(path.join(dataRoot, "announcer-lines.json"), "utf8"),
+);
+const heroCatalog = JSON.parse(
+  fs.readFileSync(path.join(dataRoot, "heroes.json"), "utf8"),
+);
+const voiceCatalog = JSON.parse(
+  fs.readFileSync(path.join(dataRoot, "voice-lines.json"), "utf8"),
+);
+const priorityTokens = [
+  ...announcerCatalog.lines.map((line) => line.id),
+  ...heroCatalog.heroes.flatMap((hero) => {
+    const directory = hero.voiceDirectory || hero.id;
+    return (voiceCatalog.heroes[hero.id] || []).map(
+      (line) => `${directory}_${line.id}`,
+    );
+  }),
+];
+const orderedTokens = [
+  ...priorityTokens,
+  ...rowsByToken.keys(),
+];
+const includedTokens = new Set(officialTokens);
+const captionRows = [];
+for (const token of orderedTokens) {
+  if (includedTokens.has(token) || !rowsByToken.has(token)) continue;
+  if (includedTokens.size >= maxAnchorTokens) break;
+  includedTokens.add(token);
+  captionRows.push(rowsByToken.get(token));
+}
 
-if (!captionRows) {
+if (!captionRows.length) {
   throw new Error("Nenhum token foi encontrado no pacote gerado.");
 }
 const closing = /\r?\n}\r?\n}\s*$/;
@@ -67,10 +104,38 @@ if (!closing.test(announcer)) {
 }
 const merged = announcer.replace(
   closing,
-  `\r\n${captionRows}\r\n}\r\n}\r\n`,
+  `\r\n${captionRows.join("\r\n")}\r\n}\r\n}\r\n`,
 );
 
 fs.mkdirSync(outputRoot, { recursive: true });
 fs.writeFileSync(outputPath, merged, "utf8");
-console.log(`Âncora criada com ${rowsByToken.size} tokens do pacote:`);
+const missingPriorityTokens = priorityTokens.filter(
+  (token) => rowsByToken.has(token) && !includedTokens.has(token),
+);
+if (missingPriorityTokens.length) {
+  throw new Error(
+    `A âncora não comportou ${missingPriorityTokens.length} tokens prioritários.`,
+  );
+}
+const anchorManifest = {
+  maxTokens: maxAnchorTokens,
+  officialTokens: officialTokens.size,
+  appendedTokens: captionRows.length,
+  totalTokens: includedTokens.size,
+  availableCatalogTokens: rowsByToken.size,
+  omittedCatalogTokens: [...rowsByToken.keys()].filter(
+    (token) => !includedTokens.has(token),
+  ).length,
+  bytes: Buffer.byteLength(merged),
+};
+fs.writeFileSync(
+  outputManifestPath,
+  `${JSON.stringify(anchorManifest, null, 2)}\n`,
+  "utf8",
+);
+console.log(
+  `Âncora criada com ${anchorManifest.totalTokens} tokens ` +
+    `(${anchorManifest.bytes} bytes; ${anchorManifest.omittedCatalogTokens} ` +
+    "permanecem nos arquivos individuais):",
+);
 console.log(outputPath);
