@@ -54,7 +54,7 @@ function stemFromToken(token, directory) {
     : token;
 }
 
-if (!fs.existsSync(vpkPath)) throw new Error(`VPK não encontrado: ${vpkPath}`);
+const hasLocalVpk = fs.existsSync(vpkPath);
 
 const heroes = JSON.parse(
   fs.readFileSync(path.join(dataRoot, "heroes.json"), "utf8"),
@@ -65,7 +65,7 @@ const voices = JSON.parse(
 const personas = JSON.parse(
   fs.readFileSync(path.join(dataRoot, "personas.json"), "utf8"),
 ).variants;
-const entries = listVpkEntries(vpkPath);
+const entries = hasLocalVpk ? listVpkEntries(vpkPath) : [];
 const entryPaths = new Set(entries.map((entry) => entry.path));
 const definedVariantIds = new Set(
   curatedVoiceVariants.map((variant) => variant.id),
@@ -80,6 +80,7 @@ const missingVariants = [...definedVariantIds].filter(
 const actualOwnerByLineId = new Map();
 const report = {
   generatedAt: new Date().toISOString(),
+  mode: hasLocalVpk ? "vpk" : "catalog",
   build: JSON.parse(
     fs.readFileSync(path.join(dataRoot, "heroes.json"), "utf8"),
   ).build,
@@ -119,7 +120,7 @@ for (const hero of heroes) {
       )
       .map((entryPath) => path.posix.basename(entryPath, ".vsnd_c")),
   );
-  const raw = entryPaths.has(englishPath)
+  const rawFromVpk = entryPaths.has(englishPath)
     ? new Set(
         parseTokens(readVpkEntry(vpkPath, englishPath))
           .map((token) => stemFromToken(token, directory))
@@ -174,6 +175,7 @@ for (const hero of heroes) {
   }
 
   const assigned = new Set(owners.keys());
+  const raw = hasLocalVpk ? rawFromVpk : new Set(assigned);
   const missing = [...raw].filter((lineId) => !assigned.has(lineId));
   const extra = [...assigned].filter((lineId) => !raw.has(lineId));
   report.heroes.push({
@@ -216,6 +218,11 @@ console.log(
     `${report.totals.assigned.toLocaleString("pt-BR")} linhas atribuídas de ` +
     `${report.totals.raw.toLocaleString("pt-BR")} assets com caption.`,
 );
+if (!hasLocalVpk) {
+  console.log(
+    "VPK local não disponível; validação limitada ao catálogo versionado.",
+  );
+}
 console.log(
   `${report.totals.duplicates} duplicadas; ${report.totals.missing} ausentes; ` +
     `${report.totals.extra} extras; ${report.totals.prefixViolations} violações de prefixo; ` +
