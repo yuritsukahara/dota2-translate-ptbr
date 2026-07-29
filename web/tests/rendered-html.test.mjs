@@ -69,6 +69,8 @@ test("página de release explica opções, camada de idioma e download", async (
   );
   assert.match(page, /DublagemBrasileiraDota2\.exe/);
   assert.equal(manifest.captions.tokens, 77_594);
+  assert.equal(manifest.captions.englishAudioAliases, 77_594);
+  assert.equal(manifest.captions.payloadEntries, 155_188);
   assert.equal(
     manifest.captions.sources.official +
       manifest.captions.sources.community +

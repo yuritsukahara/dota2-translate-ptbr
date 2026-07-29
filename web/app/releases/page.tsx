@@ -61,7 +61,9 @@ export default function ReleasesPage() {
           </dl>
           <small>
             Pacote de dados: {(release.payload.bytes / 1024 / 1024).toFixed(1)} MB,
-            baixado apenas durante a instalação.
+            baixado apenas durante a instalação. Inclui{" "}
+            {release.captions.englishAudioAliases.toLocaleString("pt-BR")} aliases
+            para as vozes originais em inglês.
           </small>
         </aside>
       </section>
@@ -131,7 +133,8 @@ export default function ReleasesPage() {
             Com a voz original inglesa, o narrador solicita identificadores
             prefixados por <code>[english]</code>. A camada brasileira associa
             esses identificadores às captions PT-BR sem editar a localização
-            inglesa original. O Dota precisa estar carregando o recurso
+            inglesa original. Esse pareamento também cobre todos os heróis,
+            personas e variantes. O Dota precisa estar carregando o recurso{" "}
             <code>brazilian</code>; não há arquivos de captions com sufixos
             <code>english</code> ou <code>russian</code>.
           </p>

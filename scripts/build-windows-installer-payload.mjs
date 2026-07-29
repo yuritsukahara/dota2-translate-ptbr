@@ -196,11 +196,13 @@ const captionManifest = JSON.parse(fs.readFileSync(captionManifestPath, "utf8"))
 const payloadFiles = collectFiles(stagingRoot);
 const payloadManifest = {
   schemaVersion: 1,
-  version: `${captionManifest.build.clientVersion}.10`,
+  version: `${captionManifest.build.clientVersion}.11`,
   createdAt: new Date().toISOString(),
   dotaBuild: captionManifest.build,
   captions: {
     tokens: captionManifest.tokens,
+    englishAudioAliases: captionManifest.englishAudioAliases,
+    payloadEntries: captionManifest.payloadEntries,
     files: captionManifest.files,
     sources: {
       official: captionManifest.sources.official,

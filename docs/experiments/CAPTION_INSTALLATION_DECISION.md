@@ -15,6 +15,11 @@ O comportamento validado é:
 5. o arquivo `subtitles_announcer_brazilian.txt` fornece os tokens normais e
    os aliases `[english]` com o mesmo texto PT-BR.
 
+O mesmo pareamento é obrigatório para heróis, personas e variantes. Quando a
+voz original continua em inglês, o cliente procura `[english]<token>` dentro
+do recurso Brazilian. O arquivo de cada grupo deve conter tanto `<token>`
+quanto `[english]<token>`, sempre com a mesma caption PT-BR.
+
 Não é necessário reiniciar a Steam, editar opções de inicialização, usar
 `autoexec.cfg` ou abrir o Dota por um launcher próprio.
 
@@ -64,6 +69,8 @@ Uma versão só pode ser promovida quando:
 - o payload contém apenas caminhos sob `layers/*/dota_brazilian`;
 - existe somente `subtitles_announcer_brazilian.txt` para o narrador;
 - os 2.074 aliases `[english]` repetem as captions PT-BR correspondentes;
+- todo token de herói, persona ou variante possui um alias `[english]` com
+  texto idêntico no arquivo Brazilian do mesmo grupo;
 - os testes confirmam que a camada está completa sem montagem no
   `gameinfo.gi` base;
 - o hash SHA-256 do payload e de cada arquivo interno confere;

@@ -53,7 +53,9 @@ for (const entry of manifest.entries || []) {
     throw new Error(`Arquivo listado no manifesto não encontrado: ${subtitlePath}`);
   }
   const subtitle = fs.readFileSync(subtitlePath, "utf8");
-  for (const match of subtitle.matchAll(/^\s*"([^"]+)"\s+"([^"]*)"\s*$/gm)) {
+  for (const match of subtitle.matchAll(
+    /^\s*"((?:\\.|[^"])*)"\s+"((?:\\.|[^"])*)"\s*$/gm,
+  )) {
     const [, token] = match;
     if (token === "Language") continue;
     rowsByToken.set(token, match[0].trimEnd());
@@ -70,18 +72,16 @@ announcer = announcer.replace(
   },
 );
 const officialTokens = new Set(
-  [...announcer.matchAll(/^\s*"([^"]+)"\s+"([^"]*)"\s*$/gm)]
+  [
+    ...announcer.matchAll(
+      /^\s*"((?:\\.|[^"])*)"\s+"((?:\\.|[^"])*)"\s*$/gm,
+    ),
+  ]
     .map((match) => match[1])
     .filter((token) => token !== "Language"),
 );
 const announcerCatalog = JSON.parse(
   fs.readFileSync(path.join(dataRoot, "announcer-lines.json"), "utf8"),
-);
-const heroCatalog = JSON.parse(
-  fs.readFileSync(path.join(dataRoot, "heroes.json"), "utf8"),
-);
-const voiceCatalog = JSON.parse(
-  fs.readFileSync(path.join(dataRoot, "voice-lines.json"), "utf8"),
 );
 for (const line of announcerCatalog.lines) {
   const row = rowsByToken.get(line.id);
@@ -93,20 +93,18 @@ for (const line of announcerCatalog.lines) {
     rowsByToken.set(alias, asEnglishAlias(row, line.id));
   }
 }
-const priorityTokens = [
+const requiredPriorityTokens = [
   ...announcerCatalog.lines.flatMap((line) => [
     line.id,
     `[english]${line.id}`,
   ]),
-  ...heroCatalog.heroes.flatMap((hero) => {
-    const directory = hero.voiceDirectory || hero.id;
-    return (voiceCatalog.heroes[hero.id] || []).map(
-      (line) => `${directory}_${line.id}`,
-    );
-  }),
 ];
+const preferredRuntimeTokens = [...rowsByToken.keys()].filter(
+  (token) => token.startsWith("[english]"),
+);
 const orderedTokens = [
-  ...priorityTokens,
+  ...requiredPriorityTokens,
+  ...preferredRuntimeTokens,
   ...rowsByToken.keys(),
 ];
 const includedTokens = new Set(officialTokens);
@@ -130,13 +128,19 @@ const merged = announcer.replace(
   `\r\n${captionRows.join("\r\n")}\r\n}\r\n}\r\n`,
 );
 const mergedRowsByToken = new Map(
-  [...merged.matchAll(/^\s*"([^"]+)"\s+"([^"]*)"\s*$/gm)]
+  [
+    ...merged.matchAll(
+      /^\s*"((?:\\.|[^"])*)"\s+"((?:\\.|[^"])*)"\s*$/gm,
+    ),
+  ]
     .filter((match) => match[1] !== "Language")
     .map((match) => [match[1], match[2]]),
 );
 for (const line of announcerCatalog.lines) {
   const sourceRow = rowsByToken.get(line.id);
-  const sourceText = sourceRow?.match(/^\s*"[^"]+"\s+"([^"]*)"\s*$/)?.[1];
+  const sourceText = sourceRow?.match(
+    /^\s*"((?:\\.|[^"])*)"\s+"((?:\\.|[^"])*)"\s*$/,
+  )?.[2];
   const aliasText = mergedRowsByToken.get(`[english]${line.id}`);
   if (sourceText === undefined || aliasText !== sourceText) {
     throw new Error(
@@ -157,7 +161,7 @@ for (const language of outputLanguages) {
   fs.writeFileSync(path.join(outputRoot, filename), localized, "utf8");
   outputFiles.push(filename);
 }
-const missingPriorityTokens = priorityTokens.filter(
+const missingPriorityTokens = requiredPriorityTokens.filter(
   (token) => rowsByToken.has(token) && !includedTokens.has(token),
 );
 if (missingPriorityTokens.length) {
@@ -172,6 +176,10 @@ const anchorManifest = {
   totalTokens: includedTokens.size,
   availableCatalogTokens: rowsByToken.size,
   announcerAliases: announcerCatalog.lines.length,
+  preferredEnglishAudioAliases: preferredRuntimeTokens.length,
+  includedEnglishAudioAliases: [...includedTokens].filter((token) =>
+    token.startsWith("[english]"),
+  ).length,
   outputFiles,
   omittedCatalogTokens: [...rowsByToken.keys()].filter(
     (token) => !includedTokens.has(token),

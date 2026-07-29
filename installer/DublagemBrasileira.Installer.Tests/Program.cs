@@ -250,6 +250,49 @@ if (!skipPayload && File.Exists(releaseArchive))
         names.Contains(
             "layers/captions/dota_brazilian/resource/subtitles/subtitles_announcer_brazilian.txt"),
         "O modo de captions deve manter o narrador padrão ancorado.");
+    var snapfireEntry = archive.GetEntry(
+        "layers/captions/dota_brazilian/resource/subtitles/" +
+        "subtitles_snapfire_brazilian.txt");
+    Expect(
+        snapfireEntry is not null,
+        "O modo de captions deve conter o grupo da Snapfire.");
+    if (snapfireEntry is not null)
+    {
+        using var reader = new StreamReader(snapfireEntry.Open());
+        var snapfireCaptions = await reader.ReadToEndAsync();
+        var snapfireRows = Regex.Matches(
+                snapfireCaptions,
+                "^\\s*\"([^\"]+)\"\\s+\"([^\"]*)\"\\s*$",
+                RegexOptions.Multiline)
+            .Cast<Match>()
+            .Where(match => match.Groups[1].Value != "Language")
+            .ToDictionary(
+                match => match.Groups[1].Value,
+                match => match.Groups[2].Value,
+                StringComparer.OrdinalIgnoreCase);
+        Expect(
+            snapfireRows.TryGetValue(
+                "snapfire_snapfire_spawn_01",
+                out var snapfireCaption) &&
+            snapfireRows.TryGetValue(
+                "[english]snapfire_snapfire_spawn_01",
+                out var snapfireEnglishCaption) &&
+            string.Equals(
+                snapfireCaption,
+                snapfireEnglishCaption,
+                StringComparison.Ordinal),
+            "A Snapfire deve fornecer o mesmo texto para o token normal e o alias inglês.");
+        foreach (var row in snapfireRows.Where(entry =>
+                     !entry.Key.StartsWith("[english]", StringComparison.OrdinalIgnoreCase)))
+        {
+            Expect(
+                snapfireRows.TryGetValue(
+                    $"[english]{row.Key}",
+                    out var aliasCaption) &&
+                string.Equals(row.Value, aliasCaption, StringComparison.Ordinal),
+                $"Token da Snapfire sem alias inglês equivalente: {row.Key}");
+        }
+    }
     foreach (var language in new[] { "english", "russian" })
     {
         var path =
@@ -314,7 +357,7 @@ if (!skipPayload && File.Exists(releaseArchive))
         var payloadManifest = await JsonSerializer.DeserializeAsync<PayloadManifest>(
             manifestStream,
             new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
-        Expect(payloadManifest?.Version == "6869.10", "A versão interna deve ser 6869.10.");
+        Expect(payloadManifest?.Version == "6869.11", "A versão interna deve ser 6869.11.");
         foreach (var file in payloadManifest?.Files ?? [])
         {
             var entry = archive.GetEntry(file.Path);
