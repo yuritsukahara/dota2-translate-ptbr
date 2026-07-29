@@ -73,6 +73,29 @@ try
     File.WriteAllText(
         Path.Combine(dotaRoot, "game", "dota", "cfg", "boot.vcfg"),
         "\"UILanguage\" \"english\"");
+    var baseGameInfoPath = Path.Combine(
+        dotaRoot,
+        "game",
+        "dota",
+        "gameinfo.gi");
+    var originalGameInfo =
+        "\"GameInfo\"\r\n{\r\n\t\"FileSystem\"\r\n\t{\r\n" +
+        "\t\t\"SearchPaths\"\r\n\t\t{\r\n" +
+        "\t\t\tGame\t\t\t\tdota\r\n" +
+        "\t\t\tMod\t\t\t\t\tdota\r\n" +
+        "\t\t}\r\n\t}\r\n}\r\n";
+    File.WriteAllText(baseGameInfoPath, originalGameInfo);
+    BrazilianCaptionMountConfiguration.Apply(baseGameInfoPath);
+    BrazilianCaptionMountConfiguration.Apply(baseGameInfoPath);
+    var mountedGameInfo = File.ReadAllText(baseGameInfoPath);
+    Expect(
+        BrazilianCaptionMountConfiguration.IsActive(baseGameInfoPath),
+        "Deve montar dota_brazilian no caminho MOD usado pelas captions.");
+    Expect(
+        mountedGameInfo.Split(
+            "Mod\t\t\t\t\tdota_brazilian",
+            StringSplitOptions.None).Length == 2,
+        "A montagem brasileira no caminho MOD deve ser idempotente.");
     var autoexecPath = Path.Combine(
         dotaRoot,
         "game",
@@ -96,91 +119,6 @@ try
             "Dublagem Brasileira Dota 2: início das captions",
             StringSplitOptions.None).Length == 2,
         "A configuração gerenciada deve ser idempotente.");
-
-    var localConfigPath = Path.Combine(testRoot, "localconfig.vdf");
-    File.WriteAllText(
-        localConfigPath,
-        """
-        "UserLocalConfigStore"
-        {
-            "Software"
-            {
-                "Valve"
-                {
-                    "Steam"
-                    {
-                        "apps"
-                        {
-                            "570"
-                            {
-                                "LastPlayed" "1"
-                                "LaunchOptions" "-map dota -novid -language russian"
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        """);
-    var launchBackup = SteamLaunchOptionsConfiguration.Capture(localConfigPath);
-    SteamLaunchOptionsConfiguration.Apply(localConfigPath);
-    var launchConfig = File.ReadAllText(localConfigPath);
-    Expect(
-        SteamLaunchOptionsConfiguration.IsActive(localConfigPath),
-        "Deve ativar -language brazilian nas opções do Dota.");
-    Expect(
-        launchConfig.Contains("-map dota -novid -language brazilian") &&
-        !launchConfig.Contains("-language russian"),
-        "Deve preservar as opções existentes e substituir apenas outro idioma.");
-    SteamLaunchOptionsConfiguration.Apply(localConfigPath);
-    launchConfig = File.ReadAllText(localConfigPath);
-    Expect(
-        launchConfig.Split("-language brazilian", StringSplitOptions.None).Length == 2,
-        "A ativação do idioma Steam deve ser idempotente.");
-    SteamLaunchOptionsConfiguration.Restore(
-        localConfigPath,
-        launchBackup.LaunchOptionsExisted,
-        launchBackup.OriginalLaunchOptions);
-    Expect(
-        File.ReadAllText(localConfigPath).Contains(
-            "\"LaunchOptions\" \"-map dota -novid -language russian\""),
-        "Deve restaurar exatamente as opções Steam anteriores.");
-
-    File.WriteAllText(
-        localConfigPath,
-        """
-        "UserLocalConfigStore"
-        {
-            "Software"
-            {
-                "Valve"
-                {
-                    "Steam"
-                    {
-                        "apps"
-                        {
-                            "570"
-                            {
-                                "LastPlayed" "1"
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        """);
-    launchBackup = SteamLaunchOptionsConfiguration.Capture(localConfigPath);
-    SteamLaunchOptionsConfiguration.Apply(localConfigPath);
-    Expect(
-        SteamLaunchOptionsConfiguration.IsActive(localConfigPath),
-        "Deve criar LaunchOptions quando a propriedade ainda não existe.");
-    SteamLaunchOptionsConfiguration.Restore(
-        localConfigPath,
-        launchBackup.LaunchOptionsExisted,
-        launchBackup.OriginalLaunchOptions);
-    Expect(
-        !File.ReadAllText(localConfigPath).Contains("\"LaunchOptions\""),
-        "A restauração deve remover a propriedade criada pelo instalador.");
 
     Expect(
         locator.TryValidate(dotaRoot, out var validated) &&
@@ -221,8 +159,8 @@ try
     Expect(installed.AudioDetected, "Deve detectar o pack de voz já instalado.");
     Expect(installed.CaptionsDetected, "Deve detectar as captions já instaladas.");
     Expect(
-        !installed.BrazilianLanguageActive,
-        "Sem o manifesto e a opção Steam, a camada não deve ser marcada como ativa.");
+        installed.BrazilianLanguageActive,
+        "A montagem MOD e o autoexec devem ativar a camada sem opções da Steam.");
 }
 finally
 {
@@ -344,7 +282,7 @@ if (!skipPayload && File.Exists(releaseArchive))
         var payloadManifest = await JsonSerializer.DeserializeAsync<PayloadManifest>(
             manifestStream,
             new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
-        Expect(payloadManifest?.Version == "6869.6", "A versão interna deve ser 6869.6.");
+        Expect(payloadManifest?.Version == "6869.7", "A versão interna deve ser 6869.7.");
         foreach (var file in payloadManifest?.Files ?? [])
         {
             var entry = archive.GetEntry(file.Path);

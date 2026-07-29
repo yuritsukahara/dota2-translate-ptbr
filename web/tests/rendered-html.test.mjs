@@ -56,7 +56,9 @@ test("página de release explica opções, camada de idioma e download", async (
   assert.match(page, /Legendas \+ Axe/);
   assert.match(page, /camada de idioma/);
   assert.match(page, /não altera mecânicas/i);
-  assert.match(page, /backup antes de começar/i);
+  assert.match(page, /backup\s+antes\s+de\s+começar/i);
+  assert.match(page, /opções de inicialização do Dota\s+não são alteradas/i);
+  assert.doesNotMatch(page, /-language brazilian|Steam pode reiniciar/i);
   assert.match(page, /DublagemBrasileiraDota2\.exe/);
   assert.equal(manifest.captions.tokens, 77_594);
   assert.equal(
