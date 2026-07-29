@@ -24,8 +24,8 @@ const outputRoot = path.join(
   "resource",
   "subtitles",
 );
-const outputPath = path.join(outputRoot, "subtitles_announcer_brazilian.txt");
 const outputManifestPath = path.join(outputRoot, "caption-anchor-manifest.json");
+const outputLanguages = ["brazilian", "english", "russian"];
 const maxAnchorTokens = Number(process.env.CAPTION_ANCHOR_MAX_TOKENS || 55_000);
 
 if (!fs.existsSync(manifestPath)) {
@@ -146,7 +146,16 @@ for (const line of announcerCatalog.lines) {
 }
 
 fs.mkdirSync(outputRoot, { recursive: true });
-fs.writeFileSync(outputPath, merged, "utf8");
+const outputFiles = [];
+for (const language of outputLanguages) {
+  const localized = merged.replace(
+    /("Language"\s+)"[^"]+"/i,
+    `$1"${language}"`,
+  );
+  const filename = `subtitles_announcer_${language}.txt`;
+  fs.writeFileSync(path.join(outputRoot, filename), localized, "utf8");
+  outputFiles.push(filename);
+}
 const missingPriorityTokens = priorityTokens.filter(
   (token) => rowsByToken.has(token) && !includedTokens.has(token),
 );
@@ -162,6 +171,7 @@ const anchorManifest = {
   totalTokens: includedTokens.size,
   availableCatalogTokens: rowsByToken.size,
   announcerAliases: announcerCatalog.lines.length,
+  outputFiles,
   omittedCatalogTokens: [...rowsByToken.keys()].filter(
     (token) => !includedTokens.has(token),
   ).length,
@@ -175,6 +185,6 @@ fs.writeFileSync(
 console.log(
   `Âncora criada com ${anchorManifest.totalTokens} tokens ` +
     `(${anchorManifest.bytes} bytes; ${anchorManifest.omittedCatalogTokens} ` +
-    "permanecem nos arquivos individuais):",
+    "permanecem nos arquivos individuais) para:",
 );
-console.log(outputPath);
+console.log(outputFiles.join(", "));

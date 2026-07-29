@@ -44,13 +44,12 @@ const captionSubtitlesRoot = path.join(
   "resource",
   "subtitles",
 );
-const captionAnchorPath = path.join(
+const captionAnchorRoot = path.join(
   repositoryRoot,
   "build",
   "caption-anchor-test",
   "resource",
   "subtitles",
-  "subtitles_announcer_brazilian.txt",
 );
 const axeAudioRoot = path.join(
   repositoryRoot,
@@ -105,13 +104,13 @@ for (const overlayRoot of [captionsOverlayRoot, axeOverlayRoot]) {
   );
   fs.mkdirSync(overlaySubtitlesRoot, { recursive: true });
   fs.cpSync(captionSubtitlesRoot, overlaySubtitlesRoot, { recursive: true });
-  fs.copyFileSync(
-    captionAnchorPath,
-    path.join(
-      overlaySubtitlesRoot,
-      "subtitles_announcer_brazilian.txt",
-    ),
-  );
+  for (const language of ["brazilian", "english", "russian"]) {
+    const filename = `subtitles_announcer_${language}.txt`;
+    fs.copyFileSync(
+      path.join(captionAnchorRoot, filename),
+      path.join(overlaySubtitlesRoot, filename),
+    );
+  }
 }
 fs.mkdirSync(path.join(axeOverlayRoot, "sounds", "vo", "axe"), { recursive: true });
 fs.mkdirSync(captionsLanguageRoot, { recursive: true });
@@ -141,6 +140,10 @@ const expectedSubtitleFiles = fs
   .readdirSync(captionSubtitlesRoot)
   .filter((name) => name.endsWith("_brazilian.txt"))
   .sort();
+expectedSubtitleFiles.push(
+  "subtitles_announcer_english.txt",
+  "subtitles_announcer_russian.txt",
+);
 for (const [modeRoot, overlayRoot] of [
   [captionsLanguageRoot, captionsOverlayRoot],
   [axeLanguageRoot, axeOverlayRoot],
@@ -189,7 +192,7 @@ const captionManifest = JSON.parse(fs.readFileSync(captionManifestPath, "utf8"))
 const payloadFiles = collectFiles(stagingRoot);
 const payloadManifest = {
   schemaVersion: 1,
-  version: `${captionManifest.build.clientVersion}.7`,
+  version: `${captionManifest.build.clientVersion}.8`,
   createdAt: new Date().toISOString(),
   dotaBuild: captionManifest.build,
   captions: {

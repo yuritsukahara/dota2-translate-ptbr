@@ -13,24 +13,24 @@ public static class CaptionConfiguration
         $@"(?:\r?\n)?{Regex.Escape(StartMarker)}.*?{Regex.Escape(EndMarker)}(?:\r?\n)?",
         RegexOptions.Singleline | RegexOptions.CultureInvariant);
 
-    public static void Apply(string autoexecPath)
+    public static void RemoveLegacyBlock(string autoexecPath)
     {
-        var existing = File.Exists(autoexecPath)
-            ? File.ReadAllText(autoexecPath)
-            : string.Empty;
-        var preserved = ManagedBlock.Replace(existing, string.Empty).TrimEnd();
-        var managed = string.Join(
-            Environment.NewLine,
-            StartMarker,
-            "cc_lang \"brazilian\"",
-            "closecaption \"1\"",
-            "cc_subtitles \"1\"",
-            EndMarker);
-        var updated = string.IsNullOrWhiteSpace(preserved)
-            ? $"{managed}{Environment.NewLine}"
-            : $"{preserved}{Environment.NewLine}{Environment.NewLine}" +
-              $"{managed}{Environment.NewLine}";
-        Directory.CreateDirectory(Path.GetDirectoryName(autoexecPath)!);
-        File.WriteAllText(autoexecPath, updated, new UTF8Encoding(false));
+        if (!File.Exists(autoexecPath))
+        {
+            return;
+        }
+
+        var existing = File.ReadAllText(autoexecPath);
+        var preserved = ManagedBlock.Replace(existing, string.Empty).Trim();
+        if (string.IsNullOrEmpty(preserved))
+        {
+            File.Delete(autoexecPath);
+            return;
+        }
+
+        File.WriteAllText(
+            autoexecPath,
+            $"{preserved}{Environment.NewLine}",
+            new UTF8Encoding(false));
     }
 }

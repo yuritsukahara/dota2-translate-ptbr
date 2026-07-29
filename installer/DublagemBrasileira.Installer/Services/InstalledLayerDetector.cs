@@ -17,18 +17,6 @@ public static class InstalledLayerDetector
         var gameInfo = Path.Combine(languageRoot, "gameinfo.gi");
         var installerMarker = Path.Combine(languageRoot, ".dublagem-brasileira.json");
         var baseGameInfo = Path.Combine(dotaRoot, "game", "dota", "gameinfo.gi");
-        var bootConfig = Path.Combine(
-            dotaRoot,
-            "game",
-            "dota",
-            "cfg",
-            "boot.vcfg");
-        var captionConfig = Path.Combine(
-            dotaRoot,
-            "game",
-            "dota",
-            "cfg",
-            "autoexec.cfg");
 
         var axeAudioCount = CountFilesSafely(axeAudioRoot, "*.vsnd_c");
         var hasProjectGameInfo = FileContains(gameInfo, "Game dota_brazilian") &&
@@ -45,9 +33,7 @@ public static class InstalledLayerDetector
             captionFileCount > 0 && hasPackedLayer;
 
         var languageActive =
-            BrazilianCaptionMountConfiguration.IsActive(baseGameInfo) &&
-            FileMatches(bootConfig, "\"UILanguage\"\\s+\"brazilian\"") &&
-            FileMatches(captionConfig, "cc_lang\\s+\"brazilian\"");
+            BrazilianCaptionMountConfiguration.IsActive(baseGameInfo);
 
         return new InstalledLayerStatus(audioDetected, captionsDetected, languageActive);
     }
@@ -70,16 +56,6 @@ public static class InstalledLayerDetector
     {
         var content = ReadTextSafely(path);
         return content?.Contains(value, StringComparison.OrdinalIgnoreCase) == true;
-    }
-
-    private static bool FileMatches(string path, string pattern)
-    {
-        var content = ReadTextSafely(path);
-        return content is not null &&
-               System.Text.RegularExpressions.Regex.IsMatch(
-                   content,
-                   pattern,
-                   System.Text.RegularExpressions.RegexOptions.IgnoreCase);
     }
 
     private static string? ReadTextSafely(string path)
