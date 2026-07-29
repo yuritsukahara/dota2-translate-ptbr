@@ -52,12 +52,17 @@ O usuário escolhe o modo dentro do instalador.
 - O rollback é centralizado: captions primeiro, áudio depois.
 - O instalador não edita executáveis, não injeta DLL e não substitui
   `game/dota/pak01_dir.vpk`.
-- O narrador com áudio inglês solicita tokens prefixados por `[english]`. A
-  camada `dota_brazilian` fornece aliases PT-BR para esses identificadores sem
-  editar ou substituir a localização inglesa original.
-- A tabela PT-BR do narrador é exposta somente como recurso `brazilian`.
-  O Dota precisa estar carregando esse idioma; não há cópias com sufixos
-  `english` ou `russian`, nem dependência de `cc_lang`.
+- O áudio original pode solicitar o token normal ou o identificador de fallback
+  `[english]`. As duas formas apontam para o mesmo texto PT-BR.
+- Os 126 recursos individuais continuam Brazilian e guardam somente os tokens
+  normais.
+- Cinco âncoras globais fornecem a compatibilidade: a configuração
+  Brazilian/English/Russian comprovada na 6869.8 e duas tabelas
+  `killing_spree` complementares.
+- Os nomes English e Russian existem somente dentro de `game/dota_brazilian`.
+  Nenhum recurso da Valve em `game/dota` é substituído.
+- A união das âncoras cobre 77.594 captions e seus 77.594 aliases. A auditoria
+  descompilada confirmou 75.520 de 75.520 eventos de heróis e variantes.
 - O executável publicado é self-contained e não exige .NET, Node.js nem uma
   cópia deste repositório.
 

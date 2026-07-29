@@ -372,7 +372,9 @@ public partial class MainWindow : Window
             var voiceLines = manifest.VoicePacks.Sum(pack => pack.Lines);
             CaptionSummaryText.Text =
                 $"{manifest.Captions.Tokens:N0} captions PT-BR do site, " +
-                $"incluindo heróis, variantes e narrador.";
+                $"incluindo heróis, variantes e narrador. " +
+                $"{manifest.Captions.EnglishAudioAliases:N0} aliases mantêm as " +
+                "legendas quando a voz original está em inglês.";
             VoiceSummaryText.Text =
                 $"{manifest.VoicePacks.Count} pack disponível, com " +
                 $"{voiceLines:N0} falas compiladas.";

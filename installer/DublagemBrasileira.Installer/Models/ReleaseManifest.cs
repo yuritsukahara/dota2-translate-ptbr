@@ -22,6 +22,8 @@ public sealed class DotaBuildInfo
 public sealed class CaptionReleaseInfo
 {
     public int Tokens { get; set; }
+    public int EnglishAudioAliases { get; set; }
+    public int PayloadEntries { get; set; }
     public int Files { get; set; }
     public CaptionSourceInfo Sources { get; set; } = new();
 }

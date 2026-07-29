@@ -83,6 +83,23 @@ function renderSubtitleFile(tokens) {
   return `\uFEFF"lang"\r\n{\r\n\t"Language"\t\t"brazilian"\r\n\t"Tokens"\r\n\t{\r\n${rows}\r\n\t}\r\n}\r\n`;
 }
 
+function includeEnglishAudioAliases(tokens) {
+  const seen = new Set(tokens.map(({ token }) => token));
+  const aliases = [];
+  for (const entry of tokens) {
+    if (entry.token.startsWith("[english]")) continue;
+    const alias = `[english]${entry.token}`;
+    if (seen.has(alias)) continue;
+    seen.add(alias);
+    aliases.push({
+      ...entry,
+      token: alias,
+      languageAliasOf: entry.token,
+    });
+  }
+  return [...tokens, ...aliases];
+}
+
 function expandKnownVoiceVariants(sourceId, tokens) {
   if (sourceId !== "axe") return tokens;
 
@@ -173,7 +190,8 @@ const manifestSources = [];
 for (const source of sources) {
   const filename = `subtitles_${source.directory}_brazilian.txt`;
   const destination = path.join(subtitlesRoot, filename);
-  const contents = renderSubtitleFile(source.tokens);
+  const renderedTokens = includeEnglishAudioAliases(source.tokens);
+  const contents = renderSubtitleFile(renderedTokens);
   fs.writeFileSync(destination, contents, "utf8");
   const sourceCounts = { official: 0, community: 0, automatic: 0 };
   for (const token of source.tokens) sourceCounts[token.source] += 1;
@@ -182,6 +200,9 @@ for (const source of sources) {
     filename,
     tokens: source.tokens.length,
     aliases: source.tokens.filter((token) => token.aliasOf).length,
+    englishAudioAliases: renderedTokens.filter((token) => token.languageAliasOf)
+      .length,
+    payloadEntries: renderedTokens.length,
     variantTokens: source.tokens.filter((token) => token.variantId).length,
     sources: sourceCounts,
     sha256: crypto.createHash("sha256").update(contents).digest("hex"),
@@ -194,6 +215,14 @@ const manifest = {
   build: voiceCatalog.build,
   files: manifestSources.length,
   tokens: manifestSources.reduce((sum, source) => sum + source.tokens, 0),
+  englishAudioAliases: manifestSources.reduce(
+    (sum, source) => sum + source.englishAudioAliases,
+    0,
+  ),
+  payloadEntries: manifestSources.reduce(
+    (sum, source) => sum + source.payloadEntries,
+    0,
+  ),
   sources: manifestSources.reduce(
     (totals, source) => ({
       official: totals.official + source.sources.official,
@@ -211,6 +240,7 @@ fs.writeFileSync(
 );
 
 console.log(
-  `${manifest.files} arquivos · ${manifest.tokens.toLocaleString("pt-BR")} captions PT-BR`,
+  `${manifest.files} arquivos · ${manifest.tokens.toLocaleString("pt-BR")} captions PT-BR · ` +
+    `${manifest.englishAudioAliases.toLocaleString("pt-BR")} aliases para áudio inglês`,
 );
 console.log(outputRoot);

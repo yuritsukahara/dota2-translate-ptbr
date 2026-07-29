@@ -17,9 +17,11 @@
     "translations:codex": "node scripts/generate-automatic-translations-codex.mjs",
     "translations:status": "node scripts/generate-automatic-translations-codex.mjs --dry-run",
     "captions:pack": "node scripts/build-local-caption-pack.mjs",
+    "captions:aliases": "node scripts/build-local-caption-pack.mjs && node scripts/audit-caption-language-aliases.mjs",
     "captions:audit": "node scripts/audit-caption-variants.mjs && node scripts/sync-persona-catalog.mjs && node scripts/sync-home-summary.mjs",
     "voices:audit": "node scripts/audit-voice-set-partition.mjs",
     "captions:repair": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/repair-caption-client-test.ps1",
+    "voices:audit:decompiled": "node scripts/audit-decompiled-voice-events.mjs",
     "images:personas": "node scripts/extract-persona-images.mjs && node scripts/sync-persona-catalog.mjs",
     "validate": "node scripts/validate.mjs",
     "web:seed": "node scripts/export-web-seed.mjs",
@@ -30,7 +32,7 @@
     "installer:publish": "dotnet publish installer/DublagemBrasileira.Installer/DublagemBrasileira.Installer.csproj -c Release -r win-x64 --self-contained true -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true -p:EnableCompressionInSingleFile=true -p:DebugType=None -o build/windows-installer",
     "web:dev": "npm --prefix web run dev",
     "web:test": "npm --prefix web test",
-    "check": "npm run validate && npm run voices:audit && npm --prefix web run lint && npm --prefix web test"
+    "check": "npm run validate && npm run captions:aliases && npm run voices:audit && npm --prefix web run lint && npm --prefix web test"
   },
   "engines": {
     "node": ">=22.13.0"

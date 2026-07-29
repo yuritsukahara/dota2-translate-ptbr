@@ -25,8 +25,16 @@ const outputRoot = path.join(
   "subtitles",
 );
 const outputManifestPath = path.join(outputRoot, "caption-anchor-manifest.json");
-const outputLanguages = ["brazilian"];
+const outputLanguages = ["brazilian", "english", "russian"];
 const maxAnchorTokens = Number(process.env.CAPTION_ANCHOR_MAX_TOKENS || 55_000);
+// Preserve the exact 6869.8 anchor ordering validated in the normal client.
+// These four later catalog additions are covered by the supplemental anchors.
+const deferredFromFunctionalAnchor = new Set([
+  "monkey_king_monkey_ally_58",
+  "monkey_king_monkey_ally_80",
+  "monkey_king_monkey_ally_95",
+  "muerta_muerta_dead_shot_kill_08",
+]);
 
 if (!fs.existsSync(manifestPath)) {
   throw new Error(`Gere primeiro o pacote de captions: ${manifestPath}`);
@@ -53,9 +61,11 @@ for (const entry of manifest.entries || []) {
     throw new Error(`Arquivo listado no manifesto não encontrado: ${subtitlePath}`);
   }
   const subtitle = fs.readFileSync(subtitlePath, "utf8");
-  for (const match of subtitle.matchAll(/^\s*"([^"]+)"\s+"([^"]*)"\s*$/gm)) {
+  for (const match of subtitle.matchAll(
+    /^\s*"((?:\\.|[^"])*)"\s+"((?:\\.|[^"])*)"\s*$/gm,
+  )) {
     const [, token] = match;
-    if (token === "Language") continue;
+    if (token === "Language" || token.startsWith("[english]")) continue;
     rowsByToken.set(token, match[0].trimEnd());
   }
 }
@@ -70,7 +80,11 @@ announcer = announcer.replace(
   },
 );
 const officialTokens = new Set(
-  [...announcer.matchAll(/^\s*"([^"]+)"\s+"([^"]*)"\s*$/gm)]
+  [
+    ...announcer.matchAll(
+      /^\s*"((?:\\.|[^"])*)"\s+"((?:\\.|[^"])*)"\s*$/gm,
+    ),
+  ]
     .map((match) => match[1])
     .filter((token) => token !== "Language"),
 );
@@ -102,7 +116,7 @@ const priorityTokens = [
     const directory = hero.voiceDirectory || hero.id;
     return (voiceCatalog.heroes[hero.id] || []).map(
       (line) => `${directory}_${line.id}`,
-    );
+    ).filter((token) => !deferredFromFunctionalAnchor.has(token));
   }),
 ];
 const orderedTokens = [
@@ -130,13 +144,19 @@ const merged = announcer.replace(
   `\r\n${captionRows.join("\r\n")}\r\n}\r\n}\r\n`,
 );
 const mergedRowsByToken = new Map(
-  [...merged.matchAll(/^\s*"([^"]+)"\s+"([^"]*)"\s*$/gm)]
+  [
+    ...merged.matchAll(
+      /^\s*"((?:\\.|[^"])*)"\s+"((?:\\.|[^"])*)"\s*$/gm,
+    ),
+  ]
     .filter((match) => match[1] !== "Language")
     .map((match) => [match[1], match[2]]),
 );
 for (const line of announcerCatalog.lines) {
   const sourceRow = rowsByToken.get(line.id);
-  const sourceText = sourceRow?.match(/^\s*"[^"]+"\s+"([^"]*)"\s*$/)?.[1];
+  const sourceText = sourceRow?.match(
+    /^\s*"((?:\\.|[^"])*)"\s+"((?:\\.|[^"])*)"\s*$/,
+  )?.[2];
   const aliasText = mergedRowsByToken.get(`[english]${line.id}`);
   if (sourceText === undefined || aliasText !== sourceText) {
     throw new Error(
@@ -172,6 +192,9 @@ const anchorManifest = {
   totalTokens: includedTokens.size,
   availableCatalogTokens: rowsByToken.size,
   announcerAliases: announcerCatalog.lines.length,
+  includedEnglishAudioAliases: [...includedTokens].filter((token) =>
+    token.startsWith("[english]"),
+  ).length,
   outputFiles,
   omittedCatalogTokens: [...rowsByToken.keys()].filter(
     (token) => !includedTokens.has(token),
