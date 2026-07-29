@@ -102,23 +102,33 @@ try
         "dota",
         "cfg",
         "autoexec.cfg");
-    File.WriteAllText(autoexecPath, "echo \"configuração preservada\"\n");
-    CaptionConfiguration.Apply(autoexecPath);
-    CaptionConfiguration.Apply(autoexecPath);
+    File.WriteAllText(
+        autoexecPath,
+        "echo \"configuração preservada\"\n" +
+        "// Dublagem Brasileira Dota 2: início das captions\n" +
+        "cc_lang \"brazilian\"\n" +
+        "closecaption \"1\"\n" +
+        "cc_subtitles \"1\"\n" +
+        "// Dublagem Brasileira Dota 2: fim das captions\n");
+    CaptionConfiguration.RemoveLegacyBlock(autoexecPath);
+    CaptionConfiguration.RemoveLegacyBlock(autoexecPath);
     var autoexec = File.ReadAllText(autoexecPath);
     Expect(
         autoexec.Contains("echo \"configuração preservada\""),
         "Deve preservar o autoexec existente.");
     Expect(
-        autoexec.Contains("cc_lang \"brazilian\"") &&
-        autoexec.Contains("closecaption \"1\"") &&
-        autoexec.Contains("cc_subtitles \"1\""),
-        "Deve ativar captions brasileiras no autoexec.");
+        !autoexec.Contains("Dublagem Brasileira Dota 2: início das captions") &&
+        !autoexec.Contains("cc_lang \"brazilian\""),
+        "Deve remover a configuração legada de captions do autoexec.");
+    File.WriteAllText(
+        autoexecPath,
+        "// Dublagem Brasileira Dota 2: início das captions\n" +
+        "cc_lang \"brazilian\"\n" +
+        "// Dublagem Brasileira Dota 2: fim das captions\n");
+    CaptionConfiguration.RemoveLegacyBlock(autoexecPath);
     Expect(
-        autoexec.Split(
-            "Dublagem Brasileira Dota 2: início das captions",
-            StringSplitOptions.None).Length == 2,
-        "A configuração gerenciada deve ser idempotente.");
+        !File.Exists(autoexecPath),
+        "Deve apagar o autoexec quando ele continha somente o bloco legado.");
 
     Expect(
         locator.TryValidate(dotaRoot, out var validated) &&
@@ -160,7 +170,7 @@ try
     Expect(installed.CaptionsDetected, "Deve detectar as captions já instaladas.");
     Expect(
         installed.BrazilianLanguageActive,
-        "A montagem MOD e o autoexec devem ativar a camada sem opções da Steam.");
+        "A montagem MOD deve ativar a camada sem autoexec ou opções da Steam.");
 }
 finally
 {
@@ -227,6 +237,32 @@ if (!skipPayload && File.Exists(releaseArchive))
         names.Contains(
             "layers/captions/dota_brazilian/resource/subtitles/subtitles_announcer_brazilian.txt"),
         "O modo de captions deve manter o narrador padrão ancorado.");
+    foreach (var language in new[] { "english", "russian" })
+    {
+        var path =
+            "layers/captions/dota_brazilian/resource/subtitles/" +
+            $"subtitles_announcer_{language}.txt";
+        Expect(
+            names.Contains(path),
+            $"O narrador PT-BR deve acompanhar o idioma carregado: {language}.");
+        var localizedAnnouncerEntry = archive.GetEntry(path);
+        if (localizedAnnouncerEntry is not null)
+        {
+            using var localizedReader = new StreamReader(localizedAnnouncerEntry.Open());
+            var localizedCaptions = await localizedReader.ReadToEndAsync();
+            Expect(
+                localizedCaptions.Contains(
+                    "\"announcer_announcer_battle_prepare_01\"" +
+                    "\t\"Prepare-se para a batalha.\""),
+                $"O arquivo {language} deve mostrar a caption PT-BR.");
+            Expect(
+                Regex.IsMatch(
+                    localizedCaptions,
+                    $"\"Language\"\\s+\"{language}\"",
+                    RegexOptions.IgnoreCase),
+                $"O recurso deve se identificar para o carregador como {language}.");
+        }
+    }
     var announcerEntry = archive.GetEntry(
         "layers/captions/dota_brazilian/resource/subtitles/" +
         "subtitles_announcer_brazilian.txt");
@@ -282,7 +318,7 @@ if (!skipPayload && File.Exists(releaseArchive))
         var payloadManifest = await JsonSerializer.DeserializeAsync<PayloadManifest>(
             manifestStream,
             new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
-        Expect(payloadManifest?.Version == "6869.7", "A versão interna deve ser 6869.7.");
+        Expect(payloadManifest?.Version == "6869.8", "A versão interna deve ser 6869.8.");
         foreach (var file in payloadManifest?.Files ?? [])
         {
             var entry = archive.GetEntry(file.Path);

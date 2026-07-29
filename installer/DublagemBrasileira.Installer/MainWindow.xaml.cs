@@ -185,7 +185,7 @@ public partial class MainWindow : Window
                 : "as legendas PT-BR e o pack de voz do Axe.") +
             "\n\nEsta é uma modificação comunitária não oficial. " +
             "O Dota deve permanecer fechado durante a instalação. A Steam pode " +
-            "continuar aberta e suas opções de inicialização não serão alteradas. " +
+            "continuar aberta; autoexec e opções de inicialização não serão alterados. " +
             "Deseja continuar?",
             "Instalar Dublagem Brasileira",
             MessageBoxButton.YesNo,

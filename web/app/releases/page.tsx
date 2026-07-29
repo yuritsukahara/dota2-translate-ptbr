@@ -109,16 +109,17 @@ export default function ReleasesPage() {
             O instalador segue a via de camada de idioma já utilizada pelo Dota
             para pacotes adicionais de linguagem. Ele registra{" "}
             <code>dota_brazilian</code> no caminho de captions do cliente e
-            configura o idioma dentro dos arquivos locais do jogo. Não
-            substitui o pacote inglês e{" "}
+            fornece a caption PT-BR correspondente ao idioma já carregado. Não
+            substitui o áudio ou o pacote inglês e{" "}
             <span>não altera mecânicas, executáveis ou DLLs.</span>
           </p>
           <p>
             A Steam pode permanecer aberta e as opções de inicialização do Dota
-            não são alteradas. Somente o jogo precisa estar fechado durante a
-            instalação. Como é uma iniciativa comunitária, uma atualização pode
-            exigir o reparo da camada; o instalador cria um backup antes de
-            começar e oferece restauração.
+            não são alteradas. O instalador também não depende de{" "}
+            <code>autoexec.cfg</code>. Somente o jogo precisa estar fechado
+            durante a instalação. Como é uma iniciativa comunitária, uma
+            atualização pode exigir o reparo da camada; o instalador cria um
+            backup antes de começar e oferece restauração.
           </p>
           <p>
             O carregador de captions consulta o caminho <code>MOD</code>. O
@@ -130,7 +131,8 @@ export default function ReleasesPage() {
             Com a voz original inglesa, o narrador solicita identificadores
             prefixados por <code>[english]</code>. A camada brasileira associa
             esses identificadores às captions PT-BR sem editar a localização
-            inglesa original.
+            inglesa original. A tabela PT-BR também acompanha os recursos
+            carregados como inglês ou russo, sem usar <code>cc_lang</code>.
           </p>
         </div>
       </section>
@@ -145,7 +147,7 @@ export default function ReleasesPage() {
         <ol className="release-flow">
           <li><span>01</span><strong>Localiza</strong><p>Procura o Dota em todas as bibliotecas Steam.</p></li>
           <li><span>02</span><strong>Verifica</strong><p>Confirma a instalação e consulta a versão estável no GitHub.</p></li>
-          <li><span>03</span><strong>Protege</strong><p>Cria uma cópia integral da camada e do idioma anterior.</p></li>
+          <li><span>03</span><strong>Protege</strong><p>Cria uma cópia integral da camada e do gameinfo anterior.</p></li>
           <li><span>04</span><strong>Ativa</strong><p>Valida SHA-256, aplica a opção escolhida e monta a camada brasileira.</p></li>
         </ol>
       </section>

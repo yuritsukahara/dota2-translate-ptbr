@@ -39,6 +39,8 @@ O usuário escolhe o modo dentro do instalador.
   necessário.
 - O ZIP e cada arquivo interno são verificados por SHA-256.
 - Não lê nem altera as opções de inicialização do Dota na Steam.
+- Não depende de `autoexec.cfg`; uma atualização remove somente o antigo bloco
+  gerenciado pelo projeto, preservando qualquer configuração do usuário.
 - Cria um backup byte a byte de `game/dota/gameinfo.gi` e acrescenta a camada
   brasileira ao caminho `MOD`, usado pelo carregador de captions. A restauração
   repõe o arquivo original integralmente.
@@ -50,6 +52,9 @@ O usuário escolhe o modo dentro do instalador.
 - O narrador com áudio inglês solicita tokens prefixados por `[english]`. A
   camada `dota_brazilian` fornece aliases PT-BR para esses identificadores sem
   editar ou substituir a localização inglesa original.
+- A mesma tabela PT-BR do narrador é exposta sob os nomes de recurso
+  `brazilian`, `english` e `russian`. Assim a legenda acompanha o idioma que o
+  próprio Dota já carregou, sem `cc_lang` e sem mudar o áudio original.
 - O executável publicado é self-contained e não exige .NET, Node.js nem uma
   cópia deste repositório.
 

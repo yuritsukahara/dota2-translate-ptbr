@@ -1,7 +1,6 @@
 using System.Diagnostics;
 using System.Text;
 using System.Text.Json;
-using System.Text.RegularExpressions;
 using DublagemBrasileira.Installer.Models;
 
 namespace DublagemBrasileira.Installer.Services;
@@ -81,7 +80,6 @@ public sealed class InstallerEngine
         if (usableState)
         {
             state = currentState!;
-            EnsureCaptionConfigBackup(dotaRoot, state);
             EnsureBaseGameInfoBackup(dotaRoot, state);
             _log("Backup original preservado; aplicando a atualização sobre a versão atual…");
         }
@@ -125,7 +123,6 @@ public sealed class InstallerEngine
         var state = LoadMatchingState(dotaRoot) ??
                     throw new InvalidOperationException(
                         "Não há um backup gerenciado para reparar esta instalação.");
-        EnsureCaptionConfigBackup(dotaRoot, state);
         EnsureBaseGameInfoBackup(dotaRoot, state);
         var manifest = await _packages.GetManifestAsync(cancellationToken);
         var layersRoot = await _packages.PrepareAsync(manifest, cancellationToken);
@@ -173,25 +170,14 @@ public sealed class InstallerEngine
         var backupRoot = Path.Combine(_stateRoot, "backups", identifier);
         var gameRoot = Path.Combine(dotaRoot, "game");
         var languageRoot = Path.Combine(gameRoot, "dota_brazilian");
-        var bootPath = Path.Combine(gameRoot, "dota", "cfg", "boot.vcfg");
-        var autoexecPath = Path.Combine(gameRoot, "dota", "cfg", "autoexec.cfg");
         var baseGameInfoPath = Path.Combine(gameRoot, "dota", "gameinfo.gi");
         Directory.CreateDirectory(backupRoot);
 
-        _log("Criando backup integral da configuração anterior…");
-        File.Copy(bootPath, Path.Combine(backupRoot, "boot.vcfg"), overwrite: true);
+        _log("Criando backup integral da camada anterior…");
         File.Copy(
             baseGameInfoPath,
             Path.Combine(backupRoot, "gameinfo.base.gi"),
             overwrite: true);
-        var autoexecExisted = File.Exists(autoexecPath);
-        if (autoexecExisted)
-        {
-            File.Copy(
-                autoexecPath,
-                Path.Combine(backupRoot, "autoexec.cfg"),
-                overwrite: true);
-        }
         var languageExisted = Directory.Exists(languageRoot);
         if (languageExisted)
         {
@@ -204,38 +190,9 @@ public sealed class InstallerEngine
             Version = version,
             BackupDirectory = backupRoot,
             OriginalLanguageLayerExisted = languageExisted,
-            CaptionConfigBackupCaptured = true,
-            OriginalAutoexecExisted = autoexecExisted,
             BaseGameInfoBackupCaptured = true,
             InstalledAt = DateTimeOffset.UtcNow
         };
-    }
-
-    private void EnsureCaptionConfigBackup(
-        string dotaRoot,
-        InstallationRecord state)
-    {
-        if (state.CaptionConfigBackupCaptured)
-        {
-            return;
-        }
-
-        var autoexecPath = Path.Combine(
-            dotaRoot,
-            "game",
-            "dota",
-            "cfg",
-            "autoexec.cfg");
-        state.OriginalAutoexecExisted = File.Exists(autoexecPath);
-        if (state.OriginalAutoexecExisted)
-        {
-            File.Copy(
-                autoexecPath,
-                Path.Combine(state.BackupDirectory, "autoexec.cfg"),
-                overwrite: true);
-        }
-        state.CaptionConfigBackupCaptured = true;
-        SaveState(state);
     }
 
     private void EnsureBaseGameInfoBackup(
@@ -278,7 +235,6 @@ public sealed class InstallerEngine
         var gameRoot = Path.Combine(dotaRoot, "game");
         var target = Path.Combine(gameRoot, "dota_brazilian");
         var staging = Path.Combine(gameRoot, $".dublagem-staging-{Guid.NewGuid():N}");
-        var bootPath = Path.Combine(gameRoot, "dota", "cfg", "boot.vcfg");
         var autoexecPath = Path.Combine(gameRoot, "dota", "cfg", "autoexec.cfg");
         var baseGameInfoPath = Path.Combine(gameRoot, "dota", "gameinfo.gi");
 
@@ -303,23 +259,19 @@ public sealed class InstallerEngine
             Directory.Delete(target, recursive: true);
         }
         Directory.Move(staging, target);
-        ActivateBrazilianLanguage(bootPath);
-        CaptionConfiguration.Apply(autoexecPath);
+        CaptionConfiguration.RemoveLegacyBlock(autoexecPath);
         BrazilianCaptionMountConfiguration.Apply(baseGameInfoPath);
         _log(
-            "Camada ativada no caminho MOD, sem alterar opções da Steam; " +
-            "o VPK inglês permanece intacto.");
+            "Camada ativada no caminho MOD, sem autoexec ou opções da Steam; " +
+            "o áudio e o VPK inglês permanecem intactos.");
     }
 
     private void RestoreFromRecord(InstallationRecord state)
     {
         var gameRoot = Path.Combine(state.DotaRoot, "game");
         var target = Path.Combine(gameRoot, "dota_brazilian");
-        var bootPath = Path.Combine(gameRoot, "dota", "cfg", "boot.vcfg");
         var autoexecPath = Path.Combine(gameRoot, "dota", "cfg", "autoexec.cfg");
         var baseGameInfoPath = Path.Combine(gameRoot, "dota", "gameinfo.gi");
-        var bootBackup = Path.Combine(state.BackupDirectory, "boot.vcfg");
-        var autoexecBackup = Path.Combine(state.BackupDirectory, "autoexec.cfg");
         var baseGameInfoBackup = Path.Combine(
             state.BackupDirectory,
             "gameinfo.base.gi");
@@ -333,27 +285,7 @@ public sealed class InstallerEngine
         {
             CopyDirectory(languageBackup, target);
         }
-        if (!File.Exists(bootBackup))
-        {
-            throw new InvalidDataException("O backup de boot.vcfg não foi encontrado.");
-        }
-        File.Copy(bootBackup, bootPath, overwrite: true);
-        if (state.CaptionConfigBackupCaptured)
-        {
-            if (state.OriginalAutoexecExisted)
-            {
-                if (!File.Exists(autoexecBackup))
-                {
-                    throw new InvalidDataException(
-                        "O backup de autoexec.cfg não foi encontrado.");
-                }
-                File.Copy(autoexecBackup, autoexecPath, overwrite: true);
-            }
-            else
-            {
-                File.Delete(autoexecPath);
-            }
-        }
+        CaptionConfiguration.RemoveLegacyBlock(autoexecPath);
         if (state.BaseGameInfoBackupCaptured)
         {
             if (!File.Exists(baseGameInfoBackup))
@@ -363,34 +295,6 @@ public sealed class InstallerEngine
             }
             File.Copy(baseGameInfoBackup, baseGameInfoPath, overwrite: true);
         }
-    }
-
-    private static void ActivateBrazilianLanguage(string bootPath)
-    {
-        var boot = File.ReadAllText(bootPath);
-        var updated = Regex.Replace(
-            boot,
-            "(\"UILanguage\"\\s+\")[^\"]+(\"\\s*)",
-            "${1}brazilian$2",
-            RegexOptions.IgnoreCase);
-        updated = Regex.Replace(
-            updated,
-            "(\"AudioLanguage\"\\s+\")[^\"]+(\"\\s*)",
-            "${1}brazilian$2",
-            RegexOptions.IgnoreCase);
-        if (!Regex.IsMatch(
-                updated,
-                "\"UILanguage\"\\s+\"brazilian\"",
-                RegexOptions.IgnoreCase) ||
-            !Regex.IsMatch(
-                updated,
-                "\"AudioLanguage\"\\s+\"brazilian\"",
-                RegexOptions.IgnoreCase))
-        {
-            throw new InvalidDataException(
-                "Não foi possível ativar Português-Brasil no boot.vcfg.");
-        }
-        File.WriteAllText(bootPath, updated, new UTF8Encoding(false));
     }
 
     private InstallationRecord? LoadMatchingState(string dotaRoot)
