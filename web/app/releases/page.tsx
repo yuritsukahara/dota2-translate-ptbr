@@ -107,16 +107,24 @@ export default function ReleasesPage() {
         <div>
           <p>
             O instalador segue a via de camada de idioma já utilizada pelo Dota
-            para pacotes adicionais de linguagem. Ele monta{" "}
-            <code>dota_brazilian</code> com a opção{" "}
-            <code>-language brazilian</code>. Não substitui o pacote inglês e
-            não altera mecânicas, executáveis ou DLLs.
+            para pacotes adicionais de linguagem. Ele registra{" "}
+            <code>dota_brazilian</code> no caminho de captions do cliente e
+            configura o idioma dentro dos arquivos locais do jogo. Não
+            substitui o pacote inglês e{" "}
+            <span>não altera mecânicas, executáveis ou DLLs.</span>
           </p>
           <p>
-            A Steam pode reiniciar uma vez para salvar essa opção. Como é uma
-            iniciativa comunitária, uma atualização do jogo pode exigir o
-            reparo da camada. O instalador cria um backup antes de começar e
-            oferece restauração.
+            A Steam pode permanecer aberta e as opções de inicialização do Dota
+            não são alteradas. Somente o jogo precisa estar fechado durante a
+            instalação. Como é uma iniciativa comunitária, uma atualização pode
+            exigir o reparo da camada; o instalador cria um backup antes de
+            começar e oferece restauração.
+          </p>
+          <p>
+            O carregador de captions consulta o caminho <code>MOD</code>. O
+            instalador cria um backup byte a byte do <code>gameinfo.gi</code>,
+            adiciona a camada brasileira antes da base e restaura o arquivo
+            original quando solicitado.
           </p>
           <p>
             Com a voz original inglesa, o narrador solicita identificadores

@@ -184,8 +184,8 @@ public partial class MainWindow : Window
                 ? "somente as legendas PT-BR."
                 : "as legendas PT-BR e o pack de voz do Axe.") +
             "\n\nEsta é uma modificação comunitária não oficial. " +
-            "O Dota deve permanecer fechado. Se a Steam estiver aberta, ela será " +
-            "reiniciada uma vez para ativar a camada brasileira sem substituir o inglês. " +
+            "O Dota deve permanecer fechado durante a instalação. A Steam pode " +
+            "continuar aberta e suas opções de inicialização não serão alteradas. " +
             "Deseja continuar?",
             "Instalar Dublagem Brasileira",
             MessageBoxButton.YesNo,
