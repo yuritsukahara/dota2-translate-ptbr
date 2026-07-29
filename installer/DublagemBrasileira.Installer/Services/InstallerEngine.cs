@@ -81,6 +81,7 @@ public sealed class InstallerEngine
         if (usableState)
         {
             state = currentState!;
+            EnsureCaptionConfigBackup(dotaRoot, state);
             _log("Backup original preservado; aplicando a atualização sobre a versão atual…");
         }
         else
@@ -122,6 +123,7 @@ public sealed class InstallerEngine
         var state = LoadMatchingState(dotaRoot) ??
                     throw new InvalidOperationException(
                         "Não há um backup gerenciado para reparar esta instalação.");
+        EnsureCaptionConfigBackup(dotaRoot, state);
         var manifest = await _packages.GetManifestAsync(cancellationToken);
         var layersRoot = await _packages.PrepareAsync(manifest, cancellationToken);
         var payloadLanguageRoot = Path.Combine(
@@ -168,10 +170,19 @@ public sealed class InstallerEngine
         var gameRoot = Path.Combine(dotaRoot, "game");
         var languageRoot = Path.Combine(gameRoot, "dota_brazilian");
         var bootPath = Path.Combine(gameRoot, "dota", "cfg", "boot.vcfg");
+        var autoexecPath = Path.Combine(gameRoot, "dota", "cfg", "autoexec.cfg");
         Directory.CreateDirectory(backupRoot);
 
         _log("Criando backup integral da configuração anterior…");
         File.Copy(bootPath, Path.Combine(backupRoot, "boot.vcfg"), overwrite: true);
+        var autoexecExisted = File.Exists(autoexecPath);
+        if (autoexecExisted)
+        {
+            File.Copy(
+                autoexecPath,
+                Path.Combine(backupRoot, "autoexec.cfg"),
+                overwrite: true);
+        }
         var languageExisted = Directory.Exists(languageRoot);
         if (languageExisted)
         {
@@ -184,8 +195,37 @@ public sealed class InstallerEngine
             Version = version,
             BackupDirectory = backupRoot,
             OriginalLanguageLayerExisted = languageExisted,
+            CaptionConfigBackupCaptured = true,
+            OriginalAutoexecExisted = autoexecExisted,
             InstalledAt = DateTimeOffset.UtcNow
         };
+    }
+
+    private void EnsureCaptionConfigBackup(
+        string dotaRoot,
+        InstallationRecord state)
+    {
+        if (state.CaptionConfigBackupCaptured)
+        {
+            return;
+        }
+
+        var autoexecPath = Path.Combine(
+            dotaRoot,
+            "game",
+            "dota",
+            "cfg",
+            "autoexec.cfg");
+        state.OriginalAutoexecExisted = File.Exists(autoexecPath);
+        if (state.OriginalAutoexecExisted)
+        {
+            File.Copy(
+                autoexecPath,
+                Path.Combine(state.BackupDirectory, "autoexec.cfg"),
+                overwrite: true);
+        }
+        state.CaptionConfigBackupCaptured = true;
+        SaveState(state);
     }
 
     private void ApplyPayload(
@@ -198,6 +238,7 @@ public sealed class InstallerEngine
         var target = Path.Combine(gameRoot, "dota_brazilian");
         var staging = Path.Combine(gameRoot, $".dublagem-staging-{Guid.NewGuid():N}");
         var bootPath = Path.Combine(gameRoot, "dota", "cfg", "boot.vcfg");
+        var autoexecPath = Path.Combine(gameRoot, "dota", "cfg", "autoexec.cfg");
 
         _log("Preparando a camada brasileira verificada…");
         CopyDirectory(payloadLanguageRoot, staging);
@@ -221,6 +262,7 @@ public sealed class InstallerEngine
         }
         Directory.Move(staging, target);
         ActivateBrazilianLanguage(bootPath);
+        CaptionConfiguration.Apply(autoexecPath);
     }
 
     private void RestoreFromRecord(InstallationRecord state)
@@ -228,7 +270,9 @@ public sealed class InstallerEngine
         var gameRoot = Path.Combine(state.DotaRoot, "game");
         var target = Path.Combine(gameRoot, "dota_brazilian");
         var bootPath = Path.Combine(gameRoot, "dota", "cfg", "boot.vcfg");
+        var autoexecPath = Path.Combine(gameRoot, "dota", "cfg", "autoexec.cfg");
         var bootBackup = Path.Combine(state.BackupDirectory, "boot.vcfg");
+        var autoexecBackup = Path.Combine(state.BackupDirectory, "autoexec.cfg");
         var languageBackup = Path.Combine(state.BackupDirectory, "dota_brazilian");
 
         if (Directory.Exists(target))
@@ -244,6 +288,22 @@ public sealed class InstallerEngine
             throw new InvalidDataException("O backup de boot.vcfg não foi encontrado.");
         }
         File.Copy(bootBackup, bootPath, overwrite: true);
+        if (state.CaptionConfigBackupCaptured)
+        {
+            if (state.OriginalAutoexecExisted)
+            {
+                if (!File.Exists(autoexecBackup))
+                {
+                    throw new InvalidDataException(
+                        "O backup de autoexec.cfg não foi encontrado.");
+                }
+                File.Copy(autoexecBackup, autoexecPath, overwrite: true);
+            }
+            else
+            {
+                File.Delete(autoexecPath);
+            }
+        }
     }
 
     private static void ActivateBrazilianLanguage(string bootPath)

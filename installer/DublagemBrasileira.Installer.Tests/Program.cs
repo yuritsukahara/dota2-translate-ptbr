@@ -72,6 +72,29 @@ try
     File.WriteAllText(
         Path.Combine(dotaRoot, "game", "dota", "cfg", "boot.vcfg"),
         "\"UILanguage\" \"english\"");
+    var autoexecPath = Path.Combine(
+        dotaRoot,
+        "game",
+        "dota",
+        "cfg",
+        "autoexec.cfg");
+    File.WriteAllText(autoexecPath, "echo \"configuração preservada\"\n");
+    CaptionConfiguration.Apply(autoexecPath);
+    CaptionConfiguration.Apply(autoexecPath);
+    var autoexec = File.ReadAllText(autoexecPath);
+    Expect(
+        autoexec.Contains("echo \"configuração preservada\""),
+        "Deve preservar o autoexec existente.");
+    Expect(
+        autoexec.Contains("cc_lang \"brazilian\"") &&
+        autoexec.Contains("closecaption \"1\"") &&
+        autoexec.Contains("cc_subtitles \"1\""),
+        "Deve ativar captions brasileiras no autoexec.");
+    Expect(
+        autoexec.Split(
+            "Dublagem Brasileira Dota 2: início das captions",
+            StringSplitOptions.None).Length == 2,
+        "A configuração gerenciada deve ser idempotente.");
 
     Expect(
         locator.TryValidate(dotaRoot, out var validated) &&
