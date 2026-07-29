@@ -29,6 +29,8 @@ const axeLanguageRoot = path.join(
 );
 const captionsOverlayRoot = path.join(releaseRoot, "overlay-captions");
 const axeOverlayRoot = path.join(releaseRoot, "overlay-captions-axe");
+const compatibilityRoot = path.join(releaseRoot, "caption-compatibility");
+const runtimeBaselineRoot = path.join(releaseRoot, "runtime-baseline");
 const captionManifestPath = path.join(
   repositoryRoot,
   "build",
@@ -88,6 +90,13 @@ function collectFiles(root, relative = "") {
   return result;
 }
 
+function withoutEnglishAliases(source) {
+  return source
+    .split(/\r?\n/)
+    .filter((line) => !/^\s*"\[english\][^"]+"\s+"/i.test(line))
+    .join("\r\n");
+}
+
 run("build-local-caption-pack.mjs");
 run("build-caption-anchor-test.mjs");
 
@@ -103,12 +112,27 @@ for (const overlayRoot of [captionsOverlayRoot, axeOverlayRoot]) {
     "subtitles",
   );
   fs.mkdirSync(overlaySubtitlesRoot, { recursive: true });
-  fs.cpSync(captionSubtitlesRoot, overlaySubtitlesRoot, { recursive: true });
-  const filename = "subtitles_announcer_brazilian.txt";
-  fs.copyFileSync(
-    path.join(captionAnchorRoot, filename),
-    path.join(overlaySubtitlesRoot, filename),
-  );
+  for (const filename of fs
+    .readdirSync(captionSubtitlesRoot)
+    .filter((name) => name.endsWith("_brazilian.txt"))) {
+    fs.writeFileSync(
+      path.join(overlaySubtitlesRoot, filename),
+      withoutEnglishAliases(
+        fs.readFileSync(path.join(captionSubtitlesRoot, filename), "utf8"),
+      ),
+      "utf8",
+    );
+  }
+  for (const filename of [
+    "subtitles_announcer_brazilian.txt",
+    "subtitles_announcer_english.txt",
+    "subtitles_announcer_russian.txt",
+  ]) {
+    fs.copyFileSync(
+      path.join(captionAnchorRoot, filename),
+      path.join(overlaySubtitlesRoot, filename),
+    );
+  }
 }
 fs.mkdirSync(path.join(axeOverlayRoot, "sounds", "vo", "axe"), { recursive: true });
 fs.mkdirSync(captionsLanguageRoot, { recursive: true });
@@ -129,6 +153,29 @@ run("pack-language-vpk.mjs", [
   captionsOverlayRoot,
   path.join(captionsLanguageRoot, "pak01"),
 ]);
+fs.mkdirSync(runtimeBaselineRoot, { recursive: true });
+for (const filename of ["pak01_dir.vpk", "pak01_000.vpk"]) {
+  fs.copyFileSync(
+    path.join(captionsLanguageRoot, filename),
+    path.join(runtimeBaselineRoot, filename),
+  );
+}
+run("build-caption-compatibility-overlay.mjs", [
+  path.join(runtimeBaselineRoot, "pak01_dir.vpk"),
+  captionSubtitlesRoot,
+  compatibilityRoot,
+]);
+for (const overlayRoot of [captionsOverlayRoot, axeOverlayRoot]) {
+  fs.cpSync(
+    path.join(compatibilityRoot, "overlay", "resource", "subtitles"),
+    path.join(overlayRoot, "resource", "subtitles"),
+    { recursive: true },
+  );
+}
+run("pack-language-vpk.mjs", [
+  captionsOverlayRoot,
+  path.join(captionsLanguageRoot, "pak01"),
+]);
 run("pack-language-vpk.mjs", [
   axeOverlayRoot,
   path.join(axeLanguageRoot, "pak01"),
@@ -138,10 +185,17 @@ const expectedSubtitleFiles = fs
   .readdirSync(captionSubtitlesRoot)
   .filter((name) => name.endsWith("_brazilian.txt"))
   .sort();
-const forbiddenSubtitleFiles = [
+const expectedCompatibilityFiles = [
   "subtitles_announcer_english.txt",
   "subtitles_announcer_russian.txt",
+  "subtitles_announcer_killing_spree_brazilian.txt",
+  "subtitles_announcer_killing_spree_english.txt",
 ];
+const expectedSubtitleEntries = new Set(
+  [...expectedSubtitleFiles, ...expectedCompatibilityFiles].map(
+    (filename) => `resource/subtitles/${filename}`,
+  ),
+);
 for (const [modeRoot, overlayRoot] of [
   [captionsLanguageRoot, captionsOverlayRoot],
   [axeLanguageRoot, axeOverlayRoot],
@@ -157,10 +211,18 @@ for (const [modeRoot, overlayRoot] of [
       throw new Error(`Caption ausente no VPK: ${entry}`);
     }
   }
-  for (const filename of forbiddenSubtitleFiles) {
+  for (const filename of expectedCompatibilityFiles) {
     const entry = `resource/subtitles/${filename}`;
-    if (packedEntries.has(entry)) {
-      throw new Error(`Caption de outro idioma presente no VPK: ${entry}`);
+    if (!packedEntries.has(entry)) {
+      throw new Error(`Âncora de compatibilidade ausente no VPK: ${entry}`);
+    }
+  }
+  const packedSubtitleEntries = [...packedEntries].filter((entry) =>
+    entry.startsWith("resource/subtitles/"),
+  );
+  for (const entry of packedSubtitleEntries) {
+    if (!expectedSubtitleEntries.has(entry)) {
+      throw new Error(`Recurso de caption inesperado no VPK: ${entry}`);
     }
   }
   fs.cpSync(
@@ -196,7 +258,7 @@ const captionManifest = JSON.parse(fs.readFileSync(captionManifestPath, "utf8"))
 const payloadFiles = collectFiles(stagingRoot);
 const payloadManifest = {
   schemaVersion: 1,
-  version: `${captionManifest.build.clientVersion}.11`,
+  version: `${captionManifest.build.clientVersion}.13`,
   createdAt: new Date().toISOString(),
   dotaBuild: captionManifest.build,
   captions: {
@@ -204,6 +266,8 @@ const payloadManifest = {
     englishAudioAliases: captionManifest.englishAudioAliases,
     payloadEntries: captionManifest.payloadEntries,
     files: captionManifest.files,
+    compatibilityAnchors: expectedCompatibilityFiles.length + 1,
+    runtimeFiles: expectedSubtitleEntries.size,
     sources: {
       official: captionManifest.sources.official,
       community: captionManifest.sources.community,
@@ -277,6 +341,7 @@ fs.writeFileSync(
 fs.rmSync(stagingRoot, { recursive: true, force: true });
 fs.rmSync(captionsOverlayRoot, { recursive: true, force: true });
 fs.rmSync(axeOverlayRoot, { recursive: true, force: true });
+fs.rmSync(compatibilityRoot, { recursive: true, force: true });
 
 console.log(
   `${captionManifest.tokens.toLocaleString("pt-BR")} captions e ` +

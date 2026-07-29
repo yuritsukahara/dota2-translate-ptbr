@@ -61,8 +61,12 @@ test("página de release explica opções, camada de idioma e download", async (
   assert.match(page, /opções de inicialização do Dota\s+não são alteradas/i);
   assert.match(page, /não depende de\{\" \"\}\s*<code>autoexec\.cfg/i);
   assert.match(page, /não modifica <code>game\/dota\/gameinfo\.gi/i);
-  assert.match(page, /somente o recurso de\s+captions <code>brazilian/i);
-  assert.match(page, /não há arquivos de captions com sufixos/i);
+  assert.match(page, /captions e índices de compatibilidade/i);
+  assert.match(
+    page,
+    /<code>brazilian<\/code>, <code>english<\/code> e\{\" \"\}\s*<code>russian/i,
+  );
+  assert.match(page, /exclusivamente em\{\" \"\}\s*<code>game\/dota_brazilian/i);
   assert.doesNotMatch(
     page,
     /-language brazilian|Steam pode reiniciar|adiciona a camada brasileira antes da base/i,
@@ -71,6 +75,8 @@ test("página de release explica opções, camada de idioma e download", async (
   assert.equal(manifest.captions.tokens, 77_594);
   assert.equal(manifest.captions.englishAudioAliases, 77_594);
   assert.equal(manifest.captions.payloadEntries, 155_188);
+  assert.equal(manifest.captions.compatibilityAnchors, 5);
+  assert.equal(manifest.captions.runtimeFiles, 130);
   assert.equal(
     manifest.captions.sources.official +
       manifest.captions.sources.community +

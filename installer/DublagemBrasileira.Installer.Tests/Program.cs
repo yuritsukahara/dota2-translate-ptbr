@@ -274,80 +274,98 @@ if (!skipPayload && File.Exists(releaseArchive))
             snapfireRows.TryGetValue(
                 "snapfire_snapfire_spawn_01",
                 out var snapfireCaption) &&
-            snapfireRows.TryGetValue(
-                "[english]snapfire_snapfire_spawn_01",
-                out var snapfireEnglishCaption) &&
-            string.Equals(
-                snapfireCaption,
-                snapfireEnglishCaption,
-                StringComparison.Ordinal),
-            "A Snapfire deve fornecer o mesmo texto para o token normal e o alias inglês.");
-        foreach (var row in snapfireRows.Where(entry =>
-                     !entry.Key.StartsWith("[english]", StringComparison.OrdinalIgnoreCase)))
+            string.Equals(snapfireCaption, "Snapfire!", StringComparison.Ordinal),
+            "O recurso individual da Snapfire deve manter a caption PT-BR normal.");
+        Expect(
+            snapfireRows.Keys.All(token =>
+                !token.StartsWith("[english]", StringComparison.OrdinalIgnoreCase)),
+            "Aliases globais não devem ser duplicados nos recursos individuais.");
+    }
+
+    const string subtitleRoot =
+        "layers/captions/dota_brazilian/resource/subtitles/";
+    var compatibilityFiles = new[]
+    {
+        "subtitles_announcer_brazilian.txt",
+        "subtitles_announcer_english.txt",
+        "subtitles_announcer_russian.txt",
+        "subtitles_announcer_killing_spree_brazilian.txt",
+        "subtitles_announcer_killing_spree_english.txt"
+    };
+    var captionsByToken = new Dictionary<string, string>(
+        StringComparer.OrdinalIgnoreCase);
+    foreach (var filename in compatibilityFiles)
+    {
+        var entry = archive.GetEntry($"{subtitleRoot}{filename}");
+        Expect(entry is not null, $"Âncora de compatibilidade ausente: {filename}");
+        if (entry is null)
         {
-            Expect(
-                snapfireRows.TryGetValue(
-                    $"[english]{row.Key}",
-                    out var aliasCaption) &&
-                string.Equals(row.Value, aliasCaption, StringComparison.Ordinal),
-                $"Token da Snapfire sem alias inglês equivalente: {row.Key}");
+            continue;
+        }
+        using var reader = new StreamReader(entry.Open());
+        var contents = await reader.ReadToEndAsync();
+        foreach (Match match in Regex.Matches(
+                     contents,
+                     "^\\s*\"([^\"]+)\"\\s+\"((?:\\\\.|[^\"])*)\"\\s*$",
+                     RegexOptions.Multiline))
+        {
+            if (match.Groups[1].Value != "Language")
+            {
+                captionsByToken[match.Groups[1].Value] =
+                    match.Groups[2].Value;
+            }
         }
     }
-    foreach (var language in new[] { "english", "russian" })
+    var normalCaptions = captionsByToken
+        .Where(entry =>
+            !entry.Key.StartsWith("[english]", StringComparison.OrdinalIgnoreCase))
+        .ToArray();
+    var englishAliases = captionsByToken
+        .Where(entry =>
+            entry.Key.StartsWith("[english]", StringComparison.OrdinalIgnoreCase))
+        .ToArray();
+    Expect(
+        normalCaptions.Length == 77_594,
+        "As cinco âncoras devem cobrir as 77.594 captions normais.");
+    Expect(
+        englishAliases.Length == 77_594,
+        "As cinco âncoras devem cobrir os 77.594 aliases do áudio inglês.");
+    foreach (var caption in normalCaptions)
     {
-        var path =
-            "layers/captions/dota_brazilian/resource/subtitles/" +
-            $"subtitles_announcer_{language}.txt";
         Expect(
-            !names.Contains(path),
-            $"O pacote Brazilian não deve conter o recurso {language}.");
+            captionsByToken.TryGetValue(
+                $"[english]{caption.Key}",
+                out var aliasCaption) &&
+            string.Equals(caption.Value, aliasCaption, StringComparison.Ordinal),
+            $"Alias inglês ausente ou divergente: {caption.Key}");
     }
-    var announcerEntry = archive.GetEntry(
-        "layers/captions/dota_brazilian/resource/subtitles/" +
-        "subtitles_announcer_brazilian.txt");
-    if (announcerEntry is not null)
-    {
-        using var reader = new StreamReader(announcerEntry.Open());
-        var announcerCaptions = await reader.ReadToEndAsync();
-        Expect(
-            announcerCaptions.Contains(
-                "\"announcer_announcer_battle_prepare_01\"" +
-                "\t\"Prepare-se para a batalha.\""),
-            "O token normal do narrador deve permanecer em PT-BR.");
-        Expect(
-            announcerCaptions.Contains(
-                "\"[english]announcer_announcer_battle_prepare_01\"" +
-                "\t\t\"Prepare-se para a batalha.\""),
-            "O alias solicitado pelo áudio inglês deve usar a caption PT-BR.");
-        var captionsByToken = Regex.Matches(
-                announcerCaptions,
-                "^\\s*\"([^\"]+)\"\\s+\"([^\"]*)\"\\s*$",
-                RegexOptions.Multiline)
-            .Cast<Match>()
-            .Where(match => match.Groups[1].Value != "Language")
-            .GroupBy(match => match.Groups[1].Value)
-            .ToDictionary(
-                group => group.Key,
-                group => group.Last().Groups[2].Value,
-                StringComparer.OrdinalIgnoreCase);
-        var announcerAliases = captionsByToken
-            .Where(entry =>
-                entry.Key.StartsWith(
-                    "[english]announcer_",
-                    StringComparison.OrdinalIgnoreCase))
-            .ToArray();
-        Expect(
-            announcerAliases.Length == 2_074,
-            "Todas as 2.074 captions do narrador devem possuir alias inglês.");
-        foreach (var alias in announcerAliases)
-        {
-            var normalToken = alias.Key["[english]".Length..];
-            Expect(
-                captionsByToken.TryGetValue(normalToken, out var normalCaption) &&
-                string.Equals(normalCaption, alias.Value, StringComparison.Ordinal),
-                $"O alias deve repetir a caption PT-BR: {normalToken}");
-        }
-    }
+    Expect(
+        captionsByToken.TryGetValue(
+            "announcer_announcer_battle_prepare_01",
+            out var prepareCaption) &&
+        string.Equals(
+            prepareCaption,
+            "Prepare-se para a batalha.",
+            StringComparison.Ordinal),
+        "O narrador deve manter “Prepare-se para a batalha.” em PT-BR.");
+    Expect(
+        captionsByToken.TryGetValue(
+            "[english]windrunner_wr_arc_spawn_01",
+            out var windArcanaCaption) &&
+        string.Equals(
+            windArcanaCaption,
+            "Windranger. Às suas ordens.",
+            StringComparison.Ordinal),
+        "A Arcana da Windranger deve estar coberta pelo alias inglês.");
+    Expect(
+        captionsByToken.TryGetValue(
+            "[english]faceless_void_fv_arc_spawn_01",
+            out var voidArcanaCaption) &&
+        string.Equals(
+            voidArcanaCaption,
+            "Faceless Void.",
+            StringComparison.Ordinal),
+        "A Arcana do Faceless Void deve estar coberta pelo alias inglês.");
 
     var manifestEntry = archive.GetEntry("payload-manifest.json");
     Expect(manifestEntry is not null, "O pacote deve conter o manifesto interno.");
@@ -357,7 +375,7 @@ if (!skipPayload && File.Exists(releaseArchive))
         var payloadManifest = await JsonSerializer.DeserializeAsync<PayloadManifest>(
             manifestStream,
             new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
-        Expect(payloadManifest?.Version == "6869.11", "A versão interna deve ser 6869.11.");
+        Expect(payloadManifest?.Version == "6869.13", "A versão interna deve ser 6869.13.");
         foreach (var file in payloadManifest?.Files ?? [])
         {
             var entry = archive.GetEntry(file.Path);

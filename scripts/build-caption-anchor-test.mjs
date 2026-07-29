@@ -25,8 +25,16 @@ const outputRoot = path.join(
   "subtitles",
 );
 const outputManifestPath = path.join(outputRoot, "caption-anchor-manifest.json");
-const outputLanguages = ["brazilian"];
+const outputLanguages = ["brazilian", "english", "russian"];
 const maxAnchorTokens = Number(process.env.CAPTION_ANCHOR_MAX_TOKENS || 55_000);
+// Preserve the exact 6869.8 anchor ordering validated in the normal client.
+// These four later catalog additions are covered by the supplemental anchors.
+const deferredFromFunctionalAnchor = new Set([
+  "monkey_king_monkey_ally_58",
+  "monkey_king_monkey_ally_80",
+  "monkey_king_monkey_ally_95",
+  "muerta_muerta_dead_shot_kill_08",
+]);
 
 if (!fs.existsSync(manifestPath)) {
   throw new Error(`Gere primeiro o pacote de captions: ${manifestPath}`);
@@ -57,7 +65,7 @@ for (const entry of manifest.entries || []) {
     /^\s*"((?:\\.|[^"])*)"\s+"((?:\\.|[^"])*)"\s*$/gm,
   )) {
     const [, token] = match;
-    if (token === "Language") continue;
+    if (token === "Language" || token.startsWith("[english]")) continue;
     rowsByToken.set(token, match[0].trimEnd());
   }
 }
@@ -83,6 +91,12 @@ const officialTokens = new Set(
 const announcerCatalog = JSON.parse(
   fs.readFileSync(path.join(dataRoot, "announcer-lines.json"), "utf8"),
 );
+const heroCatalog = JSON.parse(
+  fs.readFileSync(path.join(dataRoot, "heroes.json"), "utf8"),
+);
+const voiceCatalog = JSON.parse(
+  fs.readFileSync(path.join(dataRoot, "voice-lines.json"), "utf8"),
+);
 for (const line of announcerCatalog.lines) {
   const row = rowsByToken.get(line.id);
   if (!row) {
@@ -93,18 +107,20 @@ for (const line of announcerCatalog.lines) {
     rowsByToken.set(alias, asEnglishAlias(row, line.id));
   }
 }
-const requiredPriorityTokens = [
+const priorityTokens = [
   ...announcerCatalog.lines.flatMap((line) => [
     line.id,
     `[english]${line.id}`,
   ]),
+  ...heroCatalog.heroes.flatMap((hero) => {
+    const directory = hero.voiceDirectory || hero.id;
+    return (voiceCatalog.heroes[hero.id] || []).map(
+      (line) => `${directory}_${line.id}`,
+    ).filter((token) => !deferredFromFunctionalAnchor.has(token));
+  }),
 ];
-const preferredRuntimeTokens = [...rowsByToken.keys()].filter(
-  (token) => token.startsWith("[english]"),
-);
 const orderedTokens = [
-  ...requiredPriorityTokens,
-  ...preferredRuntimeTokens,
+  ...priorityTokens,
   ...rowsByToken.keys(),
 ];
 const includedTokens = new Set(officialTokens);
@@ -161,7 +177,7 @@ for (const language of outputLanguages) {
   fs.writeFileSync(path.join(outputRoot, filename), localized, "utf8");
   outputFiles.push(filename);
 }
-const missingPriorityTokens = requiredPriorityTokens.filter(
+const missingPriorityTokens = priorityTokens.filter(
   (token) => rowsByToken.has(token) && !includedTokens.has(token),
 );
 if (missingPriorityTokens.length) {
@@ -176,7 +192,6 @@ const anchorManifest = {
   totalTokens: includedTokens.size,
   availableCatalogTokens: rowsByToken.size,
   announcerAliases: announcerCatalog.lines.length,
-  preferredEnglishAudioAliases: preferredRuntimeTokens.length,
   includedEnglishAudioAliases: [...includedTokens].filter((token) =>
     token.startsWith("[english]"),
   ).length,

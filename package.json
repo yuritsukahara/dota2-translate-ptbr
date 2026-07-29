@@ -21,6 +21,7 @@
     "captions:audit": "node scripts/audit-caption-variants.mjs && node scripts/sync-persona-catalog.mjs && node scripts/sync-home-summary.mjs",
     "voices:audit": "node scripts/audit-voice-set-partition.mjs",
     "captions:repair": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/repair-caption-client-test.ps1",
+    "voices:audit:decompiled": "node scripts/audit-decompiled-voice-events.mjs",
     "images:personas": "node scripts/extract-persona-images.mjs && node scripts/sync-persona-catalog.mjs",
     "validate": "node scripts/validate.mjs",
     "web:seed": "node scripts/export-web-seed.mjs",

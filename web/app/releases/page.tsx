@@ -52,7 +52,7 @@ export default function ReleasesPage() {
             </div>
             <div>
               <dt>{release.captions.files}</dt>
-              <dd>arquivos de legenda</dd>
+              <dd>grupos de herói e narrador</dd>
             </div>
             <div>
               <dt>{voiceLines}</dt>
@@ -111,7 +111,8 @@ export default function ReleasesPage() {
             O instalador segue a via de camada de idioma já utilizada pelo Dota
             para pacotes adicionais de linguagem. Ele cria{" "}
             <code>game/dota_brazilian</code> e fornece somente o recurso de
-            captions <code>brazilian</code>. Não substitui o áudio ou o pacote inglês e{" "}
+            captions e índices de compatibilidade dentro dessa camada. Não
+            substitui o áudio ou os pacotes de idioma da Valve e{" "}
             <span>não altera mecânicas, executáveis ou DLLs.</span>
           </p>
           <p>
@@ -134,9 +135,11 @@ export default function ReleasesPage() {
             prefixados por <code>[english]</code>. A camada brasileira associa
             esses identificadores às captions PT-BR sem editar a localização
             inglesa original. Esse pareamento também cobre todos os heróis,
-            personas e variantes. O Dota precisa estar carregando o recurso{" "}
-            <code>brazilian</code>; não há arquivos de captions com sufixos
-            <code>english</code> ou <code>russian</code>.
+            personas e variantes. Os índices globais com nomes{" "}
+            <code>brazilian</code>, <code>english</code> e{" "}
+            <code>russian</code> ficam exclusivamente em{" "}
+            <code>game/dota_brazilian</code>; eles não alteram os arquivos
+            correspondentes em <code>game/dota</code>.
           </p>
         </div>
       </section>

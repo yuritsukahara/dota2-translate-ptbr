@@ -74,7 +74,10 @@ Node.js, .NET ou uma cópia deste repositório no computador do usuário. Ele
 escreve somente em `game/dota_brazilian`; o Dota monta essa pasta pelo fluxo
 nativo de idioma quando **Português (Brasil)** está selecionado no menu.
 Arquivos-base, `autoexec.cfg` e opções de inicialização da Steam não são
-alterados. A decisão técnica e o procedimento de recuperação estão em
+alterados. Cinco índices internos cobrem os 77.594 tokens normais e seus
+77.594 identificadores de fallback; a auditoria descompilada liga 75.520 de
+75.520 falas de heróis e variantes ao evento e ao áudio corretos. A decisão
+técnica e o procedimento de recuperação estão em
 [`docs/experiments/CAPTION_INSTALLATION_DECISION.md`](docs/experiments/CAPTION_INSTALLATION_DECISION.md).
 
 ## Catálogos e ferramentas locais
