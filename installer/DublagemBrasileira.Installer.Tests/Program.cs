@@ -179,7 +179,7 @@ if (!skipPayload && File.Exists(releaseArchive))
         var payloadManifest = await JsonSerializer.DeserializeAsync<PayloadManifest>(
             manifestStream,
             new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
-        Expect(payloadManifest?.Version == "6869.2", "A versão interna deve ser 6869.2.");
+        Expect(payloadManifest?.Version == "6869.3", "A versão interna deve ser 6869.3.");
         foreach (var file in payloadManifest?.Files ?? [])
         {
             var entry = archive.GetEntry(file.Path);
