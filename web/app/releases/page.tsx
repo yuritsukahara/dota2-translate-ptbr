@@ -118,6 +118,12 @@ export default function ReleasesPage() {
             reparo da camada. O instalador cria um backup antes de começar e
             oferece restauração.
           </p>
+          <p>
+            Com a voz original inglesa, o narrador solicita identificadores
+            prefixados por <code>[english]</code>. A camada brasileira associa
+            esses identificadores às captions PT-BR sem editar a localização
+            inglesa original.
+          </p>
         </div>
       </section>
 

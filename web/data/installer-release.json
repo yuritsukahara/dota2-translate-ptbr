@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "version": "6869.5",
-  "createdAt": "2026-07-29T01:35:55.688Z",
+  "version": "6869.6",
+  "createdAt": "2026-07-29T02:16:36.520Z",
   "dotaBuild": {
     "clientVersion": "6869",
     "date": "Jul 24 2026"
@@ -23,7 +23,7 @@
   ],
   "payload": {
     "url": "https://github.com/yuritsukahara/dota2-translate-ptbr/releases/download/installer-channel-stable/dublagem-ptbr-payload.zip",
-    "bytes": 32874841,
-    "sha256": "86d8116d02a0563a60fb8aa40440bf8c4909ce09476af7f265cf8c1dcc86c165"
+    "bytes": 32822273,
+    "sha256": "20ef5f9bd3adb6e3264f3d35f032069ca463d0e977f4b618ecf29bb15bda9a9b"
   }
 }

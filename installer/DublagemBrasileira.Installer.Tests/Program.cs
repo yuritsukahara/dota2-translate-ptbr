@@ -4,6 +4,7 @@ using System.IO;
 using System.IO.Compression;
 using System.Security.Cryptography;
 using System.Text.Json;
+using System.Text.RegularExpressions;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
 
@@ -263,6 +264,14 @@ if (!skipPayload && File.Exists(releaseArchive))
     var names = archive.Entries.Select(entry => entry.FullName).ToHashSet(
         StringComparer.OrdinalIgnoreCase);
     Expect(
+        !names.Any(name =>
+            name.StartsWith("layers/", StringComparison.OrdinalIgnoreCase) &&
+            !Regex.IsMatch(
+                name,
+                "^layers/(captions|captions-axe)/dota_brazilian/",
+                RegexOptions.IgnoreCase)),
+        "O ZIP deve escrever somente na camada dota_brazilian.");
+    Expect(
         names.Contains("layers/captions/dota_brazilian/pak01_dir.vpk"),
         "O pacote deve conter o modo somente captions.");
     Expect(
@@ -293,10 +302,38 @@ if (!skipPayload && File.Exists(releaseArchive))
                 "\t\"Prepare-se para a batalha.\""),
             "O token normal do narrador deve permanecer em PT-BR.");
         Expect(
-            !announcerCaptions.Contains(
+            announcerCaptions.Contains(
                 "\"[english]announcer_announcer_battle_prepare_01\"" +
                 "\t\t\"Prepare-se para a batalha.\""),
-            "A camada brasileira não deve depender de substituir o alias inglês.");
+            "O alias solicitado pelo áudio inglês deve usar a caption PT-BR.");
+        var captionsByToken = Regex.Matches(
+                announcerCaptions,
+                "^\\s*\"([^\"]+)\"\\s+\"([^\"]*)\"\\s*$",
+                RegexOptions.Multiline)
+            .Cast<Match>()
+            .Where(match => match.Groups[1].Value != "Language")
+            .GroupBy(match => match.Groups[1].Value)
+            .ToDictionary(
+                group => group.Key,
+                group => group.Last().Groups[2].Value,
+                StringComparer.OrdinalIgnoreCase);
+        var announcerAliases = captionsByToken
+            .Where(entry =>
+                entry.Key.StartsWith(
+                    "[english]announcer_",
+                    StringComparison.OrdinalIgnoreCase))
+            .ToArray();
+        Expect(
+            announcerAliases.Length == 2_074,
+            "Todas as 2.074 captions do narrador devem possuir alias inglês.");
+        foreach (var alias in announcerAliases)
+        {
+            var normalToken = alias.Key["[english]".Length..];
+            Expect(
+                captionsByToken.TryGetValue(normalToken, out var normalCaption) &&
+                string.Equals(normalCaption, alias.Value, StringComparison.Ordinal),
+                $"O alias deve repetir a caption PT-BR: {normalToken}");
+        }
     }
 
     var manifestEntry = archive.GetEntry("payload-manifest.json");
@@ -307,7 +344,7 @@ if (!skipPayload && File.Exists(releaseArchive))
         var payloadManifest = await JsonSerializer.DeserializeAsync<PayloadManifest>(
             manifestStream,
             new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
-        Expect(payloadManifest?.Version == "6869.5", "A versão interna deve ser 6869.5.");
+        Expect(payloadManifest?.Version == "6869.6", "A versão interna deve ser 6869.6.");
         foreach (var file in payloadManifest?.Files ?? [])
         {
             var entry = archive.GetEntry(file.Path);
