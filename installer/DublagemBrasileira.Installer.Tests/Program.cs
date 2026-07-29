@@ -96,6 +96,91 @@ try
             StringSplitOptions.None).Length == 2,
         "A configuração gerenciada deve ser idempotente.");
 
+    var localConfigPath = Path.Combine(testRoot, "localconfig.vdf");
+    File.WriteAllText(
+        localConfigPath,
+        """
+        "UserLocalConfigStore"
+        {
+            "Software"
+            {
+                "Valve"
+                {
+                    "Steam"
+                    {
+                        "apps"
+                        {
+                            "570"
+                            {
+                                "LastPlayed" "1"
+                                "LaunchOptions" "-map dota -novid -language russian"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        """);
+    var launchBackup = SteamLaunchOptionsConfiguration.Capture(localConfigPath);
+    SteamLaunchOptionsConfiguration.Apply(localConfigPath);
+    var launchConfig = File.ReadAllText(localConfigPath);
+    Expect(
+        SteamLaunchOptionsConfiguration.IsActive(localConfigPath),
+        "Deve ativar -language brazilian nas opções do Dota.");
+    Expect(
+        launchConfig.Contains("-map dota -novid -language brazilian") &&
+        !launchConfig.Contains("-language russian"),
+        "Deve preservar as opções existentes e substituir apenas outro idioma.");
+    SteamLaunchOptionsConfiguration.Apply(localConfigPath);
+    launchConfig = File.ReadAllText(localConfigPath);
+    Expect(
+        launchConfig.Split("-language brazilian", StringSplitOptions.None).Length == 2,
+        "A ativação do idioma Steam deve ser idempotente.");
+    SteamLaunchOptionsConfiguration.Restore(
+        localConfigPath,
+        launchBackup.LaunchOptionsExisted,
+        launchBackup.OriginalLaunchOptions);
+    Expect(
+        File.ReadAllText(localConfigPath).Contains(
+            "\"LaunchOptions\" \"-map dota -novid -language russian\""),
+        "Deve restaurar exatamente as opções Steam anteriores.");
+
+    File.WriteAllText(
+        localConfigPath,
+        """
+        "UserLocalConfigStore"
+        {
+            "Software"
+            {
+                "Valve"
+                {
+                    "Steam"
+                    {
+                        "apps"
+                        {
+                            "570"
+                            {
+                                "LastPlayed" "1"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        """);
+    launchBackup = SteamLaunchOptionsConfiguration.Capture(localConfigPath);
+    SteamLaunchOptionsConfiguration.Apply(localConfigPath);
+    Expect(
+        SteamLaunchOptionsConfiguration.IsActive(localConfigPath),
+        "Deve criar LaunchOptions quando a propriedade ainda não existe.");
+    SteamLaunchOptionsConfiguration.Restore(
+        localConfigPath,
+        launchBackup.LaunchOptionsExisted,
+        launchBackup.OriginalLaunchOptions);
+    Expect(
+        !File.ReadAllText(localConfigPath).Contains("\"LaunchOptions\""),
+        "A restauração deve remover a propriedade criada pelo instalador.");
+
     Expect(
         locator.TryValidate(dotaRoot, out var validated) &&
         string.Equals(validated, dotaRoot, StringComparison.OrdinalIgnoreCase),
@@ -134,7 +219,9 @@ try
     var installed = InstalledLayerDetector.Inspect(dotaRoot);
     Expect(installed.AudioDetected, "Deve detectar o pack de voz já instalado.");
     Expect(installed.CaptionsDetected, "Deve detectar as captions já instaladas.");
-    Expect(installed.BrazilianLanguageActive, "Deve detectar o idioma brasileiro ativo.");
+    Expect(
+        !installed.BrazilianLanguageActive,
+        "Sem o manifesto e a opção Steam, a camada não deve ser marcada como ativa.");
 }
 finally
 {
@@ -206,10 +293,10 @@ if (!skipPayload && File.Exists(releaseArchive))
                 "\t\"Prepare-se para a batalha.\""),
             "O token normal do narrador deve permanecer em PT-BR.");
         Expect(
-            announcerCaptions.Contains(
+            !announcerCaptions.Contains(
                 "\"[english]announcer_announcer_battle_prepare_01\"" +
                 "\t\t\"Prepare-se para a batalha.\""),
-            "O alias selecionado com áudio inglês deve usar a tradução PT-BR.");
+            "A camada brasileira não deve depender de substituir o alias inglês.");
     }
 
     var manifestEntry = archive.GetEntry("payload-manifest.json");
@@ -220,7 +307,7 @@ if (!skipPayload && File.Exists(releaseArchive))
         var payloadManifest = await JsonSerializer.DeserializeAsync<PayloadManifest>(
             manifestStream,
             new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
-        Expect(payloadManifest?.Version == "6869.4", "A versão interna deve ser 6869.4.");
+        Expect(payloadManifest?.Version == "6869.5", "A versão interna deve ser 6869.5.");
         foreach (var file in payloadManifest?.Files ?? [])
         {
             var entry = archive.GetEntry(file.Path);

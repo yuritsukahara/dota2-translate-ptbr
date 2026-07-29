@@ -9,5 +9,9 @@ public sealed class InstallationRecord
     public bool OriginalLanguageLayerExisted { get; set; }
     public bool CaptionConfigBackupCaptured { get; set; }
     public bool OriginalAutoexecExisted { get; set; }
+    public bool SteamLaunchOptionsBackupCaptured { get; set; }
+    public string SteamLocalConfigPath { get; set; } = string.Empty;
+    public bool OriginalSteamLaunchOptionsExisted { get; set; }
+    public string OriginalSteamLaunchOptions { get; set; } = string.Empty;
     public DateTimeOffset InstalledAt { get; set; }
 }

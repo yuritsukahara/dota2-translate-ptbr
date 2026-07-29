@@ -12,7 +12,7 @@ GitHub, aplicar captions/vozes e restaurar o estado anterior.
 5. Valida `game/dota/pak01_dir.vpk` e `game/dota/cfg/boot.vcfg`.
 6. Lê o build no `appmanifest_570.acf`, quando disponível.
 7. Detecta uma instalação existente pelas vozes compiladas, captions, VPK da
-   camada brasileira e idiomas ativos no `boot.vcfg`.
+   camada brasileira e pela opção Steam `-language brazilian`.
 
 Se a Steam ou o VDF não puderem ser lidos, a interface permite escolher tanto
 `dota 2 beta` quanto `dota 2 beta/game/dota`. O caminho só é salvo depois de
@@ -38,9 +38,15 @@ O usuário escolhe o modo dentro do instalador.
 - O executável baixa o pacote do canal estável no GitHub apenas quando
   necessário.
 - O ZIP e cada arquivo interno são verificados por SHA-256.
+- Preserva as opções de inicialização já configuradas e acrescenta
+  `-language brazilian`, que monta `game/dota_brazilian` antes da camada base.
+- Se a Steam estiver aberta, ela é encerrada e reaberta de forma normal uma vez
+  para que a opção seja salva.
 - O rollback é centralizado: captions primeiro, áudio depois.
 - O instalador não edita executáveis, não injeta DLL e não substitui
   `game/dota/pak01_dir.vpk`.
+- Nenhum token `[english]` precisa ser substituído: as captions PT-BR usam seus
+  IDs normais dentro da camada brasileira separada.
 - O executável publicado é self-contained e não exige .NET, Node.js nem uma
   cópia deste repositório.
 
