@@ -1,4 +1,3 @@
-using System.Text;
 using System.Text.RegularExpressions;
 
 namespace DublagemBrasileira.Installer.Services;
@@ -16,65 +15,35 @@ public static class BrazilianCaptionMountConfiguration
         $@"[\t ]*{Regex.Escape(MarkerEnd)}\r?\n?",
         RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.Multiline);
 
-    private static readonly Regex BaseModRegex = new(
-        @"^(?<indent>[\t ]*)Mod[\t ]+dota[\t ]*(?:\r?\n|$)",
-        RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.Multiline);
-
     private static readonly Regex BrazilianModRegex = new(
         @"^[\t ]*Mod[\t ]+dota_brazilian[\t ]*\r?$",
         RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.Multiline);
 
-    public static void Apply(string gameInfoPath)
+    public static bool RemoveLegacyMount(string gameInfoPath)
     {
         if (!File.Exists(gameInfoPath))
         {
-            throw new FileNotFoundException(
-                "O gameinfo.gi principal do Dota não foi encontrado.",
-                gameInfoPath);
+            return false;
         }
 
         var original = File.ReadAllText(gameInfoPath);
-        var withoutManagedBlock = ManagedBlockRegex.Replace(original, string.Empty);
-        if (BrazilianModRegex.IsMatch(withoutManagedBlock))
+        var updated = ManagedBlockRegex.Replace(original, string.Empty);
+        if (string.Equals(updated, original, StringComparison.Ordinal))
         {
-            return;
+            return false;
         }
 
-        var baseMod = BaseModRegex.Match(withoutManagedBlock);
-        if (!baseMod.Success)
-        {
-            throw new InvalidDataException(
-                "O caminho MOD principal não foi encontrado no gameinfo.gi.");
-        }
-
-        var newline = withoutManagedBlock.Contains("\r\n", StringComparison.Ordinal)
-            ? "\r\n"
-            : "\n";
-        var indent = baseMod.Groups["indent"].Value;
-        var managedBlock =
-            $"{indent}{MarkerStart}{newline}" +
-            $"{indent}Mod{new string('\t', 5)}dota_brazilian{newline}" +
-            $"{indent}{MarkerEnd}{newline}";
-        var updated = withoutManagedBlock.Insert(baseMod.Index, managedBlock);
-        File.WriteAllText(gameInfoPath, updated, new UTF8Encoding(false));
-
-        if (!IsActive(gameInfoPath))
-        {
-            throw new InvalidDataException(
-                "A camada brasileira não foi montada no caminho MOD.");
-        }
+        File.WriteAllText(gameInfoPath, updated);
+        return true;
     }
 
-    public static bool IsActive(string gameInfoPath)
+    public static bool IsLegacyMountPresent(string gameInfoPath)
     {
         try
         {
             var contents = File.ReadAllText(gameInfoPath);
-            var brazilian = BrazilianModRegex.Match(contents);
-            var baseMod = BaseModRegex.Match(contents);
-            return brazilian.Success &&
-                   baseMod.Success &&
-                   brazilian.Index < baseMod.Index;
+            return ManagedBlockRegex.IsMatch(contents) ||
+                   BrazilianModRegex.IsMatch(contents);
         }
         catch
         {

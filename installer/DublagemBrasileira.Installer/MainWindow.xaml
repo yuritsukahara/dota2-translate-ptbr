@@ -83,7 +83,7 @@
                                LineHeight="22"
                                Foreground="{StaticResource MutedBrush}"
                                TextWrapping="Wrap"
-                               Text="O instalador encontra o Dota em todas as bibliotecas Steam, valida os arquivos essenciais e cria backups antes de aplicar o teste local."/>
+                               Text="O instalador encontra o Dota em todas as bibliotecas Steam, valida os arquivos essenciais e aplica uma camada separada, sem modificar arquivos-base do jogo."/>
 
                     <Border Style="{StaticResource Card}">
                         <StackPanel>
@@ -265,18 +265,18 @@
                                                Margin="0,2,0,0"
                                                Foreground="#CDE2D8"
                                                FontSize="11"
-                                               Text="Backup criado antes de alterar"/>
+                                               Text="Cópia da camada anterior"/>
                                 </StackPanel>
 
                                 <Ellipse Grid.Row="3" Width="9" Height="9"
                                          Margin="0,20,11,0" VerticalAlignment="Top"
                                          Fill="{StaticResource YellowBrush}"/>
                                 <StackPanel Grid.Row="3" Grid.Column="1" Margin="0,16,0,0">
-                                    <TextBlock Foreground="White" FontWeight="SemiBold" Text="Sem injeção ou executáveis"/>
+                                    <TextBlock Foreground="White" FontWeight="SemiBold" Text="Arquivos-base intactos"/>
                                     <TextBlock Margin="0,2,0,0"
                                                Foreground="#CDE2D8"
                                                FontSize="11"
-                                               Text="Apenas camada de idioma reversível"/>
+                                               Text="Sem gameinfo base, autoexec, DLL ou injeção"/>
                                 </StackPanel>
                             </Grid>
                         </StackPanel>
@@ -345,7 +345,7 @@
                                                LineHeight="15"
                                                Foreground="#68551A"
                                                TextWrapping="Wrap"
-                                               Text="O instalador segue a via de camada de idioma já utilizada pelo Dota para pacotes adicionais de linguagem. Registra dota_brazilian no caminho de captions e fornece somente o recurso Brazilian. O gameinfo.gi recebe uma entrada reversível, com backup byte a byte, sem substituir o áudio ou pacote inglês, mecânicas, executáveis ou DLLs. A Steam pode permanecer aberta; autoexec e opções de inicialização não são alterados. Como é uma iniciativa comunitária, uma atualização do jogo pode exigir o reparo da camada."/>
+                                               Text="O instalador cria somente game/dota_brazilian e fornece o recurso Brazilian. O gameinfo.gi principal, o VPK inglês, executáveis e DLLs permanecem intactos. O próprio Dota monta a camada quando Português (Brasil) está selecionado no menu de idioma; nenhum argumento ou opção da Steam é necessário. Como é uma iniciativa comunitária, uma atualização do jogo pode exigir o reparo da camada."/>
                                     <CheckBox x:Name="RiskAcknowledgement"
                                               Margin="0,9,0,0"
                                               FontSize="10"

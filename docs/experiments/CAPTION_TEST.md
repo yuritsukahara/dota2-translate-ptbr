@@ -66,9 +66,20 @@ node scripts/build-local-caption-pack.mjs --hero axe
 
 O resultado fica em `build/caption-pack/dota_brazilian`.
 
-## Laboratório de instalação
+## Instalação validada
 
-O instalador usa o caminho validado no cliente normal. Feche o Dota e use:
+O caminho definitivo não altera o `gameinfo.gi` base, `autoexec.cfg` ou opções
+de inicialização. O pacote é instalado somente em `game/dota_brazilian` e o
+usuário seleciona **Português (Brasil)** no menu do Dota. O próprio
+`Game_Language` do cliente monta a camada.
+
+A decisão, o incidente anterior e os limites obrigatórios estão documentados
+em [`CAPTION_INSTALLATION_DECISION.md`](CAPTION_INSTALLATION_DECISION.md).
+
+## Laboratório histórico
+
+Os scripts abaixo pertencem ao histórico de investigação e não definem o fluxo
+do instalador publicado. Feche o Dota antes de qualquer teste:
 
 ```powershell
 # Pacote completo

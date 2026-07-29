@@ -7,12 +7,12 @@ public sealed record InstallerSnapshot(
     bool GameDirectoryPresent,
     bool AudioLayerDetected,
     bool CaptionsLayerDetected,
-    bool BrazilianLanguageActive)
+    bool BrazilianLayerReady)
 {
     public bool HasRestorableBackup => AudioBackupPresent || CaptionsManifestPresent;
 
     public bool IsInstalled =>
         AudioLayerDetected ||
         CaptionsLayerDetected ||
-        (HasRestorableBackup && BrazilianLanguageActive);
+        (HasRestorableBackup && BrazilianLayerReady);
 }
