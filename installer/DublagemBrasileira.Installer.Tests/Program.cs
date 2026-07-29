@@ -193,6 +193,24 @@ if (!skipPayload && File.Exists(releaseArchive))
         names.Contains(
             "layers/captions/dota_brazilian/resource/subtitles/subtitles_announcer_brazilian.txt"),
         "O modo de captions deve manter o narrador padrão ancorado.");
+    var announcerEntry = archive.GetEntry(
+        "layers/captions/dota_brazilian/resource/subtitles/" +
+        "subtitles_announcer_brazilian.txt");
+    if (announcerEntry is not null)
+    {
+        using var reader = new StreamReader(announcerEntry.Open());
+        var announcerCaptions = await reader.ReadToEndAsync();
+        Expect(
+            announcerCaptions.Contains(
+                "\"announcer_announcer_battle_prepare_01\"" +
+                "\t\"Prepare-se para a batalha.\""),
+            "O token normal do narrador deve permanecer em PT-BR.");
+        Expect(
+            announcerCaptions.Contains(
+                "\"[english]announcer_announcer_battle_prepare_01\"" +
+                "\t\t\"Prepare-se para a batalha.\""),
+            "O alias selecionado com áudio inglês deve usar a tradução PT-BR.");
+    }
 
     var manifestEntry = archive.GetEntry("payload-manifest.json");
     Expect(manifestEntry is not null, "O pacote deve conter o manifesto interno.");
@@ -202,7 +220,7 @@ if (!skipPayload && File.Exists(releaseArchive))
         var payloadManifest = await JsonSerializer.DeserializeAsync<PayloadManifest>(
             manifestStream,
             new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
-        Expect(payloadManifest?.Version == "6869.3", "A versão interna deve ser 6869.3.");
+        Expect(payloadManifest?.Version == "6869.4", "A versão interna deve ser 6869.4.");
         foreach (var file in payloadManifest?.Files ?? [])
         {
             var entry = archive.GetEntry(file.Path);
