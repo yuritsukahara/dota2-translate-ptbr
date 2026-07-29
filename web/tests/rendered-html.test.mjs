@@ -59,7 +59,8 @@ test("página de release explica opções, camada de idioma e download", async (
   assert.match(page, /backup\s+antes\s+de\s+começar/i);
   assert.match(page, /opções de inicialização do Dota\s+não são alteradas/i);
   assert.match(page, /não depende de\{\" \"\}\s*<code>autoexec\.cfg/i);
-  assert.match(page, /sem usar <code>cc_lang/i);
+  assert.match(page, /somente o recurso de captions <code>brazilian/i);
+  assert.match(page, /não há arquivos de captions com sufixos/i);
   assert.doesNotMatch(page, /-language brazilian|Steam pode reiniciar/i);
   assert.match(page, /DublagemBrasileiraDota2\.exe/);
   assert.equal(manifest.captions.tokens, 77_594);

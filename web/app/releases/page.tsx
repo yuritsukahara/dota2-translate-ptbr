@@ -109,7 +109,7 @@ export default function ReleasesPage() {
             O instalador segue a via de camada de idioma já utilizada pelo Dota
             para pacotes adicionais de linguagem. Ele registra{" "}
             <code>dota_brazilian</code> no caminho de captions do cliente e
-            fornece a caption PT-BR correspondente ao idioma já carregado. Não
+            fornece somente o recurso de captions <code>brazilian</code>. Não
             substitui o áudio ou o pacote inglês e{" "}
             <span>não altera mecânicas, executáveis ou DLLs.</span>
           </p>
@@ -131,8 +131,9 @@ export default function ReleasesPage() {
             Com a voz original inglesa, o narrador solicita identificadores
             prefixados por <code>[english]</code>. A camada brasileira associa
             esses identificadores às captions PT-BR sem editar a localização
-            inglesa original. A tabela PT-BR também acompanha os recursos
-            carregados como inglês ou russo, sem usar <code>cc_lang</code>.
+            inglesa original. O Dota precisa estar carregando o recurso
+            <code>brazilian</code>; não há arquivos de captions com sufixos
+            <code>english</code> ou <code>russian</code>.
           </p>
         </div>
       </section>

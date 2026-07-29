@@ -243,25 +243,8 @@ if (!skipPayload && File.Exists(releaseArchive))
             "layers/captions/dota_brazilian/resource/subtitles/" +
             $"subtitles_announcer_{language}.txt";
         Expect(
-            names.Contains(path),
-            $"O narrador PT-BR deve acompanhar o idioma carregado: {language}.");
-        var localizedAnnouncerEntry = archive.GetEntry(path);
-        if (localizedAnnouncerEntry is not null)
-        {
-            using var localizedReader = new StreamReader(localizedAnnouncerEntry.Open());
-            var localizedCaptions = await localizedReader.ReadToEndAsync();
-            Expect(
-                localizedCaptions.Contains(
-                    "\"announcer_announcer_battle_prepare_01\"" +
-                    "\t\"Prepare-se para a batalha.\""),
-                $"O arquivo {language} deve mostrar a caption PT-BR.");
-            Expect(
-                Regex.IsMatch(
-                    localizedCaptions,
-                    $"\"Language\"\\s+\"{language}\"",
-                    RegexOptions.IgnoreCase),
-                $"O recurso deve se identificar para o carregador como {language}.");
-        }
+            !names.Contains(path),
+            $"O pacote Brazilian não deve conter o recurso {language}.");
     }
     var announcerEntry = archive.GetEntry(
         "layers/captions/dota_brazilian/resource/subtitles/" +
@@ -318,7 +301,7 @@ if (!skipPayload && File.Exists(releaseArchive))
         var payloadManifest = await JsonSerializer.DeserializeAsync<PayloadManifest>(
             manifestStream,
             new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
-        Expect(payloadManifest?.Version == "6869.8", "A versão interna deve ser 6869.8.");
+        Expect(payloadManifest?.Version == "6869.9", "A versão interna deve ser 6869.9.");
         foreach (var file in payloadManifest?.Files ?? [])
         {
             var entry = archive.GetEntry(file.Path);

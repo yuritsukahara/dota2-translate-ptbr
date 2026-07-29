@@ -345,7 +345,7 @@
                                                LineHeight="15"
                                                Foreground="#68551A"
                                                TextWrapping="Wrap"
-                                               Text="O instalador segue a via de camada de idioma já utilizada pelo Dota para pacotes adicionais de linguagem. Registra dota_brazilian no caminho de captions e fornece a legenda PT-BR correspondente ao idioma carregado. O gameinfo.gi recebe uma entrada reversível, com backup byte a byte, sem substituir o áudio ou pacote inglês, mecânicas, executáveis ou DLLs. A Steam pode permanecer aberta; autoexec e opções de inicialização não são alterados. Como é uma iniciativa comunitária, uma atualização do jogo pode exigir o reparo da camada."/>
+                                               Text="O instalador segue a via de camada de idioma já utilizada pelo Dota para pacotes adicionais de linguagem. Registra dota_brazilian no caminho de captions e fornece somente o recurso Brazilian. O gameinfo.gi recebe uma entrada reversível, com backup byte a byte, sem substituir o áudio ou pacote inglês, mecânicas, executáveis ou DLLs. A Steam pode permanecer aberta; autoexec e opções de inicialização não são alterados. Como é uma iniciativa comunitária, uma atualização do jogo pode exigir o reparo da camada."/>
                                     <CheckBox x:Name="RiskAcknowledgement"
                                               Margin="0,9,0,0"
                                               FontSize="10"

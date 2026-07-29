@@ -25,7 +25,7 @@ const outputRoot = path.join(
   "subtitles",
 );
 const outputManifestPath = path.join(outputRoot, "caption-anchor-manifest.json");
-const outputLanguages = ["brazilian", "english", "russian"];
+const outputLanguages = ["brazilian"];
 const maxAnchorTokens = Number(process.env.CAPTION_ANCHOR_MAX_TOKENS || 55_000);
 
 if (!fs.existsSync(manifestPath)) {
@@ -145,6 +145,7 @@ for (const line of announcerCatalog.lines) {
   }
 }
 
+fs.rmSync(outputRoot, { recursive: true, force: true });
 fs.mkdirSync(outputRoot, { recursive: true });
 const outputFiles = [];
 for (const language of outputLanguages) {

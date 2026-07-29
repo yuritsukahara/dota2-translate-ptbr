@@ -52,9 +52,9 @@ O usuário escolhe o modo dentro do instalador.
 - O narrador com áudio inglês solicita tokens prefixados por `[english]`. A
   camada `dota_brazilian` fornece aliases PT-BR para esses identificadores sem
   editar ou substituir a localização inglesa original.
-- A mesma tabela PT-BR do narrador é exposta sob os nomes de recurso
-  `brazilian`, `english` e `russian`. Assim a legenda acompanha o idioma que o
-  próprio Dota já carregou, sem `cc_lang` e sem mudar o áudio original.
+- A tabela PT-BR do narrador é exposta somente como recurso `brazilian`.
+  O Dota precisa estar carregando esse idioma; não há cópias com sufixos
+  `english` ou `russian`, nem dependência de `cc_lang`.
 - O executável publicado é self-contained e não exige .NET, Node.js nem uma
   cópia deste repositório.
 
