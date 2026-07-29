@@ -107,13 +107,16 @@ export default function ReleasesPage() {
         <div>
           <p>
             O instalador segue a via de camada de idioma já utilizada pelo Dota
-            para pacotes adicionais de linguagem. Ele não altera mecânicas,
-            executáveis, DLLs nem o <code>pak01_dir.vpk</code> base.
+            para pacotes adicionais de linguagem. Ele monta{" "}
+            <code>dota_brazilian</code> com a opção{" "}
+            <code>-language brazilian</code>. Não substitui o pacote inglês e
+            não altera mecânicas, executáveis ou DLLs.
           </p>
           <p>
-            Como é uma iniciativa comunitária, uma atualização do jogo pode
-            exigir o reparo ou a reinstalação da camada. O instalador cria um
-            backup antes de começar e oferece restauração.
+            A Steam pode reiniciar uma vez para salvar essa opção. Como é uma
+            iniciativa comunitária, uma atualização do jogo pode exigir o
+            reparo da camada. O instalador cria um backup antes de começar e
+            oferece restauração.
           </p>
         </div>
       </section>
@@ -129,7 +132,7 @@ export default function ReleasesPage() {
           <li><span>01</span><strong>Localiza</strong><p>Procura o Dota em todas as bibliotecas Steam.</p></li>
           <li><span>02</span><strong>Verifica</strong><p>Confirma a instalação e consulta a versão estável no GitHub.</p></li>
           <li><span>03</span><strong>Protege</strong><p>Cria uma cópia integral da camada e do idioma anterior.</p></li>
-          <li><span>04</span><strong>Instala</strong><p>Valida SHA-256 e aplica somente a opção escolhida.</p></li>
+          <li><span>04</span><strong>Ativa</strong><p>Valida SHA-256, aplica a opção escolhida e monta a camada brasileira.</p></li>
         </ol>
       </section>
 
