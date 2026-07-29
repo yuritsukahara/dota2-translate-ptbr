@@ -59,24 +59,6 @@ for (const entry of manifest.entries || []) {
     rowsByToken.set(token, match[0].trimEnd());
   }
 }
-const officialRowsByToken = new Map(
-  [...announcer.matchAll(/^(\s*)"([^"]+)"\s+"([^"]*)"\s*$/gm)]
-    .filter((match) => match[2] !== "Language")
-    .map((match) => [match[2], match[0].trimEnd()]),
-);
-function asEnglishAlias(row, token) {
-  return row.replace(
-    /^(\s*)"([^"]+)"/,
-    `$1"[english]${token}"`,
-  );
-}
-announcer = announcer.replace(
-  /^(\s*)"\[english\]([^"]+)"\s+"([^"]*)"\s*$/gm,
-  (row, _indent, token) => {
-    const translated = rowsByToken.get(token) || officialRowsByToken.get(token);
-    return translated ? asEnglishAlias(translated, token) : row;
-  },
-);
 const officialTokens = new Set(
   [...announcer.matchAll(/^\s*"([^"]+)"\s+"([^"]*)"\s*$/gm)]
     .map((match) => match[1])
@@ -93,16 +75,12 @@ const voiceCatalog = JSON.parse(
 );
 for (const line of announcerCatalog.lines) {
   const row = rowsByToken.get(line.id);
-  const alias = `[english]${line.id}`;
-  if (row && !officialTokens.has(alias)) {
-    rowsByToken.set(alias, asEnglishAlias(row, line.id));
+  if (row && !officialTokens.has(line.id)) {
+    rowsByToken.set(line.id, row);
   }
 }
 const priorityTokens = [
-  ...announcerCatalog.lines.flatMap((line) => [
-    line.id,
-    `[english]${line.id}`,
-  ]),
+  ...announcerCatalog.lines.map((line) => line.id),
   ...heroCatalog.heroes.flatMap((hero) => {
     const directory = hero.voiceDirectory || hero.id;
     return (voiceCatalog.heroes[hero.id] || []).map(

@@ -1,5 +1,3 @@
-using System.Text.RegularExpressions;
-
 namespace DublagemBrasileira.Installer.Services;
 
 public sealed record InstalledLayerStatus(
@@ -9,14 +7,6 @@ public sealed record InstalledLayerStatus(
 
 public static class InstalledLayerDetector
 {
-    private static readonly Regex BrazilianUiRegex = new(
-        "\"UILanguage\"\\s+\"brazilian\"",
-        RegexOptions.Compiled | RegexOptions.IgnoreCase);
-
-    private static readonly Regex BrazilianAudioRegex = new(
-        "\"AudioLanguage\"\\s+\"brazilian\"",
-        RegexOptions.Compiled | RegexOptions.IgnoreCase);
-
     public static InstalledLayerStatus Inspect(string dotaRoot)
     {
         var languageRoot = Path.Combine(dotaRoot, "game", "dota_brazilian");
@@ -26,7 +16,6 @@ public static class InstalledLayerDetector
         var packedArchive = Path.Combine(languageRoot, "pak01_000.vpk");
         var gameInfo = Path.Combine(languageRoot, "gameinfo.gi");
         var installerMarker = Path.Combine(languageRoot, ".dublagem-brasileira.json");
-        var bootConfig = Path.Combine(dotaRoot, "game", "dota", "cfg", "boot.vcfg");
 
         var axeAudioCount = CountFilesSafely(axeAudioRoot, "*.vsnd_c");
         var hasProjectGameInfo = FileContains(gameInfo, "Game dota_brazilian") &&
@@ -42,10 +31,18 @@ public static class InstalledLayerDetector
             hasInstallerMarker && hasPackedLayer ||
             captionFileCount > 0 && hasPackedLayer;
 
-        var boot = ReadTextSafely(bootConfig);
-        var languageActive = boot is not null &&
-                             BrazilianUiRegex.IsMatch(boot) &&
-                             BrazilianAudioRegex.IsMatch(boot);
+        var languageActive = false;
+        try
+        {
+            var localConfig =
+                SteamLaunchOptionsConfiguration.LocateLocalConfig(dotaRoot);
+            languageActive =
+                SteamLaunchOptionsConfiguration.IsActive(localConfig);
+        }
+        catch
+        {
+            // A camada continua detectável, mas não está garantidamente montada.
+        }
 
         return new InstalledLayerStatus(audioDetected, captionsDetected, languageActive);
     }

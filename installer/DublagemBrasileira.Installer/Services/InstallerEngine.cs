@@ -89,27 +89,39 @@ public sealed class InstallerEngine
             state = CreateBackup(dotaRoot, manifest.Version);
         }
 
+        EnsureSteamLaunchOptionsBackup(dotaRoot, state);
+        var restartSteam = await SteamClientCoordinator.StopIfRunningAsync(
+            state.SteamLocalConfigPath,
+            _log,
+            cancellationToken);
         try
         {
-            ApplyPayload(dotaRoot, payloadLanguageRoot, manifest, mode);
-            state.Version = manifest.Version;
-            state.Mode = mode.MarkerValue();
-            state.InstalledAt = DateTimeOffset.UtcNow;
-            SaveState(state);
-            _progress(1);
-            _log(
-                $"Versão {manifest.Version} instalada: " +
-                $"{manifest.Captions.Tokens:N0} captions" +
-                (mode == InstallMode.CaptionsAndAxe
-                    ? $" e {manifest.VoicePacks.Sum(pack => pack.Lines):N0} vozes do Axe."
-                    : ", sem substituição de vozes."));
+            try
+            {
+                ApplyPayload(dotaRoot, payloadLanguageRoot, manifest, mode, state);
+                state.Version = manifest.Version;
+                state.Mode = mode.MarkerValue();
+                state.InstalledAt = DateTimeOffset.UtcNow;
+                SaveState(state);
+                _progress(1);
+                _log(
+                    $"Versão {manifest.Version} instalada: " +
+                    $"{manifest.Captions.Tokens:N0} captions" +
+                    (mode == InstallMode.CaptionsAndAxe
+                        ? $" e {manifest.VoicePacks.Sum(pack => pack.Lines):N0} vozes do Axe."
+                        : ", sem substituição de vozes."));
+            }
+            catch
+            {
+                _log("A instalação falhou. Restaurando o estado anterior…");
+                RestoreFromRecord(state);
+                DeleteState();
+                throw;
+            }
         }
-        catch
+        finally
         {
-            _log("A instalação falhou. Restaurando o estado anterior…");
-            RestoreFromRecord(state);
-            DeleteState();
-            throw;
+            RestartSteamIfNeeded(restartSteam, state.SteamLocalConfigPath);
         }
     }
 
@@ -130,25 +142,37 @@ public sealed class InstallerEngine
             layersRoot,
             mode.PayloadDirectory(),
             "dota_brazilian");
+        EnsureSteamLaunchOptionsBackup(dotaRoot, state);
+        var restartSteam = await SteamClientCoordinator.StopIfRunningAsync(
+            state.SteamLocalConfigPath,
+            _log,
+            cancellationToken);
         try
         {
-            ApplyPayload(dotaRoot, payloadLanguageRoot, manifest, mode);
-            state.Version = manifest.Version;
-            state.Mode = mode.MarkerValue();
-            state.InstalledAt = DateTimeOffset.UtcNow;
-            SaveState(state);
-            _log("Arquivos verificados e instalação reparada.");
+            try
+            {
+                ApplyPayload(dotaRoot, payloadLanguageRoot, manifest, mode, state);
+                state.Version = manifest.Version;
+                state.Mode = mode.MarkerValue();
+                state.InstalledAt = DateTimeOffset.UtcNow;
+                SaveState(state);
+                _log("Arquivos verificados e instalação reparada.");
+            }
+            catch
+            {
+                _log("O reparo não pôde ser concluído. Restaurando o estado anterior…");
+                RestoreFromRecord(state);
+                DeleteState();
+                throw;
+            }
         }
-        catch
+        finally
         {
-            _log("O reparo não pôde ser concluído. Restaurando o estado anterior…");
-            RestoreFromRecord(state);
-            DeleteState();
-            throw;
+            RestartSteamIfNeeded(restartSteam, state.SteamLocalConfigPath);
         }
     }
 
-    public Task RestoreAsync(string dotaRoot, CancellationToken cancellationToken)
+    public async Task RestoreAsync(string dotaRoot, CancellationToken cancellationToken)
     {
         cancellationToken.ThrowIfCancellationRequested();
         EnsureDotaClosed();
@@ -156,11 +180,22 @@ public sealed class InstallerEngine
         var state = LoadMatchingState(dotaRoot) ??
                     throw new InvalidOperationException(
                         "Nenhum backup criado por este instalador foi encontrado.");
-        RestoreFromRecord(state);
-        DeleteState();
-        _progress(1);
-        _log("Estado anterior restaurado.");
-        return Task.CompletedTask;
+        EnsureSteamLaunchOptionsBackup(dotaRoot, state);
+        var restartSteam = await SteamClientCoordinator.StopIfRunningAsync(
+            state.SteamLocalConfigPath,
+            _log,
+            cancellationToken);
+        try
+        {
+            RestoreFromRecord(state);
+            DeleteState();
+            _progress(1);
+            _log("Estado anterior restaurado.");
+        }
+        finally
+        {
+            RestartSteamIfNeeded(restartSteam, state.SteamLocalConfigPath);
+        }
     }
 
     private InstallationRecord CreateBackup(string dotaRoot, string version)
@@ -171,6 +206,10 @@ public sealed class InstallerEngine
         var languageRoot = Path.Combine(gameRoot, "dota_brazilian");
         var bootPath = Path.Combine(gameRoot, "dota", "cfg", "boot.vcfg");
         var autoexecPath = Path.Combine(gameRoot, "dota", "cfg", "autoexec.cfg");
+        var steamLocalConfig =
+            SteamLaunchOptionsConfiguration.LocateLocalConfig(dotaRoot);
+        var steamLaunchOptions =
+            SteamLaunchOptionsConfiguration.Capture(steamLocalConfig);
         Directory.CreateDirectory(backupRoot);
 
         _log("Criando backup integral da configuração anterior…");
@@ -197,6 +236,12 @@ public sealed class InstallerEngine
             OriginalLanguageLayerExisted = languageExisted,
             CaptionConfigBackupCaptured = true,
             OriginalAutoexecExisted = autoexecExisted,
+            SteamLaunchOptionsBackupCaptured = true,
+            SteamLocalConfigPath = steamLaunchOptions.LocalConfigPath,
+            OriginalSteamLaunchOptionsExisted =
+                steamLaunchOptions.LaunchOptionsExisted,
+            OriginalSteamLaunchOptions =
+                steamLaunchOptions.OriginalLaunchOptions,
             InstalledAt = DateTimeOffset.UtcNow
         };
     }
@@ -228,11 +273,32 @@ public sealed class InstallerEngine
         SaveState(state);
     }
 
+    private void EnsureSteamLaunchOptionsBackup(
+        string dotaRoot,
+        InstallationRecord state)
+    {
+        if (state.SteamLaunchOptionsBackupCaptured &&
+            File.Exists(state.SteamLocalConfigPath))
+        {
+            return;
+        }
+
+        var localConfig =
+            SteamLaunchOptionsConfiguration.LocateLocalConfig(dotaRoot);
+        var backup = SteamLaunchOptionsConfiguration.Capture(localConfig);
+        state.SteamLaunchOptionsBackupCaptured = true;
+        state.SteamLocalConfigPath = backup.LocalConfigPath;
+        state.OriginalSteamLaunchOptionsExisted = backup.LaunchOptionsExisted;
+        state.OriginalSteamLaunchOptions = backup.OriginalLaunchOptions;
+        SaveState(state);
+    }
+
     private void ApplyPayload(
         string dotaRoot,
         string payloadLanguageRoot,
         ReleaseManifest manifest,
-        InstallMode mode)
+        InstallMode mode,
+        InstallationRecord state)
     {
         var gameRoot = Path.Combine(dotaRoot, "game");
         var target = Path.Combine(gameRoot, "dota_brazilian");
@@ -263,6 +329,9 @@ public sealed class InstallerEngine
         Directory.Move(staging, target);
         ActivateBrazilianLanguage(bootPath);
         CaptionConfiguration.Apply(autoexecPath);
+        SteamLaunchOptionsConfiguration.Apply(state.SteamLocalConfigPath);
+        _log(
+            "Camada ativada com -language brazilian; o pacote inglês permanece intacto.");
     }
 
     private void RestoreFromRecord(InstallationRecord state)
@@ -303,6 +372,30 @@ public sealed class InstallerEngine
             {
                 File.Delete(autoexecPath);
             }
+        }
+        if (state.SteamLaunchOptionsBackupCaptured)
+        {
+            SteamLaunchOptionsConfiguration.Restore(
+                state.SteamLocalConfigPath,
+                state.OriginalSteamLaunchOptionsExisted,
+                state.OriginalSteamLaunchOptions);
+        }
+    }
+
+    private void RestartSteamIfNeeded(bool restartSteam, string localConfigPath)
+    {
+        if (!restartSteam)
+        {
+            return;
+        }
+        try
+        {
+            SteamClientCoordinator.Restart(localConfigPath, _log);
+        }
+        catch (Exception exception)
+        {
+            _log(
+                $"A configuração foi salva, mas a Steam não reabriu: {exception.Message}");
         }
     }
 
