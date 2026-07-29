@@ -3,7 +3,7 @@ namespace DublagemBrasileira.Installer.Services;
 public sealed record InstalledLayerStatus(
     bool AudioDetected,
     bool CaptionsDetected,
-    bool BrazilianLanguageActive);
+    bool LayerReady);
 
 public static class InstalledLayerDetector
 {
@@ -16,7 +16,6 @@ public static class InstalledLayerDetector
         var packedArchive = Path.Combine(languageRoot, "pak01_000.vpk");
         var gameInfo = Path.Combine(languageRoot, "gameinfo.gi");
         var installerMarker = Path.Combine(languageRoot, ".dublagem-brasileira.json");
-        var baseGameInfo = Path.Combine(dotaRoot, "game", "dota", "gameinfo.gi");
 
         var axeAudioCount = CountFilesSafely(axeAudioRoot, "*.vsnd_c");
         var hasProjectGameInfo = FileContains(gameInfo, "Game dota_brazilian") &&
@@ -32,10 +31,12 @@ public static class InstalledLayerDetector
             hasInstallerMarker && hasPackedLayer ||
             captionFileCount > 0 && hasPackedLayer;
 
-        var languageActive =
-            BrazilianCaptionMountConfiguration.IsActive(baseGameInfo);
+        var launchReady =
+            hasProjectGameInfo &&
+            hasPackedLayer &&
+            hasInstallerMarker;
 
-        return new InstalledLayerStatus(audioDetected, captionsDetected, languageActive);
+        return new InstalledLayerStatus(audioDetected, captionsDetected, launchReady);
     }
 
     private static int CountFilesSafely(string directory, string pattern)

@@ -93,9 +93,9 @@ public partial class MainWindow : Window
         if (snapshot.IsInstalled)
         {
             InstallButton.Content = "Atualizar instalação";
-            OperationStatus.Text = snapshot.BrazilianLanguageActive
-                ? "Dublagem Brasileira instalada e ativa."
-                : "Dublagem Brasileira instalada; o idioma PT-BR não está ativo.";
+            OperationStatus.Text = snapshot.BrazilianLayerReady
+                ? "Camada instalada. Selecione Português (Brasil) no menu de idioma do Dota."
+                : "A instalação foi encontrada, mas a camada precisa ser reparada.";
         }
         else
         {
@@ -185,7 +185,8 @@ public partial class MainWindow : Window
                 : "as legendas PT-BR e o pack de voz do Axe.") +
             "\n\nEsta é uma modificação comunitária não oficial. " +
             "O Dota deve permanecer fechado durante a instalação. A Steam pode " +
-            "continuar aberta; autoexec e opções de inicialização não serão alterados. " +
+            "continuar aberta; arquivos-base, autoexec e opções salvas de inicialização " +
+            "não serão alterados. O idioma é selecionado dentro do próprio Dota. " +
             "Deseja continuar?",
             "Instalar Dublagem Brasileira",
             MessageBoxButton.YesNo,

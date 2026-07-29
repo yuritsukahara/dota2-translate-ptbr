@@ -84,18 +84,25 @@ try
         "\t\t\tGame\t\t\t\tdota\r\n" +
         "\t\t\tMod\t\t\t\t\tdota\r\n" +
         "\t\t}\r\n\t}\r\n}\r\n";
-    File.WriteAllText(baseGameInfoPath, originalGameInfo);
-    BrazilianCaptionMountConfiguration.Apply(baseGameInfoPath);
-    BrazilianCaptionMountConfiguration.Apply(baseGameInfoPath);
-    var mountedGameInfo = File.ReadAllText(baseGameInfoPath);
+    var legacyGameInfo = originalGameInfo.Replace(
+        "\t\t\tMod\t\t\t\t\tdota\r\n",
+        "\t\t\t// Dublagem Brasileira Dota 2: início da montagem de captions\r\n" +
+        "\t\t\tMod\t\t\t\t\tdota_brazilian\r\n" +
+        "\t\t\t// Dublagem Brasileira Dota 2: fim da montagem de captions\r\n" +
+        "\t\t\tMod\t\t\t\t\tdota\r\n");
+    File.WriteAllText(baseGameInfoPath, legacyGameInfo);
     Expect(
-        BrazilianCaptionMountConfiguration.IsActive(baseGameInfoPath),
-        "Deve montar dota_brazilian no caminho MOD usado pelas captions.");
+        BrazilianCaptionMountConfiguration.IsLegacyMountPresent(baseGameInfoPath),
+        "Deve detectar a montagem legada no gameinfo.gi base.");
     Expect(
-        mountedGameInfo.Split(
-            "Mod\t\t\t\t\tdota_brazilian",
-            StringSplitOptions.None).Length == 2,
-        "A montagem brasileira no caminho MOD deve ser idempotente.");
+        BrazilianCaptionMountConfiguration.RemoveLegacyMount(baseGameInfoPath),
+        "Deve remover a montagem legada durante a migração.");
+    Expect(
+        File.ReadAllText(baseGameInfoPath) == originalGameInfo,
+        "A limpeza deve restaurar o conteúdo original sem a camada brasileira.");
+    Expect(
+        !BrazilianCaptionMountConfiguration.RemoveLegacyMount(baseGameInfoPath),
+        "A limpeza da montagem legada deve ser idempotente.");
     var autoexecPath = Path.Combine(
         dotaRoot,
         "game",
@@ -156,6 +163,9 @@ try
     File.WriteAllText(
         Path.Combine(languageRoot, "gameinfo.gi"),
         "LayeredOnMod dota\nGame dota_brazilian");
+    File.WriteAllText(
+        Path.Combine(languageRoot, ".dublagem-brasileira.json"),
+        "{\"schemaVersion\":1}");
     File.WriteAllBytes(Path.Combine(languageRoot, "pak01_dir.vpk"), [0x56, 0x50, 0x4B]);
     File.WriteAllBytes(Path.Combine(languageRoot, "pak01_000.vpk"), [0x01]);
     File.WriteAllText(
@@ -169,8 +179,11 @@ try
     Expect(installed.AudioDetected, "Deve detectar o pack de voz já instalado.");
     Expect(installed.CaptionsDetected, "Deve detectar as captions já instaladas.");
     Expect(
-        installed.BrazilianLanguageActive,
-        "A montagem MOD deve ativar a camada sem autoexec ou opções da Steam.");
+        installed.LayerReady,
+        "A camada completa deve ficar pronta para o fluxo nativo de idioma.");
+    Expect(
+        !BrazilianCaptionMountConfiguration.IsLegacyMountPresent(baseGameInfoPath),
+        "A instalação nova não deve exigir montagem no gameinfo.gi base.");
 }
 finally
 {
@@ -192,7 +205,7 @@ foreach (var installation in detected)
         $"- {installation.DotaRoot} | build {installation.BuildId ?? "não informado"}");
     Console.WriteLine(
         $"  Dublagem: áudio={layer.AudioDetected}, captions={layer.CaptionsDetected}, " +
-        $"idioma ativo={layer.BrazilianLanguageActive}");
+        $"camada pronta={layer.LayerReady}");
 }
 
 var repositoryRoot = FindRepositoryRoot();
@@ -243,25 +256,8 @@ if (!skipPayload && File.Exists(releaseArchive))
             "layers/captions/dota_brazilian/resource/subtitles/" +
             $"subtitles_announcer_{language}.txt";
         Expect(
-            names.Contains(path),
-            $"O narrador PT-BR deve acompanhar o idioma carregado: {language}.");
-        var localizedAnnouncerEntry = archive.GetEntry(path);
-        if (localizedAnnouncerEntry is not null)
-        {
-            using var localizedReader = new StreamReader(localizedAnnouncerEntry.Open());
-            var localizedCaptions = await localizedReader.ReadToEndAsync();
-            Expect(
-                localizedCaptions.Contains(
-                    "\"announcer_announcer_battle_prepare_01\"" +
-                    "\t\"Prepare-se para a batalha.\""),
-                $"O arquivo {language} deve mostrar a caption PT-BR.");
-            Expect(
-                Regex.IsMatch(
-                    localizedCaptions,
-                    $"\"Language\"\\s+\"{language}\"",
-                    RegexOptions.IgnoreCase),
-                $"O recurso deve se identificar para o carregador como {language}.");
-        }
+            !names.Contains(path),
+            $"O pacote Brazilian não deve conter o recurso {language}.");
     }
     var announcerEntry = archive.GetEntry(
         "layers/captions/dota_brazilian/resource/subtitles/" +
@@ -318,7 +314,7 @@ if (!skipPayload && File.Exists(releaseArchive))
         var payloadManifest = await JsonSerializer.DeserializeAsync<PayloadManifest>(
             manifestStream,
             new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
-        Expect(payloadManifest?.Version == "6869.8", "A versão interna deve ser 6869.8.");
+        Expect(payloadManifest?.Version == "6869.10", "A versão interna deve ser 6869.10.");
         foreach (var file in payloadManifest?.Files ?? [])
         {
             var entry = archive.GetEntry(file.Path);

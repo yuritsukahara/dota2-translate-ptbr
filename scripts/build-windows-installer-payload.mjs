@@ -104,13 +104,11 @@ for (const overlayRoot of [captionsOverlayRoot, axeOverlayRoot]) {
   );
   fs.mkdirSync(overlaySubtitlesRoot, { recursive: true });
   fs.cpSync(captionSubtitlesRoot, overlaySubtitlesRoot, { recursive: true });
-  for (const language of ["brazilian", "english", "russian"]) {
-    const filename = `subtitles_announcer_${language}.txt`;
-    fs.copyFileSync(
-      path.join(captionAnchorRoot, filename),
-      path.join(overlaySubtitlesRoot, filename),
-    );
-  }
+  const filename = "subtitles_announcer_brazilian.txt";
+  fs.copyFileSync(
+    path.join(captionAnchorRoot, filename),
+    path.join(overlaySubtitlesRoot, filename),
+  );
 }
 fs.mkdirSync(path.join(axeOverlayRoot, "sounds", "vo", "axe"), { recursive: true });
 fs.mkdirSync(captionsLanguageRoot, { recursive: true });
@@ -140,10 +138,10 @@ const expectedSubtitleFiles = fs
   .readdirSync(captionSubtitlesRoot)
   .filter((name) => name.endsWith("_brazilian.txt"))
   .sort();
-expectedSubtitleFiles.push(
+const forbiddenSubtitleFiles = [
   "subtitles_announcer_english.txt",
   "subtitles_announcer_russian.txt",
-);
+];
 for (const [modeRoot, overlayRoot] of [
   [captionsLanguageRoot, captionsOverlayRoot],
   [axeLanguageRoot, axeOverlayRoot],
@@ -157,6 +155,12 @@ for (const [modeRoot, overlayRoot] of [
     const entry = `resource/subtitles/${filename}`;
     if (!packedEntries.has(entry)) {
       throw new Error(`Caption ausente no VPK: ${entry}`);
+    }
+  }
+  for (const filename of forbiddenSubtitleFiles) {
+    const entry = `resource/subtitles/${filename}`;
+    if (packedEntries.has(entry)) {
+      throw new Error(`Caption de outro idioma presente no VPK: ${entry}`);
     }
   }
   fs.cpSync(
@@ -192,7 +196,7 @@ const captionManifest = JSON.parse(fs.readFileSync(captionManifestPath, "utf8"))
 const payloadFiles = collectFiles(stagingRoot);
 const payloadManifest = {
   schemaVersion: 1,
-  version: `${captionManifest.build.clientVersion}.8`,
+  version: `${captionManifest.build.clientVersion}.10`,
   createdAt: new Date().toISOString(),
   dotaBuild: captionManifest.build,
   captions: {

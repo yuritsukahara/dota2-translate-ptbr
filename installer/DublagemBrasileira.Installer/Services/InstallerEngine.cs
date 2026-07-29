@@ -47,7 +47,7 @@ public sealed class InstallerEngine
             Directory.Exists(Path.Combine(dotaRoot, "game")),
             installedLayer.AudioDetected,
             installedLayer.CaptionsDetected,
-            installedLayer.BrazilianLanguageActive);
+            installedLayer.LayerReady);
     }
 
     public Task<ReleaseManifest> GetReleaseManifestAsync(CancellationToken cancellationToken) =>
@@ -80,7 +80,7 @@ public sealed class InstallerEngine
         if (usableState)
         {
             state = currentState!;
-            EnsureBaseGameInfoBackup(dotaRoot, state);
+            RemoveLegacyBaseMount(dotaRoot);
             _log("Backup original preservado; aplicando a atualização sobre a versão atual…");
         }
         else
@@ -123,7 +123,7 @@ public sealed class InstallerEngine
         var state = LoadMatchingState(dotaRoot) ??
                     throw new InvalidOperationException(
                         "Não há um backup gerenciado para reparar esta instalação.");
-        EnsureBaseGameInfoBackup(dotaRoot, state);
+        RemoveLegacyBaseMount(dotaRoot);
         var manifest = await _packages.GetManifestAsync(cancellationToken);
         var layersRoot = await _packages.PrepareAsync(manifest, cancellationToken);
         var payloadLanguageRoot = Path.Combine(
@@ -170,14 +170,9 @@ public sealed class InstallerEngine
         var backupRoot = Path.Combine(_stateRoot, "backups", identifier);
         var gameRoot = Path.Combine(dotaRoot, "game");
         var languageRoot = Path.Combine(gameRoot, "dota_brazilian");
-        var baseGameInfoPath = Path.Combine(gameRoot, "dota", "gameinfo.gi");
         Directory.CreateDirectory(backupRoot);
 
         _log("Criando backup integral da camada anterior…");
-        File.Copy(
-            baseGameInfoPath,
-            Path.Combine(backupRoot, "gameinfo.base.gi"),
-            overwrite: true);
         var languageExisted = Directory.Exists(languageRoot);
         if (languageExisted)
         {
@@ -190,40 +185,22 @@ public sealed class InstallerEngine
             Version = version,
             BackupDirectory = backupRoot,
             OriginalLanguageLayerExisted = languageExisted,
-            BaseGameInfoBackupCaptured = true,
+            BaseGameInfoBackupCaptured = false,
             InstalledAt = DateTimeOffset.UtcNow
         };
     }
 
-    private void EnsureBaseGameInfoBackup(
-        string dotaRoot,
-        InstallationRecord state)
+    private void RemoveLegacyBaseMount(string dotaRoot)
     {
-        var backupPath = Path.Combine(
-            state.BackupDirectory,
-            "gameinfo.base.gi");
-        if (state.BaseGameInfoBackupCaptured && File.Exists(backupPath))
-        {
-            return;
-        }
-
         var gameInfoPath = Path.Combine(
             dotaRoot,
             "game",
             "dota",
             "gameinfo.gi");
-        if (!File.Exists(gameInfoPath))
+        if (BrazilianCaptionMountConfiguration.RemoveLegacyMount(gameInfoPath))
         {
-            throw new FileNotFoundException(
-                "O gameinfo.gi principal do Dota não foi encontrado.",
-                gameInfoPath);
+            _log("Montagem antiga removida do gameinfo.gi; o arquivo-base voltou ao fluxo padrão.");
         }
-        if (!File.Exists(backupPath))
-        {
-            File.Copy(gameInfoPath, backupPath, overwrite: false);
-        }
-        state.BaseGameInfoBackupCaptured = true;
-        SaveState(state);
     }
 
     private void ApplyPayload(
@@ -236,7 +213,6 @@ public sealed class InstallerEngine
         var target = Path.Combine(gameRoot, "dota_brazilian");
         var staging = Path.Combine(gameRoot, $".dublagem-staging-{Guid.NewGuid():N}");
         var autoexecPath = Path.Combine(gameRoot, "dota", "cfg", "autoexec.cfg");
-        var baseGameInfoPath = Path.Combine(gameRoot, "dota", "gameinfo.gi");
 
         _log("Preparando a camada brasileira verificada…");
         CopyDirectory(payloadLanguageRoot, staging);
@@ -260,9 +236,8 @@ public sealed class InstallerEngine
         }
         Directory.Move(staging, target);
         CaptionConfiguration.RemoveLegacyBlock(autoexecPath);
-        BrazilianCaptionMountConfiguration.Apply(baseGameInfoPath);
         _log(
-            "Camada ativada no caminho MOD, sem autoexec ou opções da Steam; " +
+            "Camada instalada em game/dota_brazilian. O gameinfo.gi base, " +
             "o áudio e o VPK inglês permanecem intactos.");
     }
 
@@ -271,10 +246,6 @@ public sealed class InstallerEngine
         var gameRoot = Path.Combine(state.DotaRoot, "game");
         var target = Path.Combine(gameRoot, "dota_brazilian");
         var autoexecPath = Path.Combine(gameRoot, "dota", "cfg", "autoexec.cfg");
-        var baseGameInfoPath = Path.Combine(gameRoot, "dota", "gameinfo.gi");
-        var baseGameInfoBackup = Path.Combine(
-            state.BackupDirectory,
-            "gameinfo.base.gi");
         var languageBackup = Path.Combine(state.BackupDirectory, "dota_brazilian");
 
         if (Directory.Exists(target))
@@ -286,15 +257,7 @@ public sealed class InstallerEngine
             CopyDirectory(languageBackup, target);
         }
         CaptionConfiguration.RemoveLegacyBlock(autoexecPath);
-        if (state.BaseGameInfoBackupCaptured)
-        {
-            if (!File.Exists(baseGameInfoBackup))
-            {
-                throw new InvalidDataException(
-                    "O backup de gameinfo.gi não foi encontrado.");
-            }
-            File.Copy(baseGameInfoBackup, baseGameInfoPath, overwrite: true);
-        }
+        RemoveLegacyBaseMount(state.DotaRoot);
     }
 
     private InstallationRecord? LoadMatchingState(string dotaRoot)

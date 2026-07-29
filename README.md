@@ -69,8 +69,13 @@ Steam, baixa do GitHub um pacote versionado e verificado e oferece dois modos:
 somente captions ou captions com o pack-exemplo do Axe.
 
 A descoberta de pastas é somente leitura. O executável publicado é
-self-contained, cria backup antes de instalar e não exige Node.js, .NET ou uma
-cópia deste repositório no computador do usuário.
+self-contained, preserva qualquer camada brasileira anterior e não exige
+Node.js, .NET ou uma cópia deste repositório no computador do usuário. Ele
+escreve somente em `game/dota_brazilian`; o Dota monta essa pasta pelo fluxo
+nativo de idioma quando **Português (Brasil)** está selecionado no menu.
+Arquivos-base, `autoexec.cfg` e opções de inicialização da Steam não são
+alterados. A decisão técnica e o procedimento de recuperação estão em
+[`docs/experiments/CAPTION_INSTALLATION_DECISION.md`](docs/experiments/CAPTION_INSTALLATION_DECISION.md).
 
 ## Catálogos e ferramentas locais
 
