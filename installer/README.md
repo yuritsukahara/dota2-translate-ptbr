@@ -45,8 +45,9 @@ O usuário escolhe o modo dentro do instalador.
 - O rollback é centralizado: captions primeiro, áudio depois.
 - O instalador não edita executáveis, não injeta DLL e não substitui
   `game/dota/pak01_dir.vpk`.
-- Nenhum token `[english]` precisa ser substituído: as captions PT-BR usam seus
-  IDs normais dentro da camada brasileira separada.
+- O narrador com áudio inglês solicita tokens prefixados por `[english]`. A
+  camada `dota_brazilian` fornece aliases PT-BR para esses identificadores sem
+  editar ou substituir a localização inglesa original.
 - O executável publicado é self-contained e não exige .NET, Node.js nem uma
   cópia deste repositório.
 

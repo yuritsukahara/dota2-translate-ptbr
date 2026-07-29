@@ -59,6 +59,16 @@ for (const entry of manifest.entries || []) {
     rowsByToken.set(token, match[0].trimEnd());
   }
 }
+function asEnglishAlias(row, token) {
+  return row.replace(/^(\s*)"([^"]+)"/, `$1"[english]${token}"`);
+}
+announcer = announcer.replace(
+  /^(\s*)"\[english\]([^"]+)"\s+"([^"]*)"\s*$/gm,
+  (row, _indent, token) => {
+    const translated = rowsByToken.get(token);
+    return translated ? asEnglishAlias(translated, token) : row;
+  },
+);
 const officialTokens = new Set(
   [...announcer.matchAll(/^\s*"([^"]+)"\s+"([^"]*)"\s*$/gm)]
     .map((match) => match[1])
@@ -75,12 +85,19 @@ const voiceCatalog = JSON.parse(
 );
 for (const line of announcerCatalog.lines) {
   const row = rowsByToken.get(line.id);
-  if (row && !officialTokens.has(line.id)) {
-    rowsByToken.set(line.id, row);
+  if (!row) {
+    throw new Error(`Caption PT-BR ausente para o narrador: ${line.id}`);
+  }
+  const alias = `[english]${line.id}`;
+  if (!officialTokens.has(alias)) {
+    rowsByToken.set(alias, asEnglishAlias(row, line.id));
   }
 }
 const priorityTokens = [
-  ...announcerCatalog.lines.map((line) => line.id),
+  ...announcerCatalog.lines.flatMap((line) => [
+    line.id,
+    `[english]${line.id}`,
+  ]),
   ...heroCatalog.heroes.flatMap((hero) => {
     const directory = hero.voiceDirectory || hero.id;
     return (voiceCatalog.heroes[hero.id] || []).map(
@@ -112,6 +129,21 @@ const merged = announcer.replace(
   closing,
   `\r\n${captionRows.join("\r\n")}\r\n}\r\n}\r\n`,
 );
+const mergedRowsByToken = new Map(
+  [...merged.matchAll(/^\s*"([^"]+)"\s+"([^"]*)"\s*$/gm)]
+    .filter((match) => match[1] !== "Language")
+    .map((match) => [match[1], match[2]]),
+);
+for (const line of announcerCatalog.lines) {
+  const sourceRow = rowsByToken.get(line.id);
+  const sourceText = sourceRow?.match(/^\s*"[^"]+"\s+"([^"]*)"\s*$/)?.[1];
+  const aliasText = mergedRowsByToken.get(`[english]${line.id}`);
+  if (sourceText === undefined || aliasText !== sourceText) {
+    throw new Error(
+      `Alias inglês sem a caption PT-BR correspondente: ${line.id}`,
+    );
+  }
+}
 
 fs.mkdirSync(outputRoot, { recursive: true });
 fs.writeFileSync(outputPath, merged, "utf8");
@@ -129,6 +161,7 @@ const anchorManifest = {
   appendedTokens: captionRows.length,
   totalTokens: includedTokens.size,
   availableCatalogTokens: rowsByToken.size,
+  announcerAliases: announcerCatalog.lines.length,
   omittedCatalogTokens: [...rowsByToken.keys()].filter(
     (token) => !includedTokens.has(token),
   ).length,
